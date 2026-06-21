@@ -8,4 +8,5 @@
     --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     --color-green-1: var(--color-emerald-500);
+    --color-blue-1: var(--color-blue-600);
 }
