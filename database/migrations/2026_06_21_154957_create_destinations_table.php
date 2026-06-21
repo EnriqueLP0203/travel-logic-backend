@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('', 255);
             $table->string('city', 255);
             $table->string('state', 255);
             $table->string('country', 255);
 
+            // Imagen de portada del destino
             $table->string('img_original_name', 255)->nullable();
             $table->string('img_new_name', 255)->nullable();
             $table->string('img_compound_name', 255)->nullable();
@@ -33,8 +33,6 @@ return new class extends Migration
             $table->unsignedInteger('updated_by')->default(0);
 
             $table->unique('slug', 'idx-destinations-slug');
-
-            $table->timestamps();
         });
     }
 
