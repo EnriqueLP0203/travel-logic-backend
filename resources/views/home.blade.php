@@ -1,49 +1,37 @@
 @extends('layouts.app')
 
+@section('title', 'Home Travel Logic Backend')
 
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@section('content')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>{{ config('app.name', 'Travel Logic') }}</title>
+{{-- Hero --}}
+<x-animate-in>
+    <div class="relative mb-12 flex min-h-[70vh] flex-col justify-center gap-5 overflow-hidden px-6 py-12 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24">
+        <img
+            src="{{ asset('images/home/bg-1.webp') }}"
+            alt=""
+            class="absolute inset-0 h-full w-full object-cover"
+            aria-hidden="true" />
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"
+            aria-hidden="true"></div>
 
-<body class="font-sans antialiased bg-white text-stone-900">
-    <div class="mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
-        {{-- Hero --}}
-        <x-animate-in>
-            <div class="relative mb-12 flex min-h-[70vh] flex-col justify-center gap-5 overflow-hidden rounded-lg px-6 py-12 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24">
-                <img
-                    src="{{ asset('images/home/bg-1.webp') }}"
-                    alt=""
-                    class="absolute inset-0 h-full w-full object-cover"
-                    aria-hidden="true" />
+        <p class="relative z-10 max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+            Host Design Meetings From Anywhere
+        </p>
+        <p class="relative z-10 max-w-3xl text-base font-normal text-white/90 sm:text-lg md:text-xl">
+            Unlock your design skills to create beautiful websites and apps with a poweful and easy-to-use tool.
+        </p>
+        <button
+            type="button"
+            class="relative z-10 w-fit rounded-full bg-green-1 px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90">
+            Contactanos
+        </button>
+    </div>
+</x-animate-in>
 
-                <div
-                    class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"
-                    aria-hidden="true"></div>
-
-                <p class="relative z-10 max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-                    Host Design Meetings From Anywhere
-                </p>
-                <p class="relative z-10 max-w-3xl text-base font-normal text-white/90 sm:text-lg md:text-xl">
-                    Unlock your design skills to create beautiful websites and apps with a poweful and easy-to-use tool.
-                </p>
-                <button
-                    type="button"
-                    class="relative z-10 w-fit rounded-full bg-green-1 px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90">
-                    Contactanos
-                </button>
-            </div>
-        </x-animate-in>
-
+<div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
         {{-- Recomendaciones --}}
         <section id="recomendaciones" aria-label="Recomendaciones" class="mb-10 md:mb-14 lg:mb-20">
             <x-animate-in>
@@ -203,6 +191,5 @@
             </x-animate-in>
         </section>
     </div>
-</body>
 
-</html>
+@endsection
