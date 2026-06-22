@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Sanctum\HasApiTokens;
 
 class TravelerAuth extends Model
 {
+    use HasApiTokens;
+
     protected $table = 'travelers_auth';
 
     public $timestamps = true;
