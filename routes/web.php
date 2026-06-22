@@ -17,3 +17,7 @@ Route::get('/quoter', function () {
 Route::get('/blog', function () {
     return view('blog');
 })->name('blog');
+
+Route::get('/destinations', function () {
+    return view('destinations');
+})->name('destinations');

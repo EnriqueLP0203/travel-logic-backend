@@ -3,6 +3,7 @@ $navItems = [
 ['route' => 'home', 'label' => 'Inicio', 'end' => true],
 ['route' => 'about', 'label' => 'Nosotros'],
 ['route' => 'blog', 'label' => 'Blog'],
+['route' => 'destinations', 'label' => 'Destinos'],
 ['route' => 'quoter', 'label' => 'Cotizador'],
 ];
 @endphp
