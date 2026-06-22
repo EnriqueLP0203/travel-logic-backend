@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Hotel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,7 +24,14 @@ Route::get('/destinations', function () {
 })->name('destinations');
 
 Route::get('/hotels', function () {
-    return view('hotels');
+    $hotels = Hotel::where('active', true)
+        ->where('is_published', true)
+        ->with(['destination', 'principalImage'])
+        ->orderBy('featured', 'desc')
+        ->orderBy('star_rating', 'desc')
+        ->get();
+
+    return view('hotels', compact('hotels'));
 })->name('hotels');
 
 Route::get('/hotel_detail', function () {

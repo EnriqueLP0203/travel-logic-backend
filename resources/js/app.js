@@ -8,37 +8,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-        elements.forEach((element) => {
-            element.classList.remove('opacity-0', 'translate-y-8');
-            element.classList.add('opacity-100', 'translate-y-0');
-        });
-
+        elements.forEach((el) => el.classList.add('is-visible'));
         return;
     }
 
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
-                if (!entry.isIntersecting) {
-                    return;
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const delay = el.dataset.animateDelay;
+                if (delay) {
+                    setTimeout(() => el.classList.add('is-visible'), parseInt(delay));
+                } else {
+                    el.classList.add('is-visible');
                 }
-
-                const element = entry.target;
-                element.classList.remove('opacity-0', 'translate-y-8');
-                element.classList.add('opacity-100', 'translate-y-0');
-                observer.unobserve(element);
+                observer.unobserve(el);
             });
         },
-        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+        { threshold: 0, rootMargin: '0px 0px 0px 0px' },
     );
 
-    elements.forEach((element) => {
-        const delay = element.dataset.animateDelay;
-
-        if (delay) {
-            element.style.transitionDelay = `${delay}ms`;
-        }
-
-        observer.observe(element);
-    });
+    elements.forEach((el) => observer.observe(el));
 });
