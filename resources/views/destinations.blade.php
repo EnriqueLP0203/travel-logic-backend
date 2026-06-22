@@ -65,13 +65,15 @@
         </div>
 
         {{-- Botón Ver más --}}
-        <x-animate-in delay="200" class="mt-8 flex justify-center sm:mt-10">
-            <button
-                type="button"
-                class="rounded-full bg-green-1 px-8 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 sm:text-base">
-                Ver más
-            </button>
-        </x-animate-in>
+        <div class="mt-8 flex justify-center sm:mt-10">
+            <x-animate-in delay="200">
+                <a
+                    href="{{ route('hotels') }}"
+                    class="rounded-full bg-green-1 px-8 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 sm:text-base">
+                    Ver más
+                </a>
+            </x-animate-in>
+        </div>
     </section>
 
     {{-- Destino destacado 1 (texto izquierda / imagen derecha) --}}

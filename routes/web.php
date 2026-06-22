@@ -21,3 +21,11 @@ Route::get('/blog', function () {
 Route::get('/destinations', function () {
     return view('destinations');
 })->name('destinations');
+
+Route::get('/hotels', function () {
+    return view('hotels');
+})->name('hotels');
+
+Route::get('/hotel_detail', function () {
+    return view('hotel_detail');
+})->name('hotel_detail');
