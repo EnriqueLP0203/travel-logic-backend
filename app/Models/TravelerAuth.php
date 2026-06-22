@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;  // <- este es el correcto
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Sanctum\HasApiTokens;
 
-class TravelerAuth extends Model
+class TravelerAuth extends Authenticatable
 {
     use HasApiTokens;
 
@@ -33,9 +33,11 @@ class TravelerAuth extends Model
         'security_token',
     ];
 
-    /**
-     * Perfil público asociado a esta cuenta.
-     */
+    public function getAuthPassword(): string
+    {
+        return $this->password_hash;
+    }
+
     public function traveler(): HasOne
     {
         return $this->hasOne(Traveler::class, 'travelers_auth_id');
