@@ -1,47 +1,37 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>{{ config('app.name', 'Travel Logic') }}</title>
+@extends('layouts.app')
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="font-sans antialiased bg-white text-stone-900">
-    <div class="mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
-        {{-- Hero --}}
-        <x-animate-in>
-            <div class="relative mb-12 flex min-h-[70vh] flex-col justify-center gap-5 overflow-hidden rounded-lg px-6 py-12 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24">
-                <img
-                    src="{{ asset('images/home/bg-1.webp') }}"
-                    alt=""
-                    class="absolute inset-0 h-full w-full object-cover"
-                    aria-hidden="true"
-                />
+@section('title', 'Home Travel Logic Backend')
 
-                <div
-                    class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"
-                    aria-hidden="true"
-                ></div>
+@section('content')
 
-                <p class="relative z-10 max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-                    Host Design Meetings From Anywhere
-                </p>
-                <p class="relative z-10 max-w-3xl text-base font-normal text-white/90 sm:text-lg md:text-xl">
-                    Unlock your design skills to create beautiful websites and apps with a poweful and easy-to-use tool.
-                </p>
-                <button
-                    type="button"
-                    class="relative z-10 w-fit rounded-full bg-green-1 px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                >
-                    Contactanos
-                </button>
-            </div>
-        </x-animate-in>
+{{-- Hero --}}
+<x-animate-in>
+    <div class="relative mb-12 flex min-h-[70vh] flex-col justify-center gap-5 overflow-hidden px-6 py-12 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24">
+        <img
+            src="{{ asset('images/home/bg-1.webp') }}"
+            alt=""
+            class="absolute inset-0 h-full w-full object-cover"
+            aria-hidden="true" />
 
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"
+            aria-hidden="true"></div>
+
+        <p class="relative z-10 max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+            Host Design Meetings From Anywhere
+        </p>
+        <p class="relative z-10 max-w-3xl text-base font-normal text-white/90 sm:text-lg md:text-xl">
+            Unlock your design skills to create beautiful websites and apps with a poweful and easy-to-use tool.
+        </p>
+        <button
+            type="button"
+            class="relative z-10 w-fit rounded-full bg-green-1 px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90">
+            Contactanos
+        </button>
+    </div>
+</x-animate-in>
+
+<div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
         {{-- Recomendaciones --}}
         <section id="recomendaciones" aria-label="Recomendaciones" class="mb-10 md:mb-14 lg:mb-20">
             <x-animate-in>
@@ -55,22 +45,19 @@
                     <img
                         src="{{ asset('images/home/frame1.webp') }}"
                         alt="Frame 1"
-                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none"
-                    />
+                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
                 </x-animate-in>
                 <x-animate-in delay="200" class="aspect-square flex-1 overflow-hidden rounded-lg">
                     <img
                         src="{{ asset('images/home/frame2.webp') }}"
                         alt="Frame 2"
-                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none"
-                    />
+                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
                 </x-animate-in>
                 <x-animate-in delay="300" class="aspect-square flex-1 overflow-hidden rounded-lg">
                     <img
                         src="{{ asset('images/home/frame3.webp') }}"
                         alt="Frame 3"
-                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none"
-                    />
+                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
                 </x-animate-in>
             </div>
 
@@ -79,28 +66,28 @@
                     <div class="grid w-full grid-cols-1 gap-6 rounded-lg bg-emerald-500/20 p-6 sm:grid-cols-3 sm:gap-8 sm:p-8 md:gap-10 lg:h-72 lg:items-center">
                         <div class="flex h-40 flex-col items-center justify-center rounded-lg border border-emerald-500 bg-white p-4 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 text-emerald-500" aria-hidden="true">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                                <line x1="9" x2="9.01" y1="9" y2="9"/>
-                                <line x1="15" x2="15.01" y1="9" y2="9"/>
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                                <line x1="9" x2="9.01" y1="9" y2="9" />
+                                <line x1="15" x2="15.01" y1="9" y2="9" />
                             </svg>
                             <p class="text-xl font-bold sm:text-2xl">250+</p>
                             <p class="text-base font-normal sm:text-lg lg:text-xl">Happy Customers</p>
                         </div>
                         <div class="flex h-40 flex-col items-center justify-center rounded-lg border border-emerald-500 bg-white p-4 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 text-emerald-500" aria-hidden="true">
-                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
                             </svg>
                             <p class="text-xl font-bold sm:text-2xl">600+</p>
                             <p class="text-base font-normal sm:text-lg lg:text-xl">Projects Completed</p>
                         </div>
                         <div class="flex h-40 flex-col items-center justify-center rounded-lg border border-emerald-500 bg-white p-4 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 text-emerald-500" aria-hidden="true">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                             </svg>
                             <p class="text-xl font-bold sm:text-2xl">11k+</p>
                             <p class="text-base font-normal sm:text-lg lg:text-xl">Subscribers</p>
@@ -126,8 +113,7 @@
                     <img
                         src="{{ asset('images/home/frame4.webp') }}"
                         alt="Frame 4"
-                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none"
-                    />
+                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none" />
                 </x-animate-in>
             </div>
         </section>
@@ -147,8 +133,7 @@
                             <img
                                 src="{{ asset('images/home/frame1.webp') }}"
                                 alt="Frame 1"
-                                class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none"
-                            />
+                                class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
                         </div>
                         <p class="text-center text-lg font-normal text-indigo-950 sm:text-xl lg:text-2xl">VENTAJA</p>
                     </x-animate-in>
@@ -160,8 +145,7 @@
                             <img
                                 src="{{ asset('images/home/frame2.webp') }}"
                                 alt="Frame 2"
-                                class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none"
-                            />
+                                class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
                         </div>
                         <p class="text-center text-lg font-normal text-indigo-950 sm:text-xl lg:text-2xl">VENTAJA</p>
                     </x-animate-in>
@@ -173,8 +157,7 @@
                             <img
                                 src="{{ asset('images/home/frame3.webp') }}"
                                 alt="Frame 3"
-                                class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none"
-                            />
+                                class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
                         </div>
                         <p class="text-center text-lg font-normal text-indigo-950 sm:text-xl lg:text-2xl">VENTAJA</p>
                     </x-animate-in>
@@ -190,8 +173,7 @@
                         src="{{ asset('images/home/bg2.webp') }}"
                         alt=""
                         class="block h-auto min-h-[280px] w-full object-cover sm:min-h-[360px] lg:min-h-[420px]"
-                        aria-hidden="true"
-                    />
+                        aria-hidden="true" />
 
                     <div class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
 
@@ -201,8 +183,7 @@
                         </p>
                         <button
                             type="button"
-                            class="rounded-full bg-green-1 px-8 py-3 text-base font-semibold text-white transition-opacity hover:opacity-90 sm:px-12 sm:text-lg lg:text-xl"
-                        >
+                            class="rounded-full bg-green-1 px-8 py-3 text-base font-semibold text-white transition-opacity hover:opacity-90 sm:px-12 sm:text-lg lg:text-xl">
                             VER MAS
                         </button>
                     </div>
@@ -210,5 +191,7 @@
             </x-animate-in>
         </section>
     </div>
-</body>
-</html>
+
+    <x-contact-form />
+
+@endsection
