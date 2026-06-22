@@ -192,4 +192,6 @@
         </section>
     </div>
 
+    <x-contact-form />
+
 @endsection
