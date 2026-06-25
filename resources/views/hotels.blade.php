@@ -3,13 +3,10 @@
 @section('title', 'Hoteles - Travel Logic')
 
 @section('content')
-<div class="mx-auto w-full max-w-[1600px] px-2 pb-10 sm:px-3 md:px-4 lg:px-6 lg:pb-16">
+<div class="mx-auto w-full max-w-[1600px] px-2 pb-10 sm:px-3 md:px-4 lg:px-6 lg:pb-16 mt-24">
     {{-- Banner --}}
-    <x-animate-in>
-        <div class="mb-8 overflow-hidden rounded-lg sm:mb-10 md:mb-12">
-            <div class="h-48 w-full bg-gray-300 sm:h-56 md:h-64 lg:h-80"></div>
-        </div>
-    </x-animate-in>
+
+
 
     {{-- Grid de hoteles --}}
     <x-animate-in>
