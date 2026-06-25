@@ -19,6 +19,8 @@
                     <x-hotel-card :hotel="$hotel" />
                 @endforeach
             </div>
+
+            <x-pagination :paginator="$hotels" />
         @else
             <div class="flex flex-col items-center justify-center py-20 text-gray-400">
                 <svg class="mb-4 h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">

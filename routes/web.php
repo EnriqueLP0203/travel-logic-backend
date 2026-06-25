@@ -29,7 +29,7 @@ Route::get('/hotels', function () {
         ->with(['destination', 'principalImage'])
         ->orderBy('featured', 'desc')
         ->orderBy('star_rating', 'desc')
-        ->get();
+        ->paginate(30);
 
     return view('hotels', compact('hotels'));
 })->name('hotels');
