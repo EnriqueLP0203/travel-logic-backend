@@ -3,24 +3,31 @@
 @section('title', 'Hoteles - Travel Logic')
 
 @section('content')
-<div class="mx-auto w-full max-w-[1600px] px-2 pb-10 sm:px-3 md:px-4 lg:px-6 lg:pb-16">
-    {{-- Banner --}}
-    <x-animate-in>
-        <div class="mb-8 overflow-hidden rounded-lg sm:mb-10 md:mb-12">
-            <div class="h-48 w-full bg-gray-300 sm:h-56 md:h-64 lg:h-80"></div>
-        </div>
+<div class="mx-auto w-full max-w-[1600px] px-2 pb-10 sm:px-3 md:px-4 lg:px-6 lg:pb-16 mt-24">
+    {{-- search bar --}}
+    <x-hotels-search-bar :destinations="$destinations" />
 
-        <div class="grid grid-cols-4">
-            <div class="w-full h-md overflow-hidden bg-white shadow-xl transition-all duration-200 hover:scale-102 rounded-lg">
-                <div class="w-full h-48 bg-gray-300">
-                </div>
-                <div class="py-12 px-4">
-                    <p class="text-xl font-bold leading-6 text-indigo-950">Hotel 1</p>
-                    <p class="text-sm font-normal leading-5 text-indigo-950">0 reseñas</p>
-                </div>
+
+
+    {{-- Grid de hoteles --}}
+    <x-animate-in>
+        @if ($hotels->isNotEmpty())
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                @foreach ($hotels as $hotel)
+                    <x-hotel-card :hotel="$hotel" />
+                @endforeach
             </div>
 
-        </div>
+            <x-pagination :paginator="$hotels" />
+        @else
+            <div class="flex flex-col items-center justify-center py-20 text-gray-400">
+                <svg class="mb-4 h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H3.75A.75.75 0 013 21V9.75z" />
+                </svg>
+                <p class="text-lg font-medium">No hay hoteles disponibles por el momento.</p>
+            </div>
+        @endif
     </x-animate-in>
 </div>
 @endsection

@@ -16,8 +16,15 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+        'guard' => env('travelers', 'web'),
+        'passwords' => [
+            'travelers' => [
+                'provider' => 'travelers',
+                'table'    => 'password_reset_tokens',
+                'expire'   => 60,
+                'throttle' => 60,
+            ],
+        ],
     ],
 
     /*
@@ -39,6 +46,10 @@ return [
 
     'guards' => [
         'web' => [
+            'driver' => 'session',
+            'provider' => 'travelers',
+        ],
+        'api' => [
             'driver' => 'sanctum',
             'provider' => 'travelers',
         ],
