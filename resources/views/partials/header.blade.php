@@ -21,12 +21,14 @@ $navItems = [
             </a>
             @endforeach
 
-            <button class="bg-green-1 text-white px-4 py-2 rounded-full">
+            <a href="{{ route('auth-traveler', ['form' => 'login']) }}"
+                class="bg-green-1 text-white px-4 py-2 rounded-full transition-opacity duration-200 hover:opacity-90">
                 <span class="text-white text-lg font-semibold px-2">Iniciar sesion</span>
-            </button>
-            <button class="bg-blue-1 text-white px-4 py-2 rounded-full">
+            </a>
+            <a href="{{ route('auth-traveler', ['form' => 'register']) }}"
+                class="bg-blue-1 text-white px-4 py-2 rounded-full transition-opacity duration-200 hover:opacity-90">
                 <span class="text-white text-lg font-semibold px-2">Registrarse</span>
-            </button>
+            </a>
         </nav>
     </div>
 </header>
