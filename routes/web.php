@@ -53,3 +53,7 @@ Route::get('/hotels', function (Request $request) {
 Route::get('/hotel_detail', function () {
     return view('hotel_detail');
 })->name('hotel_detail');
+
+Route::get('/auth-traveler', function () {
+    return view('auth-traveler');
+})->name('auth-traveler');
