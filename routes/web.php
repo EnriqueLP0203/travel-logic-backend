@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TravelerAuthController;
 use App\Models\Destination;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
@@ -55,5 +56,15 @@ Route::get('/hotel_detail', function () {
 })->name('hotel_detail');
 
 Route::get('/auth-traveler', function () {
+    $previous = url()->previous();
+
+    if (! str_contains($previous, '/auth-traveler')) {
+        session(['url.intended' => $previous]);
+    }
+
     return view('auth-traveler');
 })->name('auth-traveler');
+
+Route::post('/auth-traveler/login', [TravelerAuthController::class, 'login'])->name('traveler.login');
+Route::post('/auth-traveler/register', [TravelerAuthController::class, 'register'])->name('traveler.register');
+Route::post('/logout', [TravelerAuthController::class, 'logout'])->name('traveler.logout');
