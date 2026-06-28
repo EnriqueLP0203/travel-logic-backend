@@ -32,9 +32,9 @@
 
             {{-- Formulario correspondiente --}}
             @if ($form === 'register')
-                <x-register-traveler-form />
+                <x-register-traveler-form :action="route('traveler.register')" />
             @else
-                <x-login-traveler-form />
+                <x-login-traveler-form :action="route('traveler.login')" />
             @endif
         </div>
     </x-animate-in>
