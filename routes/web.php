@@ -26,6 +26,13 @@ Route::get('/destinations', function () {
     return view('destinations');
 })->name('destinations');
 
+Route::get('/media/hotels/{filename}', function (string $filename) {
+    $path = storage_path('travel_media/hotels/' . $filename);
+    abort_unless(is_file($path), 404);
+
+    return response()->file($path);
+})->where('filename', '[A-Za-z0-9._-]+')->name('media.hotels');
+
 Route::get('/hotels', function (Request $request) {
     $hotels = Hotel::where('active', true)
         ->where('is_published', true)

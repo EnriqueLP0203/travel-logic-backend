@@ -38,4 +38,16 @@ class HotelGallery extends Model
     {
         return $this->belongsTo(Hotel::class, 'hotel_id');
     }
+
+    /**
+     * URL pública de la imagen en storage/travel_media/hotels.
+     */
+    public function getUrlAttribute(): ?string
+    {
+        if (empty($this->compound_name)) {
+            return null;
+        }
+
+        return route('media.hotels', ['filename' => $this->compound_name]);
+    }
 }
