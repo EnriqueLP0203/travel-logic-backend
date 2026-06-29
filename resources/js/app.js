@@ -28,6 +28,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const openModal = (modal) => {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+    };
+
+    const closeModal = (modal) => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+    };
+
+    document.querySelectorAll('[data-modal-target]').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+            const modal = document.querySelector(`[data-modal="${trigger.dataset.modalTarget}"]`);
+            if (modal) {
+                openModal(modal);
+            }
+        });
+    });
+
+    document.querySelectorAll('[data-modal]').forEach((modal) => {
+        modal.querySelectorAll('[data-modal-close]').forEach((closer) => {
+            closer.addEventListener('click', () => closeModal(modal));
+        });
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            document.querySelectorAll('[data-modal]:not(.hidden)').forEach((modal) => closeModal(modal));
+        }
+    });
+
     const profileContainer = document.querySelector('[data-profile-menu-container]');
 
     if (!profileContainer) {
