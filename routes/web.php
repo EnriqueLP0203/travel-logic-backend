@@ -58,6 +58,24 @@ Route::get('/hotels', function (Request $request) {
     return view('hotels', compact('hotels', 'destinations'));
 })->name('hotels');
 
+Route::get('/hotels/{slug}', function (string $slug) {
+    $hotel = Hotel::where('slug', $slug)
+        ->where('active', true)
+        ->where('is_published', true)
+        ->with([
+            'destination',
+            'translations' => fn ($q) => $q->where('language_code', 'es-MX'),
+            'gallery' => fn ($q) => $q->where('active', true),
+            'principalImage',
+            'classifications.translations' => fn ($q) => $q->where('language_code', 'es-MX'),
+            'classifications.classificationGroup.translations' => fn ($q) => $q->where('language_code', 'es-MX'),
+            'approvedReviews.traveler',
+        ])
+        ->firstOrFail();
+
+    return view('hotel_details', compact('hotel'));
+})->name('hotel.show');
+
 Route::get('/hotel_detail', function () {
     return view('hotel_detail');
 })->name('hotel_detail');
