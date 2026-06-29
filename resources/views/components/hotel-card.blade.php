@@ -8,7 +8,7 @@
     $stars = (int) $hotel->star_category;
 @endphp
 
-<div class="w-full overflow-hidden rounded-2xl bg-white shadow-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-2xl">
+<a href="{{ route('hotel.show', $hotel->slug) }}" class="block w-full overflow-hidden rounded-2xl bg-white shadow-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-2xl">
     {{-- Imagen principal --}}
     <div class="h-48 w-full overflow-hidden bg-gray-200">
         @if ($image && $image->url)
@@ -60,4 +60,4 @@
             {{ $reviewCount }} {{ $reviewCount === 1 ? 'reseña' : 'reseñas' }}
         </p>
     </div>
-</div>
+</a>
