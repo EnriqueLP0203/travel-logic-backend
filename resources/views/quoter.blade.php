@@ -34,10 +34,12 @@
     <x-contact-info-modal name="contact-info" />
 
     <div class="flex justify-center py-24">
-        <a type="button" class="bg-green-1 text-white px-4 py-2 rounded-full transition-opacity duration-200 hover:opacity-90">
+        <button type="button" data-modal-target="facturation" class="bg-green-1 text-white px-4 py-2 rounded-full transition-opacity duration-200 hover:opacity-90">
             <span class="text-white text-lg font-semibold px-2">Informacion de facturacion</span>
-        </a>
+        </button>
     </div>
+
+    <x-facturation-form-modal name="facturation" />
 
 </div>
 
