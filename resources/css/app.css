@@ -5,13 +5,16 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-lato: 'Lato', ui-sans-serif, system-ui, sans-serif,
+    --font-montserrat: 'Montserrat', ui-sans-serif, system-ui, sans-serif,
+    --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif,
+
     /* Green colors */
     --color-green-1: #C9FCB2;
     --color-green-2: #98DE79;
     --color-green-3: #4CAF20;
-    --color-green-4: #164800;
+    --color-green-4: #6DD62E;
+    --color-green-5: #164800;
 
     /* Blue colors */
     --color-blue-1: #8F96B1;
