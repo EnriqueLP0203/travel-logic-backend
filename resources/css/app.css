@@ -5,9 +5,9 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-lato: 'Lato', ui-sans-serif, system-ui, sans-serif,
-    --font-montserrat: 'Montserrat', ui-sans-serif, system-ui, sans-serif,
-    --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif,
+    --font-lato: 'Lato', ui-sans-serif, system-ui, sans-serif;
+    --font-montserrat: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
     /* Green colors */
     --color-green-100: #C9FCB2;
