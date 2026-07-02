@@ -23,8 +23,8 @@
         </p>
         <div class="ml-24 flex items-center gap-2">
             <button
-                type="button"
-                class="flex items-center gap-2 relative z-10 w-fit rounded-lg bg-green-400 px-6 py-3 text-base font-bold text-white transition-opacity hover:opacity-90">
+                typCrucerose="button"
+                class="flex items-center gap-2 relative z-10 w-fit rounded-lg bg-green-300 px-6 py-3 text-base font-bold text-white transition-opacity hover:opacity-90">
                 Acceder al portal
                 <x-lucide-arrow-right class="h-4 w-4 text-white" />
 
@@ -35,8 +35,11 @@
                 Quiero registrarme
             </button>
         </div>
+
     </div>
 </x-animate-in>
+<x-home-filter-info />
+
 
 <div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
     {{-- Recomendaciones --}}
