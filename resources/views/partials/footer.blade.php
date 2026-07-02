@@ -7,9 +7,9 @@
             <p class="text-base font-bold text-indigo-950">MENU</p>
             <a href="{{ route('home') }}"   class="text-base font-medium text-indigo-950 hover:text-green-1 transition-colors">INICIO</a>
             <a href="{{ route('about') }}"  class="text-base font-medium text-indigo-950 hover:text-green-1 transition-colors">NOSOTROS</a>
-            <a href="#"                     class="text-base font-medium text-indigo-950 hover:text-green-1 transition-colors">DESTINOS</a>
-            <a href="{{ route('blog') }}"   class="text-base font-medium text-indigo-950 hover:text-green-1 transition-colors">BLOG</a>
-            <a href="{{ route('quoter') }}" class="text-base font-medium text-indigo-950 hover:text-green-1 transition-colors">COTIZADOR</a>
+            <a href="{{ route('contact') }}" class="text-base font-medium text-indigo-950 hover:text-green-1 transition-colors">CONTACTO</a>
+            <a href="{{ route('offers') }}" class="text-base font-medium text-indigo-950 hover:text-green-1 transition-colors">OFERTAS</a>
+            <a href="{{ route('hotels') }}" class="text-base font-medium text-indigo-950 hover:text-green-1 transition-colors">HOSPEDAJES</a>
 
             {{-- Social icons --}}
             <div class="flex gap-2 mt-4 items-center">

@@ -14,17 +14,13 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/quoter', function () {
-    return view('quoter');
-})->name('quoter');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
-Route::get('/blog', function () {
-    return view('blog');
-})->name('blog');
-
-Route::get('/destinations', function () {
-    return view('destinations');
-})->name('destinations');
+Route::get('/offers', function () {
+    return view('offers');
+})->name('offers');
 
 Route::get('/media/hotels/{filename}', function (string $filename) {
     $path = storage_path('travel_media/hotels/' . $filename);
