@@ -38,10 +38,18 @@
             </p>
 
             <div class="flex gap-4">
-                <div class="size-8 rounded-lg bg-white/50"></div>
-                <div class="size-8 rounded-lg bg-white/50"></div>
-                <div class="size-8 rounded-lg bg-white/50"></div>
-                <div class="size-8 rounded-lg bg-white/50"></div>
+                <a href="#" aria-label="Facebook" class="flex size-8 items-center justify-center rounded-lg bg-white/50 text-white transition-opacity hover:opacity-80">
+                    <x-si-facebook class="size-4" />
+                </a>
+                <a href="#" aria-label="Instagram" class="flex size-8 items-center justify-center rounded-lg bg-white/50 text-white transition-opacity hover:opacity-80">
+                    <x-si-instagram class="size-4" />
+                </a>
+                <a href="#" aria-label="X" class="flex size-8 items-center justify-center rounded-lg bg-white/50 text-white transition-opacity hover:opacity-80">
+                    <x-si-x class="size-4" />
+                </a>
+                <a href="#" aria-label="LinkedIn" class="flex size-8 items-center justify-center rounded-lg bg-white/50 text-white transition-opacity hover:opacity-80">
+                    <x-lucide-linkedin class="size-4" />
+                </a>
             </div>
         </div>
     </div>
