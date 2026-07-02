@@ -1,4 +1,4 @@
-<div class="flex w-full flex-col rounded-xl border border-green-400 bg-white p-6 shadow-xl">
+<div class="flex w-full flex-col rounded-xl border border-green-300 bg-white p-6 shadow-xl">
         <!-- botones filtros de informacion -->
         <div class="flex items-center gap-12">
             <a class="text-slate-500  text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
