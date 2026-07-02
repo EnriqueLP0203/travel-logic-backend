@@ -1,34 +1,57 @@
 @php
 $navItems = [
-['route' => 'home', 'label' => 'Inicio', 'end' => true],
-['route' => 'about', 'label' => 'Nosotros'],
-['route' => 'blog', 'label' => 'Blog'],
-['route' => 'destinations', 'label' => 'Destinos'],
-['route' => 'quoter', 'label' => 'Cotizador'],
+    ['route' => 'home', 'label' => 'Inicio'],
+    ['route' => 'about', 'label' => 'Nosotros'],
+    ['route' => 'contact', 'label' => 'Contacto'],
+    ['route' => 'offers', 'label' => 'Ofertas'],
+    ['route' => 'hotels', 'label' => 'Hospedajes'],
 ];
 @endphp
 
-<header class="sticky top-0 left-0 right-0 z-50 bg-white shadow-md">
-    <div class="flex justify-between items-center h-auto w-full px-14 py-6 mt-4">
-        <img src="{{ asset('images/logo.webp') }}" alt="Travel Logic" class="w-32 h-auto" />
+<header class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="flex h-9 items-center justify-between bg-blue-400 px-14">
+        <p class="text-xs font-normal font-lato text-white">🌍 Operadora Mayorista · México y el Caribe</p>
 
-        <nav class="flex items-center gap-4 md:gap-16">
-            @foreach ($navItems as $item)
-            <a
-                href="{{ route($item['route']) }}"
-                class="font-semibold text-sm md:text-xl transition-colors duration-200 hover:text-green-1 {{ request()->routeIs($item['route']) ? 'text-green-1' : 'text-stone-900' }}">
-                {{ $item['label'] }}
+        <div class="flex items-center gap-6">
+            <a class="text-xs font-normal font-inter text-white">Soporte 24/7</a>
+            <div class="flex items-center gap-2">
+                <a class="text-xs font-semibold font-inter text-green-400">Ingresa al Portal</a>
+                <x-lucide-arrow-right class="h-4 w-4 text-green-400" />
+            </div>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-between px-14 py-6">
+        <div class="flex items-center gap-8 md:gap-12">
+            <a href="{{ route('home') }}" aria-label="Ir al inicio">
+                <img src="{{ asset('images/logo.webp') }}" alt="Travel Logic" class="w-20" />
             </a>
-            @endforeach
 
+            <nav class="flex items-center gap-4 md:gap-8">
+                @foreach ($navItems as $item)
+                    <a
+                        href="{{ route($item['route']) }}"
+                        class="text-sm font-semibold transition-colors duration-200 hover:text-green-1 md:text-xl {{ request()->routeIs($item['route']) ? 'text-green-1' : 'text-stone-900' }}"
+                    >
+                        {{ $item['label'] }}
+                    </a>
+                @endforeach
+            </nav>
+        </div>
+
+        <div class="flex items-center gap-2">
             @guest
-                <a href="{{ route('auth-traveler', ['form' => 'login']) }}"
-                    class="bg-green-1 text-white px-4 py-2 rounded-full transition-opacity duration-200 hover:opacity-90">
-                    <span class="text-white text-lg font-semibold px-2">Iniciar sesion</span>
+                <a
+                    href="{{ route('auth-traveler', ['form' => 'register']) }}"
+                    class="px-4 py-2 text-lg font-semibold text-stone-900 transition-opacity duration-200 hover:opacity-90"
+                >
+                    Registrarse
                 </a>
-                <a href="{{ route('auth-traveler', ['form' => 'register']) }}"
-                    class="bg-blue-1 text-white px-4 py-2 rounded-full transition-opacity duration-200 hover:opacity-90">
-                    <span class="text-white text-lg font-semibold px-2">Registrarse</span>
+                <a
+                    href="{{ route('auth-traveler', ['form' => 'login']) }}"
+                    class="rounded-lg bg-green-400 px-4 py-2 text-lg font-semibold text-white transition-opacity duration-200 hover:opacity-90"
+                >
+                    Iniciar sesión
                 </a>
             @else
                 <div class="relative" data-profile-menu-container>
@@ -69,6 +92,6 @@ $navItems = [
                     </div>
                 </div>
             @endguest
-        </nav>
+        </div>
     </div>
 </header>
