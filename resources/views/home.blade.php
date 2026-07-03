@@ -49,69 +49,34 @@
 
 
 <div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-2 pt-28 sm:px-3 sm:pt-32 md:px-4 md:pt-36 lg:px-6 lg:pt-40">
-    {{-- Recomendaciones --}}
-    <section id="recomendaciones" aria-label="Recomendaciones" class="mb-10 md:mb-14 lg:mb-20">
-        <x-animate-in>
-            <h2 class="mb-6 text-center text-3xl font-bold text-indigo-950 sm:text-4xl lg:mb-8 lg:text-5xl">
-                RECOMENDACIONES
-            </h2>
-        </x-animate-in>
+    {{-- key features --}}
+    <section id="key-features" aria-label="Key Features" class="mb-10 md:mb-14 lg:mb-20">
+        <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
+            <div class="flex flex-col items-center gap-2">
+                <div class="size-16 bg-green-100 rounded-lg flex items-center justify-center">
+                    <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
+                </div>
+                <p class="w-72 text-center text-2xl font-extrabold font-inter text-indigo-950">Liberar el potencial de cada agencia</p>
+                <p class="w-72 text-center text-base font-medium text-zinc-500">Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.</p>
+            </div>
 
-        <div class="mb-8 flex w-full flex-col gap-4 sm:mb-10 sm:gap-6 md:mb-12 md:flex-row lg:mb-14">
-            <x-animate-in delay="100" class="aspect-square flex-1 overflow-hidden rounded-lg">
-                <img
-                    src="{{ asset('images/home/frame1.webp') }}"
-                    alt="Frame 1"
-                    class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
-            </x-animate-in>
-            <x-animate-in delay="200" class="aspect-square flex-1 overflow-hidden rounded-lg">
-                <img
-                    src="{{ asset('images/home/frame2.webp') }}"
-                    alt="Frame 2"
-                    class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
-            </x-animate-in>
-            <x-animate-in delay="300" class="aspect-square flex-1 overflow-hidden rounded-lg">
-                <img
-                    src="{{ asset('images/home/frame3.webp') }}"
-                    alt="Frame 3"
-                    class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
-            </x-animate-in>
+            <div class="flex flex-col items-center gap-4">
+                <div class="size-16 bg-green-100 rounded-lg flex items-center justify-center">
+                    <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
+                </div>
+                <p class="w-72 text-center text-2xl font-extrabold font-inter text-indigo-950">El operador turístico líder del mercado</p>
+                <p class="w-72 text-center text-base font-medium text-zinc-500">Ser reconocidos como el socio estratégico de referencia para agencias de viajes mediante nuestro enfoque de.</p>
+            </div>
+
+            <div class="flex flex-col items-center gap-4">
+                <div class="size-16 bg-green-100 rounded-lg flex items-center justify-center">
+                    <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
+                </div>
+                <p class="w-72 text-center text-2xl font-extrabold font-inter text-indigo-950">Tu socio estratégico B2B</p>
+                <p class="w-72 text-center text-base font-medium text-zinc-500">Tour operador especializado en el mercado B2B que conecta agencias con una amplia red de servicios hoteleros, mejorando su eficiencia y garantizando experiencias de viaje memorables</p>
+            </div>
         </div>
 
-        <x-animate-in delay="120">
-            <div class="flex w-full justify-center">
-                <div class="grid w-full grid-cols-1 gap-6 rounded-lg bg-emerald-500/20 p-6 sm:grid-cols-3 sm:gap-8 sm:p-8 md:gap-10 lg:h-72 lg:items-center">
-                    <div class="flex h-40 flex-col items-center justify-center rounded-lg border border-emerald-500 bg-white p-4 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 text-emerald-500" aria-hidden="true">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-                            <line x1="9" x2="9.01" y1="9" y2="9" />
-                            <line x1="15" x2="15.01" y1="9" y2="9" />
-                        </svg>
-                        <p class="text-xl font-bold sm:text-2xl">250+</p>
-                        <p class="text-base font-normal sm:text-lg lg:text-xl">Happy Customers</p>
-                    </div>
-                    <div class="flex h-40 flex-col items-center justify-center rounded-lg border border-emerald-500 bg-white p-4 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 text-emerald-500" aria-hidden="true">
-                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                        </svg>
-                        <p class="text-xl font-bold sm:text-2xl">600+</p>
-                        <p class="text-base font-normal sm:text-lg lg:text-xl">Projects Completed</p>
-                    </div>
-                    <div class="flex h-40 flex-col items-center justify-center rounded-lg border border-emerald-500 bg-white p-4 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 text-emerald-500" aria-hidden="true">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        </svg>
-                        <p class="text-xl font-bold sm:text-2xl">11k+</p>
-                        <p class="text-base font-normal sm:text-lg lg:text-xl">Subscribers</p>
-                    </div>
-                </div>
-            </div>
-        </x-animate-in>
     </section>
 
     {{-- Features --}}
