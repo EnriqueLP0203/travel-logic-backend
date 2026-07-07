@@ -6,7 +6,7 @@
 <div class="mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
     <div class="grid grid-cols-2 gap-12 py-24">
         <div class="flex w-3xl flex-col items-start text-left">
-            <h1 class="mb-10 text-6xl font-black text-indigo-950">
+            <h1 class="mb-4 text-6xl font-black font-inter text-indigo-950">
                 ¿Listo para hacer crecer tu agencia con nosotros?
             </h1>
 

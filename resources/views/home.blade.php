@@ -4,194 +4,285 @@
 
 @section('content')
 
-{{-- Hero --}}
-<x-animate-in>
-    <div class="relative mb-12 flex min-h-[70vh] flex-col justify-center gap-5 overflow-hidden px-6 py-12 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24">
-        <img
-            src="{{ asset('images/home/bg-1.webp') }}"
-            alt=""
-            class="absolute inset-0 h-full w-full object-cover"
-            aria-hidden="true" />
+{{-- Hero + filtro flotante entre secciones --}}
+<div class="relative">
+    <x-animate-in>
+        <div class="relative flex min-h-[70vh] flex-col justify-center gap-5 overflow-hidden px-6 py-12 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24">
+            <img
+                src="{{ asset('images/home/bg-1.webp') }}"
+                alt=""
+                class="absolute inset-0 h-full w-full object-cover"
+                aria-hidden="true" />
 
-        <div
-            class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"
-            aria-hidden="true"></div>
+            <div class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
 
-        <p class="relative z-10 max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-            Host Design Meetings From Anywhere
-        </p>
-        <p class="relative z-10 max-w-3xl text-base font-normal text-white/90 sm:text-lg md:text-xl">
-            Unlock your design skills to create beautiful websites and apps with a poweful and easy-to-use tool.
-        </p>
-        <button
-            type="button"
-            class="relative z-10 w-fit rounded-full bg-green-1 px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90">
-            Contactanos
-        </button>
-    </div>
-</x-animate-in>
+            <p class="ml-24 relative z-10 max-w-xl text-6xl font-black font-montserrat leading-tight text-white">
+                El socio estratégico que tu agencia necesita
+            </p>
+            <p class="ml-24 mb-4 relative z-10 max-w-xl text-base font-normal text-white/90 sm:text-lg md:text-xl">
+                Soluciones integrales y personalizadas bajo el modelo que simplifican tu operación y te permiten ofrecer experiencias memorables a tus clientes.
+            </p>
+            <div class="ml-24 flex items-center gap-2">
+                <button
+                    typCrucerose="button"
+                    class="flex items-center gap-2 relative z-10 w-fit rounded-lg bg-green-300 px-6 py-3 text-base font-bold text-white transition-opacity hover:opacity-90">
+                    Acceder al portal
+                    <x-lucide-arrow-right class="h-4 w-4 text-white" />
 
-<div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
-        {{-- Recomendaciones --}}
-        <section id="recomendaciones" aria-label="Recomendaciones" class="mb-10 md:mb-14 lg:mb-20">
-            <x-animate-in>
-                <h2 class="mb-6 text-center text-3xl font-bold text-indigo-950 sm:text-4xl lg:mb-8 lg:text-5xl">
-                    RECOMENDACIONES
-                </h2>
-            </x-animate-in>
-
-            <div class="mb-8 flex w-full flex-col gap-4 sm:mb-10 sm:gap-6 md:mb-12 md:flex-row lg:mb-14">
-                <x-animate-in delay="100" class="aspect-square flex-1 overflow-hidden rounded-lg">
-                    <img
-                        src="{{ asset('images/home/frame1.webp') }}"
-                        alt="Frame 1"
-                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
-                </x-animate-in>
-                <x-animate-in delay="200" class="aspect-square flex-1 overflow-hidden rounded-lg">
-                    <img
-                        src="{{ asset('images/home/frame2.webp') }}"
-                        alt="Frame 2"
-                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
-                </x-animate-in>
-                <x-animate-in delay="300" class="aspect-square flex-1 overflow-hidden rounded-lg">
-                    <img
-                        src="{{ asset('images/home/frame3.webp') }}"
-                        alt="Frame 3"
-                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
-                </x-animate-in>
+                </button>
+                <button
+                    type="button"
+                    class="relative z-10 w-fit rounded-lg border border-white px-6 py-3 text-base font-semibold text-white transition-opacity hover:opacity-90">
+                    Quiero registrarme
+                </button>
             </div>
 
-            <x-animate-in delay="120">
-                <div class="flex w-full justify-center">
-                    <div class="grid w-full grid-cols-1 gap-6 rounded-lg bg-emerald-500/20 p-6 sm:grid-cols-3 sm:gap-8 sm:p-8 md:gap-10 lg:h-72 lg:items-center">
-                        <div class="flex h-40 flex-col items-center justify-center rounded-lg border border-emerald-500 bg-white p-4 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 text-emerald-500" aria-hidden="true">
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-                                <line x1="9" x2="9.01" y1="9" y2="9" />
-                                <line x1="15" x2="15.01" y1="9" y2="9" />
-                            </svg>
-                            <p class="text-xl font-bold sm:text-2xl">250+</p>
-                            <p class="text-base font-normal sm:text-lg lg:text-xl">Happy Customers</p>
-                        </div>
-                        <div class="flex h-40 flex-col items-center justify-center rounded-lg border border-emerald-500 bg-white p-4 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 text-emerald-500" aria-hidden="true">
-                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                            </svg>
-                            <p class="text-xl font-bold sm:text-2xl">600+</p>
-                            <p class="text-base font-normal sm:text-lg lg:text-xl">Projects Completed</p>
-                        </div>
-                        <div class="flex h-40 flex-col items-center justify-center rounded-lg border border-emerald-500 bg-white p-4 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 text-emerald-500" aria-hidden="true">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            <p class="text-xl font-bold sm:text-2xl">11k+</p>
-                            <p class="text-base font-normal sm:text-lg lg:text-xl">Subscribers</p>
-                        </div>
+        </div>
+    </x-animate-in>
+
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 z-20 translate-y-1/2 px-2 sm:px-3 md:px-4 lg:px-6">
+        <div class="pointer-events-auto mx-auto w-full max-w-[1600px]">
+            <x-home-filter-info />
+        </div>
+    </div>
+</div>
+
+
+<div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-2 pt-28 sm:px-3 sm:pt-32 md:px-4 md:pt-36 lg:px-6 lg:pt-40">
+    {{-- key features --}}
+    <section id="key-features" aria-label="Key Features" class="mb-10 md:mb-14 lg:mb-20">
+        <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
+            <div class="flex flex-col items-center gap-2">
+                <div class="size-16 bg-green-100 rounded-lg flex items-center justify-center">
+                    <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
+                </div>
+                <p class="w-72 text-center text-2xl font-extrabold font-inter text-indigo-950">Liberar el potencial de cada agencia</p>
+                <p class="w-72 text-center text-base font-medium text-zinc-500">Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.</p>
+            </div>
+
+            <div class="flex flex-col items-center gap-4">
+                <div class="size-16 bg-green-100 rounded-lg flex items-center justify-center">
+                    <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
+                </div>
+                <p class="w-72 text-center text-2xl font-extrabold font-inter text-indigo-950">El operador turístico líder del mercado</p>
+                <p class="w-72 text-center text-base font-medium text-zinc-500">Ser reconocidos como el socio estratégico de referencia para agencias de viajes mediante nuestro enfoque de.</p>
+            </div>
+
+            <div class="flex flex-col items-center gap-4">
+                <div class="size-16 bg-green-100 rounded-lg flex items-center justify-center">
+                    <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
+                </div>
+                <p class="w-72 text-center text-2xl font-extrabold font-inter text-indigo-950">Tu socio estratégico B2B</p>
+                <p class="w-72 text-center text-base font-medium text-zinc-500">Tour operador especializado en el mercado B2B que conecta agencias con una amplia red de servicios hoteleros, mejorando su eficiencia y garantizando experiencias de viaje memorables</p>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+{{-- Features --}}
+<section id="features" aria-label="Features" class="w-full bg-blue-400">
+    <div class="grid min-h-[420px] grid-cols-1 lg:grid-cols-2 lg:min-h-[520px]">
+        <div class="flex flex-col justify-center gap-6 px-6 py-12 sm:px-8 sm:py-16 md:px-16 lg:px-24 xl:px-32">
+            <p class="text-sm font-extrabold font-inter text-green-300">¿Por qué Travel Logic?</p>
+            <div class="flex flex-col gap-4">
+                <p class="text-2xl font-bold font-inter text-white sm:text-3xl lg:text-4xl">Todo lo que tu agencia necesita</p>
+                <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
+            </div>
+            <p class="max-w-xl text-base font-normal font-inter text-white">Plataforma B2B diseñada por expertos bajo el modelo One Stop Shop para impulsar las ventas de tu agencia.</p>
+            <div class="flex flex-col gap-6">
+                <div class="flex items-start gap-4">
+                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
+                        <p class="text-2xl font-normal font-inter text-white">1</p>
+                    </div>
+                    <div>
+                        <p class="text-base font-bold font-inter text-white">Portal B2B Exclusivo</p>
+                        <p class="text-xs font-normal font-inter text-white/90">Plataforma 100% diseñada para agencias. Consulta disponibilidad, cotiza y reserva en tiempo real, las 24 horas del día.</p>
                     </div>
                 </div>
-            </x-animate-in>
-        </section>
-
-        {{-- Features --}}
-        <section id="features" aria-label="Features" class="mb-10 md:mb-14 lg:mb-20">
-            <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
-                <x-animate-in class="flex w-full flex-1 flex-col gap-4 lg:max-w-2xl">
-                    <p class="mb-6 text-start text-3xl font-bold text-indigo-950 sm:text-4xl lg:mb-8 lg:text-5xl">TITLE</p>
-                    <p class="text-start text-base font-normal text-stone-900 sm:text-lg lg:text-xl">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis blandit lorem. In quis turpis congue, accumsan lacus eu, mollis arcu. Fusce finibus nec elit a semper. Vivamus auctor pulvinar tincidunt. Nunc lacinia urna velit, quis fringilla dui vulputate egestas. Quisque lobortis ex eget magna pretium, nec cursus felis lacinia. Nam accumsan ante sed libero tincidunt faucibus. Duis nec erat diam. Aenean dui nunc, pretium et semper vulputate, mattis in purus. Donec luctus rutrum faucibus.
-                    </p>
-                    <p class="text-start text-base font-normal text-stone-900 sm:text-lg lg:text-xl">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis blandit lorem. In quis turpis congue, accumsan lacus eu, mollis arcu. Fusce finibus nec elit a semper. Vivamus auctor pulvinar tincidunt. Nunc lacinia urna velit, quis fringilla dui vulputate egestas. Quisque lobortis ex eget magna pretium, nec cursus felis lacinia. Nam accumsan ante sed libero tincidunt faucibus. Duis nec erat diam. Aenean dui nunc, pretium et semper vulputate, mattis in purus. Donec luctus rutrum faucibus.
-                    </p>
-                </x-animate-in>
-                <x-animate-in delay="180" class="w-full shrink-0 overflow-hidden rounded-lg lg:w-[min(100%,520px)] lg:flex-1">
-                    <img
-                        src="{{ asset('images/home/frame4.webp') }}"
-                        alt="Frame 4"
-                        class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none" />
-                </x-animate-in>
-            </div>
-        </section>
-
-        {{-- Ventajas --}}
-        <section id="ventajas" aria-label="Ventajas" class="mb-10 md:mb-14 lg:mb-20">
-            <div class="flex w-full flex-col items-center justify-center rounded-lg border border-emerald-500 p-4 sm:p-6 md:p-8">
-                <x-animate-in>
-                    <p class="mb-6 mt-1 text-center text-3xl font-bold text-indigo-950 sm:mb-8 sm:text-4xl lg:text-5xl">
-                        PORQUE VIAJAR CON TRAVEL LOGIC
-                    </p>
-                </x-animate-in>
-
-                <div class="flex w-full flex-col items-center gap-8 py-4 sm:gap-10 lg:flex-row lg:items-center lg:justify-center lg:gap-6 xl:gap-8">
-                    <x-animate-in delay="100" class="flex shrink-0 flex-col items-center justify-center gap-4 sm:gap-5">
-                        <div class="size-32 shrink-0 overflow-hidden rounded-full sm:size-36 lg:size-40">
-                            <img
-                                src="{{ asset('images/home/frame1.webp') }}"
-                                alt="Frame 1"
-                                class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
-                        </div>
-                        <p class="text-center text-lg font-normal text-indigo-950 sm:text-xl lg:text-2xl">VENTAJA</p>
-                    </x-animate-in>
-
-                    <div class="hidden h-1 w-12 shrink-0 bg-emerald-500 lg:block lg:w-16 xl:w-20" aria-hidden="true"></div>
-
-                    <x-animate-in delay="220" class="flex shrink-0 flex-col items-center justify-center gap-4 sm:gap-5">
-                        <div class="size-32 shrink-0 overflow-hidden rounded-full sm:size-36 lg:size-40">
-                            <img
-                                src="{{ asset('images/home/frame2.webp') }}"
-                                alt="Frame 2"
-                                class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
-                        </div>
-                        <p class="text-center text-lg font-normal text-indigo-950 sm:text-xl lg:text-2xl">VENTAJA</p>
-                    </x-animate-in>
-
-                    <div class="hidden h-1 w-12 shrink-0 bg-emerald-500 lg:block lg:w-16 xl:w-20" aria-hidden="true"></div>
-
-                    <x-animate-in delay="340" class="flex shrink-0 flex-col items-center justify-center gap-4 sm:gap-5">
-                        <div class="size-32 shrink-0 overflow-hidden rounded-full sm:size-36 lg:size-40">
-                            <img
-                                src="{{ asset('images/home/frame3.webp') }}"
-                                alt="Frame 3"
-                                class="aspect-square h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none" />
-                        </div>
-                        <p class="text-center text-lg font-normal text-indigo-950 sm:text-xl lg:text-2xl">VENTAJA</p>
-                    </x-animate-in>
-                </div>
-            </div>
-        </section>
-
-        {{-- About --}}
-        <section id="about" aria-label="About" class="mb-10 md:mb-14 lg:mb-20">
-            <x-animate-in>
-                <div class="relative overflow-hidden rounded-lg">
-                    <img
-                        src="{{ asset('images/home/bg2.webp') }}"
-                        alt=""
-                        class="block h-auto min-h-[280px] w-full object-cover sm:min-h-[360px] lg:min-h-[420px]"
-                        aria-hidden="true" />
-
-                    <div class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
-
-                    <div class="absolute inset-0 flex flex-col items-center justify-center gap-5 px-6 py-12 sm:px-8 sm:py-16">
-                        <p class="mb-6 text-center text-3xl font-bold text-white sm:mb-8 sm:text-4xl md:text-5xl lg:mb-10 lg:text-6xl">
-                            ACERCA DE TRAVEL LOGICS
-                        </p>
-                        <button
-                            type="button"
-                            class="rounded-full bg-green-1 px-8 py-3 text-base font-semibold text-white transition-opacity hover:opacity-90 sm:px-12 sm:text-lg lg:text-xl">
-                            VER MAS
-                        </button>
+                <div class="flex items-start gap-4">
+                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
+                        <p class="text-2xl font-normal font-inter text-white">2</p>
+                    </div>
+                    <div>
+                        <p class="text-base font-bold font-inter text-white">Tarifas Netas Garantizadas</p>
+                        <p class="text-xs font-normal font-inter text-white/90">Precios de mayorista en más de 500 hoteles y paquetes en México, el Caribe y destinos internacionales seleccionados.</p>
                     </div>
                 </div>
-            </x-animate-in>
-        </section>
+                <div class="flex items-start gap-4">
+                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
+                        <p class="text-2xl font-normal font-inter text-white">3</p>
+                    </div>
+                    <div>
+                        <p class="text-base font-bold font-inter text-white">Cotizador con tu Marca</p>
+                        <p class="text-xs font-normal font-inter text-white/90">Genera propuestas con el logo y datos de tu agencia, listas para enviar a tus clientes al instante vía PDF o correo.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
+                        <p class="text-2xl font-normal font-inter text-white">4</p>
+                    </div>
+                    <div>
+                        <p class="text-base font-bold font-inter text-white">Herramientas de Marketing</p>
+                        <p class="text-xs font-normal font-inter text-white/90">Descarga flyers y materiales promocionales personalizados para impulsar tus ventas en redes sociales y WhatsApp.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
+                        <p class="text-2xl font-normal font-inter text-white">5</p>
+                    </div>
+                    <div>
+                        <p class="text-base font-bold font-inter text-white">Herramientas de Marketing</p>
+                        <p class="text-xs font-normal font-inter text-white/90">Plataforma 100% diseñada para agencias. Consulta disponibilidad, cotiza y reserva en tiempo real, las 24 horas del día.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
+                        <p class="text-2xl font-normal font-inter text-white">6</p>
+                    </div>
+                    <div>
+                        <p class="text-base font-bold font-inter text-white">Portal B2B Exclusivo</p>
+                        <p class="text-xs font-normal font-inter text-white/90">Plataforma 100% diseñada para agencias. Consulta disponibilidad, cotiza y reserva en tiempo real, las 24 horas del día.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-center px-6 py-12 sm:px-8 lg:px-12 lg:py-16">
+            <img
+                src="{{ asset('images/home/keys.webp') }}"
+                alt="Todo lo que tu agencia necesita"
+                width="560"
+                height="575"
+                class="h-auto w-2xl object-contain" />
+        </div>
+    </div>
+</section>
+
+<!-- seccion portafolio de hoteles -->
+<section id="portfolio-hotels" aria-label="Portfolio Hotels" class="w-full bg-white mt-10 px-24">
+    <div class="flex flex-col items-start gap-3">
+        <p class="text-sm font-extrabold font-inter text-green-300">Nuestro portafolio</p>
+        <p class="text-4xl font-black font-inter text-indigo-950">Destinos que venden solos</p>
+        <div class="w-12 h-1 bg-green-300" aria-hidden="true"></div>
     </div>
 
-    <x-contact-form />
+    <div class="flex flex-row gap-4 mt-10">
+        <div class="w-md h-132 p-10 bg-gray-400 rounded-3xl"></div>
+        <div class="w-md h-132 p-10 bg-gray-400 rounded-3xl"></div>
+        <div class="w-md h-132 p-10 bg-gray-400 rounded-3xl"></div>
+        <div class="w-md h-132 p-10 bg-gray-400 rounded-3xl"></div>
+    </div>
+
+</section>
+
+<section id="steps" aria-label="Cómo empezar" class="w-full bg-blue-400 mt-20">
+    <div class="grid grid-cols-1 gap-10 px-6 py-12 sm:px-8 sm:py-16 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-24 lg:py-20">
+        <div class="w-2xl flex flex-col gap-6">
+            <div class="flex flex-col items-start gap-3">
+                <p class="text-sm font-extrabold font-inter text-green-300">Así de fácil</p>
+                <p class="text-4xl font-black font-inter text-white">Empieza a vender en 4 pasos</p>
+                <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
+            </div>
+
+            <p class="max-w-sm text-base font-normal font-inter text-white">
+                Sin contratos complicados. Sin cuotas de entrada. Solo regístrate y genera comisiones.
+            </p>
+
+            <ol class="mt-4 flex flex-col gap-8 border-l-4 border-green-300 pl-8">
+                <li class="flex items-center gap-8">
+                    <span class="flex size-14 shrink-0 items-center justify-center rounded-full outline outline-3 outline-green-300 text-3xl font-bold font-inter text-white" aria-hidden="true">1</span>
+                    <div>
+                        <p class="text-3xl font-bold font-inter text-white">Regístrate gratis</p>
+                        <p class="max-w-lg text-xl font-light font-inter text-white">Llena el formulario en línea con los datos de tu agencia. Aprobación en 24 horas.</p>
+                    </div>
+                </li>
+                <li class="flex items-center gap-8">
+                    <span class="flex size-14 shrink-0 items-center justify-center rounded-full outline outline-3 outline-green-300 text-3xl font-bold font-inter text-white" aria-hidden="true">2</span>
+                    <div>
+                        <p class="text-3xl font-bold font-inter text-white">Accede al portal B2B</p>
+                        <p class="max-w-lg text-xl font-light font-inter text-white">Explora tarifas netas y disponibilidad en tiempo real de más de 500 hoteles y paquetes.</p>
+                    </div>
+                </li>
+                <li class="flex items-center gap-8">
+                    <span class="flex size-14 shrink-0 items-center justify-center rounded-full outline outline-3 outline-green-300 text-3xl font-bold font-inter text-white" aria-hidden="true">3</span>
+                    <div>
+                        <p class="text-3xl font-bold font-inter text-white">Cotiza y reserva</p>
+                        <p class="max-w-lg text-xl font-light font-inter text-white">Genera propuestas con tu marca y confirma reservas para tus clientes al instante.</p>
+                    </div>
+                </li>
+                <li class="flex items-center gap-8">
+                    <span class="flex size-14 shrink-0 items-center justify-center rounded-full outline outline-3 outline-green-300 text-3xl font-bold font-inter text-white" aria-hidden="true">4</span>
+                    <div>
+                        <p class="text-3xl font-bold font-inter text-white">Genera comisiones</p>
+                        <p class="max-w-lg text-xl font-light font-inter text-white">Vende experiencias memorables y recibe tus comisiones sin trámites complicados.</p>
+                    </div>
+                </li>
+            </ol>
+
+            <button
+                type="button"
+                class="mt-6 flex w-sm self-center justify-center items-center gap-2 rounded-lg bg-green-300 px-6 py-3 text-2xl font-bold text-white transition-opacity hover:opacity-90">
+                Empezar
+                <x-lucide-arrow-right class="h-6 w-6 text-white" />
+            </button>
+        </div>
+
+        <div class="flex flex-col gap-4 items-center justify-center">
+            <div class="w-2xl h-96 rounded-3xl bg-zinc-300"></div>
+            <div class="grid grid-cols-2 gap-4 w-2xl">
+                <div class="h-96 rounded-3xl bg-zinc-300"></div>
+                <div class="h-96 flex flex-col gap-4">
+                    <div class="h-full rounded-3xl bg-zinc-300"></div>
+                    <div class="h-full rounded-3xl bg-zinc-300"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials" aria-label="Testimonios" class="mt-20 w-full bg-white pb-20">
+    <div class="flex items-center justify-between px-24">
+        <div class="flex flex-col gap-3">
+            <p class="text-sm font-extrabold font-inter text-green-300">Testimonios</p>
+            <p class="text-4xl font-black font-inter text-blue-400">Lo que dicen nuestras agencias</p>
+            <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button type="button" aria-label="Testimonio anterior" class="flex size-20 items-center justify-center rounded-full border-3 border-green-300">
+                <x-lucide-arrow-left class="h-10 w-10 text-green-300" />
+            </button>
+            <button type="button" aria-label="Testimonio siguiente" class="flex size-20 items-center justify-center rounded-full border-3 border-green-300">
+                <x-lucide-arrow-right class="h-10 w-10 text-green-300" />
+            </button>
+        </div>
+    </div>
+
+    <div class="mt-32 flex flex-wrap justify-center gap-4 px-24">
+        @foreach (range(1, 4) as $_)
+        <x-testimonial-card
+            name="Jorge Lopez"
+            quote="Travel Logic transformó nuestra operación. El cotizador con nuestra marca nos ahorra horas cada semana y nuestros clientes quedan impresionados." />
+        @endforeach
+    </div>
+</section>
+
+<section id="contact" aria-label="Contact" class="w-full bg-blue-300 mt-20 px-24 py-32">
+    <div class="flex flex-row gap-20 justify-center">
+        <div class="w-2xl flex flex-col gap-8 items-center justify-center">
+            <p class="text-5xl font-black font-inter text-white">¿Listo para hacer crecer tu agencia con nosotros?</p>
+            <p class="text-base font-medium font-inter text-white">Únete a más de 200 agencias que ya disfrutan de tarifas exclusivasy herramientas profesionales bajo el modelo One Stop Shop.</p>
+            <div class="flex flex-row gap-4">
+                <button class="bg-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Registrarme gratis</button>
+                <button class="border border-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Hablar con un asesor</button>
+            </div>
+        </div>
+        <div>
+            <img src="{{ asset('images/mapa.png') }}" alt="Contact" width="560" height="575" class="h-auto w-2xl object-contain" />
+        </div>
+    </div>
+
+</section>
+
+
 
 @endsection
