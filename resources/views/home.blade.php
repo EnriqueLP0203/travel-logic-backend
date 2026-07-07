@@ -240,7 +240,49 @@
     </div>
 </section>
 
+<section id="testimonials" aria-label="Testimonios" class="mt-20 w-full bg-white pb-20">
+    <div class="flex items-center justify-between px-24">
+        <div class="flex flex-col gap-3">
+            <p class="text-sm font-extrabold font-inter text-green-300">Testimonios</p>
+            <p class="text-4xl font-black font-inter text-blue-400">Lo que dicen nuestras agencias</p>
+            <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button type="button" aria-label="Testimonio anterior" class="flex size-20 items-center justify-center rounded-full border-3 border-green-300">
+                <x-lucide-arrow-left class="h-10 w-10 text-green-300" />
+            </button>
+            <button type="button" aria-label="Testimonio siguiente" class="flex size-20 items-center justify-center rounded-full border-3 border-green-300">
+                <x-lucide-arrow-right class="h-10 w-10 text-green-300" />
+            </button>
+        </div>
+    </div>
 
-<x-contact-form />
+    <div class="mt-32 flex flex-wrap justify-center gap-4 px-24">
+        @foreach (range(1, 4) as $_)
+        <x-testimonial-card
+            name="Jorge Lopez"
+            quote="Travel Logic transformó nuestra operación. El cotizador con nuestra marca nos ahorra horas cada semana y nuestros clientes quedan impresionados." />
+        @endforeach
+    </div>
+</section>
+
+<section id="contact" aria-label="Contact" class="w-full bg-blue-300 mt-20 px-24 py-32">
+    <div class="flex flex-row gap-20 justify-center">
+        <div class="w-2xl flex flex-col gap-8 items-center justify-center">
+            <p class="text-5xl font-black font-inter text-white">¿Listo para hacer crecer tu agencia con nosotros?</p>
+            <p class="text-base font-medium font-inter text-white">Únete a más de 200 agencias que ya disfrutan de tarifas exclusivasy herramientas profesionales bajo el modelo One Stop Shop.</p>
+            <div class="flex flex-row gap-4">
+                <button class="bg-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Registrarme gratis</button>
+                <button class="border border-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Hablar con un asesor</button>
+            </div>
+        </div>
+        <div>
+            <img src="{{ asset('images/mapa.png') }}" alt="Contact" width="560" height="575" class="h-auto w-2xl object-contain" />
+        </div>
+    </div>
+
+</section>
+
+
 
 @endsection
