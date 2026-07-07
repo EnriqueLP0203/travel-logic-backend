@@ -11,31 +11,27 @@
                 <img
                     src="{{ asset('images/home/frame1.webp') }}"
                     alt="Equipo de Travel Logic"
-                    class="h-full w-full object-cover"
-                />
+                    class="h-full w-full object-cover" />
             </div>
             <div class="flex w-80 flex-col gap-4 lg:w-96">
                 <div class="min-h-80 flex-1 overflow-hidden rounded-3xl">
                     <img
                         src="{{ asset('images/home/frame2.webp') }}"
                         alt="Oficinas de Travel Logic"
-                        class="h-full w-full object-cover"
-                    />
+                        class="h-full w-full object-cover" />
                 </div>
                 <div class="flex gap-4">
                     <div class="size flex-1 overflow-hidden rounded-3xl">
                         <img
                             src="{{ asset('images/home/frame3.webp') }}"
                             alt="Experiencias de viaje"
-                            class="h-full w-full object-cover"
-                        />
+                            class="h-full w-full object-cover" />
                     </div>
                     <div class="size flex-1 overflow-hidden rounded-3xl">
                         <img
                             src="{{ asset('images/home/frame4.webp') }}"
                             alt="Destinos turísticos"
-                            class="h-full w-full object-cover"
-                        />
+                            class="h-full w-full object-cover" />
                     </div>
                 </div>
             </div>
@@ -55,7 +51,39 @@
     </div>
 </section>
 
-<section id="history" aria-label="History" class="w-full bg-blue-300 mt-20 px-24 py-32">
+<section id="history" aria-label="History" class="w-full bg-white px-24 py-32">
+    <div class="flex flex-col gap-4 items-center">
+        <p class="text-5xl font-extrabold font-inter text-blue-300">Nuestra Historia</p>
+        <div class="max-w-7xl flex flex-col gap-4 text-center text-xl font-medium font-inter text-zinc-600 leading-6">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. </p>
+            <p>Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.</p>
+        </div>
+        @php
+            $airlines = [
+                ['src' => 'aircanada.png', 'alt' => 'Air Canada'],
+                ['src' => 'american.png', 'alt' => 'American Airlines'],
+                ['src' => 'british.png', 'alt' => 'British Airways'],
+                ['src' => 'qatar.png', 'alt' => 'Qatar Airways'],
+                ['src' => 'emirates.png', 'alt' => 'Emirates'],
+                ['src' => 'southwest.png', 'alt' => 'Southwest Airlines'],
+                ['src' => 'turkish.png', 'alt' => 'Turkish Airlines'],
+            ];
+        @endphp
+
+        <div class="mx-auto flex w-full flex-col gap-24 mt-20">
+            @foreach (array_chunk($airlines, 4) as $row)
+                <div class="flex flex-wrap justify-center gap-x-24 gap-y-6">
+                    @foreach ($row as $airline)
+                        <img
+                            src="{{ asset('images/about/' . $airline['src']) }}"
+                            alt="{{ $airline['alt'] }}"
+                            class="w-64 h-24 shrink-0 object-contain"
+                        />
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
+    </div>
 
 </section>
 
