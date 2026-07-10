@@ -59,28 +59,27 @@
             <p>Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.</p>
         </div>
         @php
-            $airlines = [
-                ['src' => 'aircanada.png', 'alt' => 'Air Canada'],
-                ['src' => 'american.png', 'alt' => 'American Airlines'],
-                ['src' => 'british.png', 'alt' => 'British Airways'],
-                ['src' => 'qatar.png', 'alt' => 'Qatar Airways'],
-                ['src' => 'emirates.png', 'alt' => 'Emirates'],
-                ['src' => 'southwest.png', 'alt' => 'Southwest Airlines'],
-                ['src' => 'turkish.png', 'alt' => 'Turkish Airlines'],
-            ];
+        $airlines = [
+        ['src' => 'aircanada.png', 'alt' => 'Air Canada'],
+        ['src' => 'american.png', 'alt' => 'American Airlines'],
+        ['src' => 'british.png', 'alt' => 'British Airways'],
+        ['src' => 'qatar.png', 'alt' => 'Qatar Airways'],
+        ['src' => 'emirates.png', 'alt' => 'Emirates'],
+        ['src' => 'southwest.png', 'alt' => 'Southwest Airlines'],
+        ['src' => 'turkish.png', 'alt' => 'Turkish Airlines'],
+        ];
         @endphp
 
         <div class="mx-auto flex w-full flex-col gap-24 mt-20">
             @foreach (array_chunk($airlines, 4) as $row)
-                <div class="flex flex-wrap justify-center gap-x-24 gap-y-6">
-                    @foreach ($row as $airline)
-                        <img
-                            src="{{ asset('images/about/' . $airline['src']) }}"
-                            alt="{{ $airline['alt'] }}"
-                            class="w-64 h-24 shrink-0 object-contain"
-                        />
-                    @endforeach
-                </div>
+            <div class="flex flex-wrap justify-center gap-x-24 gap-y-6">
+                @foreach ($row as $airline)
+                <img
+                    src="{{ asset('images/about/' . $airline['src']) }}"
+                    alt="{{ $airline['alt'] }}"
+                    class="w-64 h-24 shrink-0 object-contain" />
+                @endforeach
+            </div>
             @endforeach
         </div>
     </div>
@@ -88,6 +87,20 @@
 </section>
 
 <section id="mission" aria-label="Mission" class="w-full bg-blue-300 mt-20 px-24 py-32">
+    <div class="flex flex-row gap-24 items-start justify-center">
+        <div class="max-w-md flex flex-col gap-2 items-center justify-center">
+            <p class="text-2xl text-white font-extrabold font-inter">Misión</p>
+            <p class=" text-center text-base font-medium font-inter text-white/80">Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.</p>
+        </div>
+        <div class="max-w-md flex flex-col gap-2 items-center justify-center">
+            <p class="text-2xl text-white font-extrabold font-inter">Visión</p>
+            <p class="text-center text-base font-medium font-inter text-white/80">Ser reconocidos como el socio estratégico de referencia para agencias de viajes mediante nuestro enfoque de.</p>
+        </div>
+        <div class="max-w-md flex flex-col gap-2 items-center justify-center">
+            <p class="text-2xl text-white font-extrabold font-inter">Valores</p>
+            <p class="text-center text-base font-medium font-inter text-white/80">Tour operador especializado en el mercado B2B que conecta agencias con una amplia red de servicios hoteleros, mejorando su eficiencia y garantizando experiencias de viaje memorables</p>
+        </div>
+    </div>
 
 </section>
 
