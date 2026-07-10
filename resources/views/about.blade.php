@@ -104,8 +104,23 @@
 
 </section>
 
-<section id="team" aria-label="Team" class="w-full bg-blue-300 mt-20 px-24 py-32">
+<section id="team" aria-label="Team" class="mt-20 mb-20 w-full bg-white px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24">
+    <div class="mx-auto w-full max-w-[1600px]">
+        <p class="mb-12 text-5xl font-extrabold font-inter text-blue-300">El Equipo</p>
 
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+            @foreach (range(1, 6) as $_)
+                <div class="relative aspect-[568/488] w-full overflow-hidden bg-white">
+                    <div class="absolute left-[14%] top-[4.5%] h-[59%] w-[45%] rounded-2xl bg-gray-400"></div>
+                    <div class="absolute bottom-[4%] left-[28%] w-[56%] rounded-tl-xl rounded-tr-xl rounded-br-xl bg-blue-300 p-6 lg:p-8">
+                        <p class="font-inter text-sm font-normal leading-5 text-white lg:text-base">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus.
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </section>
 
 @endsection
