@@ -4,201 +4,123 @@
 
 @section('content')
 
-<div class="mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
+<section id="about" aria-label="Nosotros" class="w-full bg-blue-300 py-16 md:py-24 lg:py-32">
+    <div class="mx-auto flex w-full max-w-[1600px] flex-col items-center gap-12 px-6 sm:px-8 md:gap-16 md:px-16 lg:flex-row lg:items-center lg:justify-center lg:gap-20 lg:px-24">
+        <div class="flex shrink-0 items-stretch gap-4">
+            <div class="w-80 overflow-hidden rounded-3xl lg:w-96">
+                <img
+                    src="{{ asset('images/home/frame1.webp') }}"
+                    alt="Equipo de Travel Logic"
+                    class="h-full w-full object-cover" />
+            </div>
+            <div class="flex w-80 flex-col gap-4 lg:w-96">
+                <div class="min-h-80 flex-1 overflow-hidden rounded-3xl">
+                    <img
+                        src="{{ asset('images/home/frame2.webp') }}"
+                        alt="Oficinas de Travel Logic"
+                        class="h-full w-full object-cover" />
+                </div>
+                <div class="flex gap-4">
+                    <div class="size flex-1 overflow-hidden rounded-3xl">
+                        <img
+                            src="{{ asset('images/home/frame3.webp') }}"
+                            alt="Experiencias de viaje"
+                            class="h-full w-full object-cover" />
+                    </div>
+                    <div class="size flex-1 overflow-hidden rounded-3xl">
+                        <img
+                            src="{{ asset('images/home/frame4.webp') }}"
+                            alt="Destinos turísticos"
+                            class="h-full w-full object-cover" />
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    {{-- Banner image --}}
-    <x-animate-in>
-        <div class="mb-10 h-64 w-full rounded-lg bg-gray-300 md:mb-12 md:h-80 lg:mb-16 lg:h-96"></div>
-    </x-animate-in>
+        <div class="flex w-full max-w-xl flex-col justify-center">
+            <div class="mb-6 flex flex-col gap-2">
+                <h1 class="font-inter text-4xl font-semibold leading-tight text-white">Nosotros</h1>
+                <p class="font-inter text-xl font-medium text-white/80">Soluciones integrales y personalizadas.</p>
+            </div>
+            <div class="border-l-4 border-sky-500 pl-6">
+                <p class="font-inter text-xl font-normal leading-8 text-white">
+                    Lorem ipsum dolor sit amet consectetur. In at amet semper velit elit nisi faucibus arcu. Bibendum nulla porttitor faucibus bibendum erat a vulputate sed. Quisque quis viverra turpis at erat vel ut metus congue. Sed senectus ullamcorper imperdiet sit fermentum. Fermentum faucibus proin hac sed condimentum euismod felis risus.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-    {{-- Nosotros --}}
-    <div class="mb-10 flex flex-col items-center justify-center gap-6 md:mb-14 md:gap-10 lg:mb-20">
-        <x-animate-in>
-            <p class="text-center text-3xl font-bold text-indigo-950 sm:text-4xl lg:text-5xl">
-                NOSOTROS
-            </p>
-        </x-animate-in>
-        <x-animate-in delay="120">
-            <p class="mx-auto max-w-4xl text-center text-base font-normal text-indigo-950 sm:text-lg lg:max-w-5xl lg:text-xl">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis
-                blandit lorem. In quis turpis congue, accumsan lacus eu, mollis arcu.
-                Fusce finibus nec elit a semper. Vivamus auctor pulvinar tincidunt.
-                Nunc lacinia urna velit, quis fringilla dui vulputate egestas. Quisque
-                lobortis ex eget magna pretium, nec cursus felis lacinia. Nam accumsan
-                ante sed libero tincidunt faucibus. Duis nec erat diam. Aenean dui
-                nunc, pretiu
-            </p>
-        </x-animate-in>
+<section id="history" aria-label="History" class="w-full bg-white px-24 py-32">
+    <div class="flex flex-col gap-4 items-center">
+        <p class="text-5xl font-extrabold font-inter text-blue-300">Nuestra Historia</p>
+        <div class="max-w-7xl flex flex-col gap-4 text-center text-xl font-medium font-inter text-zinc-600 leading-6">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. </p>
+            <p>Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.</p>
+        </div>
+        @php
+        $airlines = [
+        ['src' => 'aircanada.png', 'alt' => 'Air Canada'],
+        ['src' => 'american.png', 'alt' => 'American Airlines'],
+        ['src' => 'british.png', 'alt' => 'British Airways'],
+        ['src' => 'qatar.png', 'alt' => 'Qatar Airways'],
+        ['src' => 'emirates.png', 'alt' => 'Emirates'],
+        ['src' => 'southwest.png', 'alt' => 'Southwest Airlines'],
+        ['src' => 'turkish.png', 'alt' => 'Turkish Airlines'],
+        ];
+        @endphp
+
+        <div class="mx-auto flex w-full flex-col gap-24 mt-20">
+            @foreach (array_chunk($airlines, 4) as $row)
+            <div class="flex flex-wrap justify-center gap-x-24 gap-y-6">
+                @foreach ($row as $airline)
+                <img
+                    src="{{ asset('images/about/' . $airline['src']) }}"
+                    alt="{{ $airline['alt'] }}"
+                    class="w-64 h-24 shrink-0 object-contain" />
+                @endforeach
+            </div>
+            @endforeach
+        </div>
     </div>
 
-    {{-- Qué nos diferencia --}}
-    <div class="mb-10 md:mb-14 lg:mb-20">
-        <x-animate-in>
-            <p class="mb-6 text-center text-3xl font-bold text-indigo-950 sm:text-4xl lg:mb-8 lg:text-5xl">
-                QUE NOS DIFERENCIA
-            </p>
-        </x-animate-in>
+</section>
 
-        <div class="w-full rounded-lg border border-indigo-950/20 p-4 sm:p-6 md:p-8 lg:p-10">
+<section id="mission" aria-label="Mission" class="w-full bg-blue-300 mt-20 px-24 py-32">
+    <div class="flex flex-row gap-24 items-start justify-center">
+        <div class="max-w-md flex flex-col gap-2 items-center justify-center">
+            <p class="text-2xl text-white font-extrabold font-inter">Misión</p>
+            <p class=" text-center text-base font-medium font-inter text-white/80">Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.</p>
+        </div>
+        <div class="max-w-md flex flex-col gap-2 items-center justify-center">
+            <p class="text-2xl text-white font-extrabold font-inter">Visión</p>
+            <p class="text-center text-base font-medium font-inter text-white/80">Ser reconocidos como el socio estratégico de referencia para agencias de viajes mediante nuestro enfoque de.</p>
+        </div>
+        <div class="max-w-md flex flex-col gap-2 items-center justify-center">
+            <p class="text-2xl text-white font-extrabold font-inter">Valores</p>
+            <p class="text-center text-base font-medium font-inter text-white/80">Tour operador especializado en el mercado B2B que conecta agencias con una amplia red de servicios hoteleros, mejorando su eficiencia y garantizando experiencias de viaje memorables</p>
+        </div>
+    </div>
 
-            @php
-                $differentiators = [
-                    ['delay' => 100],
-                    ['delay' => 200],
-                    ['delay' => 300],
-                    ['delay' => 400],
-                ];
-            @endphp
+</section>
 
-            @foreach ($differentiators as $index => $item)
-                <x-animate-in delay="{{ $item['delay'] }}">
-                    <div class="grid w-full grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-[minmax(96px,128px)_minmax(140px,1fr)_minmax(0,2.5fr)] md:gap-10 lg:gap-14 xl:gap-16">
-                        <div class="mx-auto size-24 shrink-0 rounded-[52px] bg-gray-300 transition-transform duration-500 ease-out hover:scale-105 motion-reduce:transition-none md:mx-0 md:size-28 lg:size-32" aria-hidden="true"></div>
-                        <p class="min-w-0 text-center text-2xl font-semibold text-emerald-500 sm:text-3xl md:text-left lg:text-4xl">LOREM IPSUM</p>
-                        <p class="min-w-0 text-base font-normal text-stone-900 sm:text-lg lg:text-xl">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis
-                            blandit lorem. In quis turpis congue, accumsan lacus eu, mollis
-                            arcu. Fusce finibus nec elit a semper. Vivamus auctor pulvinar
-                            tincidunt. Nunc lacinia urna velit, quis fringilla dui vulputate
-                            egestas. Quisque lobortis ex eget magna pretium, nec cursus felis
-                            lacinia. Nam acc
+<section id="team" aria-label="Team" class="mt-20 mb-20 w-full bg-white px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24">
+    <div class="mx-auto w-full max-w-[1600px]">
+        <p class="mb-12 text-5xl font-extrabold font-inter text-blue-300">El Equipo</p>
+
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+            @foreach (range(1, 6) as $_)
+                <div class="relative aspect-[568/488] w-full overflow-hidden bg-white">
+                    <div class="absolute left-[14%] top-[4.5%] h-[59%] w-[45%] rounded-2xl bg-gray-400"></div>
+                    <div class="absolute bottom-[4%] left-[28%] w-[56%] rounded-tl-xl rounded-tr-xl rounded-br-xl bg-blue-300 p-6 lg:p-8">
+                        <p class="font-inter text-sm font-normal leading-5 text-white lg:text-base">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus.
                         </p>
                     </div>
-                </x-animate-in>
-
-                @if (!$loop->last)
-                    <div class="my-6 border-t border-indigo-950/20 md:my-8 lg:my-10" aria-hidden="true"></div>
-                @endif
+                </div>
             @endforeach
-
         </div>
     </div>
-
-    {{-- Nuestra historia --}}
-    <div class="mb-10 md:mb-14 lg:mb-20">
-        <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
-            <x-animate-in class="flex w-full flex-1 flex-col gap-4 lg:max-w-2xl">
-                <p class="mb-6 text-start text-3xl font-bold text-indigo-950 sm:text-4xl lg:mb-8 lg:text-5xl">
-                    NUESTRA HISTORIA
-                </p>
-                <p class="text-base font-normal text-start sm:text-lg lg:text-xl">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis
-                    blandit lorem. In quis turpis congue, accumsan lacus eu, mollis
-                    arcu. Fusce finibus nec elit a semper. Vivamus auctor pulvinar
-                    tincidunt. Nunc lacinia urna velit, quis fringilla dui vulputate
-                    egestas. Quisque lobortis ex eget magna pretium, nec cursus felis
-                    lacinia. Nam accumsan ante sed libero tincidunt faucibus. Duis nec
-                    erat diam. Aenean dui nunc, pretium et semper vulputate, mattis in
-                    purus. Donec luctus rutrum faucibus.
-                </p>
-                <p class="text-base font-normal text-start sm:text-lg lg:text-xl">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis
-                    blandit lorem. In quis turpis congue, accumsan lacus eu, mollis
-                    arcu. Fusce finibus nec elit a semper. Vivamus auctor pulvinar
-                    tincidunt. Nunc lacinia urna velit, quis fringilla dui vulputate
-                    egestas. Quisque lobortis ex eget magna pretium, nec cursus felis
-                    lacinia. Nam accumsan ante sed libero tincidunt faucibus. Duis nec
-                    erat diam. Aenean dui nunc, pretium et semper vulputate, mattis in
-                    purus. Donec luctus rutrum faucibus.
-                </p>
-            </x-animate-in>
-
-            <x-animate-in delay="180" class="w-full shrink-0 lg:w-[min(100%,520px)] lg:flex-1">
-                <div class="h-64 w-full rounded-lg bg-gray-300 sm:h-80 lg:h-[542px]"></div>
-            </x-animate-in>
-        </div>
-    </div>
-
-    {{-- Conoce al equipo --}}
-    <div class="mb-10 md:mb-14 lg:mb-20">
-        <x-animate-in>
-            <p class="mb-6 text-center text-3xl font-bold text-indigo-950 sm:text-4xl lg:mb-8 lg:text-5xl">
-                CONOCE AL EQUIPO
-            </p>
-        </x-animate-in>
-
-        <div class="flex w-full flex-col gap-8 rounded-lg border border-indigo-950/20 p-4 sm:gap-10 sm:p-6 md:p-8 lg:p-10">
-
-            @php
-                $teamMembers = [
-                    ['delay' => 100,  'role' => 'CEO'],
-                    ['delay' => 220,  'role' => 'CEO'],
-                    ['delay' => 340,  'role' => 'CEO'],
-                ];
-            @endphp
-
-            @foreach ($teamMembers as $member)
-                <x-animate-in delay="{{ $member['delay'] }}">
-                    <div class="flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-10 lg:gap-12">
-                        <div class="size-48 shrink-0 rounded-[52px] bg-gray-300 transition-transform duration-500 ease-out hover:scale-[1.02] motion-reduce:transition-none sm:size-56 lg:size-64" aria-hidden="true"></div>
-                        <div class="flex min-w-0 flex-1 flex-col justify-center gap-6 sm:gap-8 lg:gap-10">
-                            <div class="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 lg:gap-10">
-                                <p class="text-center text-2xl font-semibold text-indigo-950 sm:text-left sm:text-3xl lg:text-4xl">
-                                    NOMBRE APELLIDO
-                                </p>
-                                <p class="text-xl font-normal text-emerald-500 sm:text-2xl">{{ $member['role'] }}</p>
-                            </div>
-                            <p class="min-w-0 text-base font-normal text-stone-900 sm:text-lg lg:text-xl">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis
-                                blandit lorem. In quis turpis congue, accumsan lacus eu, mollis
-                                arcu. Fusce finibus nec elit a semper. Vivamus auctor pulvinar
-                                tincidunt. Nunc lacinia urna velit, quis fringilla dui vulputate
-                                egestas. Quisque lobortis ex eget magna pretium, nec cursus
-                                felis lacinia. Nam acc
-                            </p>
-                        </div>
-                    </div>
-                </x-animate-in>
-            @endforeach
-
-        </div>
-    </div>
-
-    {{-- Nuestros clientes --}}
-    <div class="mb-10 md:mb-14 lg:mb-16">
-        <x-animate-in>
-            <p class="mb-6 text-center text-3xl font-bold text-indigo-950 sm:text-4xl lg:mb-8 lg:text-5xl">
-                NUESTROS CLIENTES
-            </p>
-        </x-animate-in>
-
-        <div class="grid w-full grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
-
-            @php
-                $clients = [
-                    ['delay' => 100],
-                    ['delay' => 200],
-                    ['delay' => 300],
-                    ['delay' => 400],
-                ];
-            @endphp
-
-            @foreach ($clients as $client)
-                <x-animate-in delay="{{ $client['delay'] }}">
-                    <div class="flex w-full gap-4 sm:gap-6">
-                        <div class="size-12 shrink-0 rounded-full bg-gray-300 sm:size-14" aria-hidden="true"></div>
-                        <div class="min-w-0 flex-1">
-                            <p class="text-xl font-semibold text-indigo-950 sm:text-2xl">NOMBRE APELLIDO</p>
-                            <p class="text-lg font-normal text-emerald-500 sm:text-2xl">*****</p>
-                            <p class="mt-2 text-base font-normal text-stone-900 sm:text-lg">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis
-                                blandit lorem. In quis turpis congue, accumsan lacus eu, mollis
-                                arcu. Fusce finibus nec elit a semper. Vivamus auctor pulvinar
-                                tincidunt. Nunc lacinia urna velit, quis fringilla dui vulputate
-                                egestas. Quisque lobortis ex eget magna pretium, nec cursus
-                                felis lacinia. Nam acc
-                            </p>
-                        </div>
-                    </div>
-                </x-animate-in>
-            @endforeach
-
-        </div>
-    </div>
-
-    {{-- Contact Form --}}
-    <x-contact-form />
-
-</div>
+</section>
 
 @endsection
