@@ -12,7 +12,7 @@
     {{-- Grid de hoteles --}}
     <x-animate-in>
         @if ($hotels->isNotEmpty())
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3 justify-items-center">
                 @foreach ($hotels as $hotel)
                     <x-hotel-card :hotel="$hotel" />
                 @endforeach
