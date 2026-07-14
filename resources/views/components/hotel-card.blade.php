@@ -8,9 +8,9 @@
     $stars = (int) $hotel->star_category;
 @endphp
 
-<a href="{{ route('hotel.show', $hotel->slug) }}" class="block w-full overflow-hidden rounded-2xl bg-white shadow-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-2xl">
+<div class="flex h-[460px] w-96 flex-col overflow-hidden rounded-3xl bg-white shadow-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-2xl">
     {{-- Imagen principal --}}
-    <div class="h-48 w-full overflow-hidden bg-gray-200">
+    <div class="h-72 w-full shrink-0 overflow-hidden bg-gray-200">
         @if ($image && $image->url)
             <img
                 src="{{ $image->url }}"
@@ -30,34 +30,26 @@
     </div>
 
     {{-- Contenido --}}
-    <div class="px-4 py-5">
-        {{-- Estrellas --}}
-        @if ($stars > 0)
-            <div class="mb-1 flex gap-0.5">
-                @for ($i = 1; $i <= 5; $i++)
-                    <svg
-                        class="h-4 w-4 {{ $i <= $stars ? 'text-amber-400' : 'text-gray-300' }}"
-                        fill="currentColor" viewBox="0 0 20 20"
-                    >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                @endfor
-            </div>
-        @endif
-
+    <div class="flex flex-1 flex-col px-4 py-5">
         {{-- Nombre --}}
-        <p class="text-base font-bold leading-snug text-indigo-950">{{ $hotel->name }}</p>
+        <p class="line-clamp-2 text-2xl font-bold font-inter leading-snug text-indigo-950">{{ $hotel->name }}</p>
 
         {{-- Destino --}}
         @if ($hotel->destination)
-            <p class="mt-0.5 text-xs font-medium text-indigo-400">
-                {{ $hotel->destination->name ?? '' }}
+            <p class="mt-0.5 flex items-center gap-1 text-xs font-medium text-black">
+                <x-lucide-map-pin class="size-3.5 shrink-0 text-zinc-500" />
+                {{ $hotel->destination->city }}
             </p>
         @endif
 
-        {{-- Reseñas --}}
-        <p class="mt-1 text-sm font-normal text-gray-500">
-            {{ $reviewCount }} {{ $reviewCount === 1 ? 'reseña' : 'reseñas' }}
-        </p>
+        {{-- boton de ver mas --}}
+        <div class="mt-auto pt-3 flex justify-end">
+            <a
+                href="{{ route('hotel.show', $hotel->slug) }}"
+                class="inline-flex items-center gap-2 rounded-lg bg-green-300 px-4 py-2 text-base font-bold font-inter text-white"
+            >
+                Ver más
+            </a>
+        </div>
     </div>
-</a>
+</div>
