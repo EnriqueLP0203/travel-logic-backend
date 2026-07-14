@@ -38,4 +38,22 @@ class Destination extends Model
     {
         return $this->hasMany(Hotel::class, 'destination_id');
     }
+
+    /**
+     * URL pública del thumbnail en storage/travel_media/destinations.
+     */
+    public function getThumbnailUrlAttribute(): ?string
+    {
+        if (empty($this->img_compound_name)) {
+            return null;
+        }
+
+        $thumbnail = 't_' . $this->img_compound_name;
+        $basePath = storage_path('travel_media/destinations/');
+        $filename = is_file($basePath . $thumbnail)
+            ? $thumbnail
+            : $this->img_compound_name;
+
+        return route('media.destinations', ['filename' => $filename]);
+    }
 }
