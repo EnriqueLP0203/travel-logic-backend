@@ -53,6 +53,32 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.querySelectorAll('[data-modal-close]').forEach((closer) => {
             closer.addEventListener('click', () => closeModal(modal));
         });
+
+        if (modal.hasAttribute('data-open-on-load')) {
+            openModal(modal);
+        }
+    });
+
+    document.querySelectorAll('[data-image-input]').forEach((input) => {
+        input.addEventListener('change', () => {
+            const container = input.closest('label');
+            if (!container) return;
+
+            const preview = container.querySelector('[data-image-preview]');
+            const placeholder = container.querySelector('[data-image-placeholder]');
+            const fileName = container.querySelector('[data-image-name]');
+            const file = input.files?.[0];
+
+            if (!file || !preview) return;
+
+            preview.src = window.URL.createObjectURL(file);
+            preview.classList.remove('hidden');
+            placeholder?.classList.add('hidden');
+
+            if (fileName) {
+                fileName.textContent = file.name;
+            }
+        });
     });
 
     document.addEventListener('keydown', (event) => {
