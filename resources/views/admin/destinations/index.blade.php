@@ -10,6 +10,12 @@
     </div>
 @endif
 
+@if (session('error'))
+    <div class="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="bg-white rounded-lg shadow-sm border border-slate-200">
 
     {{-- Header de la card --}}
@@ -80,18 +86,43 @@
                     </td>
                     <td class="px-6 py-3">
                         <div class="flex items-center justify-center gap-6">
-                            {{-- Ver --}}
-                            <button type="button" class="text-slate-500 hover:text-slate-700 hover:scale-110 transition-all duration-300" title="Ver">
+                            <button
+                                type="button"
+                                data-modal-target="destination-view"
+                                data-id="{{ $destino->id }}"
+                                data-city="{{ $destino->city }}"
+                                data-state="{{ $destino->state }}"
+                                data-country="{{ $destino->country }}"
+                                data-active="{{ $destino->active ? '1' : '0' }}"
+                                data-thumbnail="{{ $destino->thumbnail_url ?? '' }}"
+                                class="text-slate-500 hover:text-slate-700 hover:scale-110 transition-all duration-300"
+                                title="Ver">
                                 <x-lucide-eye class="w-5" />
                             </button>
 
-                            {{-- Editar --}}
-                            <button type="button" class="text-blue-500 hover:text-blue-700 hover:scale-110 transition-all duration-300" title="Editar">
+                            <button
+                                type="button"
+                                data-modal-target="destination-edit"
+                                data-id="{{ $destino->id }}"
+                                data-city="{{ $destino->city }}"
+                                data-state="{{ $destino->state }}"
+                                data-country="{{ $destino->country }}"
+                                data-active="{{ $destino->active ? '1' : '0' }}"
+                                data-thumbnail="{{ $destino->thumbnail_url ?? '' }}"
+                                data-update-url="{{ route('admin.destinations.update', $destino) }}"
+                                class="text-blue-500 hover:text-blue-700 hover:scale-110 transition-all duration-300"
+                                title="Editar">
                                 <x-lucide-pencil class="w-5" />
                             </button>
 
-                            {{-- Eliminar --}}
-                            <button type="button" class="text-red-500 hover:text-red-700 hover:scale-110 transition-all duration-300" title="Eliminar">
+                            <button
+                                type="button"
+                                data-modal-target="destination-delete"
+                                data-id="{{ $destino->id }}"
+                                data-city="{{ $destino->city }}"
+                                data-delete-url="{{ route('admin.destinations.destroy', $destino) }}"
+                                class="text-red-500 hover:text-red-700 hover:scale-110 transition-all duration-300"
+                                title="Eliminar">
                                 <x-lucide-trash class="w-5" />
                             </button>
                         </div>
@@ -117,4 +148,7 @@
 </div>
 
 <x-destination-create-modal />
+<x-destination-view-modal />
+<x-destination-edit-modal />
+<x-destination-delete-modal />
 @endsection

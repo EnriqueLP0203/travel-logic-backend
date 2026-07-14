@@ -104,6 +104,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/hotels', fn () => view('admin.hotels.index'))->name('hotels.index');
     Route::get('/destinations', [AdminDestinationController::class, 'index'])->name('destinations.index');
     Route::post('/destinations', [AdminDestinationController::class, 'store'])->name('destinations.store');
+    Route::put('/destinations/{destination}', [AdminDestinationController::class, 'update'])->name('destinations.update');
+    Route::delete('/destinations/{destination}', [AdminDestinationController::class, 'destroy'])->name('destinations.destroy');
     Route::get('/classifications', fn () => view('admin.classifications.index'))->name('classifications.index');
     Route::get('/agencies', fn () => view('admin.agencies.index'))->name('agencies.index');
     Route::get('/reviews', fn () => view('admin.reviews.index'))->name('reviews.index');

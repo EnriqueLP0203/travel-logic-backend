@@ -1,10 +1,12 @@
 @props([
-    'name' => 'destination-create',
+    'name' => 'destination-edit',
 ])
 
 @php
     $estadosMexico = config('mexico.states');
     $pais = config('mexico.country');
+    $isEditError = $errors->any() && old('_method') === 'PUT';
+    $editId = old('destination_id');
 @endphp
 
 <div
@@ -12,19 +14,15 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="{{ $name }}-title"
-    @if ($errors->any() && old('_method') !== 'PUT') data-open-on-load @endif
+    @if ($isEditError) data-open-on-load @endif
     class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
-    {{-- Overlay --}}
     <div data-modal-close class="absolute inset-0 bg-slate-900/50"></div>
 
-    {{-- Contenedor del modal --}}
     <div class="relative z-10 flex w-full max-w-3xl flex-col rounded-lg bg-white shadow-xl">
-        {{-- Header --}}
         <div class="flex items-center justify-between border-b border-slate-200 px-6 py-4">
             <h2 id="{{ $name }}-title" class="text-base font-semibold text-slate-800">
-                Nuevo destino
+                Editar destino
             </h2>
-
             <button
                 type="button"
                 data-modal-close
@@ -34,11 +32,17 @@
             </button>
         </div>
 
-        <form action="{{ route('admin.destinations.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col">
+        <form
+            data-edit-form
+            action="{{ $editId ? route('admin.destinations.update', $editId) : '#' }}"
+            method="POST"
+            enctype="multipart/form-data"
+            class="flex flex-col">
             @csrf
+            @method('PUT')
+            <input type="hidden" name="destination_id" data-edit-id value="{{ $editId }}">
 
             <div class="grid grid-cols-1 gap-8 px-6 py-6 md:grid-cols-2">
-                {{-- Columna izquierda: datos --}}
                 <div class="flex flex-col gap-4">
                     <div class="flex flex-col gap-1.5">
                         <label for="{{ $name }}-city" class="text-sm font-medium text-slate-700">
@@ -48,6 +52,7 @@
                             id="{{ $name }}-city"
                             type="text"
                             name="city"
+                            data-edit-city
                             required
                             value="{{ old('city') }}"
                             placeholder="Ej. Cancún"
@@ -64,6 +69,7 @@
                         <select
                             id="{{ $name }}-country"
                             name="country"
+                            data-edit-country
                             required
                             class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('country') border-red-400 @enderror">
                             <option value="{{ $pais }}" @selected(old('country', $pais) === $pais)>{{ $pais }}</option>
@@ -80,6 +86,7 @@
                         <select
                             id="{{ $name }}-state"
                             name="state"
+                            data-edit-state
                             required
                             class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('state') border-red-400 @enderror">
                             <option value="" disabled @selected(! old('state'))>Selecciona un estado</option>
@@ -97,13 +104,13 @@
                             type="checkbox"
                             name="active"
                             value="1"
+                            data-edit-active
                             @checked(old('active', true))
                             class="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
                         <span class="text-sm text-slate-700">Activo</span>
                     </label>
                 </div>
 
-                {{-- Columna derecha: imagen --}}
                 <div class="flex flex-col gap-1.5">
                     <label for="{{ $name }}-image" class="text-sm font-medium text-slate-700">
                         Imagen
@@ -122,19 +129,20 @@
 
                         <img
                             data-image-preview
+                            data-edit-image-preview
                             alt="Vista previa"
                             class="absolute inset-0 hidden h-full w-full object-cover">
 
-                        <div data-image-placeholder class="flex flex-col items-center gap-3">
+                        <div data-image-placeholder data-edit-image-placeholder class="flex flex-col items-center gap-3">
                             <span class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-slate-400 shadow-sm ring-1 ring-slate-200 group-hover:text-blue-500">
                                 <x-lucide-image-plus class="size-6" />
                             </span>
                             <div>
                                 <p class="text-sm font-medium text-slate-700">
-                                    Subir imagen
+                                    Cambiar imagen
                                 </p>
                                 <p class="mt-1 text-xs text-slate-500">
-                                    JPG, PNG o WEBP
+                                    JPG, PNG o WEBP (opcional)
                                 </p>
                             </div>
                         </div>
@@ -150,7 +158,6 @@
                 </div>
             </div>
 
-            {{-- Footer --}}
             <div class="flex items-center justify-end gap-3 border-t border-slate-200 px-6 py-4">
                 <button
                     type="button"
@@ -160,8 +167,8 @@
                 </button>
                 <button
                     type="submit"
-                    class="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700">
-                    Guardar
+                    class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700">
+                    Actualizar
                 </button>
             </div>
         </form>
