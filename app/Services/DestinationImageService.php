@@ -61,6 +61,25 @@ class DestinationImageService
         ];
     }
 
+    /**
+     * Elimina original + variantes t_ y c_ del storage.
+     */
+    public function delete(?string $compoundName): void
+    {
+        if (empty($compoundName)) {
+            return;
+        }
+
+        $directory = storage_path(self::DIRECTORY);
+
+        foreach (['', 't_', 'c_'] as $prefix) {
+            $path = $directory . '/' . $prefix . $compoundName;
+            if (is_file($path)) {
+                unlink($path);
+            }
+        }
+    }
+
     private function createThumbnail(string $source, string $destination, string $extension): void
     {
         [$sourceImage, $width, $height] = $this->loadImage($source, $extension);
