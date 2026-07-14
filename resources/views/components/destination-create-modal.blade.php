@@ -2,11 +2,17 @@
     'name' => 'destination-create',
 ])
 
+@php
+    $estadosMexico = config('mexico.states');
+    $pais = config('mexico.country');
+@endphp
+
 <div
     data-modal="{{ $name }}"
     role="dialog"
     aria-modal="true"
     aria-labelledby="{{ $name }}-title"
+    @if ($errors->any()) data-open-on-load @endif
     class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
     {{-- Overlay --}}
     <div data-modal-close class="absolute inset-0 bg-slate-900/50"></div>
@@ -28,7 +34,7 @@
             </button>
         </div>
 
-        <form action="#" method="POST" enctype="multipart/form-data" class="flex flex-col">
+        <form action="{{ route('admin.destinations.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col">
             @csrf
 
             <div class="grid grid-cols-1 gap-8 px-6 py-6 md:grid-cols-2">
@@ -43,46 +49,13 @@
                             type="text"
                             name="city"
                             required
+                            value="{{ old('city') }}"
                             placeholder="Ej. Cancún"
-                            class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                            class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('city') border-red-400 @enderror">
+                        @error('city')
+                            <p class="text-xs text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
-
-                    @php
-                        $estadosMexico = [
-                            'Aguascalientes',
-                            'Baja California',
-                            'Baja California Sur',
-                            'Campeche',
-                            'Chiapas',
-                            'Chihuahua',
-                            'Ciudad de México',
-                            'Coahuila',
-                            'Colima',
-                            'Durango',
-                            'Estado de México',
-                            'Guanajuato',
-                            'Guerrero',
-                            'Hidalgo',
-                            'Jalisco',
-                            'Michoacán',
-                            'Morelos',
-                            'Nayarit',
-                            'Nuevo León',
-                            'Oaxaca',
-                            'Puebla',
-                            'Querétaro',
-                            'Quintana Roo',
-                            'San Luis Potosí',
-                            'Sinaloa',
-                            'Sonora',
-                            'Tabasco',
-                            'Tamaulipas',
-                            'Tlaxcala',
-                            'Veracruz',
-                            'Yucatán',
-                            'Zacatecas',
-                        ];
-                    @endphp
 
                     <div class="flex flex-col gap-1.5">
                         <label for="{{ $name }}-country" class="text-sm font-medium text-slate-700">
@@ -92,9 +65,12 @@
                             id="{{ $name }}-country"
                             name="country"
                             required
-                            class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
-                            <option value="México" selected>México</option>
+                            class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('country') border-red-400 @enderror">
+                            <option value="{{ $pais }}" @selected(old('country', $pais) === $pais)>{{ $pais }}</option>
                         </select>
+                        @error('country')
+                            <p class="text-xs text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="flex flex-col gap-1.5">
@@ -105,12 +81,15 @@
                             id="{{ $name }}-state"
                             name="state"
                             required
-                            class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
-                            <option value="" disabled selected>Selecciona un estado</option>
+                            class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('state') border-red-400 @enderror">
+                            <option value="" disabled @selected(! old('state'))>Selecciona un estado</option>
                             @foreach ($estadosMexico as $estado)
-                                <option value="{{ $estado }}">{{ $estado }}</option>
+                                <option value="{{ $estado }}" @selected(old('state') === $estado)>{{ $estado }}</option>
                             @endforeach
                         </select>
+                        @error('state')
+                            <p class="text-xs text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <label class="mt-1 flex cursor-pointer items-center gap-2">
@@ -118,7 +97,7 @@
                             type="checkbox"
                             name="active"
                             value="1"
-                            checked
+                            @checked(old('active', true))
                             class="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
                         <span class="text-sm text-slate-700">Activo</span>
                     </label>
@@ -132,24 +111,14 @@
 
                     <label
                         for="{{ $name }}-image"
-                        class="group relative flex min-h-56 flex-1 cursor-pointer flex-col items-center justify-center gap-3 overflow-hidden rounded-lg border-2 border-slate-300 bg-slate-50 px-4 py-6 text-center transition hover:border-blue-400 hover:bg-blue-50/40">
+                        class="group relative flex min-h-56 flex-1 cursor-pointer flex-col items-center justify-center gap-3 overflow-hidden rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 px-4 py-6 text-center transition hover:border-blue-400 hover:bg-blue-50/40 @error('image') border-red-400 @enderror">
                         <input
                             id="{{ $name }}-image"
                             type="file"
                             name="image"
                             accept="image/jpeg,image/png,image/webp"
-                            class="sr-only"
-                            onchange="
-                                const preview = this.closest('label').querySelector('[data-image-preview]');
-                                const placeholder = this.closest('label').querySelector('[data-image-placeholder]');
-                                const fileName = this.closest('label').querySelector('[data-image-name]');
-                                const file = this.files?.[0];
-                                if (!file) return;
-                                preview.src = URL.createObjectURL(file);
-                                preview.classList.remove('hidden');
-                                placeholder.classList.add('hidden');
-                                fileName.textContent = file.name;
-                            ">
+                            data-image-input
+                            class="sr-only">
 
                         <img
                             data-image-preview
@@ -175,6 +144,9 @@
                             class="pointer-events-none absolute bottom-0 left-0 right-0 truncate bg-slate-900/70 px-3 py-1.5 text-xs text-white empty:hidden">
                         </span>
                     </label>
+                    @error('image')
+                        <p class="text-xs text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
 
