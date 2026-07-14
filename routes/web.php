@@ -89,3 +89,13 @@ Route::get('/auth-traveler', function () {
 Route::post('/auth-traveler/login', [TravelerAuthController::class, 'login'])->name('traveler.login');
 Route::post('/auth-traveler/register', [TravelerAuthController::class, 'register'])->name('traveler.register');
 Route::post('/logout', [TravelerAuthController::class, 'logout'])->name('traveler.logout');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', fn () => view('admin.dashboard'))->name('dashboard');
+
+    Route::get('/hotels', fn () => view('admin.hotels.index'))->name('hotels.index');
+    Route::get('/destinations', fn () => view('admin.destinations.index'))->name('destinations.index');
+    Route::get('/classifications', fn () => view('admin.classifications.index'))->name('classifications.index');
+    Route::get('/agencies', fn () => view('admin.agencies.index'))->name('agencies.index');
+    Route::get('/reviews', fn () => view('admin.reviews.index'))->name('reviews.index');
+});
