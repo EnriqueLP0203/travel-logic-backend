@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
 use App\Http\Controllers\TravelerAuthController;
 use App\Models\Destination;
 use App\Models\Hotel;
@@ -28,6 +29,13 @@ Route::get('/media/hotels/{filename}', function (string $filename) {
 
     return response()->file($path);
 })->where('filename', '[A-Za-z0-9._-]+')->name('media.hotels');
+
+Route::get('/media/destinations/{filename}', function (string $filename) {
+    $path = storage_path('travel_media/destinations/' . $filename);
+    abort_unless(is_file($path), 404);
+
+    return response()->file($path);
+})->where('filename', '[A-Za-z0-9._-]+')->name('media.destinations');
 
 Route::get('/hotels', function (Request $request) {
     $hotels = Hotel::where('active', true)
@@ -94,7 +102,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', fn () => view('admin.dashboard'))->name('dashboard');
 
     Route::get('/hotels', fn () => view('admin.hotels.index'))->name('hotels.index');
-    Route::get('/destinations', fn () => view('admin.destinations.index'))->name('destinations.index');
+    Route::get('/destinations', [AdminDestinationController::class, 'index'])->name('destinations.index');
     Route::get('/classifications', fn () => view('admin.classifications.index'))->name('classifications.index');
     Route::get('/agencies', fn () => view('admin.agencies.index'))->name('agencies.index');
     Route::get('/reviews', fn () => view('admin.reviews.index'))->name('reviews.index');
