@@ -10,13 +10,14 @@
     <div class="flex items-center justify-between px-6 py-4 border-b border-slate-200">
         <h2 class="text-sm font-semibold text-slate-800">Listado</h2>
 
-        <a href="#"
+        <button type="button"
+            data-modal-target="destination-create"
             class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-md transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
             Nuevo
-        </a>
+        </button>
     </div>
 
     {{-- Barra de acciones --}}
@@ -108,4 +109,6 @@
     @endif
 
 </div>
+
+<x-destination-create-modal />
 @endsection
