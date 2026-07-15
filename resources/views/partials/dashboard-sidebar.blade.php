@@ -19,10 +19,16 @@ $navItems = [
         'icon' => 'lucide-map-pin',
     ],
     [
-        'route' => 'admin.classifications.index',
-        'active' => 'admin.classifications.*',
-        'label' => 'Clasificaciones',
+        'route' => 'admin.hotel-groups.index',
+        'active' => 'admin.hotel-groups.*',
+        'label' => 'Grupos de hotel',
         'icon' => 'lucide-tags',
+    ],
+    [
+        'route' => 'admin.accommodation-types.index',
+        'active' => 'admin.accommodation-types.*',
+        'label' => 'Tipos de alojamiento',
+        'icon' => 'lucide-bed-double',
     ],
     [
         'route' => 'admin.agencies.index',

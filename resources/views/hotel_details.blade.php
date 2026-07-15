@@ -32,7 +32,6 @@ fn ($item) => filled($item)
 }
 }
 
-$classificationsByGroup = $hotel->classifications->groupBy('classification_group_id');
 @endphp
 
 <div class="mx-auto w-full max-w-[1600px] px-2 pb-10 sm:px-3 md:px-4 lg:px-6 lg:pb-16 mt-24">
@@ -159,38 +158,50 @@ $classificationsByGroup = $hotel->classifications->groupBy('classification_group
             @endif
         </div>
 
-        {{-- Col 2: Grupos y clasificaciones --}}
+        {{-- Col 2: Grupos de hotel y tipos de alojamiento --}}
         <div class="rounded-2xl bg-white p-6 shadow-xl">
-            <h2 class="mb-4 text-xl font-bold text-indigo-950">Grupos y clasificaciones</h2>
-            @if ($classificationsByGroup->isNotEmpty())
+            <h2 class="mb-4 text-xl font-bold text-indigo-950">Grupos y tipos</h2>
             <div class="space-y-5">
-                @foreach ($classificationsByGroup as $groupId => $classifications)
-                @php
-                $group = $classifications->first()?->classificationGroup;
-                $groupName = $group?->translations->first()?->classification_group_name;
-                @endphp
-                @if ($groupName)
+                @if ($hotel->hotelGroups->isNotEmpty())
                 <div>
                     <h3 class="mb-2 text-sm font-semibold uppercase tracking-wide text-indigo-400">
-                        {{ $groupName }}
+                        Grupos de hotel
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        @foreach ($classifications as $classification)
+                        @foreach ($hotel->hotelGroups as $group)
                         @php
-                        $className = $classification->translations->first()?->classification_name;
+                        $groupName = $group->translations->first()?->name;
                         @endphp
-                        @if ($className)
+                        @if ($groupName)
                         <span class="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700">
-                            {{ $className }}
+                            {{ $groupName }}
                         </span>
                         @endif
                         @endforeach
                     </div>
                 </div>
                 @endif
-                @endforeach
+
+                @if ($hotel->accommodationTypes->isNotEmpty())
+                <div>
+                    <h3 class="mb-2 text-sm font-semibold uppercase tracking-wide text-indigo-400">
+                        Tipos de alojamiento
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        @foreach ($hotel->accommodationTypes as $type)
+                        @php
+                        $typeName = $type->translations->first()?->name;
+                        @endphp
+                        @if ($typeName)
+                        <span class="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700">
+                            {{ $typeName }}
+                        </span>
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+                @endif
             </div>
-            @endif
         </div>
 
         {{-- Col 3: Calificaciones --}}
