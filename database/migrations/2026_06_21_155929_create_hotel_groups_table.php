@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('hotel_groups', function (Blueprint $table) {
             $table->increments('id')->unsigned();
 
-            $table->integer('order')->default(1);
-
             $table->string('img_original_name', 255)->nullable();
             $table->string('img_new_name', 255)->nullable();
             $table->string('img_compound_name', 255)->nullable();
