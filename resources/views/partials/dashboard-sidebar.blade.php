@@ -30,18 +30,6 @@ $navItems = [
         'label' => 'Tipos de alojamiento',
         'icon' => 'lucide-bed-double',
     ],
-    [
-        'route' => 'admin.agencies.index',
-        'active' => 'admin.agencies.*',
-        'label' => 'Agencias',
-        'icon' => 'lucide-briefcase',
-    ],
-    [
-        'route' => 'admin.reviews.index',
-        'active' => 'admin.reviews.*',
-        'label' => 'Reseñas',
-        'icon' => 'lucide-star',
-    ],
 ];
 @endphp
 
