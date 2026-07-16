@@ -11,7 +11,6 @@ class HotelGroupResource extends JsonResource
     {
         return [
             'id'    => $this->id,
-            'order' => $this->order,
             'name'  => $this->translations->first()?->name ?? null,
             'image' => $this->img_compound_name
                 ? [

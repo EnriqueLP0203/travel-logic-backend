@@ -13,7 +13,6 @@ class HotelGroup extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'order',
         'img_original_name',
         'img_new_name',
         'img_compound_name',
@@ -21,6 +20,8 @@ class HotelGroup extends Model
         'img_hash_name',
         'img_file_size',
         'active',
+        'created_at',
+        'updated_at',
         'created_by',
         'updated_by',
     ];
@@ -42,5 +43,23 @@ class HotelGroup extends Model
             'hotel_group_id',
             'hotel_id'
         );
+    }
+
+    /**
+     * URL pública del thumbnail en storage/travel_media/hotel_groups.
+     */
+    public function getThumbnailUrlAttribute(): ?string
+    {
+        if (empty($this->img_compound_name)) {
+            return null;
+        }
+
+        $thumbnail = 't_' . $this->img_compound_name;
+        $basePath = storage_path('travel_media/hotel_groups/');
+        $filename = is_file($basePath . $thumbnail)
+            ? $thumbnail
+            : $this->img_compound_name;
+
+        return route('media.hotel-groups', ['filename' => $filename]);
     }
 }

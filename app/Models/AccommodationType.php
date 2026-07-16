@@ -13,7 +13,6 @@ class AccommodationType extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'order',
         'icon_class',
         'active',
         'created_at',
