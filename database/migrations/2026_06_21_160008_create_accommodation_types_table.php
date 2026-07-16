@@ -9,22 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * Replica la tabla `classification_groups` de Hotelia.
-     * Grupos de clasificación (ej. Playa, Ciudad, Fiesta, Descanso, Lujo, Aeropuerto).
+     * Tipos de alojamiento (ej. Todo Incluido, Familias, Boutique).
      */
     public function up(): void
     {
-        Schema::create('classification_groups', function (Blueprint $table) {
+        Schema::create('accommodation_types', function (Blueprint $table) {
             $table->increments('id')->unsigned();
 
             $table->integer('order')->default(1);
-
-            $table->string('img_original_name', 255)->nullable();
-            $table->string('img_new_name', 255)->nullable();
-            $table->string('img_compound_name', 255)->nullable();
-            $table->string('img_extension', 255)->nullable();
-            $table->string('img_hash_name', 255)->nullable();
-            $table->integer('img_file_size')->nullable()->default(0);
+            $table->string('icon_class', 255)->nullable();
 
             $table->boolean('active')->default(true);
             $table->dateTime('created_at');
@@ -39,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classification_groups');
+        Schema::dropIfExists('accommodation_types');
     }
 };

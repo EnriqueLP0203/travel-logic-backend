@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AccommodationTypeController as AdminAccommodationTypeController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
+use App\Http\Controllers\Admin\LucideIconController as AdminLucideIconController;
 use App\Http\Controllers\TravelerAuthController;
 use App\Models\Destination;
 use App\Models\Hotel;
@@ -71,8 +73,8 @@ Route::get('/hotels/{slug}', function (string $slug) {
             'translations' => fn ($q) => $q->where('language_code', 'es-MX'),
             'gallery' => fn ($q) => $q->where('active', true),
             'principalImage',
-            'classifications.translations' => fn ($q) => $q->where('language_code', 'es-MX'),
-            'classifications.classificationGroup.translations' => fn ($q) => $q->where('language_code', 'es-MX'),
+            'hotelGroups.translations' => fn ($q) => $q->where('language_code', 'es-MX'),
+            'accommodationTypes.translations' => fn ($q) => $q->where('language_code', 'es-MX'),
             'approvedReviews.traveler',
         ])
         ->firstOrFail();
@@ -106,7 +108,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/destinations', [AdminDestinationController::class, 'store'])->name('destinations.store');
     Route::put('/destinations/{destination}', [AdminDestinationController::class, 'update'])->name('destinations.update');
     Route::delete('/destinations/{destination}', [AdminDestinationController::class, 'destroy'])->name('destinations.destroy');
-    Route::get('/classifications', fn () => view('admin.classifications.index'))->name('classifications.index');
+    Route::get('/hotel-groups', fn () => view('admin.hotel-groups.index'))->name('hotel-groups.index');
+
+    Route::get('/accommodation-types', [AdminAccommodationTypeController::class, 'index'])->name('accommodation-types.index');
+    Route::post('/accommodation-types', [AdminAccommodationTypeController::class, 'store'])->name('accommodation-types.store');
+    Route::put('/accommodation-types/{accommodation_type}', [AdminAccommodationTypeController::class, 'update'])->name('accommodation-types.update');
+    Route::delete('/accommodation-types/{accommodation_type}', [AdminAccommodationTypeController::class, 'destroy'])->name('accommodation-types.destroy');
+
+    Route::get('/icons/catalog', [AdminLucideIconController::class, 'catalog'])->name('icons.catalog');
+    Route::get('/icons/preview', [AdminLucideIconController::class, 'preview'])->name('icons.preview');
+    Route::get('/icons/previews', [AdminLucideIconController::class, 'previews'])->name('icons.previews');
+
     Route::get('/agencies', fn () => view('admin.agencies.index'))->name('agencies.index');
     Route::get('/reviews', fn () => view('admin.reviews.index'))->name('reviews.index');
 });

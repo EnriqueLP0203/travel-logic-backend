@@ -21,7 +21,8 @@ class HotelController extends Controller
      *   ?destination={slug}
      *   ?featured=1
      *   ?star_category=5
-     *   ?classification={id}
+     *   ?group={id}
+     *   ?accommodation_type={id}
      */
     public function index(Request $request): AnonymousResourceCollection
     {
@@ -48,12 +49,21 @@ class HotelController extends Controller
             $query->where('star_category', $request->integer('star_category'));
         }
 
-        // Filtro por clasificación (Todo incluido, Familias, etc.)
-        if ($request->filled('classification')) {
+        // Filtro por grupo de hotel
+        if ($request->filled('group')) {
             $query->whereHas(
-                'classifications',
+                'hotelGroups',
                 fn($q) =>
-                $q->where('classifications.id', $request->integer('classification'))
+                $q->where('hotel_groups.id', $request->integer('group'))
+            );
+        }
+
+        // Filtro por tipo de alojamiento
+        if ($request->filled('accommodation_type')) {
+            $query->whereHas(
+                'accommodationTypes',
+                fn($q) =>
+                $q->where('accommodation_types.id', $request->integer('accommodation_type'))
             );
         }
 
@@ -77,8 +87,8 @@ class HotelController extends Controller
                 'destination',
                 'translations',
                 'gallery',
-                'classifications.translations',
-                'classifications.classificationGroup.translations',
+                'hotelGroups.translations',
+                'accommodationTypes.translations',
             ])
             ->first();
 

@@ -122,15 +122,28 @@ class Hotel extends Model
     }
 
     /**
-     * Clasificaciones asociadas al hotel (Todo Incluido, Familias, etc).
+     * Grupos de hotel asociados (Playa, Ciudad, Lujo, etc).
      */
-    public function classifications(): BelongsToMany
+    public function hotelGroups(): BelongsToMany
     {
         return $this->belongsToMany(
-            Classification::class,
-            'classifications_hotels',
+            HotelGroup::class,
+            'hotels_hotel_groups',
             'hotel_id',
-            'classification_id'
+            'hotel_group_id'
+        );
+    }
+
+    /**
+     * Tipos de alojamiento asociados (Todo Incluido, Familias, etc).
+     */
+    public function accommodationTypes(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            AccommodationType::class,
+            'hotels_accommodation_types',
+            'hotel_id',
+            'accommodation_type_id'
         );
     }
 }
