@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccommodationTypeController as AdminAccommodationTypeController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
 use App\Http\Controllers\Admin\HotelGroupsController as AdminHotelGroupsController;
+use App\Http\Controllers\Admin\HotelsController as AdminHotelsController;
 use App\Http\Controllers\Admin\LucideIconController as AdminLucideIconController;
 use App\Http\Controllers\TravelerAuthController;
 use App\Models\Destination;
@@ -111,7 +112,10 @@ Route::post('/logout', [TravelerAuthController::class, 'logout'])->name('travele
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', fn () => view('admin.dashboard'))->name('dashboard');
 
-    Route::get('/hotels', fn () => view('admin.hotels.index'))->name('hotels.index');
+    Route::get('/hotels', [AdminHotelsController::class, 'index'])->name('hotels.index');
+    Route::post('/hotels', [AdminHotelsController::class, 'store'])->name('hotels.store');
+    Route::put('/hotels/{hotel}', [AdminHotelsController::class, 'update'])->name('hotels.update');
+    Route::delete('/hotels/{hotel}', [AdminHotelsController::class, 'destroy'])->name('hotels.destroy');
     Route::get('/destinations', [AdminDestinationController::class, 'index'])->name('destinations.index');
     Route::post('/destinations', [AdminDestinationController::class, 'store'])->name('destinations.store');
     Route::put('/destinations/{destination}', [AdminDestinationController::class, 'update'])->name('destinations.update');

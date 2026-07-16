@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             populateDestinationModal(modal, trigger);
             populateAccommodationTypeModal(modal, trigger);
             populateHotelGroupModal(modal, trigger);
+            populateHotelModal(modal, trigger);
             openModal(modal);
         });
     });
@@ -272,6 +273,208 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const parseGalleryJson = (raw) => {
+        try {
+            const parsed = JSON.parse(raw || '[]');
+            return Array.isArray(parsed) ? parsed : [];
+        } catch {
+            return [];
+        }
+    };
+
+    const setCheckboxGroup = (container, csvIds) => {
+        if (!container) return;
+        const ids = new Set(
+            String(csvIds || '')
+                .split(',')
+                .map((v) => v.trim())
+                .filter(Boolean),
+        );
+        container.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+            checkbox.checked = ids.has(String(checkbox.value));
+        });
+    };
+
+    const renderExistingGallery = (container, items) => {
+        if (!container) return;
+        container.innerHTML = '';
+
+        if (!items.length) {
+            container.innerHTML =
+                '<p class="col-span-full text-xs text-slate-400">Sin imágenes secundarias.</p>';
+            return;
+        }
+
+        items.forEach((item) => {
+            const wrap = document.createElement('label');
+            wrap.className =
+                'relative block overflow-hidden rounded-md border border-slate-200 bg-slate-50';
+            wrap.innerHTML = `
+                <img src="${item.url}" alt="" class="h-20 w-full object-cover">
+                <span class="absolute inset-x-0 bottom-0 flex items-center gap-1 bg-slate-900/70 px-2 py-1 text-[10px] text-white">
+                    <input type="checkbox" name="remove_gallery_ids[]" value="${item.id}" class="size-3 rounded border-slate-300">
+                    Eliminar
+                </span>
+            `;
+            container.appendChild(wrap);
+        });
+    };
+
+    const renderViewGallery = (container, emptyEl, items) => {
+        if (!container) return;
+        container.querySelectorAll('[data-view-gallery-item]').forEach((el) => el.remove());
+
+        if (!items.length) {
+            emptyEl?.classList.remove('hidden');
+            return;
+        }
+
+        emptyEl?.classList.add('hidden');
+        items.forEach((item) => {
+            const img = document.createElement('img');
+            img.src = item.url;
+            img.alt = '';
+            img.setAttribute('data-view-gallery-item', '');
+            img.className = 'h-20 w-full rounded-md object-cover border border-slate-200';
+            container.appendChild(img);
+        });
+    };
+
+    const populateHotelModal = (modal, trigger) => {
+        const target = trigger.dataset.modalTarget;
+
+        if (target === 'hotel-view') {
+            const nameEl = modal.querySelector('[data-view-name]');
+            const destEl = modal.querySelector('[data-view-destination]');
+            const starsEl = modal.querySelector('[data-view-star-category]');
+            const addressEl = modal.querySelector('[data-view-address]');
+            const publishedEl = modal.querySelector('[data-view-published]');
+            const featuredEl = modal.querySelector('[data-view-featured]');
+            const activeEl = modal.querySelector('[data-view-active]');
+            const shortEl = modal.querySelector('[data-view-short-description]');
+            const image = modal.querySelector('[data-view-image]');
+            const empty = modal.querySelector('[data-view-image-empty]');
+            const galleryContainer = modal.querySelector('[data-view-gallery]');
+            const galleryEmpty = modal.querySelector('[data-view-gallery-empty]');
+            const thumb = trigger.dataset.thumbnail || '';
+            const gallery = parseGalleryJson(trigger.dataset.gallery);
+
+            if (nameEl) nameEl.textContent = trigger.dataset.name || '—';
+            if (destEl) destEl.textContent = trigger.dataset.destination || '—';
+            if (starsEl) starsEl.textContent = trigger.dataset.starCategory || '—';
+            if (addressEl) addressEl.textContent = trigger.dataset.address || '—';
+            if (publishedEl) {
+                publishedEl.textContent = trigger.dataset.published === '1' ? 'Publicado' : 'No publicado';
+            }
+            if (featuredEl) {
+                featuredEl.textContent = trigger.dataset.featured === '1' ? 'Destacado' : 'No destacado';
+            }
+            if (activeEl) {
+                activeEl.textContent = trigger.dataset.active === '1' ? 'Activo' : 'Inactivo';
+            }
+            if (shortEl) shortEl.textContent = trigger.dataset.shortDescription || '—';
+
+            if (thumb && image) {
+                image.src = thumb;
+                image.alt = trigger.dataset.name || '';
+                image.classList.remove('hidden');
+                empty?.classList.add('hidden');
+            } else if (image) {
+                image.removeAttribute('src');
+                image.classList.add('hidden');
+                empty?.classList.remove('hidden');
+            }
+
+            renderViewGallery(galleryContainer, galleryEmpty, gallery);
+        }
+
+        if (target === 'hotel-edit') {
+            const form = modal.querySelector('[data-edit-form]');
+            const setVal = (selector, value) => {
+                const el = modal.querySelector(selector);
+                if (el) el.value = value ?? '';
+            };
+
+            if (form && trigger.dataset.updateUrl) {
+                form.action = trigger.dataset.updateUrl;
+            }
+
+            setVal('[data-edit-id]', trigger.dataset.id);
+            setVal('[data-edit-name]', trigger.dataset.name);
+            setVal('[data-edit-destination]', trigger.dataset.destinationId);
+            setVal('[data-edit-star-category]', trigger.dataset.starCategory);
+            setVal('[data-edit-address]', trigger.dataset.address);
+            setVal('[data-edit-postal-code]', trigger.dataset.postalCode);
+            setVal('[data-edit-latitude]', trigger.dataset.latitude);
+            setVal('[data-edit-longitude]', trigger.dataset.longitude);
+            setVal('[data-edit-phone]', trigger.dataset.phone);
+            setVal('[data-edit-email]', trigger.dataset.email);
+            setVal('[data-edit-website]', trigger.dataset.website);
+            setVal('[data-edit-star-rating]', trigger.dataset.starRating);
+            setVal('[data-edit-price-range]', trigger.dataset.priceRange);
+            setVal('[data-edit-slug]', trigger.dataset.slug);
+            setVal('[data-edit-active]', trigger.dataset.active === '1' ? '1' : '0');
+            setVal('[data-edit-published]', trigger.dataset.published === '1' ? '1' : '0');
+            setVal('[data-edit-featured]', trigger.dataset.featured === '1' ? '1' : '0');
+            setVal('[data-edit-short-description]', trigger.dataset.shortDescription);
+            setVal('[data-edit-description]', trigger.dataset.description);
+            setVal('[data-edit-amenities]', trigger.dataset.amenities);
+            setVal('[data-edit-meta-title]', trigger.dataset.metaTitle);
+            setVal('[data-edit-meta-description]', trigger.dataset.metaDescription);
+            setVal('[data-edit-meta-keywords]', trigger.dataset.metaKeywords);
+
+            setCheckboxGroup(
+                modal.querySelector('[data-edit-hotel-groups]'),
+                trigger.dataset.hotelGroups,
+            );
+            setCheckboxGroup(
+                modal.querySelector('[data-edit-accommodation-types]'),
+                trigger.dataset.accommodationTypes,
+            );
+
+            const fileInput = modal.querySelector('[data-image-input]');
+            const fileName = modal.querySelector('[data-image-name]');
+            const preview = modal.querySelector('[data-edit-image-preview]');
+            const placeholder = modal.querySelector('[data-edit-image-placeholder]');
+            const galleryInput = modal.querySelector('[data-gallery-input]');
+            const galleryPreview = modal.querySelector('[data-gallery-preview]');
+
+            if (fileInput) fileInput.value = '';
+            if (fileName) fileName.textContent = '';
+            if (galleryInput) galleryInput.value = '';
+            if (galleryPreview) galleryPreview.innerHTML = '';
+
+            const thumb = trigger.dataset.thumbnail || '';
+            if (thumb && preview) {
+                preview.src = thumb;
+                preview.classList.remove('hidden');
+                placeholder?.classList.add('hidden');
+            } else if (preview) {
+                preview.removeAttribute('src');
+                preview.classList.add('hidden');
+                placeholder?.classList.remove('hidden');
+            }
+
+            renderExistingGallery(
+                modal.querySelector('[data-edit-existing-gallery]'),
+                parseGalleryJson(trigger.dataset.gallery),
+            );
+        }
+
+        if (target === 'hotel-delete') {
+            const form = modal.querySelector('[data-delete-form]');
+            const nameLabel = modal.querySelector('[data-delete-name]');
+
+            if (form && trigger.dataset.deleteUrl) {
+                form.action = trigger.dataset.deleteUrl;
+            }
+
+            if (nameLabel) {
+                nameLabel.textContent = trigger.dataset.name || '—';
+            }
+        }
+    };
+
     document.querySelectorAll('[data-modal]').forEach((modal) => {
         modal.querySelectorAll('[data-modal-close]').forEach((closer) => {
             closer.addEventListener('click', () => closeModal(modal));
@@ -301,6 +504,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (fileName) {
                 fileName.textContent = file.name;
             }
+        });
+    });
+
+    document.querySelectorAll('[data-gallery-input]').forEach((input) => {
+        input.addEventListener('change', () => {
+            const root = input.closest('section') || input.closest('form') || input.parentElement;
+            const preview = root?.querySelector('[data-gallery-preview]');
+            if (!preview) return;
+
+            preview.innerHTML = '';
+            Array.from(input.files || []).forEach((file) => {
+                const img = document.createElement('img');
+                img.src = window.URL.createObjectURL(file);
+                img.alt = file.name;
+                img.className = 'h-20 w-full rounded-md object-cover border border-slate-200';
+                preview.appendChild(img);
+            });
         });
     });
 
