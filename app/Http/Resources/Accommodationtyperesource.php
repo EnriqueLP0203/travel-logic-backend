@@ -11,7 +11,6 @@ class AccommodationTypeResource extends JsonResource
     {
         return [
             'id'         => $this->id,
-            'order'      => $this->order,
             'icon_class' => $this->icon_class,
             'name'       => $this->translations->first()?->name ?? null,
         ];

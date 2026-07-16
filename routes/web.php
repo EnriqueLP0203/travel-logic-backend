@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AccommodationTypeController as AdminAccommodationTypeController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
+use App\Http\Controllers\Admin\HotelGroupsController as AdminHotelGroupsController;
 use App\Http\Controllers\Admin\LucideIconController as AdminLucideIconController;
 use App\Http\Controllers\TravelerAuthController;
 use App\Models\Destination;
@@ -38,6 +39,13 @@ Route::get('/media/destinations/{filename}', function (string $filename) {
 
     return response()->file($path);
 })->where('filename', '[A-Za-z0-9._-]+')->name('media.destinations');
+
+Route::get('/media/hotel-groups/{filename}', function (string $filename) {
+    $path = storage_path('travel_media/hotel_groups/' . $filename);
+    abort_unless(is_file($path), 404);
+
+    return response()->file($path);
+})->where('filename', '[A-Za-z0-9._-]+')->name('media.hotel-groups');
 
 Route::get('/hotels', function (Request $request) {
     $hotels = Hotel::where('active', true)
@@ -108,7 +116,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/destinations', [AdminDestinationController::class, 'store'])->name('destinations.store');
     Route::put('/destinations/{destination}', [AdminDestinationController::class, 'update'])->name('destinations.update');
     Route::delete('/destinations/{destination}', [AdminDestinationController::class, 'destroy'])->name('destinations.destroy');
-    Route::get('/hotel-groups', fn () => view('admin.hotel-groups.index'))->name('hotel-groups.index');
+    Route::get('/hotel-groups', [AdminHotelGroupsController::class, 'index'])->name('hotel-groups.index');
+    Route::post('/hotel-groups', [AdminHotelGroupsController::class, 'store'])->name('hotel-groups.store');
+    Route::put('/hotel-groups/{hotel_group}', [AdminHotelGroupsController::class, 'update'])->name('hotel-groups.update');
+    Route::delete('/hotel-groups/{hotel_group}', [AdminHotelGroupsController::class, 'destroy'])->name('hotel-groups.destroy');
 
     Route::get('/accommodation-types', [AdminAccommodationTypeController::class, 'index'])->name('accommodation-types.index');
     Route::post('/accommodation-types', [AdminAccommodationTypeController::class, 'store'])->name('accommodation-types.store');

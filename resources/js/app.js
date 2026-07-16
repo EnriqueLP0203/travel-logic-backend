@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             populateDestinationModal(modal, trigger);
             populateAccommodationTypeModal(modal, trigger);
+            populateHotelGroupModal(modal, trigger);
             openModal(modal);
         });
     });
@@ -186,6 +187,78 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (target === 'accommodation-type-delete') {
+            const form = modal.querySelector('[data-delete-form]');
+            const nameLabel = modal.querySelector('[data-delete-name]');
+
+            if (form && trigger.dataset.deleteUrl) {
+                form.action = trigger.dataset.deleteUrl;
+            }
+
+            if (nameLabel) {
+                nameLabel.textContent = trigger.dataset.name || '—';
+            }
+        }
+    };
+
+    const populateHotelGroupModal = (modal, trigger) => {
+        const target = trigger.dataset.modalTarget;
+
+        if (target === 'hotel-group-view') {
+            const nameEl = modal.querySelector('[data-view-name]');
+            const activeEl = modal.querySelector('[data-view-active]');
+            const image = modal.querySelector('[data-view-image]');
+            const empty = modal.querySelector('[data-view-image-empty]');
+            const thumb = trigger.dataset.thumbnail || '';
+
+            if (nameEl) nameEl.textContent = trigger.dataset.name || '—';
+            if (activeEl) activeEl.textContent = trigger.dataset.active === '1' ? 'Activo' : 'Inactivo';
+
+            if (thumb && image) {
+                image.src = thumb;
+                image.alt = trigger.dataset.name || '';
+                image.classList.remove('hidden');
+                empty?.classList.add('hidden');
+            } else if (image) {
+                image.removeAttribute('src');
+                image.classList.add('hidden');
+                empty?.classList.remove('hidden');
+            }
+        }
+
+        if (target === 'hotel-group-edit') {
+            const form = modal.querySelector('[data-edit-form]');
+            const idInput = modal.querySelector('[data-edit-id]');
+            const nameInput = modal.querySelector('[data-edit-name]');
+            const activeSelect = modal.querySelector('[data-edit-active]');
+            const preview = modal.querySelector('[data-edit-image-preview]');
+            const placeholder = modal.querySelector('[data-edit-image-placeholder]');
+            const fileName = modal.querySelector('[data-image-name]');
+            const fileInput = modal.querySelector('[data-image-input]');
+
+            if (form && trigger.dataset.updateUrl) {
+                form.action = trigger.dataset.updateUrl;
+            }
+
+            if (idInput) idInput.value = trigger.dataset.id || '';
+            if (nameInput) nameInput.value = trigger.dataset.name || '';
+            if (activeSelect) activeSelect.value = trigger.dataset.active === '1' ? '1' : '0';
+
+            if (fileInput) fileInput.value = '';
+            if (fileName) fileName.textContent = '';
+
+            const thumb = trigger.dataset.thumbnail || '';
+            if (thumb && preview) {
+                preview.src = thumb;
+                preview.classList.remove('hidden');
+                placeholder?.classList.add('hidden');
+            } else if (preview) {
+                preview.removeAttribute('src');
+                preview.classList.add('hidden');
+                placeholder?.classList.remove('hidden');
+            }
+        }
+
+        if (target === 'hotel-group-delete') {
             const form = modal.querySelector('[data-delete-form]');
             const nameLabel = modal.querySelector('[data-delete-name]');
 

@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('accommodation_types', function (Blueprint $table) {
             $table->increments('id')->unsigned();
 
-            $table->integer('order')->default(1);
             $table->string('icon_class', 255)->nullable();
 
             $table->boolean('active')->default(true);
