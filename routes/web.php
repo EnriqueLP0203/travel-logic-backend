@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AccommodationTypeController as AdminAccommodationTypeController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
 use App\Http\Controllers\Admin\HotelGroupsController as AdminHotelGroupsController;
 use App\Http\Controllers\Admin\HotelsController as AdminHotelsController;
@@ -110,7 +111,7 @@ Route::post('/auth-traveler/register', [TravelerAuthController::class, 'register
 Route::post('/logout', [TravelerAuthController::class, 'logout'])->name('traveler.logout');
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', fn () => view('admin.dashboard'))->name('dashboard');
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/hotels', [AdminHotelsController::class, 'index'])->name('hotels.index');
     Route::post('/hotels', [AdminHotelsController::class, 'store'])->name('hotels.store');
