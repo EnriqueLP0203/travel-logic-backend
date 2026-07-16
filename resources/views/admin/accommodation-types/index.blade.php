@@ -28,9 +28,11 @@
             Nuevo
         </button>
     </div>
+
     {{-- Barra de acciones --}}
     <div class="flex items-center justify-between px-6 py-3">
         <p class="text-sm text-slate-500">
+            {{ $types->total() }} {{ $types->total() === 1 ? 'registro' : 'registros' }}
         </p>
 
         <div class="flex items-center gap-2">
@@ -62,6 +64,49 @@
                     <th class="px-6 py-3 font-medium text-slate-500 text-center">Acciones</th>
                 </tr>
             </thead>
+            <tbody class="divide-y divide-slate-100">
+                @forelse ($types as $type)
+                    @php
+                        $typeName = $type->translations->first()?->name ?? '—';
+                    @endphp
+                    <tr class="hover:bg-slate-50/80">
+                        <td class="px-6 py-3 text-slate-500">{{ $type->id }}</td>
+                        <td class="px-6 py-3 font-medium text-slate-800">{{ $typeName }}</td>
+                        <td class="px-6 py-3 text-slate-700">
+                            @if ($type->icon_class)
+                                <span class="inline-flex items-center gap-2">
+                                    <x-dynamic-component :component="$type->icon_class" class="size-4 shrink-0" />
+                                    <span class="text-xs text-slate-500">{{ $type->icon_class }}</span>
+                                </span>
+                            @else
+                                <span class="text-slate-400">—</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-3">
+                            @if ($type->active)
+                                <span class="inline-flex rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-700">Activo</span>
+                            @else
+                                <span class="inline-flex rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">Inactivo</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-3 text-center text-slate-400">—</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="px-6 py-10 text-center text-slate-400">
+                            No hay tipos de alojamiento registrados.
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    @if ($types->hasPages())
+        <div class="px-6 py-4 border-t border-slate-200">
+            {{ $types->links() }}
+        </div>
+    @endif
 </div>
 
 <x-accommodation-types.create-new-modal />
