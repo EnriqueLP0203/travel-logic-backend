@@ -28,10 +28,95 @@
         </button>
     </div>
 
-    <div class="flex items-center justify-between px-6 py-3">
-        <p class="text-sm text-slate-500">
-            {{ $hotels->total() }} {{ $hotels->total() === 1 ? 'registro' : 'registros' }}
-        </p>
+    <div class="space-y-3 border-b border-slate-200 px-6 py-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+            <p class="text-sm text-slate-500">
+                {{ $hotels->total() }} {{ $hotels->total() === 1 ? 'registro' : 'registros' }}
+            </p>
+            @if (request()->hasAny(['name', 'sort', 'dir', 'without_groups', 'without_types', 'published', 'featured']))
+            <a href="{{ route('admin.hotels.index') }}"
+                class="text-sm text-slate-500 underline-offset-2 hover:text-slate-700 hover:underline">
+                Limpiar filtros
+            </a>
+            @endif
+        </div>
+
+        <form method="GET" action="{{ route('admin.hotels.index') }}"
+            class="flex flex-wrap items-end gap-3">
+            <div class="flex min-w-[12rem] flex-1 flex-col gap-1">
+                <label for="filter-name" class="text-xs font-medium text-slate-500">Nombre</label>
+                <input id="filter-name" type="search" name="name" value="{{ request('name') }}"
+                    placeholder="Buscar hotel…"
+                    class="rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label for="filter-sort" class="text-xs font-medium text-slate-500">Ordenar por</label>
+                <select id="filter-sort" name="sort"
+                    class="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <option value="name" @selected(request('sort', 'name') === 'name')>Nombre</option>
+                    <option value="created_at" @selected(request('sort') === 'created_at')>Fecha de creación</option>
+                    <option value="updated_at" @selected(request('sort') === 'updated_at')>Última actualización</option>
+                    <option value="destination" @selected(request('sort') === 'destination')>Destino</option>
+                    <option value="star_category" @selected(request('sort') === 'star_category')>Estrellas</option>
+                    <option value="star_rating" @selected(request('sort') === 'star_rating')>Calificación</option>
+                    <option value="slug" @selected(request('sort') === 'slug')>Slug</option>
+                </select>
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label for="filter-dir" class="text-xs font-medium text-slate-500">Dirección</label>
+                <select id="filter-dir" name="dir"
+                    class="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <option value="asc" @selected(request('dir', 'asc') === 'asc')>Ascendente</option>
+                    <option value="desc" @selected(request('dir') === 'desc')>Descendente</option>
+                </select>
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label for="filter-published" class="text-xs font-medium text-slate-500">Publicado</label>
+                <select id="filter-published" name="published"
+                    class="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <option value="" @selected(request('published') === null || request('published') === '')>Todos</option>
+                    <option value="1" @selected(request('published') === '1')>Sí</option>
+                    <option value="0" @selected(request('published') === '0')>No</option>
+                </select>
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label for="filter-featured" class="text-xs font-medium text-slate-500">Destacado</label>
+                <select id="filter-featured" name="featured"
+                    class="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <option value="" @selected(request('featured') === null || request('featured') === '')>Todos</option>
+                    <option value="1" @selected(request('featured') === '1')>Sí</option>
+                    <option value="0" @selected(request('featured') === '0')>No</option>
+                </select>
+            </div>
+
+            <div class="flex flex-col gap-1.5 pb-1">
+                <span class="text-xs font-medium text-slate-500">Faltantes</span>
+                <div class="flex flex-wrap items-center gap-3">
+                    <label class="inline-flex items-center gap-1.5 text-sm text-slate-700">
+                        <input type="checkbox" name="without_groups" value="1"
+                            @checked(request()->boolean('without_groups'))
+                            class="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                        Sin grupos
+                    </label>
+                    <label class="inline-flex items-center gap-1.5 text-sm text-slate-700">
+                        <input type="checkbox" name="without_types" value="1"
+                            @checked(request()->boolean('without_types'))
+                            class="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                        Sin tipos
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit"
+                class="inline-flex items-center gap-1.5 rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
+                <x-lucide-funnel class="w-4 h-4" />
+                Filtrar
+            </button>
+        </form>
     </div>
 
     <div class="overflow-x-auto">

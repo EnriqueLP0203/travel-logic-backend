@@ -12,6 +12,7 @@ use App\Models\HotelGallery;
 use App\Models\HotelGroup;
 use App\Services\HotelImageService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -21,9 +22,24 @@ class HotelsController extends Controller
     /**
      * Listado de hoteles.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $hotels = Hotel::query()
+        $allowedSorts = [
+            'name',
+            'created_at',
+            'updated_at',
+            'star_category',
+            'star_rating',
+            'slug',
+            'destination',
+        ];
+
+        $sort = in_array($request->input('sort'), $allowedSorts, true)
+            ? $request->input('sort')
+            : 'name';
+        $dir = $request->input('dir') === 'desc' ? 'desc' : 'asc';
+
+        $query = Hotel::query()
             ->with([
                 'destination',
                 'principalImage',
@@ -31,9 +47,42 @@ class HotelsController extends Controller
                 'translations' => fn ($q) => $q->where('language_code', 'es-MX'),
                 'hotelGroups',
                 'accommodationTypes',
-            ])
-            ->orderBy('name')
-            ->paginate(15);
+            ]);
+
+        $query->when($request->filled('name'), function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->input('name') . '%');
+        });
+
+        $query->when($request->boolean('without_groups'), function ($q) {
+            $q->whereDoesntHave('hotelGroups');
+        });
+
+        $query->when($request->boolean('without_types'), function ($q) {
+            $q->whereDoesntHave('accommodationTypes');
+        });
+
+        if ($request->filled('published') && in_array($request->input('published'), ['0', '1'], true)) {
+            $query->where('is_published', (bool) $request->input('published'));
+        }
+
+        if ($request->filled('featured') && in_array($request->input('featured'), ['0', '1'], true)) {
+            $query->where('featured', (bool) $request->input('featured'));
+        }
+
+        if ($sort === 'destination') {
+            $query
+                ->leftJoin('destinations', 'hotels.destination_id', '=', 'destinations.id')
+                ->select('hotels.*')
+                ->orderBy('destinations.city', $dir)
+                ->orderBy('hotels.name', 'asc');
+        } else {
+            $query->orderBy($sort, $dir);
+            if ($sort !== 'name') {
+                $query->orderBy('name', 'asc');
+            }
+        }
+
+        $hotels = $query->paginate(15)->withQueryString();
 
         $destinations = Destination::query()
             ->where('active', true)
