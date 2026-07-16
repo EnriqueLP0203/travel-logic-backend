@@ -112,6 +112,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/accommodation-types', [AdminAccommodationTypeController::class, 'index'])->name('accommodation-types.index');
     Route::post('/accommodation-types', [AdminAccommodationTypeController::class, 'store'])->name('accommodation-types.store');
+    Route::put('/accommodation-types/{accommodation_type}', [AdminAccommodationTypeController::class, 'update'])->name('accommodation-types.update');
+    Route::delete('/accommodation-types/{accommodation_type}', [AdminAccommodationTypeController::class, 'destroy'])->name('accommodation-types.destroy');
 
     Route::get('/icons/catalog', [AdminLucideIconController::class, 'catalog'])->name('icons.catalog');
     Route::get('/icons/preview', [AdminLucideIconController::class, 'preview'])->name('icons.preview');

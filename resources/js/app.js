@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!modal) return;
 
             populateDestinationModal(modal, trigger);
+            populateAccommodationTypeModal(modal, trigger);
             openModal(modal);
         });
     });
@@ -123,6 +124,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (cityLabel) {
                 cityLabel.textContent = trigger.dataset.city || '—';
+            }
+        }
+    };
+
+    const populateAccommodationTypeModal = (modal, trigger) => {
+        const target = trigger.dataset.modalTarget;
+        const previewUrl =
+            modal.dataset.iconPreviewUrl ||
+            modal.querySelector('[data-icon-picker-root]')?.dataset.iconPreviewUrl ||
+            '/admin/icons/preview';
+
+        const emptyIconSvg =
+            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-12 text-slate-300"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>';
+
+        if (target === 'accommodation-type-view') {
+            const nameEl = modal.querySelector('[data-view-name]');
+            const activeEl = modal.querySelector('[data-view-active]');
+            const iconEl = modal.querySelector('[data-view-icon]');
+            const iconPreview = modal.querySelector('[data-view-icon-preview]');
+            const iconClass = trigger.dataset.icon || '';
+
+            if (nameEl) nameEl.textContent = trigger.dataset.name || '—';
+            if (activeEl) activeEl.textContent = trigger.dataset.active === '1' ? 'Activo' : 'Inactivo';
+            if (iconEl) iconEl.textContent = iconClass || '—';
+
+            if (iconPreview) {
+                if (!iconClass) {
+                    iconPreview.innerHTML = emptyIconSvg;
+                } else {
+                    fetch(`${previewUrl}?name=${encodeURIComponent(iconClass)}`)
+                        .then((res) => (res.ok ? res.json() : null))
+                        .then((data) => {
+                            iconPreview.innerHTML = data?.html || emptyIconSvg;
+                        })
+                        .catch(() => {
+                            iconPreview.innerHTML = emptyIconSvg;
+                        });
+                }
+            }
+        }
+
+        if (target === 'accommodation-type-edit') {
+            const form = modal.querySelector('[data-edit-form]');
+            const idInput = modal.querySelector('[data-edit-id]');
+            const nameInput = modal.querySelector('[data-edit-name]');
+            const activeSelect = modal.querySelector('[data-edit-active]');
+            const iconInput = modal.querySelector('[data-edit-icon]');
+
+            if (form && trigger.dataset.updateUrl) {
+                form.action = trigger.dataset.updateUrl;
+            }
+
+            if (idInput) idInput.value = trigger.dataset.id || '';
+            if (nameInput) nameInput.value = trigger.dataset.name || '';
+            if (activeSelect) activeSelect.value = trigger.dataset.active === '1' ? '1' : '0';
+            if (iconInput) {
+                iconInput.value = trigger.dataset.icon || '';
+                iconInput.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+        }
+
+        if (target === 'accommodation-type-delete') {
+            const form = modal.querySelector('[data-delete-form]');
+            const nameLabel = modal.querySelector('[data-delete-name]');
+
+            if (form && trigger.dataset.deleteUrl) {
+                form.action = trigger.dataset.deleteUrl;
+            }
+
+            if (nameLabel) {
+                nameLabel.textContent = trigger.dataset.name || '—';
             }
         }
     };
