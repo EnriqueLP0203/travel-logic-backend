@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\AccommodationTypeController as AdminAccommodationTypeController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
 use App\Http\Controllers\Admin\HotelGroupsController as AdminHotelGroupsController;
 use App\Http\Controllers\Admin\HotelsController as AdminHotelsController;
 use App\Http\Controllers\Admin\LucideIconController as AdminLucideIconController;
-use App\Http\Controllers\TravelerAuthController;
 use App\Models\Destination;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
@@ -106,35 +106,44 @@ Route::get('/auth-traveler', function () {
     return view('auth-traveler');
 })->name('auth-traveler');
 
-Route::get('/admin-dashboard-auth', function () {
-    return view('admin-dashboard-auth');
-})->name('admin-dashboard-auth');
+Route::redirect('/admin-dashboard-auth', '/admin/login');
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::middleware('guest:admin')->group(function () {
+        Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
+        Route::post('/login', [AdminAuthController::class, 'login']);
+    });
 
-    Route::get('/hotels', [AdminHotelsController::class, 'index'])->name('hotels.index');
-    Route::post('/hotels', [AdminHotelsController::class, 'store'])->name('hotels.store');
-    Route::put('/hotels/{hotel}', [AdminHotelsController::class, 'update'])->name('hotels.update');
-    Route::delete('/hotels/{hotel}', [AdminHotelsController::class, 'destroy'])->name('hotels.destroy');
-    Route::get('/destinations', [AdminDestinationController::class, 'index'])->name('destinations.index');
-    Route::post('/destinations', [AdminDestinationController::class, 'store'])->name('destinations.store');
-    Route::put('/destinations/{destination}', [AdminDestinationController::class, 'update'])->name('destinations.update');
-    Route::delete('/destinations/{destination}', [AdminDestinationController::class, 'destroy'])->name('destinations.destroy');
-    Route::get('/hotel-groups', [AdminHotelGroupsController::class, 'index'])->name('hotel-groups.index');
-    Route::post('/hotel-groups', [AdminHotelGroupsController::class, 'store'])->name('hotel-groups.store');
-    Route::put('/hotel-groups/{hotel_group}', [AdminHotelGroupsController::class, 'update'])->name('hotel-groups.update');
-    Route::delete('/hotel-groups/{hotel_group}', [AdminHotelGroupsController::class, 'destroy'])->name('hotel-groups.destroy');
+    Route::post('/logout', [AdminAuthController::class, 'logout'])
+        ->middleware('auth:admin')
+        ->name('logout');
 
-    Route::get('/accommodation-types', [AdminAccommodationTypeController::class, 'index'])->name('accommodation-types.index');
-    Route::post('/accommodation-types', [AdminAccommodationTypeController::class, 'store'])->name('accommodation-types.store');
-    Route::put('/accommodation-types/{accommodation_type}', [AdminAccommodationTypeController::class, 'update'])->name('accommodation-types.update');
-    Route::delete('/accommodation-types/{accommodation_type}', [AdminAccommodationTypeController::class, 'destroy'])->name('accommodation-types.destroy');
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/icons/catalog', [AdminLucideIconController::class, 'catalog'])->name('icons.catalog');
-    Route::get('/icons/preview', [AdminLucideIconController::class, 'preview'])->name('icons.preview');
-    Route::get('/icons/previews', [AdminLucideIconController::class, 'previews'])->name('icons.previews');
+        Route::get('/hotels', [AdminHotelsController::class, 'index'])->name('hotels.index');
+        Route::post('/hotels', [AdminHotelsController::class, 'store'])->name('hotels.store');
+        Route::put('/hotels/{hotel}', [AdminHotelsController::class, 'update'])->name('hotels.update');
+        Route::delete('/hotels/{hotel}', [AdminHotelsController::class, 'destroy'])->name('hotels.destroy');
+        Route::get('/destinations', [AdminDestinationController::class, 'index'])->name('destinations.index');
+        Route::post('/destinations', [AdminDestinationController::class, 'store'])->name('destinations.store');
+        Route::put('/destinations/{destination}', [AdminDestinationController::class, 'update'])->name('destinations.update');
+        Route::delete('/destinations/{destination}', [AdminDestinationController::class, 'destroy'])->name('destinations.destroy');
+        Route::get('/hotel-groups', [AdminHotelGroupsController::class, 'index'])->name('hotel-groups.index');
+        Route::post('/hotel-groups', [AdminHotelGroupsController::class, 'store'])->name('hotel-groups.store');
+        Route::put('/hotel-groups/{hotel_group}', [AdminHotelGroupsController::class, 'update'])->name('hotel-groups.update');
+        Route::delete('/hotel-groups/{hotel_group}', [AdminHotelGroupsController::class, 'destroy'])->name('hotel-groups.destroy');
 
-    Route::get('/agencies', fn () => view('admin.agencies.index'))->name('agencies.index');
-    Route::get('/reviews', fn () => view('admin.reviews.index'))->name('reviews.index');
+        Route::get('/accommodation-types', [AdminAccommodationTypeController::class, 'index'])->name('accommodation-types.index');
+        Route::post('/accommodation-types', [AdminAccommodationTypeController::class, 'store'])->name('accommodation-types.store');
+        Route::put('/accommodation-types/{accommodation_type}', [AdminAccommodationTypeController::class, 'update'])->name('accommodation-types.update');
+        Route::delete('/accommodation-types/{accommodation_type}', [AdminAccommodationTypeController::class, 'destroy'])->name('accommodation-types.destroy');
+
+        Route::get('/icons/catalog', [AdminLucideIconController::class, 'catalog'])->name('icons.catalog');
+        Route::get('/icons/preview', [AdminLucideIconController::class, 'preview'])->name('icons.preview');
+        Route::get('/icons/previews', [AdminLucideIconController::class, 'previews'])->name('icons.previews');
+
+        Route::get('/agencies', fn () => view('admin.agencies.index'))->name('agencies.index');
+        Route::get('/reviews', fn () => view('admin.reviews.index'))->name('reviews.index');
+    });
 });
