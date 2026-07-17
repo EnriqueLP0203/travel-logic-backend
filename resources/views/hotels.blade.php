@@ -5,7 +5,7 @@
 @section('content')
 <div class="mx-auto w-full max-w-[1600px] px-2 pb-10 sm:px-3 md:px-4 lg:px-6 lg:pb-16 mt-24">
     {{-- search bar --}}
-    <x-hotels-search-bar :destinations="$destinations" />
+    <x-hotels-search-bar :destinations="$destinations" :hotel-groups="$hotelGroups" />
 
 
 

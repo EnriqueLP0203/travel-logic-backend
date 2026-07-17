@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\HotelsController as AdminHotelsController;
 use App\Http\Controllers\Admin\LucideIconController as AdminLucideIconController;
 use App\Models\Destination;
 use App\Models\Hotel;
+use App\Models\HotelGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -70,8 +71,13 @@ Route::get('/hotels', function (Request $request) {
     $destinations = Destination::where('active', true)
         ->orderBy('city')
         ->get();
+    
+    $hotelGroups = HotelGroup::where('active', true)
+        ->with(['translations' => fn ($q) => $q->where('language_code', 'es-MX')])
+        ->orderBy('id')
+        ->get();
 
-    return view('hotels', compact('hotels', 'destinations'));
+    return view('hotels', compact('hotels', 'destinations', 'hotelGroups'));
 })->name('hotels');
 
 Route::get('/hotels/{slug}', function (string $slug) {

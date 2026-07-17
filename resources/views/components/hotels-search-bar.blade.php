@@ -1,5 +1,6 @@
 @props([
 'destinations' => collect(),
+'hotelGroups' => collect(),
 ])
 
 <div>
@@ -57,5 +58,5 @@
         </div>
     </form>
 
-    <x-hotels-filters-modal />
+    <x-hotels-filters-modal :hotel-groups="$hotelGroups" />
 </div>

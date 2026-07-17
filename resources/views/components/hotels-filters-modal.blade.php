@@ -1,5 +1,6 @@
 @props([
 'name' => 'hotels-filters',
+'hotelGroups' => collect(),
 ])
 
 <div
@@ -23,40 +24,35 @@
         </button>
 
         <p class="text-5xl font-extrabold font-inter leading-[54px] text-blue-300">Filtros</p>
-        <p class="text-2xl font-bold font-inter leading-5 text-slate-800">Destinos</p>
+        <p class="text-2xl font-bold font-inter leading-5 text-slate-800">Grupos</p>
+
         <div class="grid grid-cols-6 gap-12">
-            <div class="flex flex-col items-center gap-2">
+            @forelse ($hotelGroups as $group)
+            @php
+            $groupName = $group->translations->first()?->name ?? 'Grupo';
+            @endphp
+            <button type="button" class="flex flex-col items-center gap-2">
+                @if ($group->thumbnail_url)
+                <img
+                    src="{{ $group->thumbnail_url }}"
+                    alt="{{ $groupName }}"
+                    class="size-28 rounded-xl object-cover" />
+                @else
+                <div class="size-28 rounded-xl bg-gray-200"></div>
+                @endif
+                <p class="text-base font-bold font-inter leading-5 text-slate-500">
+                    {{ $groupName }}
+                </p>
+            </button>
+            @empty
+            <p class="col-span-full text-sm text-slate-400">No hay grupos disponibles.</p>
+            @endforelse
+
+
+            <!-- <div class="flex flex-col items-center gap-2">
                 <div class="size-28 rounded-xl bg-gray-200"></div>
                 <p class="text-base font-bold font-inter leading-5 text-slate-500">Familiar</p>
-            </div>
-
-            <div class="flex flex-col items-center gap-2">
-                <div class="size-28 rounded-xl bg-gray-200"></div>
-                <p class="text-base font-bold font-inter leading-5 text-slate-500">Deportivo</p>
-            </div>
-
-            <div class="flex flex-col items-center gap-2">
-                <div class="size-28 rounded-xl bg-gray-200"></div>
-                <p class="text-base font-bold font-inter leading-5 text-slate-500">Evento</p>
-            </div>
-            <div class="flex flex-col items-center gap-2">
-                <div class="size-28 rounded-xl bg-gray-200"></div>
-                <p class="text-base font-bold font-inter leading-5 text-slate-500">Lifestyle</p>
-            </div>
-
-            <div class="flex flex-col items-center gap-2">
-                <div class="size-28 rounded-xl bg-gray-200"></div>
-                <p class="text-base font-bold font-inter leading-5 text-slate-500">Adultos</p>
-            </div>
-
-            <div class="flex flex-col items-center gap-2">
-                <div class="size-28 rounded-xl bg-gray-200"></div>
-                <p class="text-base font-bold font-inter leading-5 text-slate-500">Convenciones</p>
-            </div>
-            <div class="flex flex-col items-center gap-2">
-                <div class="size-28 rounded-xl bg-gray-200"></div>
-                <p class="text-base font-bold font-inter leading-5 text-slate-500">Bodas</p>
-            </div>
+            </div> -->
         </div>
         <p class="text-2xl font-bold font-inter leading-5 text-slate-800">Ciudades</p>
 
