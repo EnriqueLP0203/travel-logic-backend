@@ -106,10 +106,6 @@ Route::get('/auth-traveler', function () {
     return view('auth-traveler');
 })->name('auth-traveler');
 
-Route::post('/auth-traveler/login', [TravelerAuthController::class, 'login'])->name('traveler.login');
-Route::post('/auth-traveler/register', [TravelerAuthController::class, 'register'])->name('traveler.register');
-Route::post('/logout', [TravelerAuthController::class, 'logout'])->name('traveler.logout');
-
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 

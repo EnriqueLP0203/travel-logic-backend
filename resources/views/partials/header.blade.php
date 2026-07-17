@@ -41,18 +41,18 @@ $navItems = [
 
         <div class="flex items-center gap-2">
             @guest
-                <a
-                    href="{{ route('auth-traveler', ['form' => 'register']) }}"
+                <button
                     class="px-4 py-2 text-lg font-semibold text-stone-900 transition-opacity duration-200 hover:opacity-90"
+                    type="button"
                 >
                     Registrarse
-                </a>
-                <a
-                    href="{{ route('auth-traveler', ['form' => 'login']) }}"
+                </button>
+                <button
                     class="rounded-lg bg-green-400 px-4 py-2 text-lg font-semibold text-white transition-opacity duration-200 hover:opacity-90"
+                    type="button"
                 >
                     Iniciar sesión
-                </a>
+                </button>
             @else
                 <div class="relative" data-profile-menu-container>
                     <button
