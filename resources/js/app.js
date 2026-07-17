@@ -564,9 +564,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 previewBox.innerHTML = html;
             };
 
+            const lucideCatalogLink =
+                '<a href="https://lucide.dev/icons" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">lucide.dev/icons</a>';
+
             const setStatus = (message, isError = false) => {
                 if (!status) return;
-                status.textContent = message;
+                status.innerHTML = `${message} ${lucideCatalogLink}`;
                 status.classList.toggle('text-red-500', isError);
                 status.classList.toggle('text-slate-500', !isError);
             };

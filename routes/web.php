@@ -7,8 +7,10 @@ use App\Http\Controllers\Admin\DestinationController as AdminDestinationControll
 use App\Http\Controllers\Admin\HotelGroupsController as AdminHotelGroupsController;
 use App\Http\Controllers\Admin\HotelsController as AdminHotelsController;
 use App\Http\Controllers\Admin\LucideIconController as AdminLucideIconController;
+use App\Models\AccommodationType;
 use App\Models\Destination;
 use App\Models\Hotel;
+use App\Models\HotelGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +58,18 @@ Route::get('/hotels', function (Request $request) {
         ->when($request->filled('destination_id'), function ($query) use ($request) {
             $query->where('destination_id', $request->input('destination_id'));
         })
+        ->when($request->filled('hotel_group_id'), function ($query) use ($request) {
+            $query->whereHas(
+                'hotelGroups',
+                fn ($q) => $q->where('hotel_groups.id', $request->integer('hotel_group_id'))
+            );
+        })
+        ->when($request->filled('accommodation_type'), function ($query) use ($request) {
+            $query->whereHas(
+                'accommodationTypes',
+                fn ($q) => $q->where('accommodation_types.id', $request->integer('accommodation_type'))
+            );
+        })
         ->when($request->input('star_category') !== null && $request->input('star_category') !== '', function ($query) use ($request) {
             $query->where('star_category', $request->input('star_category'));
         })
@@ -71,7 +85,17 @@ Route::get('/hotels', function (Request $request) {
         ->orderBy('city')
         ->get();
 
-    return view('hotels', compact('hotels', 'destinations'));
+    $hotelGroups = HotelGroup::where('active', true)
+        ->with(['translations' => fn ($q) => $q->where('language_code', 'es-MX')])
+        ->orderBy('id')
+        ->get();
+
+    $accommodationTypes = AccommodationType::where('active', true)
+        ->with(['translations' => fn ($q) => $q->where('language_code', 'es-MX')])
+        ->orderBy('id')
+        ->get();
+
+    return view('hotels', compact('hotels', 'destinations', 'hotelGroups', 'accommodationTypes'));
 })->name('hotels');
 
 Route::get('/hotels/{slug}', function (string $slug) {
