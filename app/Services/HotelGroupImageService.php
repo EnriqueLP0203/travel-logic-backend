@@ -35,21 +35,41 @@ class HotelGroupImageService
         }
 
         $originalName = $file->getClientOriginalName();
-        $extension = strtolower($file->getClientOriginalExtension() ?: $file->extension() ?: 'jpg');
+        $clientExtension = strtolower($file->getClientOriginalExtension() ?: $file->extension() ?: 'jpg');
         $newName = Str::slug($name) ?: 'grupo-hotel';
         $hashName = Str::lower(Str::random(8));
-        $compoundName = "{$newName}_{$hashName}.{$extension}";
+        $tempName = "{$newName}_{$hashName}.tmp";
+        $tempPath = $directory . '/' . $tempName;
 
-        $originalPath = $directory . '/' . $compoundName;
-        $thumbPath = $directory . '/t_' . $compoundName;
-        $cropPath = $directory . '/c_' . $compoundName;
-
-        if (! $file->move($directory, $compoundName)) {
+        if (! $file->move($directory, $tempName)) {
             throw new RuntimeException('No se pudo guardar la imagen del grupo de hotel.');
         }
 
-        $this->createThumbnail($originalPath, $thumbPath, $extension);
-        $this->createCrop($originalPath, $cropPath, $extension);
+        try {
+            // La extensión del cliente puede mentir (p. ej. JPEG con nombre .webp).
+            $extension = $this->detectExtension($tempPath, $clientExtension);
+            $compoundName = "{$newName}_{$hashName}.{$extension}";
+            $originalPath = $directory . '/' . $compoundName;
+            $thumbPath = $directory . '/t_' . $compoundName;
+            $cropPath = $directory . '/c_' . $compoundName;
+
+            if (! rename($tempPath, $originalPath)) {
+                throw new RuntimeException('No se pudo preparar la imagen del grupo de hotel.');
+            }
+            $tempPath = null;
+
+            $this->createThumbnail($originalPath, $thumbPath, $extension);
+            $this->createCrop($originalPath, $cropPath, $extension);
+        } catch (\Throwable $e) {
+            if ($tempPath && is_file($tempPath)) {
+                unlink($tempPath);
+            }
+            if (isset($compoundName)) {
+                $this->delete($compoundName);
+            }
+
+            throw $e;
+        }
 
         return [
             'img_original_name' => $originalName,
@@ -125,19 +145,41 @@ class HotelGroupImageService
     }
 
     /**
+     * Detecta el formato real del archivo (no confía en la extensión del cliente).
+     */
+    private function detectExtension(string $path, string $fallback = 'jpg'): string
+    {
+        $type = @exif_imagetype($path);
+
+        return match ($type) {
+            IMAGETYPE_JPEG => 'jpg',
+            IMAGETYPE_PNG => 'png',
+            IMAGETYPE_WEBP => 'webp',
+            default => match (strtolower($fallback)) {
+                'jpeg', 'jpg' => 'jpg',
+                'png' => 'png',
+                'webp' => 'webp',
+                default => throw new RuntimeException('Formato de imagen no soportado o archivo corrupto.'),
+            },
+        };
+    }
+
+    /**
      * @return array{0: \GdImage, 1: int, 2: int}
      */
     private function loadImage(string $path, string $extension): array
     {
+        $extension = $this->detectExtension($path, $extension);
+
         $image = match ($extension) {
-            'jpg', 'jpeg' => imagecreatefromjpeg($path),
-            'png' => imagecreatefrompng($path),
-            'webp' => imagecreatefromwebp($path),
-            default => throw new RuntimeException("Formato de imagen no soportado: {$extension}"),
+            'jpg', 'jpeg' => @imagecreatefromjpeg($path),
+            'png' => @imagecreatefrompng($path),
+            'webp' => @imagecreatefromwebp($path),
+            default => false,
         };
 
         if ($image === false) {
-            throw new RuntimeException('No se pudo leer la imagen subida.');
+            throw new RuntimeException('No se pudo leer la imagen subida. Usa JPG, PNG o WEBP válido.');
         }
 
         $width = imagesx($image);
