@@ -1,6 +1,8 @@
 @props([
-'name' => 'hotels-filters',
-'hotelGroups' => collect(),
+    'name' => 'hotels-filters',
+    'hotelGroups' => collect(),
+    'accommodationTypes' => collect(),
+    'destinations' => collect(),
 ])
 
 <div
@@ -24,57 +26,62 @@
         </button>
 
         <p class="text-5xl font-extrabold font-inter leading-[54px] text-blue-300">Filtros</p>
+
+        {{-- 1. Grupos --}}
         <p class="text-2xl font-bold font-inter leading-5 text-slate-800">Grupos</p>
 
-        <div class="grid grid-cols-6 gap-12">
+        <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
             @forelse ($hotelGroups as $group)
-            @php
-            $groupName = $group->translations->first()?->name ?? 'Grupo';
-            @endphp
-            <button type="button" class="flex flex-col items-center gap-2">
-                @if ($group->thumbnail_url)
-                <img
-                    src="{{ $group->thumbnail_url }}"
-                    alt="{{ $groupName }}"
-                    class="size-28 rounded-xl object-cover" />
-                @else
-                <div class="size-28 rounded-xl bg-gray-200"></div>
-                @endif
-                <p class="text-base font-bold font-inter leading-5 text-slate-500">
-                    {{ $groupName }}
-                </p>
-            </button>
+                @php
+                    $groupName = $group->translations->first()?->name ?? 'Grupo';
+                @endphp
+                <button type="button" class="flex flex-col items-center gap-2">
+                    @if ($group->thumbnail_url)
+                        <img
+                            src="{{ $group->thumbnail_url }}"
+                            alt="{{ $groupName }}"
+                            class="size-28 rounded-xl object-cover" />
+                    @else
+                        <div class="size-28 rounded-xl bg-gray-200"></div>
+                    @endif
+                    <p class="text-base font-bold font-inter leading-5 text-slate-500">
+                        {{ $groupName }}
+                    </p>
+                </button>
             @empty
-            <p class="col-span-full text-sm text-slate-400">No hay grupos disponibles.</p>
+                <p class="col-span-full text-sm text-slate-400">No hay grupos disponibles.</p>
             @endforelse
-
-
-            <!-- <div class="flex flex-col items-center gap-2">
-                <div class="size-28 rounded-xl bg-gray-200"></div>
-                <p class="text-base font-bold font-inter leading-5 text-slate-500">Familiar</p>
-            </div> -->
-        </div>
-        <p class="text-2xl font-bold font-inter leading-5 text-slate-800">Ciudades</p>
-
-        <div class="flex gap-2">
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Cancun</button>
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">CDMX</button>
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Merida</button>
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Playa del Carmen</button>
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Tulum</button>
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Todos</button>
         </div>
 
+        {{-- 2. Tipos de alojamiento --}}
         <p class="text-2xl font-bold font-inter leading-5 text-slate-800">Tipo de alojamiento</p>
-        <div class="flex gap-2">
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Plan europeo</button>
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Pet friendly</button>
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Familias</button>
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Solo adultos</button>
-            <button class="bg-white border border-gray-200 rounded-sm px-4 py-2">Todo incluido</button>
+        <div class="flex flex-wrap gap-2">
+            @forelse ($accommodationTypes as $type)
+                @php
+                    $typeName = $type->translations->first()?->name ?? 'Tipo';
+                @endphp
+                <button type="button" class="bg-white border border-gray-200 rounded-sm px-4 py-2">
+                    {{ $typeName }}
+                </button>
+            @empty
+                <p class="text-sm text-slate-400">No hay tipos de alojamiento disponibles.</p>
+            @endforelse
         </div>
 
-        <button class="max-w-96 h-16 bg-green-400 text-white text-2xl font-semibold font-inter rounded-sm px-4 py-2">Filtrar</button>
-    </div>
+        {{-- 3. Destinos --}}
+        <p class="text-2xl font-bold font-inter leading-5 text-slate-800">Destinos</p>
+        <div class="flex flex-wrap gap-2">
+            @forelse ($destinations as $destination)
+                <button type="button" class="bg-white border border-gray-200 rounded-sm px-4 py-2">
+                    {{ $destination->city }}
+                </button>
+            @empty
+                <p class="text-sm text-slate-400">No hay destinos disponibles.</p>
+            @endforelse
+        </div>
 
+        <button type="button" class="max-w-96 h-16 bg-green-400 text-white text-2xl font-semibold font-inter rounded-sm px-4 py-2">
+            Filtrar
+        </button>
+    </div>
 </div>
