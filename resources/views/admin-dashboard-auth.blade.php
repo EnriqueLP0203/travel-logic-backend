@@ -59,27 +59,27 @@
                 </div>
             @endif
 
-            <form method="POST" action="#" class="mt-6 flex flex-col gap-5">
+            <form method="POST" action="{{ route('admin.login') }}" class="mt-6 flex flex-col gap-5">
                 @csrf
 
                 <div class="flex flex-col gap-1.5">
-                    <label for="email" class="text-sm font-medium text-slate-700">Correo electrónico</label>
+                    <label for="username" class="text-sm font-medium text-slate-700">Usuario</label>
                     <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        value="{{ old('email') }}"
-                        placeholder="admin@ejemplo.com"
+                        id="username"
+                        type="text"
+                        name="username"
+                        value="{{ old('username') }}"
+                        placeholder="Tu usuario"
                         maxlength="255"
                         required
-                        autocomplete="email"
+                        autocomplete="username"
                         @class([
                             'h-11 w-full rounded-md border px-3 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-400/40',
-                            'border-slate-300' => ! $errors->has('email'),
-                            'border-red-500' => $errors->has('email'),
+                            'border-slate-300' => ! $errors->has('username'),
+                            'border-red-500' => $errors->has('username'),
                         ])
                     />
-                    @error('email')
+                    @error('username')
                         <p class="text-xs font-medium text-red-600">{{ $message }}</p>
                     @enderror
                 </div>

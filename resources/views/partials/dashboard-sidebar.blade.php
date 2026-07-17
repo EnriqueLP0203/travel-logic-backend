@@ -61,7 +61,7 @@ $navItems = [
         @endforeach
     </nav>
 
-    <div class="border-t border-white/10 px-5 py-4">
+    <div class="flex flex-col gap-3 border-t border-white/10 px-5 py-4">
         <a
             href="{{ route('home') }}"
             class="flex items-center gap-2 text-xs font-medium text-blue-100 transition-colors hover:text-white"
@@ -69,5 +69,16 @@ $navItems = [
             <x-lucide-external-link class="size-3.5" />
             Ver sitio público
         </a>
+
+        <form method="POST" action="{{ route('admin.logout') }}">
+            @csrf
+            <button
+                type="submit"
+                class="flex w-full items-center gap-2 text-xs font-medium text-blue-100 transition-colors hover:text-white"
+            >
+                <x-lucide-log-out class="size-3.5" />
+                Cerrar sesión
+            </button>
+        </form>
     </div>
 </aside>
