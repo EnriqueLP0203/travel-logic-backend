@@ -106,6 +106,10 @@ Route::get('/auth-traveler', function () {
     return view('auth-traveler');
 })->name('auth-traveler');
 
+Route::get('/admin-dashboard-auth', function () {
+    return view('admin-dashboard-auth');
+})->name('admin-dashboard-auth');
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 
