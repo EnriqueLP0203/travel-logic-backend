@@ -58,6 +58,18 @@ Route::get('/hotels', function (Request $request) {
         ->when($request->filled('destination_id'), function ($query) use ($request) {
             $query->where('destination_id', $request->input('destination_id'));
         })
+        ->when($request->filled('hotel_group_id'), function ($query) use ($request) {
+            $query->whereHas(
+                'hotelGroups',
+                fn ($q) => $q->where('hotel_groups.id', $request->integer('hotel_group_id'))
+            );
+        })
+        ->when($request->filled('accommodation_type'), function ($query) use ($request) {
+            $query->whereHas(
+                'accommodationTypes',
+                fn ($q) => $q->where('accommodation_types.id', $request->integer('accommodation_type'))
+            );
+        })
         ->when($request->input('star_category') !== null && $request->input('star_category') !== '', function ($query) use ($request) {
             $query->where('star_category', $request->input('star_category'));
         })
