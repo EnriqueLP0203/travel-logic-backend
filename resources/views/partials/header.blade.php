@@ -40,7 +40,8 @@ $navItems = [
         </div>
 
         <div class="flex items-center gap-2">
-            @guest
+            {{-- Solo el guard web (viajeros); la sesión admin no afecta el sitio público --}}
+            @guest('web')
                 <button
                     class="px-4 py-2 text-lg font-semibold text-stone-900 transition-opacity duration-200 hover:opacity-90"
                     type="button"
@@ -74,20 +75,22 @@ $navItems = [
                     >
                         <div class="border-b border-stone-100 px-4 py-3">
                             <p class="text-sm font-semibold text-stone-900">
-                                {{ auth()->user()->traveler?->first_name ?? 'Viajero' }}
+                                {{ auth('web')->user()->traveler?->first_name ?? 'Viajero' }}
                             </p>
                         </div>
 
                         <div class="p-2">
-                            <form method="POST" action="{{ route('traveler.logout') }}">
-                                @csrf
-                                <button
-                                    type="submit"
-                                    class="flex w-full items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold text-stone-700 transition-colors duration-200 hover:bg-stone-100"
-                                >
-                                    Cerrar sesión
-                                </button>
-                            </form>
+                            @if (Route::has('traveler.logout'))
+                                <form method="POST" action="{{ route('traveler.logout') }}">
+                                    @csrf
+                                    <button
+                                        type="submit"
+                                        class="flex w-full items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold text-stone-700 transition-colors duration-200 hover:bg-stone-100"
+                                    >
+                                        Cerrar sesión
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
