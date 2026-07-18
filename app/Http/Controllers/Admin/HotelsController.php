@@ -122,13 +122,13 @@ class HotelsController extends Controller
 
         DB::transaction(function () use ($data, $now, $slug, $request, $images) {
             $hotel = Hotel::create([
-                'destination_id' => $data['destination_id'],
+                'destination_id' => $data['destination_id'] ?? null,
                 'name' => $data['name'],
-                'star_category' => $data['star_category'],
-                'address' => $data['address'],
-                'postal_code' => $data['postal_code'],
-                'latitude' => $data['latitude'],
-                'longitude' => $data['longitude'],
+                'star_category' => $data['star_category'] ?? 1,
+                'address' => $data['address'] ?? null,
+                'postal_code' => $data['postal_code'] ?? null,
+                'latitude' => $data['latitude'] ?? null,
+                'longitude' => $data['longitude'] ?? null,
                 'phone' => $data['phone'] ?? null,
                 'email' => $data['email'] ?? null,
                 'website' => $data['website'] ?? null,
@@ -136,10 +136,10 @@ class HotelsController extends Controller
                 'price_range' => $data['price_range'] ?? null,
                 'featured' => $data['featured'] ?? false,
                 'is_published' => $data['is_published'] ?? false,
-                'hotel_detail_id' => $data['hotel_detail_id'] ?? 'manual',
-                'hotel_code' => $data['hotel_code'] ?? $slug,
-                'supplier_id' => $data['supplier_id'] ?? 'manual',
-                'supplier_name' => $data['supplier_name'] ?? 'Admin',
+                'hotel_detail_id' => $data['hotel_detail_id'] ?? null,
+                'hotel_code' => $data['hotel_code'] ?? null,
+                'supplier_id' => $data['supplier_id'] ?? null,
+                'supplier_name' => $data['supplier_name'] ?? null,
                 'slug' => $slug,
                 'active' => $data['active'] ?? true,
                 'created_by' => 0,
@@ -150,12 +150,12 @@ class HotelsController extends Controller
 
             $hotel->translations()->create([
                 'language_code' => 'es-MX',
-                'short_description' => $data['short_description'] ?? null,
-                'description' => $data['description'] ?? null,
-                'amenities' => $data['amenities'] ?? null,
-                'meta_title' => $data['meta_title'] ?? null,
-                'meta_description' => $data['meta_description'] ?? null,
-                'meta_keywords' => $data['meta_keywords'] ?? null,
+                'short_description' => $data['short_description'] ?? '',
+                'description' => $data['description'] ?? '',
+                'amenities' => $data['amenities'] ?? '',
+                'meta_title' => $data['meta_title'] ?? '',
+                'meta_description' => $data['meta_description'] ?? '',
+                'meta_keywords' => $data['meta_keywords'] ?? '',
             ]);
 
             $hotel->hotelGroups()->sync($data['hotel_group_ids'] ?? []);
@@ -201,13 +201,13 @@ class HotelsController extends Controller
 
         DB::transaction(function () use ($data, $hotel, $request, $images, $slug, $now) {
             $hotel->update([
-                'destination_id' => $data['destination_id'],
+                'destination_id' => $data['destination_id'] ?? null,
                 'name' => $data['name'],
-                'star_category' => $data['star_category'],
-                'address' => $data['address'],
-                'postal_code' => $data['postal_code'],
-                'latitude' => $data['latitude'],
-                'longitude' => $data['longitude'],
+                'star_category' => $data['star_category'] ?? 1,
+                'address' => $data['address'] ?? null,
+                'postal_code' => $data['postal_code'] ?? null,
+                'latitude' => $data['latitude'] ?? null,
+                'longitude' => $data['longitude'] ?? null,
                 'phone' => $data['phone'] ?? null,
                 'email' => $data['email'] ?? null,
                 'website' => $data['website'] ?? null,
@@ -230,12 +230,12 @@ class HotelsController extends Controller
                 ->first();
 
             $translationPayload = [
-                'short_description' => $data['short_description'] ?? null,
-                'description' => $data['description'] ?? null,
-                'amenities' => $data['amenities'] ?? null,
-                'meta_title' => $data['meta_title'] ?? null,
-                'meta_description' => $data['meta_description'] ?? null,
-                'meta_keywords' => $data['meta_keywords'] ?? null,
+                'short_description' => $data['short_description'] ?? '',
+                'description' => $data['description'] ?? '',
+                'amenities' => $data['amenities'] ?? '',
+                'meta_title' => $data['meta_title'] ?? '',
+                'meta_description' => $data['meta_description'] ?? '',
+                'meta_keywords' => $data['meta_keywords'] ?? '',
             ];
 
             if ($translation) {

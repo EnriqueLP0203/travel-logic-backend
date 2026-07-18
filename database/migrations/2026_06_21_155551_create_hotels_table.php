@@ -17,14 +17,14 @@ return new class extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->increments('id')->unsigned();
 
-            $table->unsignedInteger('destination_id');
+            $table->unsignedInteger('destination_id')->nullable();
 
             $table->string('name', 250);
             $table->tinyInteger('star_category')->default(1);
-            $table->string('address', 500);
-            $table->string('postal_code', 10);
-            $table->decimal('latitude', 12, 7);
-            $table->decimal('longitude', 12, 7);
+            $table->string('address', 500)->nullable();
+            $table->string('postal_code', 10)->nullable();
+            $table->decimal('latitude', 12, 7)->nullable();
+            $table->decimal('longitude', 12, 7)->nullable();
             $table->string('phone', 50)->nullable();
             $table->string('email', 250)->nullable();
             $table->string('website', 250)->nullable();
@@ -34,10 +34,10 @@ return new class extends Migration
             $table->boolean('is_published')->default(false);
 
             // Datos de integración con el proveedor / catálogo externo
-            $table->string('hotel_detail_id', 50);
-            $table->string('hotel_code', 50);
-            $table->string('supplier_id', 50);
-            $table->string('supplier_name', 150);
+            $table->string('hotel_detail_id', 50)->nullable();
+            $table->string('hotel_code', 50)->nullable();
+            $table->string('supplier_id', 50)->nullable();
+            $table->string('supplier_name', 150)->nullable();
 
             $table->string('slug', 150);
             $table->boolean('active')->default(true);

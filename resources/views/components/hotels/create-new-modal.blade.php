@@ -44,9 +44,9 @@
 
                         <div class="flex flex-col gap-1.5">
                             <label for="{{ $name }}-destination" class="text-sm font-medium text-slate-700">Destino</label>
-                            <select id="{{ $name }}-destination" name="destination_id" required
+                            <select id="{{ $name }}-destination" name="destination_id"
                                 class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('destination_id') border-red-400 @enderror">
-                                <option value="" disabled @selected(! old('destination_id'))>Selecciona un destino</option>
+                                <option value="" @selected(! old('destination_id'))>Selecciona un destino</option>
                                 @foreach ($destinations as $destination)
                                     <option value="{{ $destination->id }}" @selected(old('destination_id') == $destination->id)>
                                         {{ $destination->city }}
@@ -58,7 +58,7 @@
 
                         <div class="flex flex-col gap-1.5">
                             <label for="{{ $name }}-stars" class="text-sm font-medium text-slate-700">Estrellas</label>
-                            <select id="{{ $name }}-stars" name="star_category" required
+                            <select id="{{ $name }}-stars" name="star_category"
                                 class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
                                 @for ($i = 1; $i <= 5; $i++)
                                     <option value="{{ $i }}" @selected(old('star_category', 3) == $i)>{{ $i }}</option>
@@ -88,25 +88,25 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="flex flex-col gap-1.5 md:col-span-2">
                             <label for="{{ $name }}-address" class="text-sm font-medium text-slate-700">Dirección</label>
-                            <input id="{{ $name }}-address" type="text" name="address" required value="{{ old('address') }}"
+                            <input id="{{ $name }}-address" type="text" name="address" value="{{ old('address') }}"
                                 class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('address') border-red-400 @enderror">
                             @error('address')<p class="text-xs text-red-500">{{ $message }}</p>@enderror
                         </div>
                         <div class="flex flex-col gap-1.5">
                             <label for="{{ $name }}-postal" class="text-sm font-medium text-slate-700">Código postal</label>
-                            <input id="{{ $name }}-postal" type="text" name="postal_code" required value="{{ old('postal_code') }}"
+                            <input id="{{ $name }}-postal" type="text" name="postal_code" value="{{ old('postal_code') }}"
                                 class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('postal_code') border-red-400 @enderror">
                             @error('postal_code')<p class="text-xs text-red-500">{{ $message }}</p>@enderror
                         </div>
                         <div class="flex flex-col gap-1.5">
                             <label for="{{ $name }}-lat" class="text-sm font-medium text-slate-700">Latitud</label>
-                            <input id="{{ $name }}-lat" type="number" name="latitude" step="any" required value="{{ old('latitude') }}"
+                            <input id="{{ $name }}-lat" type="number" name="latitude" step="any" value="{{ old('latitude') }}"
                                 class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('latitude') border-red-400 @enderror">
                             @error('latitude')<p class="text-xs text-red-500">{{ $message }}</p>@enderror
                         </div>
                         <div class="flex flex-col gap-1.5">
                             <label for="{{ $name }}-lng" class="text-sm font-medium text-slate-700">Longitud</label>
-                            <input id="{{ $name }}-lng" type="number" name="longitude" step="any" required value="{{ old('longitude') }}"
+                            <input id="{{ $name }}-lng" type="number" name="longitude" step="any" value="{{ old('longitude') }}"
                                 class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('longitude') border-red-400 @enderror">
                             @error('longitude')<p class="text-xs text-red-500">{{ $message }}</p>@enderror
                         </div>
