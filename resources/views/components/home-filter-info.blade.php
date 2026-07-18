@@ -1,19 +1,29 @@
 <div class="flex w-full flex-col rounded-xl border border-green-300 bg-white p-6 shadow-xl">
         <!-- botones filtros de informacion -->
         <div class="flex items-center gap-12">
-            <a class="text-slate-500  text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+            <a x-on:click="activo = (activo === 'hoteles' ? null : 'hoteles')"
+                :class="activo === 'hoteles' ? 'text-green-400' : 'text-slate-500'"
+                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
                 🏨 Hoteles
             </a>
-            <a class="text-slate-500  text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+            <a x-on:click="activo = (activo === 'vuelos' ? null : 'vuelos')"
+                :class="activo === 'vuelos' ? 'text-green-400' : 'text-slate-500'"
+                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
                 ✈️ Vuelos
             </a>
-            <a class="text-slate-500  text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+            <a x-on:click="activo = (activo === 'paquetes' ? null : 'paquetes')"
+                :class="activo === 'paquetes' ? 'text-green-400' : 'text-slate-500'"
+                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
                 🎒 Paquetes
             </a>
-            <a class="text-slate-500  text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+            <a x-on:click="activo = (activo === 'tours' ? null : 'tours')"
+                :class="activo === 'tours' ? 'text-green-400' : 'text-slate-500'"
+                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
                 🎯 Tours
             </a>
-            <a class="text-slate-500  text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+            <a x-on:click="activo = (activo === 'bodas' ? null : 'bodas')"
+                :class="activo === 'bodas' ? 'text-green-400' : 'text-slate-500'"
+                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
                 💍 Grupos & Bodas
             </a>
         </div>

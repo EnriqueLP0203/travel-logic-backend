@@ -49,3 +49,7 @@
         transition: none;
     }
 }
+
+[x-cloak] {
+    display: none !important;
+}
