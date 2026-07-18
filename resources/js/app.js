@@ -1,6 +1,3 @@
-import Alpine from 'alpinejs';
-window.Alpine = Alpine;
-Alpine.start();
 document.addEventListener('DOMContentLoaded', () => {
     const elements = document.querySelectorAll('[data-animate-in]');
 

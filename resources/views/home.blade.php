@@ -5,55 +5,47 @@
 @section('content')
 
 {{-- Hero + filtro flotante entre secciones --}}
-<div x-data="{ activo: null }">
-    <div class="relative">
-        <x-animate-in>
-            <div class="relative flex min-h-[70vh] flex-col justify-center gap-5 overflow-hidden px-6 py-12 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24">
-                <img
-                    src="{{ asset('images/home/bg-1.webp') }}"
-                    alt=""
-                    class="absolute inset-0 h-full w-full object-cover"
-                    aria-hidden="true" />
+<div class="relative">
+    <x-animate-in>
+        <div class="relative flex min-h-[70vh] flex-col justify-center gap-5 overflow-hidden px-6 py-12 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24">
+            <img
+                src="{{ asset('images/home/bg-1.webp') }}"
+                alt=""
+                class="absolute inset-0 h-full w-full object-cover"
+                aria-hidden="true" />
 
-                <div class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
+            <div class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
 
-                <p class="ml-24 relative z-10 max-w-xl text-6xl font-black font-montserrat leading-tight text-white">
-                    El socio estratégico que tu agencia necesita
-                </p>
-                <p class="ml-24 mb-4 relative z-10 max-w-xl text-base font-normal text-white/90 sm:text-lg md:text-xl">
-                    Soluciones integrales y personalizadas bajo el modelo que simplifican tu operación y te permiten ofrecer experiencias memorables a tus clientes.
-                </p>
-                <div class="ml-24 flex items-center gap-2">
-                    <button
-                        typCrucerose="button"
-                        class="flex items-center gap-2 relative z-10 w-fit rounded-lg bg-green-300 px-6 py-3 text-base font-bold text-white transition-opacity hover:opacity-90">
-                        Acceder al portal
-                        <x-lucide-arrow-right class="h-4 w-4 text-white" />
+            <p class="ml-24 relative z-10 max-w-xl text-6xl font-black font-montserrat leading-tight text-white">
+                El socio estratégico que tu agencia necesita
+            </p>
+            <p class="ml-24 mb-4 relative z-10 max-w-xl text-base font-normal text-white/90 sm:text-lg md:text-xl">
+                Soluciones integrales y personalizadas bajo el modelo que simplifican tu operación y te permiten ofrecer experiencias memorables a tus clientes.
+            </p>
+            <div class="ml-24 flex items-center gap-2">
+                <button
+                    typCrucerose="button"
+                    class="flex items-center gap-2 relative z-10 w-fit rounded-lg bg-green-300 px-6 py-3 text-base font-bold text-white transition-opacity hover:opacity-90">
+                    Acceder al portal
+                    <x-lucide-arrow-right class="h-4 w-4 text-white" />
 
-                    </button>
-                    <button
-                        type="button"
-                        class="relative z-10 w-fit rounded-lg border border-white px-6 py-3 text-base font-semibold text-white transition-opacity hover:opacity-90">
-                        Quiero registrarme
-                    </button>
-                </div>
-
+                </button>
+                <button
+                    type="button"
+                    class="relative z-10 w-fit rounded-lg border border-white px-6 py-3 text-base font-semibold text-white transition-opacity hover:opacity-90">
+                    Quiero registrarme
+                </button>
             </div>
-        </x-animate-in>
 
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 z-20 translate-y-1/2 px-2 sm:px-3 md:px-4 lg:px-6">
-            <div class="pointer-events-auto mx-auto w-full max-w-[1600px]">
-                <x-home-filter-info />
-            </div>
+        </div>
+    </x-animate-in>
+
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 z-20 translate-y-1/2 px-2 sm:px-3 md:px-4 lg:px-6">
+        <div class="pointer-events-auto mx-auto w-full max-w-[1600px]">
+            <x-home-filter-info />
         </div>
     </div>
-
-    {{-- Bloque de detalles: FUERA del hero, en el flujo normal.
-         Al aparecer empuja el contenido de abajo; al ocultarse, libera el espacio. --}}
-    <div class="mt-24 sm:mt-28 md:mt-32">
-        <x-home-filter-details />
-    </div>
-</div>{{-- cierra x-data --}}
+</div>
 
 
 <div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-2 pt-28 sm:px-3 sm:pt-32 md:px-4 md:pt-36 lg:px-6 lg:pt-40">
