@@ -14,13 +14,19 @@
             x-cloak
             class="col-start-1 row-start-1"
         >
-            <h3 class="text-2xl font-black font-montserrat text-indigo-950">
-                {{ $categoria['title'] }}
-            </h3>
-            <div class="mt-2 h-1 w-12 bg-green-300" aria-hidden="true"></div>
-            <p class="mt-4 max-w-3xl text-base font-normal font-montserrat text-slate-500">
-                {{ $categoria['text'] }}
-            </p>
+            <div class="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+                <div class="w-full min-w-0 flex-1">
+                    <h3 class="text-2xl font-black font-montserrat text-indigo-950">
+                        {{ $categoria['title'] }}
+                    </h3>
+                    <div class="mt-2 h-1 w-12 bg-green-300" aria-hidden="true"></div>
+                    <p class="mt-4 max-w-3xl text-base font-normal font-montserrat text-slate-500">
+                        {{ $categoria['text'] }}
+                    </p>
+                </div>
+
+                <x-stacked-cards :items="$categoria['cards']" class="mx-auto lg:mx-0" />
+            </div>
         </div>
     @endforeach
 </div>

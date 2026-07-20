@@ -15,26 +15,56 @@ class HomeFilterDetails extends Component
 
     public function __construct()
     {
+        $cards = [
+            [
+                'name'  => 'Hotel +',
+                'image' => asset('images/home/frame1.webp'),
+            ],
+            [
+                'name'  => 'Tour + Hotel',
+                'image' => asset('images/home/frame2.webp'),
+            ],
+            [
+                'name'  => 'Vuelo + Hotel',
+                'image' => asset('images/home/frame3.webp'),
+            ],
+        ];
+
         $this->categorias = [
             'hoteles' => [
                 'title' => 'Hoteles',
-                'text'  => 'Encuentra el hospedaje ideal para tus clientes con tarifas netas garantizadas en más de 500 hoteles en México, el Caribe y destinos internacionales.',
+                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
+
+Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
+                'cards' => $cards,
             ],
             'vuelos' => [
                 'title' => 'Vuelos',
-                'text'  => 'Reserva vuelos nacionales e internacionales con las mejores conexiones y precios competitivos para armar el viaje completo.',
+                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
+
+Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
+                'cards' => $cards,
             ],
             'paquetes' => [
                 'title' => 'Paquetes',
-                'text'  => 'Combina hotel, vuelo y traslados en un solo paquete listo para vender, con la flexibilidad de personalizarlo según cada cliente.',
+                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
+
+Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
+                'cards' => $cards,
             ],
             'tours' => [
                 'title' => 'Tours',
-                'text'  => 'Ofrece experiencias y actividades en destino: excursiones, tours guiados y aventuras que hacen memorable cada viaje.',
+                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
+
+Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
+                'cards' => $cards,
             ],
             'bodas' => [
                 'title' => 'Grupos & Bodas',
-                'text'  => 'Organiza bodas de destino y viajes en grupo con atención especializada, cotizaciones a la medida y coordinación de principio a fin.',
+                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
+
+Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
+                'cards' => $cards,
             ],
         ];
     }

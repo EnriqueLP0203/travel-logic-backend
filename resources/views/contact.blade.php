@@ -20,11 +20,11 @@
                         <input type="text" id="name" name="name" class="w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950" />
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label for="email" class="text-sm font-medium font-lato text-indigo-950">Nombre</label>
+                        <label for="email" class="text-sm font-medium font-lato text-indigo-950">Correo</label>
                         <input type="email" id="email" name="email" class="w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950" />
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label for="phone" class="text-sm font-medium font-lato text-indigo-950">Nombre</label>
+                        <label for="phone" class="text-sm font-medium font-lato text-indigo-950">Teléfono</label>
                         <input type="text" id="phone" name="phone" class="w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950" />
                     </div>
                     <!-- aceptar terminos y condiciones -->
