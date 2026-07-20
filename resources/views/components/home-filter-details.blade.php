@@ -1,15 +1,18 @@
-<div class="mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
+{{-- Los 5 bloques comparten la misma celda del grid (col-start-1 row-start-1)
+     para que al cambiar de categoria el que sale y el que entra se crucen
+     encimados, sin empujarse ni saltar. --}}
+<div class="mx-auto grid w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
     @foreach ($categorias as $clave => $categoria)
         <div
             x-show="activo === '{{ $clave }}'"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 -translate-y-4"
-            x-transition:enter-end="opacity-100 translate-y-0"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 translate-y-0"
-            x-transition:leave-end="opacity-0 -translate-y-4"
+            x-transition:enter="transition-opacity ease-out duration-500"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition-opacity ease-in duration-300"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
             x-cloak
-            class=""
+            class="col-start-1 row-start-1"
         >
             <h3 class="text-2xl font-black font-montserrat text-indigo-950">
                 {{ $categoria['title'] }}
