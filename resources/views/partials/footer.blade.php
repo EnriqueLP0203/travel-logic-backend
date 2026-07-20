@@ -8,12 +8,20 @@
         </div>
 
         <div class="flex flex-col gap-6">
-            <p class="text-sm font-bold font-montserrat text-white">DESTINOS</p>
-            <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Familiar</a>
-            <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Deporte</a>
-            <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Eventos</a>
-            <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Lifestyle & Wellness</a>
-            <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Cultural</a>
+            <p class="text-sm font-bold font-montserrat text-white">GRUPOS</p>
+            @forelse ($footerHotelGroups as $group)
+                @php
+                    $groupName = $group->translations->first()?->name ?? 'Grupo';
+                @endphp
+                <a
+                    href="{{ route('hotels', ['hotel_group_id' => $group->id]) }}"
+                    class="text-sm font-light font-lato text-white transition-colors hover:text-green-300"
+                >
+                    {{ $groupName }}
+                </a>
+            @empty
+                <p class="text-sm font-light font-lato text-white/70">Sin grupos disponibles</p>
+            @endforelse
         </div>
 
         <div class="flex flex-col gap-6">
