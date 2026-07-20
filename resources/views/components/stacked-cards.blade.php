@@ -11,7 +11,7 @@ SVG;
 @endphp
 
 {{-- Contenedor: alto/ancho suficientes para las 3 rotadas --}}
-<div {{ $attributes->merge(['class' => 'relative w-[28rem] h-96 shrink-0']) }}>
+<div {{ $attributes->merge(['class' => 'relative flex h-80 w-[28rem] shrink-0 items-center']) }}>
     @foreach ($items as $index => $item)
         @php
             $config = [
@@ -23,7 +23,7 @@ SVG;
             $isFront = $index === array_key_last($items);
         @endphp
 
-        <div class="absolute inset-0 w-64 h-80 p-4 bg-white rounded-xl shadow-[9px_16px_40px_20px_rgba(0,0,0,0.1)] overflow-hidden origin-top-left {{ $config['rotate'] }} {{ $config['translate'] }} {{ $config['z'] }} transition-transform duration-300 hover:scale-[1.02]">
+        <div class="absolute left-0 top-0 w-64 h-80 p-4 bg-white rounded-xl shadow-[9px_16px_40px_20px_rgba(0,0,0,0.1)] overflow-hidden origin-top-left {{ $config['rotate'] }} {{ $config['translate'] }} {{ $config['z'] }} transition-transform duration-300 hover:scale-[1.02]">
             <img
                 src="{{ $item['image'] }}"
                 alt="{{ $item['name'] }}"

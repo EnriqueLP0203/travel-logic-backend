@@ -14,8 +14,8 @@
             x-cloak
             class="col-start-1 row-start-1"
         >
-            <div class="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-                <div class="w-full min-w-0 flex-1">
+            <div class="flex flex-col items-center gap-8 mt-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+                <div class="flex w-full min-w-0 flex-1 flex-col justify-center">
                     <h3 class="text-2xl font-black font-montserrat text-indigo-950">
                         {{ $categoria['title'] }}
                     </h3>
@@ -25,7 +25,9 @@
                     </p>
                 </div>
 
-                <x-stacked-cards :items="$categoria['cards']" class="mx-auto lg:mx-0" />
+                <div class="flex shrink-0 items-center justify-center self-center">
+                    <x-stacked-cards :items="$categoria['cards']" />
+                </div>
             </div>
         </div>
     @endforeach
