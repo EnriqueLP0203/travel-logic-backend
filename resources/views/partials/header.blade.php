@@ -42,12 +42,12 @@ $navItems = [
         <div class="flex items-center gap-2">
             {{-- Solo el guard web (viajeros); la sesión admin no afecta el sitio público --}}
             @guest('web')
-                <button
+                <a
+                    href="{{ route('register-agency') }}"
                     class="px-4 py-2 text-lg font-semibold text-stone-900 transition-opacity duration-200 hover:opacity-90"
-                    type="button"
                 >
                     Registrarse
-                </button>
+                </a>
                 <button
                     class="rounded-lg bg-green-400 px-4 py-2 text-lg font-semibold text-white transition-opacity duration-200 hover:opacity-90"
                     type="button"

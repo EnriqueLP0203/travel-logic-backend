@@ -30,6 +30,14 @@ Route::get('/offers', function () {
     return view('offers');
 })->name('offers');
 
+Route::get('/register-agency', function () {
+    return view('register-agency');
+})->name('register-agency');
+
+Route::get('/billing', function () {
+    return view('billing');
+})->name('billing');
+
 Route::get('/media/hotels/{filename}', function (string $filename) {
     $path = storage_path('travel_media/hotels/' . $filename);
     abort_unless(is_file($path), 404);
