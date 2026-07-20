@@ -24,18 +24,19 @@
                     Soluciones integrales y personalizadas bajo el modelo que simplifican tu operación y te permiten ofrecer experiencias memorables a tus clientes.
                 </p>
                 <div class="ml-24 flex items-center gap-2">
-                    <button
-                        typCrucerose="button"
+                    <a
+                        href="https://www.partners.travel-logic.com/site/login"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="flex items-center gap-2 relative z-10 w-fit rounded-lg bg-green-300 px-6 py-3 text-base font-bold text-white transition-opacity hover:opacity-90">
                         Acceder al portal
                         <x-lucide-arrow-right class="h-4 w-4 text-white" />
-
-                    </button>
-                    <button
-                        type="button"
+                    </a>
+                    <a
+                        href="{{ route('register-agency') }}"
                         class="relative z-10 w-fit rounded-lg border border-white px-6 py-3 text-base font-semibold text-white transition-opacity hover:opacity-90">
                         Quiero registrarme
-                    </button>
+                    </a>
                 </div>
 
             </div>
@@ -227,12 +228,12 @@
                 </li>
             </ol>
 
-            <button
-                type="button"
+            <a
+                href="{{ route('register-agency') }}"
                 class="mt-6 flex w-sm self-center justify-center items-center gap-2 rounded-lg bg-green-300 px-6 py-3 text-2xl font-bold text-white transition-opacity hover:opacity-90">
                 Empezar
                 <x-lucide-arrow-right class="h-6 w-6 text-white" />
-            </button>
+            </a>
         </div>
 
         <div class="flex flex-col gap-4 items-center justify-center">
@@ -280,8 +281,8 @@
             <p class="text-5xl font-black font-inter text-white">¿Listo para hacer crecer tu agencia con nosotros?</p>
             <p class="text-base font-medium font-inter text-white">Únete a más de 200 agencias que ya disfrutan de tarifas exclusivasy herramientas profesionales bajo el modelo One Stop Shop.</p>
             <div class="flex flex-row gap-4">
-                <button class="bg-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Registrarme gratis</button>
-                <button class="border border-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Hablar con un asesor</button>
+                <a href="{{ route('register-agency') }}" class="bg-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Registrarme gratis</a>
+                <a href="https://apsholding.mx/agendar-cita-travel-logic" target="_blank" rel="noopener noreferrer" class="border border-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Hablar con un asesor</a>
             </div>
         </div>
         <div>

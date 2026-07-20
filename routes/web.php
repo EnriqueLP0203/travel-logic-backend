@@ -34,9 +34,7 @@ Route::get('/register-agency', function () {
     return view('register-agency');
 })->name('register-agency');
 
-Route::get('/billing', function () {
-    return view('billing');
-})->name('billing');
+Route::redirect('/billing', '/register-agency')->name('billing');
 
 Route::get('/media/hotels/{filename}', function (string $filename) {
     $path = storage_path('travel_media/hotels/' . $filename);
