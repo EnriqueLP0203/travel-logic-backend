@@ -404,6 +404,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setVal('[data-edit-id]', trigger.dataset.id);
             setVal('[data-edit-name]', trigger.dataset.name);
+
+            const titleName = modal.querySelector('[data-edit-title-name]');
+            if (titleName) {
+                titleName.textContent = trigger.dataset.name
+                    ? `— ${trigger.dataset.name}`
+                    : '';
+            }
+
             setVal('[data-edit-destination]', trigger.dataset.destinationId);
             setVal('[data-edit-star-category]', trigger.dataset.starCategory);
             setVal('[data-edit-address]', trigger.dataset.address);

@@ -24,6 +24,8 @@ class HotelsController extends Controller
      */
     public function index(Request $request): View
     {
+        session(['admin.hotels.index_query' => $request->query()]);
+
         $allowedSorts = [
             'name',
             'created_at',
@@ -36,7 +38,7 @@ class HotelsController extends Controller
 
         $sort = in_array($request->input('sort'), $allowedSorts, true)
             ? $request->input('sort')
-            : 'name';
+            : 'id';
         $dir = $request->input('dir') === 'desc' ? 'desc' : 'asc';
 
         $query = Hotel::query()
@@ -182,9 +184,7 @@ class HotelsController extends Controller
             }
         });
 
-        return redirect()
-            ->route('admin.hotels.index')
-            ->with('success', 'Hotel creado correctamente.');
+        return $this->redirectToIndex('Hotel creado correctamente.');
     }
 
     /**
@@ -289,9 +289,7 @@ class HotelsController extends Controller
             }
         });
 
-        return redirect()
-            ->route('admin.hotels.index')
-            ->with('success', 'Hotel actualizado correctamente.');
+        return $this->redirectToIndex('Hotel actualizado correctamente.');
     }
 
     /**
@@ -300,18 +298,17 @@ class HotelsController extends Controller
     public function destroy(Hotel $hotel, HotelImageService $images): RedirectResponse
     {
         if ($hotel->reviews()->exists()) {
-            return redirect()
-                ->route('admin.hotels.index')
-                ->with('error', 'No se puede eliminar porque tiene reseñas asociadas.');
+            return $this->redirectToIndex(
+                'No se puede eliminar porque tiene reseñas asociadas.',
+                'error'
+            );
         }
 
         $compoundNames = $hotel->gallery()->pluck('compound_name');
         $images->deleteMany($compoundNames);
         $hotel->delete();
 
-        return redirect()
-            ->route('admin.hotels.index')
-            ->with('success', 'Hotel eliminado correctamente.');
+        return $this->redirectToIndex('Hotel eliminado correctamente.');
     }
 
     /**
@@ -364,5 +361,12 @@ class HotelsController extends Controller
         }
 
         return $slug;
+    }
+
+    private function redirectToIndex(string $message, string $flashKey = 'success'): RedirectResponse
+    {
+        return redirect()
+            ->route('admin.hotels.index', session('admin.hotels.index_query', []))
+            ->with($flashKey, $message);
     }
 }

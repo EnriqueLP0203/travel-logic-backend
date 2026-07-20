@@ -1,13 +1,13 @@
 @props([
-    'name' => 'hotel-edit',
-    'destinations' => collect(),
-    'hotelGroups' => collect(),
-    'accommodationTypes' => collect(),
+'name' => 'hotel-edit',
+'destinations' => collect(),
+'hotelGroups' => collect(),
+'accommodationTypes' => collect(),
 ])
 
 @php
-    $isEditError = $errors->any() && old('_method') === 'PUT';
-    $editId = old('hotel_id');
+$isEditError = $errors->any() && old('_method') === 'PUT';
+$editId = old('hotel_id');
 @endphp
 
 <div
@@ -23,6 +23,11 @@
         <div class="flex shrink-0 items-center justify-between border-b border-slate-200 px-6 py-4">
             <h2 id="{{ $name }}-title" class="text-base font-semibold text-slate-800">
                 Editar hotel
+                <span data-edit-title-name class="text-base font-semibold text-slate-800">
+                    @if ($isEditError && old('name'))
+                    — {{ old('name') }}
+                    @endif
+                </span>
             </h2>
             <button type="button" data-modal-close aria-label="Cerrar"
                 class="flex h-8 w-8 items-center justify-center rounded-md text-slate-400 transition hover:bg-slate-100 hover:text-slate-600">
@@ -54,9 +59,9 @@
                                 class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
                                 <option value="">Selecciona un destino</option>
                                 @foreach ($destinations as $destination)
-                                    <option value="{{ $destination->id }}" @selected(old('destination_id') == $destination->id)>
-                                        {{ $destination->city }}
-                                    </option>
+                                <option value="{{ $destination->id }}" @selected(old('destination_id')==$destination->id)>
+                                    {{ $destination->city }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>
@@ -65,8 +70,8 @@
                             <select id="{{ $name }}-stars" name="star_category" data-edit-star-category
                                 class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm">
                                 @for ($i = 1; $i <= 5; $i++)
-                                    <option value="{{ $i }}" @selected(old('star_category') == $i)>{{ $i }}</option>
-                                @endfor
+                                    <option value="{{ $i }}" @selected(old('star_category')==$i)>{{ $i }}</option>
+                                    @endfor
                             </select>
                         </div>
                         <div class="flex flex-col gap-1.5">
@@ -172,13 +177,13 @@
                             <p class="mb-2 text-sm font-medium text-slate-700">Grupos de hotel</p>
                             <div class="max-h-40 space-y-2 overflow-y-auto rounded-md border border-slate-200 p-3" data-edit-hotel-groups>
                                 @foreach ($hotelGroups as $group)
-                                    @php $gName = $group->translations->first()?->name ?? "#{$group->id}"; @endphp
-                                    <label class="flex items-center gap-2 text-sm text-slate-700">
-                                        <input type="checkbox" name="hotel_group_ids[]" value="{{ $group->id }}"
-                                            data-group-id="{{ $group->id }}"
-                                            class="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
-                                        {{ $gName }}
-                                    </label>
+                                @php $gName = $group->translations->first()?->name ?? "#{$group->id}"; @endphp
+                                <label class="flex items-center gap-2 text-sm text-slate-700">
+                                    <input type="checkbox" name="hotel_group_ids[]" value="{{ $group->id }}"
+                                        data-group-id="{{ $group->id }}"
+                                        class="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                                    {{ $gName }}
+                                </label>
                                 @endforeach
                             </div>
                         </div>
@@ -186,13 +191,13 @@
                             <p class="mb-2 text-sm font-medium text-slate-700">Tipos de alojamiento</p>
                             <div class="max-h-40 space-y-2 overflow-y-auto rounded-md border border-slate-200 p-3" data-edit-accommodation-types>
                                 @foreach ($accommodationTypes as $type)
-                                    @php $tName = $type->translations->first()?->name ?? "#{$type->id}"; @endphp
-                                    <label class="flex items-center gap-2 text-sm text-slate-700">
-                                        <input type="checkbox" name="accommodation_type_ids[]" value="{{ $type->id }}"
-                                            data-type-id="{{ $type->id }}"
-                                            class="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
-                                        {{ $tName }}
-                                    </label>
+                                @php $tName = $type->translations->first()?->name ?? "#{$type->id}"; @endphp
+                                <label class="flex items-center gap-2 text-sm text-slate-700">
+                                    <input type="checkbox" name="accommodation_type_ids[]" value="{{ $type->id }}"
+                                        data-type-id="{{ $type->id }}"
+                                        class="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                                    {{ $tName }}
+                                </label>
                                 @endforeach
                             </div>
                         </div>
