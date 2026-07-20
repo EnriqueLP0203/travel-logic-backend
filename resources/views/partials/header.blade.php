@@ -48,12 +48,14 @@ $navItems = [
                 >
                     Registrarse
                 </a>
-                <button
+                <a
+                    href="https://www.partners.travel-logic.com/site/login"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     class="rounded-lg bg-green-400 px-4 py-2 text-lg font-semibold text-white transition-opacity duration-200 hover:opacity-90"
-                    type="button"
                 >
                     Iniciar sesión
-                </button>
+                </a>
             @else
                 <div class="relative" data-profile-menu-container>
                     <button
