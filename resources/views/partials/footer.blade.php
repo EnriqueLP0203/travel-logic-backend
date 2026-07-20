@@ -1,7 +1,7 @@
 <footer class="bg-blue-400">
     <div class="flex items-start justify-between gap-12 px-14 py-8 pt-24">
         <div class="flex max-w-64 flex-col gap-6">
-            <img src="{{ asset('images/logo.webp') }}" alt="Travel Logic" class="w-24 shrink-0" />
+            <img src="{{ asset('images/logo_white.png') }}" alt="Travel Logic" class="w-32 shrink-0" />
             <p class="text-base font-light font-lato text-white">
                 Tour operador especializado en el mercado B2B. Tu socio estratégico para crecer en turismo.
             </p>
@@ -27,7 +27,7 @@
         <div class="flex flex-col gap-6">
             <p class="text-sm font-bold font-montserrat text-white">EMPRESA</p>
             <a href="{{ route('about') }}" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Quienes somos</a>
-            <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Unete como agencia</a>
+            <a href="{{ route('register-agency') }}" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Unete como agencia</a>
         </div>
 
         <div class="flex flex-col gap-6">
@@ -35,7 +35,7 @@
             <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Centro de ayuda</a>
             <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Terminos y Condiciones</a>
             <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Aviso de privacidad</a>
-            <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Contacto</a>
+            <a href="{{ route('contact') }}" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Contacto</a>
         </div>
     </div>
 
