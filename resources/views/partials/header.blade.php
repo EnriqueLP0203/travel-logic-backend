@@ -14,10 +14,6 @@ $navItems = [
 
         <div class="flex items-center gap-6">
             <a class="text-xs font-normal font-inter text-white">Soporte 24/7</a>
-            <div class="flex items-center gap-2">
-                <a class="text-xs font-semibold font-inter text-green-400">Ingresa al Portal</a>
-                <x-lucide-arrow-right class="h-4 w-4 text-green-400" />
-            </div>
         </div>
     </div>
 

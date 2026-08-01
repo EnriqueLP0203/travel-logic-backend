@@ -32,7 +32,6 @@
 
         <div class="flex flex-col gap-6">
             <p class="text-sm font-bold font-montserrat text-white">SOPORTE</p>
-            <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Centro de ayuda</a>
             <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Terminos y Condiciones</a>
             <a href="#" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Aviso de privacidad</a>
             <a href="{{ route('contact') }}" class="text-sm font-light font-lato text-white transition-colors hover:text-green-300">Contacto</a>
