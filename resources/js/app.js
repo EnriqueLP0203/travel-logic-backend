@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!modal) return;
 
             populateDestinationModal(modal, trigger);
+            populateCustomerInformationModal(modal, trigger);
             populateAccommodationTypeModal(modal, trigger);
             populateHotelGroupModal(modal, trigger);
             populateHotelModal(modal, trigger);
@@ -129,6 +130,111 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (cityLabel) {
                 cityLabel.textContent = trigger.dataset.city || '—';
+            }
+        }
+    };
+
+    const populateCustomerInformationModal = (modal, trigger) => {
+        const target = trigger.dataset.modalTarget;
+
+        if (target === 'customer-information-view') {
+            const setText = (selector, value) => {
+                const el = modal.querySelector(selector);
+                if (el) el.textContent = value || '—';
+            };
+
+            setText('[data-view-username]', trigger.dataset.username);
+            setText('[data-view-agency-name]', trigger.dataset.agencyName);
+            setText('[data-view-legal-name]', trigger.dataset.legalName);
+            setText('[data-view-contact-person]', trigger.dataset.contactPerson);
+            setText('[data-view-email]', trigger.dataset.email);
+            setText(
+                '[data-view-location]',
+                [trigger.dataset.city, trigger.dataset.state, trigger.dataset.country].filter(Boolean).join(', '),
+            );
+            setText(
+                '[data-view-phones]',
+                [trigger.dataset.phone, trigger.dataset.mobile].filter(Boolean).join(' / '),
+            );
+            setText('[data-view-billing-manager]', trigger.dataset.billingManager);
+            setText('[data-view-billing-email]', trigger.dataset.billingEmail);
+            setText('[data-view-billing-address]', trigger.dataset.billingAddress);
+            setText(
+                '[data-view-billing-location]',
+                [trigger.dataset.billingCity, trigger.dataset.billingState, trigger.dataset.billingCountry]
+                    .filter(Boolean)
+                    .join(', '),
+            );
+            setText('[data-view-billing-zip-code]', trigger.dataset.billingZipCode);
+            setText(
+                '[data-view-billing-phones]',
+                [trigger.dataset.billingPhone, trigger.dataset.billingPhone2, trigger.dataset.billingMobile]
+                    .filter(Boolean)
+                    .join(' / '),
+            );
+            setText('[data-view-billing-tax-id]', trigger.dataset.billingTaxId);
+            setText(
+                '[data-view-billing-same-as-contact]',
+                trigger.dataset.billingSameAsContact === '1' ? 'Sí' : 'No',
+            );
+            setText('[data-view-status-label]', trigger.dataset.statusLabel);
+            setText('[data-view-created-at]', trigger.dataset.createdAt);
+
+            const logoLink = modal.querySelector('[data-view-logo-link]');
+            const logoEmpty = modal.querySelector('[data-view-logo-empty]');
+            const logoUrl = trigger.dataset.logoUrl || '';
+
+            if (logoUrl && logoLink) {
+                logoLink.href = logoUrl;
+                logoLink.classList.remove('hidden');
+                logoEmpty?.classList.add('hidden');
+            } else {
+                if (logoLink) {
+                    logoLink.removeAttribute('href');
+                    logoLink.classList.add('hidden');
+                }
+                logoEmpty?.classList.remove('hidden');
+            }
+        }
+
+        if (target === 'customer-information-review') {
+            const form = modal.querySelector('[data-review-form]');
+            const agencyLabel = modal.querySelector('[data-review-agency-name]');
+            const reviewedInput = modal.querySelector('[data-review-is-reviewed]');
+            const acceptedTrue = modal.querySelector('[data-review-is-accepted-true]');
+            const acceptedFalse = modal.querySelector('[data-review-is-accepted-false]');
+
+            if (form && trigger.dataset.updateUrl) {
+                form.action = trigger.dataset.updateUrl;
+            }
+
+            if (agencyLabel) {
+                agencyLabel.textContent = trigger.dataset.agencyName || '—';
+            }
+
+            if (reviewedInput) {
+                reviewedInput.checked = trigger.dataset.isReviewed === '1';
+            }
+
+            if (acceptedTrue) {
+                acceptedTrue.checked = trigger.dataset.isAccepted === '1';
+            }
+
+            if (acceptedFalse) {
+                acceptedFalse.checked = trigger.dataset.isAccepted === '0';
+            }
+        }
+
+        if (target === 'customer-information-delete') {
+            const form = modal.querySelector('[data-delete-form]');
+            const agencyLabel = modal.querySelector('[data-delete-agency-name]');
+
+            if (form && trigger.dataset.deleteUrl) {
+                form.action = trigger.dataset.deleteUrl;
+            }
+
+            if (agencyLabel) {
+                agencyLabel.textContent = trigger.dataset.agencyName || '—';
             }
         }
     };

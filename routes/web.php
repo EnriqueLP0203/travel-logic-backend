@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Admin\AccommodationTypeController as AdminAccommodationTypeController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\CustomerInformationController as AdminCustomerInformationController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
 use App\Http\Controllers\Admin\HotelGroupsController as AdminHotelGroupsController;
 use App\Http\Controllers\Admin\HotelsController as AdminHotelsController;
 use App\Http\Controllers\Admin\LucideIconController as AdminLucideIconController;
+use App\Http\Controllers\AgencyRegistrationController;
 use App\Models\AccommodationType;
 use App\Models\Destination;
 use App\Models\Hotel;
@@ -37,6 +39,8 @@ Route::get('/offers', function () {
 Route::get('/register-agency', function () {
     return view('register-agency');
 })->name('register-agency');
+
+Route::post('/register-agency', [AgencyRegistrationController::class, 'store'])->name('register-agency.store');
 
 Route::redirect('/billing', '/register-agency')->name('billing');
 
@@ -103,12 +107,6 @@ Route::get('/hotels', function (Request $request) {
     $accommodationTypes = AccommodationType::where('active', true)
         ->with(['translations' => fn ($q) => $q->where('language_code', 'es-MX')])
         ->orderBy('id')
-        ->get();
-
-    $interestedClients = InterestedClient::where('active', true)
-        ->get();
-
-    $customerInformation = CustomerInformation::where('active', true)
         ->get();
 
     return view('hotels', compact('hotels', 'destinations', 'hotelGroups', 'accommodationTypes'));
@@ -183,9 +181,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/icons/preview', [AdminLucideIconController::class, 'preview'])->name('icons.preview');
         Route::get('/icons/previews', [AdminLucideIconController::class, 'previews'])->name('icons.previews');
 
-        Route::get('/agencies', fn () => view('admin.agencies.index'))->name('agencies.index');
         Route::get('/reviews', fn () => view('admin.reviews.index'))->name('reviews.index');
-        Route::get('/customer-information', fn () => view('admin.customer_information.index'))->name('customer-information.index');
+        Route::get('/customer-information', [AdminCustomerInformationController::class, 'index'])->name('customer-information.index');
+        Route::put('/customer-information/{customerInformation}', [AdminCustomerInformationController::class, 'update'])->name('customer-information.update');
+        Route::delete('/customer-information/{customerInformation}', [AdminCustomerInformationController::class, 'destroy'])->name('customer-information.destroy');
         Route::get('/interested-clients', fn () => view('admin.interested_clients.index'))->name('interested-clients.index');
     });
 });
