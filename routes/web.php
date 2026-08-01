@@ -105,6 +105,12 @@ Route::get('/hotels', function (Request $request) {
         ->orderBy('id')
         ->get();
 
+    $interestedClients = InterestedClient::where('active', true)
+        ->get();
+
+    $customerInformation = CustomerInformation::where('active', true)
+        ->get();
+
     return view('hotels', compact('hotels', 'destinations', 'hotelGroups', 'accommodationTypes'));
 })->name('hotels');
 
@@ -179,5 +185,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/agencies', fn () => view('admin.agencies.index'))->name('agencies.index');
         Route::get('/reviews', fn () => view('admin.reviews.index'))->name('reviews.index');
+        Route::get('/customer-information', fn () => view('admin.customer_information.index'))->name('customer-information.index');
+        Route::get('/interested-clients', fn () => view('admin.interested_clients.index'))->name('interested-clients.index');
     });
 });
