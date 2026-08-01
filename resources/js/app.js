@@ -594,7 +594,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('[data-modal]').forEach((modal) => {
         modal.querySelectorAll('[data-modal-close]').forEach((closer) => {
-            closer.addEventListener('click', () => closeModal(modal));
+            closer.addEventListener('click', () => {
+                const redirectUrl = modal.dataset.redirectOnClose;
+
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                    return;
+                }
+
+                closeModal(modal);
+            });
         });
 
         if (modal.hasAttribute('data-open-on-load')) {
