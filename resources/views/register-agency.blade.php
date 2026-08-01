@@ -25,7 +25,37 @@
 <div
     x-data="{
         paso: {{ $initialPaso }},
-        billingSameAsContact: {{ old('billing_same_as_contact') ? 'true' : 'false' }}
+        billingSameAsContact: {{ old('billing_same_as_contact') ? 'true' : 'false' }},
+        showGlobalError: {{ $errors->any() ? 'true' : 'false' }},
+        fieldErrors: {
+            username: {{ $errors->has('username') ? 'true' : 'false' }},
+            agency_name: {{ $errors->has('agency_name') ? 'true' : 'false' }},
+            legal_name: {{ $errors->has('legal_name') ? 'true' : 'false' }},
+            logo_url: {{ $errors->has('logo_url') ? 'true' : 'false' }},
+            password: {{ $errors->has('password') ? 'true' : 'false' }},
+            contact_person: {{ $errors->has('contact_person') ? 'true' : 'false' }},
+            email: {{ $errors->has('email') ? 'true' : 'false' }},
+            country: {{ $errors->has('country') ? 'true' : 'false' }},
+            state: {{ $errors->has('state') ? 'true' : 'false' }},
+            city: {{ $errors->has('city') ? 'true' : 'false' }},
+            phone: {{ $errors->has('phone') ? 'true' : 'false' }},
+            mobile: {{ $errors->has('mobile') ? 'true' : 'false' }},
+            billing_address: {{ $errors->has('billing_address') ? 'true' : 'false' }},
+            billing_zip_code: {{ $errors->has('billing_zip_code') ? 'true' : 'false' }},
+            billing_tax_id: {{ $errors->has('billing_tax_id') ? 'true' : 'false' }},
+            billing_email: {{ $errors->has('billing_email') ? 'true' : 'false' }},
+            billing_country: {{ $errors->has('billing_country') ? 'true' : 'false' }},
+            billing_state: {{ $errors->has('billing_state') ? 'true' : 'false' }},
+            billing_city: {{ $errors->has('billing_city') ? 'true' : 'false' }},
+            billing_phone: {{ $errors->has('billing_phone') ? 'true' : 'false' }},
+            billing_mobile: {{ $errors->has('billing_mobile') ? 'true' : 'false' }},
+        },
+        clearError(field) {
+            this.fieldErrors[field] = false;
+            if (!Object.values(this.fieldErrors).some(Boolean)) {
+                this.showGlobalError = false;
+            }
+        },
     }"
     class="relative min-h-screen grid grid-cols-1"
     :class="paso === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'"
@@ -54,17 +84,13 @@
     >
         <div class="w-full" :class="paso === 3 ? 'max-w-3xl' : 'max-w-md'">
 
-            @if (session('success'))
-                <div class="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                    Revisa los campos marcados e intenta de nuevo.
-                </div>
-            @endif
+            <div
+                x-show="showGlobalError"
+                x-cloak
+                class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+            >
+                Revisa los campos marcados e intenta de nuevo.
+            </div>
 
             <h1 class="text-center text-3xl font-black font-montserrat text-indigo-950">
                 <span x-show="paso !== 3">Crear Cuenta</span>
@@ -116,38 +142,58 @@
                     <div class="flex flex-col gap-1.5">
                         <label for="agency_username" class="text-sm font-medium font-montserrat text-indigo-950">Nombre de Usuario</label>
                         <input id="agency_username" type="text" name="username" value="{{ old('username') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('username') border-red-400 @else border-stone-300 @enderror" />
-                        @error('username')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('username')"
+                            :class="fieldErrors.username ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('username'))
+                            <p x-show="fieldErrors.username" x-cloak class="text-xs text-red-600">{{ $errors->first('username') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="agency_name" class="text-sm font-medium font-montserrat text-indigo-950">Nombre de la Agencia</label>
                         <input id="agency_name" type="text" name="agency_name" value="{{ old('agency_name') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('agency_name') border-red-400 @else border-stone-300 @enderror" />
-                        @error('agency_name')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('agency_name')"
+                            :class="fieldErrors.agency_name ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('agency_name'))
+                            <p x-show="fieldErrors.agency_name" x-cloak class="text-xs text-red-600">{{ $errors->first('agency_name') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="agency_legal_name" class="text-sm font-medium font-montserrat text-indigo-950">Nombre fiscal</label>
                         <input id="agency_legal_name" type="text" name="legal_name" value="{{ old('legal_name') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('legal_name') border-red-400 @else border-stone-300 @enderror" />
-                        @error('legal_name')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('legal_name')"
+                            :class="fieldErrors.legal_name ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('legal_name'))
+                            <p x-show="fieldErrors.legal_name" x-cloak class="text-xs text-red-600">{{ $errors->first('legal_name') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="agency_logo_url" class="text-sm font-medium font-montserrat text-indigo-950">Enlace del logotipo</label>
                         <input id="agency_logo_url" type="url" name="logo_url" value="{{ old('logo_url') }}"
                             placeholder="https://drive.google.com/..."
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('logo_url') border-red-400 @else border-stone-300 @enderror" />
+                            @input="clearError('logo_url')"
+                            :class="fieldErrors.logo_url ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         <p class="text-xs text-slate-500">Pega un enlace compartido (Google Drive, Dropbox, etc.) para descargar el logotipo.</p>
-                        @error('logo_url')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                        @if ($errors->has('logo_url'))
+                            <p x-show="fieldErrors.logo_url" x-cloak class="text-xs text-red-600">{{ $errors->first('logo_url') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="agency_password" class="text-sm font-medium font-montserrat text-indigo-950">Contraseña</label>
                         <input id="agency_password" type="password" name="password"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('password') border-red-400 @else border-stone-300 @enderror" />
-                        @error('password')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('password')"
+                            :class="fieldErrors.password ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('password'))
+                            <p x-show="fieldErrors.password" x-cloak class="text-xs text-red-600">{{ $errors->first('password') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
@@ -167,50 +213,78 @@
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_person" class="text-sm font-medium font-montserrat text-indigo-950">Persona de contacto</label>
                         <input id="contact_person" type="text" name="contact_person" value="{{ old('contact_person') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('contact_person') border-red-400 @else border-stone-300 @enderror" />
-                        @error('contact_person')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('contact_person')"
+                            :class="fieldErrors.contact_person ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('contact_person'))
+                            <p x-show="fieldErrors.contact_person" x-cloak class="text-xs text-red-600">{{ $errors->first('contact_person') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_email" class="text-sm font-medium font-montserrat text-indigo-950">Correo electrónico</label>
                         <input id="contact_email" type="email" name="email" value="{{ old('email') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('email') border-red-400 @else border-stone-300 @enderror" />
-                        @error('email')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('email')"
+                            :class="fieldErrors.email ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('email'))
+                            <p x-show="fieldErrors.email" x-cloak class="text-xs text-red-600">{{ $errors->first('email') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_country" class="text-sm font-medium font-montserrat text-indigo-950">País</label>
                         <input id="contact_country" type="text" name="country" value="{{ old('country') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('country') border-red-400 @else border-stone-300 @enderror" />
-                        @error('country')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('country')"
+                            :class="fieldErrors.country ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('country'))
+                            <p x-show="fieldErrors.country" x-cloak class="text-xs text-red-600">{{ $errors->first('country') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_state" class="text-sm font-medium font-montserrat text-indigo-950">Estado</label>
                         <input id="contact_state" type="text" name="state" value="{{ old('state') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('state') border-red-400 @else border-stone-300 @enderror" />
-                        @error('state')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('state')"
+                            :class="fieldErrors.state ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('state'))
+                            <p x-show="fieldErrors.state" x-cloak class="text-xs text-red-600">{{ $errors->first('state') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_city" class="text-sm font-medium font-montserrat text-indigo-950">Ciudad</label>
                         <input id="contact_city" type="text" name="city" value="{{ old('city') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('city') border-red-400 @else border-stone-300 @enderror" />
-                        @error('city')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('city')"
+                            :class="fieldErrors.city ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('city'))
+                            <p x-show="fieldErrors.city" x-cloak class="text-xs text-red-600">{{ $errors->first('city') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_phone" class="text-sm font-medium font-montserrat text-indigo-950">Teléfono</label>
                         <input id="contact_phone" type="tel" name="phone" value="{{ old('phone') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('phone') border-red-400 @else border-stone-300 @enderror" />
-                        @error('phone')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('phone')"
+                            :class="fieldErrors.phone ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('phone'))
+                            <p x-show="fieldErrors.phone" x-cloak class="text-xs text-red-600">{{ $errors->first('phone') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_mobile" class="text-sm font-medium font-montserrat text-indigo-950">Teléfono móvil</label>
                         <input id="contact_mobile" type="tel" name="mobile" value="{{ old('mobile') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('mobile') border-red-400 @else border-stone-300 @enderror" />
-                        @error('mobile')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('mobile')"
+                            :class="fieldErrors.mobile ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('mobile'))
+                            <p x-show="fieldErrors.mobile" x-cloak class="text-xs text-red-600">{{ $errors->first('mobile') }}</p>
+                        @endif
                     </div>
 
                     <button type="button" x-on:click="paso = 3"
@@ -237,22 +311,34 @@
                     <div class="flex flex-col gap-1.5">
                         <label for="billing_address" class="text-sm font-medium font-montserrat text-indigo-950">Dirección</label>
                         <input id="billing_address" type="text" name="billing_address" value="{{ old('billing_address') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('billing_address') border-red-400 @else border-stone-300 @enderror" />
-                        @error('billing_address')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('billing_address')"
+                            :class="fieldErrors.billing_address ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('billing_address'))
+                            <p x-show="fieldErrors.billing_address" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_address') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="billing_zip" class="text-sm font-medium font-montserrat text-indigo-950">Código Postal</label>
                         <input id="billing_zip" type="text" name="billing_zip_code" value="{{ old('billing_zip_code') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('billing_zip_code') border-red-400 @else border-stone-300 @enderror" />
-                        @error('billing_zip_code')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('billing_zip_code')"
+                            :class="fieldErrors.billing_zip_code ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('billing_zip_code'))
+                            <p x-show="fieldErrors.billing_zip_code" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_zip_code') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="billing_tax_id" class="text-sm font-medium font-montserrat text-indigo-950">Código fiscal/identidad</label>
                         <input id="billing_tax_id" type="text" name="billing_tax_id" value="{{ old('billing_tax_id') }}"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('billing_tax_id') border-red-400 @else border-stone-300 @enderror" />
-                        @error('billing_tax_id')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                            @input="clearError('billing_tax_id')"
+                            :class="fieldErrors.billing_tax_id ? 'border-red-400' : 'border-stone-300'"
+                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                        @if ($errors->has('billing_tax_id'))
+                            <p x-show="fieldErrors.billing_tax_id" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_tax_id') }}</p>
+                        @endif
                     </div>
 
                     <div class="flex flex-col gap-1.5">
@@ -279,43 +365,67 @@
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_email" class="text-sm font-medium font-montserrat text-indigo-950">Correo electrónico</label>
                             <input id="billing_email" type="email" name="billing_email" value="{{ old('billing_email') }}"
-                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('billing_email') border-red-400 @else border-stone-300 @enderror" />
-                            @error('billing_email')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                                @input="clearError('billing_email')"
+                                :class="fieldErrors.billing_email ? 'border-red-400' : 'border-stone-300'"
+                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                            @if ($errors->has('billing_email'))
+                                <p x-show="fieldErrors.billing_email" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_email') }}</p>
+                            @endif
                         </div>
 
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_country" class="text-sm font-medium font-montserrat text-indigo-950">País</label>
                             <input id="billing_country" type="text" name="billing_country" value="{{ old('billing_country') }}"
-                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('billing_country') border-red-400 @else border-stone-300 @enderror" />
-                            @error('billing_country')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                                @input="clearError('billing_country')"
+                                :class="fieldErrors.billing_country ? 'border-red-400' : 'border-stone-300'"
+                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                            @if ($errors->has('billing_country'))
+                                <p x-show="fieldErrors.billing_country" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_country') }}</p>
+                            @endif
                         </div>
 
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_state" class="text-sm font-medium font-montserrat text-indigo-950">Estado</label>
                             <input id="billing_state" type="text" name="billing_state" value="{{ old('billing_state') }}"
-                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('billing_state') border-red-400 @else border-stone-300 @enderror" />
-                            @error('billing_state')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                                @input="clearError('billing_state')"
+                                :class="fieldErrors.billing_state ? 'border-red-400' : 'border-stone-300'"
+                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                            @if ($errors->has('billing_state'))
+                                <p x-show="fieldErrors.billing_state" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_state') }}</p>
+                            @endif
                         </div>
 
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_city" class="text-sm font-medium font-montserrat text-indigo-950">Ciudad</label>
                             <input id="billing_city" type="text" name="billing_city" value="{{ old('billing_city') }}"
-                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('billing_city') border-red-400 @else border-stone-300 @enderror" />
-                            @error('billing_city')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                                @input="clearError('billing_city')"
+                                :class="fieldErrors.billing_city ? 'border-red-400' : 'border-stone-300'"
+                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                            @if ($errors->has('billing_city'))
+                                <p x-show="fieldErrors.billing_city" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_city') }}</p>
+                            @endif
                         </div>
 
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_phone" class="text-sm font-medium font-montserrat text-indigo-950">Teléfono</label>
                             <input id="billing_phone" type="tel" name="billing_phone" value="{{ old('billing_phone') }}"
-                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('billing_phone') border-red-400 @else border-stone-300 @enderror" />
-                            @error('billing_phone')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                                @input="clearError('billing_phone')"
+                                :class="fieldErrors.billing_phone ? 'border-red-400' : 'border-stone-300'"
+                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                            @if ($errors->has('billing_phone'))
+                                <p x-show="fieldErrors.billing_phone" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_phone') }}</p>
+                            @endif
                         </div>
 
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_mobile" class="text-sm font-medium font-montserrat text-indigo-950">Teléfono móvil</label>
                             <input id="billing_mobile" type="tel" name="billing_mobile" value="{{ old('billing_mobile') }}"
-                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40 @error('billing_mobile') border-red-400 @else border-stone-300 @enderror" />
-                            @error('billing_mobile')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                                @input="clearError('billing_mobile')"
+                                :class="fieldErrors.billing_mobile ? 'border-red-400' : 'border-stone-300'"
+                                class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
+                            @if ($errors->has('billing_mobile'))
+                                <p x-show="fieldErrors.billing_mobile" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_mobile') }}</p>
+                            @endif
                         </div>
                     </div>
 
@@ -336,5 +446,7 @@
         </div>
     </div>
 </div>
+
+<x-register-agency-success-modal />
 
 @endsection
