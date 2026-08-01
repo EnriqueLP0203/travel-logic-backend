@@ -109,19 +109,6 @@ class Hotel extends Model
     }
 
     /**
-     * Agencias que pueden gestionar reservas para este hotel.
-     */
-    public function agencies(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Agency::class,
-            'agencies_hotels',
-            'hotel_id',
-            'agency_id'
-        );
-    }
-
-    /**
      * Grupos de hotel asociados (Playa, Ciudad, Lujo, etc).
      */
     public function hotelGroups(): BelongsToMany
