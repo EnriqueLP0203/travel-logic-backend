@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * Versión completa del hotel para la vista de detalle.
  * Incluye traducción según idioma del request (Accept-Language header),
- * galería, grupos de hotel, tipos de alojamiento, agencias y reseñas aprobadas.
+ * galería, grupos de hotel, tipos de alojamiento y reseñas aprobadas.
  */
 class HotelResource extends JsonResource
 {
@@ -69,11 +69,6 @@ class HotelResource extends JsonResource
             // Tipos de alojamiento (Todo incluido, Familias, etc.)
             'accommodationTypes' => AccommodationTypeResource::collection(
                 $this->whenLoaded('accommodationTypes')
-            ),
-
-            // Agencias que pueden agendar este hotel
-            'agencies' => AgencyResource::collection(
-                $this->whenLoaded('agencies')
             ),
         ];
     }
