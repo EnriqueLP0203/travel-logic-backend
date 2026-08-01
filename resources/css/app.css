@@ -53,3 +53,41 @@
 [x-cloak] {
     display: none !important;
 }
+
+/* ── Destinations infinite marquee ─────────────────────── */
+.destinations-marquee {
+    overflow: hidden;
+    width: 100%;
+}
+
+.destinations-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: destinations-marquee-scroll 60s linear infinite;
+}
+
+.destinations-marquee__set {
+    display: flex;
+    flex-shrink: 0;
+    gap: 1rem;
+    padding-right: 1rem;
+}
+
+.destinations-marquee:hover .destinations-marquee__track {
+    animation-play-state: paused;
+}
+
+@keyframes destinations-marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .destinations-marquee__track {
+        animation: none;
+    }
+}

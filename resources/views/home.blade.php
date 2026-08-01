@@ -167,21 +167,15 @@
     </div>
 </section>
 
-<!-- seccion portafolio de hoteles -->
-<section id="portfolio-hotels" aria-label="Portfolio Hotels" class="w-full bg-white mt-10 px-24">
-    <div class="flex flex-col items-start gap-3">
+<!-- seccion portafolio de destinos -->
+<section id="portfolio-hotels" aria-label="Portafolio de destinos" class="mt-10 w-full bg-white">
+    <div class="flex flex-col items-start gap-3 px-6 sm:px-8 md:px-16 lg:px-24">
         <p class="text-sm font-extrabold font-inter text-green-300">Nuestro portafolio</p>
         <p class="text-4xl font-black font-inter text-indigo-950">Destinos que venden solos</p>
-        <div class="w-12 h-1 bg-green-300" aria-hidden="true"></div>
+        <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
     </div>
 
-    <div class="flex flex-row gap-4 mt-10">
-        <div class="w-md h-132 p-10 bg-gray-400 rounded-3xl"></div>
-        <div class="w-md h-132 p-10 bg-gray-400 rounded-3xl"></div>
-        <div class="w-md h-132 p-10 bg-gray-400 rounded-3xl"></div>
-        <div class="w-md h-132 p-10 bg-gray-400 rounded-3xl"></div>
-    </div>
-
+    <x-destinations-carousel :destinations="$destinations" />
 </section>
 
 <section id="steps" aria-label="Cómo empezar" class="w-full bg-blue-400 mt-20">

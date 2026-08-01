@@ -15,7 +15,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
+    $destinations = Destination::where('active', true)
+        ->orderBy('city')
+        ->get();
+
+    return view('home', compact('destinations'));
 })->name('home');
 
 Route::get('/about', function () {
