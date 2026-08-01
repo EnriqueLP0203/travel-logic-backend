@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AgencyResource;
 use App\Http\Resources\HotelListResource;
 use App\Http\Resources\HotelResource;
 use App\Models\Hotel;
@@ -97,27 +96,5 @@ class HotelController extends Controller
         }
 
         return new HotelResource($hotel);
-    }
-
-    /**
-     * Agencias disponibles para un hotel (requiere autenticación).
-     * GET /api/hotels/{slug}/agencies
-     */
-    public function agencies(Request $request, string $slug): AnonymousResourceCollection|JsonResponse
-    {
-        $hotel = Hotel::where('slug', $slug)
-            ->where('active', true)
-            ->where('is_published', true)
-            ->first();
-
-        if (! $hotel) {
-            return response()->json(['message' => 'Hotel no encontrado.'], 404);
-        }
-
-        $agencies = $hotel->agencies()
-            ->where('active', true)
-            ->get();
-
-        return AgencyResource::collection($agencies);
     }
 }
