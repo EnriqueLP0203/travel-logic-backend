@@ -15,8 +15,7 @@ class ContactController extends Controller
     {
         InterestedClient::create($request->only('name', 'email', 'phone'));
 
-        return redirect()
-            ->route('contact')
+        return back()
             ->with('success', 'Tu mensaje fue enviado correctamente. Te contactaremos pronto.');
     }
 }

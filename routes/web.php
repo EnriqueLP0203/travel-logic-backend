@@ -127,7 +127,6 @@ Route::get('/hotels/{slug}', function (string $slug) {
             'principalImage',
             'hotelGroups.translations' => fn ($q) => $q->where('language_code', 'es-MX'),
             'accommodationTypes.translations' => fn ($q) => $q->where('language_code', 'es-MX'),
-            'approvedReviews.traveler',
         ])
         ->firstOrFail();
 
