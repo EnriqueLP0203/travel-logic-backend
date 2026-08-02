@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             populateDestinationModal(modal, trigger);
             populateCustomerInformationModal(modal, trigger);
+            populateInterestedClientModal(modal, trigger);
             populateAccommodationTypeModal(modal, trigger);
             populateHotelGroupModal(modal, trigger);
             populateHotelModal(modal, trigger);
@@ -235,6 +236,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (agencyLabel) {
                 agencyLabel.textContent = trigger.dataset.agencyName || '—';
+            }
+        }
+    };
+
+    const populateInterestedClientModal = (modal, trigger) => {
+        const target = trigger.dataset.modalTarget;
+
+        if (target === 'interested-client-attend') {
+            const form = modal.querySelector('[data-attend-form]');
+            const clientLabel = modal.querySelector('[data-attend-client-name]');
+            const attendedInput = modal.querySelector('[data-attend-is-attended]');
+
+            if (form && trigger.dataset.updateUrl) {
+                form.action = trigger.dataset.updateUrl;
+            }
+
+            if (clientLabel) {
+                clientLabel.textContent = trigger.dataset.clientName || '—';
+            }
+
+            if (attendedInput) {
+                attendedInput.checked = trigger.dataset.isAttended === '1';
+            }
+        }
+
+        if (target === 'interested-client-delete') {
+            const form = modal.querySelector('[data-delete-form]');
+            const clientLabel = modal.querySelector('[data-delete-client-name]');
+
+            if (form && trigger.dataset.deleteUrl) {
+                form.action = trigger.dataset.deleteUrl;
+            }
+
+            if (clientLabel) {
+                clientLabel.textContent = trigger.dataset.clientName || '—';
             }
         }
     };
@@ -925,6 +961,43 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     initLucideIconPickers();
+
+    const initNumericPhoneInputs = () => {
+        document.querySelectorAll('input[type="tel"], input[data-numeric-phone]').forEach((input) => {
+            if (input.dataset.numericPhoneBound === 'true') {
+                return;
+            }
+
+            input.dataset.numericPhoneBound = 'true';
+
+            const sanitize = () => {
+                const digitsOnly = input.value.replace(/\D/g, '');
+                const maxLength = input.maxLength > 0 ? input.maxLength : digitsOnly.length;
+                const sanitized = digitsOnly.slice(0, maxLength);
+
+                if (input.value !== sanitized) {
+                    input.value = sanitized;
+                }
+            };
+
+            input.addEventListener('input', sanitize);
+
+            input.addEventListener('paste', (event) => {
+                event.preventDefault();
+
+                const pasted = (event.clipboardData?.getData('text') ?? '').replace(/\D/g, '');
+                const start = input.selectionStart ?? input.value.length;
+                const end = input.selectionEnd ?? input.value.length;
+                const maxLength = input.maxLength > 0 ? input.maxLength : undefined;
+                const merged = `${input.value.slice(0, start)}${pasted}${input.value.slice(end)}`.replace(/\D/g, '');
+
+                input.value = maxLength ? merged.slice(0, maxLength) : merged;
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+            });
+        });
+    };
+
+    initNumericPhoneInputs();
 
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {

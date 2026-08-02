@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NumericPhone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -28,26 +29,26 @@ class StoreCustomerInformationRequest extends FormRequest
             'password' => ['required', 'confirmed', Password::defaults()],
 
             'contact_person' => ['required', 'string', 'max:250'],
-            'email' => ['required', 'email', 'max:150', 'unique:customer_information,email'],
+            'email' => ['required', 'email:rfc,dns', 'max:150', 'unique:customer_information,email'],
             'country' => ['required', 'string', 'max:100'],
             'state' => ['required', 'string', 'max:100'],
             'city' => ['required', 'string', 'max:100'],
-            'phone' => ['nullable', 'string', 'max:20'],
-            'mobile' => ['nullable', 'string', 'max:20'],
+            'phone' => ['nullable', new NumericPhone],
+            'mobile' => ['nullable', new NumericPhone],
 
             'billing_manager' => ['nullable', 'string', 'max:250'],
             'billing_address' => ['required', 'string', 'max:250'],
             'billing_zip_code' => ['required', 'string', 'max:20'],
-            'billing_phone_2' => ['nullable', 'string', 'max:20'],
+            'billing_phone_2' => ['nullable', new NumericPhone],
             'billing_tax_id' => ['required', 'string', 'max:100'],
             'billing_same_as_contact' => ['sometimes', 'boolean'],
 
-            'billing_email' => [Rule::requiredIf(! $sameAsContact), 'nullable', 'email', 'max:150'],
+            'billing_email' => [Rule::requiredIf(! $sameAsContact), 'nullable', 'email:rfc,dns', 'max:150'],
             'billing_country' => [Rule::requiredIf(! $sameAsContact), 'nullable', 'string', 'max:100'],
             'billing_state' => [Rule::requiredIf(! $sameAsContact), 'nullable', 'string', 'max:100'],
             'billing_city' => [Rule::requiredIf(! $sameAsContact), 'nullable', 'string', 'max:100'],
-            'billing_phone' => [Rule::requiredIf(! $sameAsContact), 'nullable', 'string', 'max:20'],
-            'billing_mobile' => [Rule::requiredIf(! $sameAsContact), 'nullable', 'string', 'max:20'],
+            'billing_phone' => [Rule::requiredIf(! $sameAsContact), 'nullable', new NumericPhone],
+            'billing_mobile' => [Rule::requiredIf(! $sameAsContact), 'nullable', new NumericPhone],
         ];
     }
 
@@ -77,7 +78,7 @@ class StoreCustomerInformationRequest extends FormRequest
             'billing_email.required' => 'El correo de facturación es obligatorio.',
             'billing_country.required' => 'El país de facturación es obligatorio.',
             'billing_state.required' => 'El estado de facturación es obligatorio.',
-            'billing_city.required' => 'La ciudad de facturación es obligatoria.',
+            'billing_city.required' => 'La ciudad de facturación es obligatorio.',
             'billing_phone.required' => 'El teléfono de facturación es obligatorio.',
             'billing_mobile.required' => 'El teléfono móvil de facturación es obligatorio.',
         ];
@@ -85,8 +86,16 @@ class StoreCustomerInformationRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $this->merge([
+        $payload = [
             'billing_same_as_contact' => $this->boolean('billing_same_as_contact'),
-        ]);
+        ];
+
+        foreach (['phone', 'mobile', 'billing_phone', 'billing_phone_2', 'billing_mobile'] as $field) {
+            if ($this->has($field)) {
+                $payload[$field] = NumericPhone::normalize($this->input($field));
+            }
+        }
+
+        $this->merge($payload);
     }
 }
