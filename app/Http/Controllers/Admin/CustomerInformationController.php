@@ -52,13 +52,20 @@ class CustomerInformationController extends Controller
 
         $customerInformation->update([
             'is_reviewed' => $data['is_reviewed'],
-            'is_accepted' => $data['is_reviewed'] ? $data['is_accepted'] : null,
+            'is_accepted' => $data['is_accepted'],
             'updated_by' => 0,
         ]);
 
+        $message = match (true) {
+            ! $data['is_reviewed'] => 'La solicitud volvió a estado pendiente.',
+            $data['is_accepted'] === true => 'Solicitud aceptada correctamente.',
+            $data['is_accepted'] === false => 'Solicitud rechazada correctamente.',
+            default => 'Solicitud actualizada correctamente.',
+        };
+
         return redirect()
             ->route('admin.customer-information.index', $request->only('status'))
-            ->with('success', 'Solicitud actualizada correctamente.');
+            ->with('success', $message);
     }
 
     /**

@@ -38,16 +38,6 @@
                     Agencia: <span data-review-agency-name class="font-semibold text-slate-800">—</span>
                 </p>
 
-                <label class="flex items-center gap-2 text-sm text-slate-700">
-                    <input
-                        type="checkbox"
-                        name="is_reviewed"
-                        value="1"
-                        data-review-is-reviewed
-                        class="size-4 rounded border-slate-300 text-green-600 focus:ring-green-500">
-                    Marcar como revisado
-                </label>
-
                 <fieldset data-review-acceptance-fieldset class="space-y-2">
                     <legend class="text-sm font-medium text-slate-700">Decisión</legend>
                     <label class="flex items-center gap-2 text-sm text-slate-700">
@@ -60,6 +50,9 @@
                             class="size-4 border-slate-300 text-red-600 focus:ring-red-500">
                         Rechazar solicitud
                     </label>
+                    <p class="text-xs text-slate-500">
+                        Haz clic de nuevo en una opción seleccionada para dejar la solicitud pendiente.
+                    </p>
                 </fieldset>
             </div>
 

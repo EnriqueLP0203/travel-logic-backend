@@ -201,7 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target === 'customer-information-review') {
             const form = modal.querySelector('[data-review-form]');
             const agencyLabel = modal.querySelector('[data-review-agency-name]');
-            const reviewedInput = modal.querySelector('[data-review-is-reviewed]');
             const acceptedTrue = modal.querySelector('[data-review-is-accepted-true]');
             const acceptedFalse = modal.querySelector('[data-review-is-accepted-false]');
 
@@ -211,10 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (agencyLabel) {
                 agencyLabel.textContent = trigger.dataset.agencyName || '—';
-            }
-
-            if (reviewedInput) {
-                reviewedInput.checked = trigger.dataset.isReviewed === '1';
             }
 
             if (acceptedTrue) {
@@ -961,6 +956,30 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     initLucideIconPickers();
+
+    const initReviewDecisionRadios = () => {
+        const modal = document.querySelector('[data-modal="customer-information-review"]');
+
+        if (!modal || modal.dataset.reviewRadiosBound === 'true') {
+            return;
+        }
+
+        modal.dataset.reviewRadiosBound = 'true';
+
+        modal.querySelectorAll('[data-review-is-accepted-true], [data-review-is-accepted-false]').forEach((radio) => {
+            radio.addEventListener('mousedown', () => {
+                radio.dataset.wasChecked = radio.checked ? 'true' : 'false';
+            });
+
+            radio.addEventListener('click', () => {
+                if (radio.dataset.wasChecked === 'true') {
+                    radio.checked = false;
+                }
+            });
+        });
+    };
+
+    initReviewDecisionRadios();
 
     const initNumericPhoneInputs = () => {
         document.querySelectorAll('input[type="tel"], input[data-numeric-phone]').forEach((input) => {

@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateCustomerInformationRequest extends FormRequest
 {
@@ -19,39 +18,17 @@ class UpdateCustomerInformationRequest extends FormRequest
     {
         return [
             'is_reviewed' => ['required', 'boolean'],
-            'is_accepted' => [
-                'nullable',
-                'boolean',
-                Rule::requiredIf(fn () => $this->boolean('is_reviewed')),
-            ],
-        ];
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public function messages(): array
-    {
-        return [
-            'is_reviewed.required' => 'Indica si el registro fue revisado.',
-            'is_accepted.required' => 'Selecciona si el registro fue aceptado o rechazado.',
+            'is_accepted' => ['nullable', 'boolean'],
         ];
     }
 
     protected function prepareForValidation(): void
     {
-        $isReviewed = $this->boolean('is_reviewed');
+        $hasDecision = $this->has('is_accepted') && $this->input('is_accepted') !== '';
 
-        $payload = [
-            'is_reviewed' => $isReviewed,
-        ];
-
-        if (! $isReviewed) {
-            $payload['is_accepted'] = null;
-        } elseif ($this->has('is_accepted') && $this->input('is_accepted') !== '') {
-            $payload['is_accepted'] = $this->boolean('is_accepted');
-        }
-
-        $this->merge($payload);
+        $this->merge([
+            'is_reviewed' => $hasDecision,
+            'is_accepted' => $hasDecision ? $this->boolean('is_accepted') : null,
+        ]);
     }
 }
