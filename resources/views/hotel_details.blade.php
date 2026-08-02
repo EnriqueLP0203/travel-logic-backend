@@ -12,8 +12,16 @@ $mosaicImages = $hotel->gallery
     ->values();
 $mosaicTotal = $mosaicImages->count();
 $hasMorePhotos = $mosaicTotal > 4;
-$mosaicSlots = $hasMorePhotos ? $mosaicImages->take(3) : $mosaicImages->take(4);
+$visibleMosaicCount = $hasMorePhotos ? 3 : min($mosaicTotal, 4);
 $remainingPhotos = $hasMorePhotos ? $mosaicTotal - 3 : 0;
+
+// Orden de llenado: columna izquierda, luego arriba-derecha, luego abajo-derecha
+$mosaicSlotOrder = [0, 2, 1, 3];
+$mosaicBySlot = [];
+
+for ($i = 0; $i < $visibleMosaicCount; $i++) {
+    $mosaicBySlot[$mosaicSlotOrder[$i]] = $mosaicImages[$i];
+}
 
 $location = $hotel->destination
     ? collect([$hotel->destination->city, $hotel->destination->state, $hotel->destination->country])->filter()->implode(', ')
@@ -29,7 +37,7 @@ $location = $hotel->destination
             <span class="text-blue-300">{{ $hotel->name }}</span>
         </p>
 
-        <div class="flex flex-wrap items-baseline justify-between gap-3.5">
+        <div class="flex flex-col gap-3.5">
             <h1 class="text-3xl font-extrabold text-blue-300 sm:text-4xl">{{ $hotel->name }}</h1>
 
             @if ($location)
@@ -62,15 +70,19 @@ $location = $hotel->destination
             @endif
         </div>
 
-        {{-- Mosaico 2x2 --}}
+        {{-- Mosaico 2x2 — slots: 0 arriba-izq, 1 arriba-der, 2 abajo-izq, 3 abajo-der --}}
         <div class="grid h-64 grid-cols-2 grid-rows-2 gap-3 sm:h-80 lg:h-[420px]">
             @for ($slot = 0; $slot < 4; $slot++)
                 @php
                 $isSeeMoreSlot = $hasMorePhotos && $slot === 3;
-                $image = $isSeeMoreSlot ? null : $mosaicSlots->get($slot);
+                $image = $mosaicBySlot[$slot] ?? null;
+                $isUsedSlot = $isSeeMoreSlot || ($image && $image->url);
                 @endphp
 
-                <div class="relative overflow-hidden rounded-2xl bg-gray-200">
+                <div @class([
+                    'relative overflow-hidden rounded-2xl',
+                    'bg-gray-200' => $isUsedSlot,
+                ])>
                     @if ($isSeeMoreSlot)
                     <div class="flex h-full w-full items-center justify-center bg-gray-800/80">
                         <span class="text-lg font-semibold text-white">
@@ -82,13 +94,6 @@ $location = $hotel->destination
                         src="{{ $image->url }}"
                         alt="{{ $hotel->name }} - imagen {{ $slot + 1 }}"
                         class="h-full w-full object-cover" />
-                    @else
-                    <div class="flex h-full w-full items-center justify-center bg-gray-300">
-                        <svg class="h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
-                        </svg>
-                    </div>
                     @endif
                 </div>
             @endfor
@@ -99,9 +104,9 @@ $location = $hotel->destination
     <section class="mb-10 grid grid-cols-1 items-start gap-7 lg:grid-cols-[1.4fr_1fr]">
         {{-- Columna izquierda: Detalles --}}
         <div>
-            <h2 class="mb-4 text-xl font-extrabold text-blue-300">Detalles del hotel</h2>
+            <h2 class="mb-4 text-2xl font-extrabold text-blue-300">Detalles del hotel</h2>
             @if ($translation && filled($translation->description))
-            <div class="text-sm leading-relaxed text-gray-600 [&_b]:font-semibold [&_b]:text-blue-300 [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:pl-5">
+            <div class="text-base leading-relaxed text-gray-600 [&_b]:font-semibold [&_b]:text-blue-300 [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:pl-5">
                 {!! $translation->description !!}
             </div>
             @elseif ($translation && filled($translation->short_description))
@@ -116,7 +121,7 @@ $location = $hotel->destination
         {{-- Columna derecha: dos tarjetas apiladas --}}
         <div class="space-y-5">
             <div class="rounded-2xl border border-[#eef3e9] bg-[#f8faf6] p-6">
-                <h2 class="mb-4 text-xl font-extrabold text-blue-300">Grupos de hotel</h2>
+                <h2 class="mb-4 text-xl font-extrabold text-blue-300">Categoría</h2>
                 @if ($hotel->hotelGroups->isNotEmpty())
                 <div class="flex flex-wrap gap-2.5">
                     @foreach ($hotel->hotelGroups as $group)
