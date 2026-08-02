@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             populateDestinationModal(modal, trigger);
             populateCustomerInformationModal(modal, trigger);
+            populateInterestedClientModal(modal, trigger);
             populateAccommodationTypeModal(modal, trigger);
             populateHotelGroupModal(modal, trigger);
             populateHotelModal(modal, trigger);
@@ -235,6 +236,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (agencyLabel) {
                 agencyLabel.textContent = trigger.dataset.agencyName || '—';
+            }
+        }
+    };
+
+    const populateInterestedClientModal = (modal, trigger) => {
+        const target = trigger.dataset.modalTarget;
+
+        if (target === 'interested-client-attend') {
+            const form = modal.querySelector('[data-attend-form]');
+            const clientLabel = modal.querySelector('[data-attend-client-name]');
+            const attendedInput = modal.querySelector('[data-attend-is-attended]');
+
+            if (form && trigger.dataset.updateUrl) {
+                form.action = trigger.dataset.updateUrl;
+            }
+
+            if (clientLabel) {
+                clientLabel.textContent = trigger.dataset.clientName || '—';
+            }
+
+            if (attendedInput) {
+                attendedInput.checked = trigger.dataset.isAttended === '1';
+            }
+        }
+
+        if (target === 'interested-client-delete') {
+            const form = modal.querySelector('[data-delete-form]');
+            const clientLabel = modal.querySelector('[data-delete-client-name]');
+
+            if (form && trigger.dataset.deleteUrl) {
+                form.action = trigger.dataset.deleteUrl;
+            }
+
+            if (clientLabel) {
+                clientLabel.textContent = trigger.dataset.clientName || '—';
             }
         }
     };
