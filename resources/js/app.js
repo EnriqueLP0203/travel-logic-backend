@@ -962,6 +962,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initLucideIconPickers();
 
+    const initNumericPhoneInputs = () => {
+        document.querySelectorAll('input[type="tel"], input[data-numeric-phone]').forEach((input) => {
+            if (input.dataset.numericPhoneBound === 'true') {
+                return;
+            }
+
+            input.dataset.numericPhoneBound = 'true';
+
+            const sanitize = () => {
+                const digitsOnly = input.value.replace(/\D/g, '');
+                const maxLength = input.maxLength > 0 ? input.maxLength : digitsOnly.length;
+                const sanitized = digitsOnly.slice(0, maxLength);
+
+                if (input.value !== sanitized) {
+                    input.value = sanitized;
+                }
+            };
+
+            input.addEventListener('input', sanitize);
+
+            input.addEventListener('paste', (event) => {
+                event.preventDefault();
+
+                const pasted = (event.clipboardData?.getData('text') ?? '').replace(/\D/g, '');
+                const start = input.selectionStart ?? input.value.length;
+                const end = input.selectionEnd ?? input.value.length;
+                const maxLength = input.maxLength > 0 ? input.maxLength : undefined;
+                const merged = `${input.value.slice(0, start)}${pasted}${input.value.slice(end)}`.replace(/\D/g, '');
+
+                input.value = maxLength ? merged.slice(0, maxLength) : merged;
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+            });
+        });
+    };
+
+    initNumericPhoneInputs();
+
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             document.querySelectorAll('[data-modal]:not(.hidden)').forEach((modal) => closeModal(modal));
