@@ -141,7 +141,7 @@
                 <div x-show="paso === 1" class="flex flex-col gap-5">
                     <div class="flex flex-col gap-1.5">
                         <label for="agency_username" class="text-sm font-medium font-montserrat text-indigo-950">Nombre de Usuario</label>
-                        <input id="agency_username" type="text" name="username" value="{{ old('username') }}"
+                        <input id="agency_username" type="text" name="username" value="{{ old('username') }}" maxlength="100"
                             @input="clearError('username')"
                             :class="fieldErrors.username ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -152,7 +152,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <label for="agency_name" class="text-sm font-medium font-montserrat text-indigo-950">Nombre de la Agencia</label>
-                        <input id="agency_name" type="text" name="agency_name" value="{{ old('agency_name') }}"
+                        <input id="agency_name" type="text" name="agency_name" value="{{ old('agency_name') }}" maxlength="250"
                             @input="clearError('agency_name')"
                             :class="fieldErrors.agency_name ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -163,7 +163,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <label for="agency_legal_name" class="text-sm font-medium font-montserrat text-indigo-950">Nombre fiscal</label>
-                        <input id="agency_legal_name" type="text" name="legal_name" value="{{ old('legal_name') }}"
+                        <input id="agency_legal_name" type="text" name="legal_name" value="{{ old('legal_name') }}" maxlength="250"
                             @input="clearError('legal_name')"
                             :class="fieldErrors.legal_name ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -174,7 +174,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <label for="agency_logo_url" class="text-sm font-medium font-montserrat text-indigo-950">Enlace del logotipo</label>
-                        <input id="agency_logo_url" type="url" name="logo_url" value="{{ old('logo_url') }}"
+                        <input id="agency_logo_url" type="url" name="logo_url" value="{{ old('logo_url') }}" maxlength="500"
                             placeholder="https://drive.google.com/..."
                             @input="clearError('logo_url')"
                             :class="fieldErrors.logo_url ? 'border-red-400' : 'border-stone-300'"
@@ -212,7 +212,7 @@
                 <div x-show="paso === 2" x-cloak class="flex flex-col gap-5">
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_person" class="text-sm font-medium font-montserrat text-indigo-950">Persona de contacto</label>
-                        <input id="contact_person" type="text" name="contact_person" value="{{ old('contact_person') }}"
+                        <input id="contact_person" type="text" name="contact_person" value="{{ old('contact_person') }}" maxlength="250"
                             @input="clearError('contact_person')"
                             :class="fieldErrors.contact_person ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -223,7 +223,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_email" class="text-sm font-medium font-montserrat text-indigo-950">Correo electrónico</label>
-                        <input id="contact_email" type="email" name="email" value="{{ old('email') }}"
+                        <input id="contact_email" type="email" name="email" value="{{ old('email') }}" maxlength="150"
                             @input="clearError('email')"
                             :class="fieldErrors.email ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -234,7 +234,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_country" class="text-sm font-medium font-montserrat text-indigo-950">País</label>
-                        <input id="contact_country" type="text" name="country" value="{{ old('country') }}"
+                        <input id="contact_country" type="text" name="country" value="{{ old('country') }}" maxlength="100"
                             @input="clearError('country')"
                             :class="fieldErrors.country ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -245,7 +245,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_state" class="text-sm font-medium font-montserrat text-indigo-950">Estado</label>
-                        <input id="contact_state" type="text" name="state" value="{{ old('state') }}"
+                        <input id="contact_state" type="text" name="state" value="{{ old('state') }}" maxlength="100"
                             @input="clearError('state')"
                             :class="fieldErrors.state ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -256,7 +256,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_city" class="text-sm font-medium font-montserrat text-indigo-950">Ciudad</label>
-                        <input id="contact_city" type="text" name="city" value="{{ old('city') }}"
+                        <input id="contact_city" type="text" name="city" value="{{ old('city') }}" maxlength="100"
                             @input="clearError('city')"
                             :class="fieldErrors.city ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -268,6 +268,8 @@
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_phone" class="text-sm font-medium font-montserrat text-indigo-950">Teléfono</label>
                         <input id="contact_phone" type="tel" name="phone" value="{{ old('phone') }}"
+                            inputmode="numeric" minlength="7" maxlength="15" pattern="[0-9]{7,15}"
+                            title="Entre 7 y 15 dígitos, sin espacios"
                             @input="clearError('phone')"
                             :class="fieldErrors.phone ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -279,6 +281,8 @@
                     <div class="flex flex-col gap-1.5">
                         <label for="contact_mobile" class="text-sm font-medium font-montserrat text-indigo-950">Teléfono móvil</label>
                         <input id="contact_mobile" type="tel" name="mobile" value="{{ old('mobile') }}"
+                            inputmode="numeric" minlength="7" maxlength="15" pattern="[0-9]{7,15}"
+                            title="Entre 7 y 15 dígitos, sin espacios"
                             @input="clearError('mobile')"
                             :class="fieldErrors.mobile ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -303,14 +307,14 @@
                 <div x-show="paso === 3" x-cloak class="grid grid-cols-1 gap-x-8 gap-y-5 md:grid-cols-2">
                     <div class="flex flex-col gap-1.5">
                         <label for="billing_manager" class="text-sm font-medium font-montserrat text-indigo-950">Encargado de facturación</label>
-                        <input id="billing_manager" type="text" name="billing_manager" value="{{ old('billing_manager') }}"
+                        <input id="billing_manager" type="text" name="billing_manager" value="{{ old('billing_manager') }}" maxlength="250"
                             placeholder="Opcional: si es la misma persona de contacto, déjalo vacío"
                             class="h-12 w-full rounded-lg border border-stone-300 px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label for="billing_address" class="text-sm font-medium font-montserrat text-indigo-950">Dirección</label>
-                        <input id="billing_address" type="text" name="billing_address" value="{{ old('billing_address') }}"
+                        <input id="billing_address" type="text" name="billing_address" value="{{ old('billing_address') }}" maxlength="250"
                             @input="clearError('billing_address')"
                             :class="fieldErrors.billing_address ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -321,7 +325,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <label for="billing_zip" class="text-sm font-medium font-montserrat text-indigo-950">Código Postal</label>
-                        <input id="billing_zip" type="text" name="billing_zip_code" value="{{ old('billing_zip_code') }}"
+                        <input id="billing_zip" type="text" name="billing_zip_code" value="{{ old('billing_zip_code') }}" maxlength="20"
                             @input="clearError('billing_zip_code')"
                             :class="fieldErrors.billing_zip_code ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -332,7 +336,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <label for="billing_tax_id" class="text-sm font-medium font-montserrat text-indigo-950">Código fiscal/identidad</label>
-                        <input id="billing_tax_id" type="text" name="billing_tax_id" value="{{ old('billing_tax_id') }}"
+                        <input id="billing_tax_id" type="text" name="billing_tax_id" value="{{ old('billing_tax_id') }}" maxlength="100"
                             @input="clearError('billing_tax_id')"
                             :class="fieldErrors.billing_tax_id ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -344,6 +348,8 @@
                     <div class="flex flex-col gap-1.5">
                         <label for="billing_phone_2" class="text-sm font-medium font-montserrat text-indigo-950">Teléfono 2 (opcional)</label>
                         <input id="billing_phone_2" type="tel" name="billing_phone_2" value="{{ old('billing_phone_2') }}"
+                            inputmode="numeric" minlength="7" maxlength="15" pattern="[0-9]{7,15}"
+                            title="Entre 7 y 15 dígitos, sin espacios"
                             class="h-12 w-full rounded-lg border border-stone-300 px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                     </div>
 
@@ -364,7 +370,7 @@
                     <div x-show="!billingSameAsContact" x-cloak class="contents">
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_email" class="text-sm font-medium font-montserrat text-indigo-950">Correo electrónico</label>
-                            <input id="billing_email" type="email" name="billing_email" value="{{ old('billing_email') }}"
+                            <input id="billing_email" type="email" name="billing_email" value="{{ old('billing_email') }}" maxlength="150"
                                 @input="clearError('billing_email')"
                                 :class="fieldErrors.billing_email ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -375,7 +381,7 @@
 
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_country" class="text-sm font-medium font-montserrat text-indigo-950">País</label>
-                            <input id="billing_country" type="text" name="billing_country" value="{{ old('billing_country') }}"
+                            <input id="billing_country" type="text" name="billing_country" value="{{ old('billing_country') }}" maxlength="100"
                                 @input="clearError('billing_country')"
                                 :class="fieldErrors.billing_country ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -386,7 +392,7 @@
 
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_state" class="text-sm font-medium font-montserrat text-indigo-950">Estado</label>
-                            <input id="billing_state" type="text" name="billing_state" value="{{ old('billing_state') }}"
+                            <input id="billing_state" type="text" name="billing_state" value="{{ old('billing_state') }}" maxlength="100"
                                 @input="clearError('billing_state')"
                                 :class="fieldErrors.billing_state ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -397,7 +403,7 @@
 
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_city" class="text-sm font-medium font-montserrat text-indigo-950">Ciudad</label>
-                            <input id="billing_city" type="text" name="billing_city" value="{{ old('billing_city') }}"
+                            <input id="billing_city" type="text" name="billing_city" value="{{ old('billing_city') }}" maxlength="100"
                                 @input="clearError('billing_city')"
                                 :class="fieldErrors.billing_city ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -409,6 +415,8 @@
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_phone" class="text-sm font-medium font-montserrat text-indigo-950">Teléfono</label>
                             <input id="billing_phone" type="tel" name="billing_phone" value="{{ old('billing_phone') }}"
+                                inputmode="numeric" minlength="7" maxlength="15" pattern="[0-9]{7,15}"
+                                title="Entre 7 y 15 dígitos, sin espacios"
                                 @input="clearError('billing_phone')"
                                 :class="fieldErrors.billing_phone ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
@@ -420,6 +428,8 @@
                         <div class="flex flex-col gap-1.5">
                             <label for="billing_mobile" class="text-sm font-medium font-montserrat text-indigo-950">Teléfono móvil</label>
                             <input id="billing_mobile" type="tel" name="billing_mobile" value="{{ old('billing_mobile') }}"
+                                inputmode="numeric" minlength="7" maxlength="15" pattern="[0-9]{7,15}"
+                                title="Entre 7 y 15 dígitos, sin espacios"
                                 @input="clearError('billing_mobile')"
                                 :class="fieldErrors.billing_mobile ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />

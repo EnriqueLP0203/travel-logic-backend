@@ -30,6 +30,8 @@
                             id="name"
                             name="name"
                             value="{{ old('name') }}"
+                            maxlength="250"
+                            required
                             class="w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950 @error('name') border-red-500 @enderror"
                         />
                         @error('name')
@@ -43,6 +45,8 @@
                             id="email"
                             name="email"
                             value="{{ old('email') }}"
+                            maxlength="150"
+                            required
                             class="w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950 @error('email') border-red-500 @enderror"
                         />
                         @error('email')
@@ -52,12 +56,19 @@
                     <div class="flex flex-col gap-2">
                         <label for="phone" class="text-sm font-medium font-lato text-indigo-950">Teléfono</label>
                         <input
-                            type="text"
+                            type="tel"
                             id="phone"
                             name="phone"
                             value="{{ old('phone') }}"
+                            inputmode="numeric"
+                            minlength="7"
+                            maxlength="15"
+                            pattern="[0-9]{7,15}"
+                            title="Entre 7 y 15 dígitos, sin espacios"
+                            required
                             class="w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950 @error('phone') border-red-500 @enderror"
                         />
+                        <p class="text-xs text-indigo-950/60">Entre 7 y 15 dígitos, sin espacios ni guiones.</p>
                         @error('phone')
                             <p class="text-xs text-red-600">{{ $message }}</p>
                         @enderror
