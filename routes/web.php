@@ -7,8 +7,10 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
 use App\Http\Controllers\Admin\HotelGroupsController as AdminHotelGroupsController;
 use App\Http\Controllers\Admin\HotelsController as AdminHotelsController;
+use App\Http\Controllers\Admin\InterestedClientController as AdminInterestedClientController;
 use App\Http\Controllers\Admin\LucideIconController as AdminLucideIconController;
 use App\Http\Controllers\AgencyRegistrationController;
+use App\Http\Controllers\ContactController;
 use App\Models\AccommodationType;
 use App\Models\Destination;
 use App\Models\Hotel;
@@ -31,6 +33,8 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/offers', function () {
     return view('offers');
@@ -185,6 +189,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/customer-information', [AdminCustomerInformationController::class, 'index'])->name('customer-information.index');
         Route::put('/customer-information/{customerInformation}', [AdminCustomerInformationController::class, 'update'])->name('customer-information.update');
         Route::delete('/customer-information/{customerInformation}', [AdminCustomerInformationController::class, 'destroy'])->name('customer-information.destroy');
-        Route::get('/interested-clients', fn () => view('admin.interested_clients.index'))->name('interested-clients.index');
+        Route::get('/interested-clients', [AdminInterestedClientController::class, 'index'])->name('interested-clients.index');
+        Route::put('/interested-clients/{interestedClient}', [AdminInterestedClientController::class, 'update'])->name('interested-clients.update');
+        Route::delete('/interested-clients/{interestedClient}', [AdminInterestedClientController::class, 'destroy'])->name('interested-clients.destroy');
     });
 });
