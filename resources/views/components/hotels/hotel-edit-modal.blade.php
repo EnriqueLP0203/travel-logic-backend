@@ -43,7 +43,7 @@ $editId = old('hotel_id');
             @method('PUT')
             <input type="hidden" name="hotel_id" data-edit-id value="{{ $editId }}">
 
-            <div class="flex-1 space-y-8 overflow-y-auto px-6 py-6">
+            <div class="flex-1 space-y-8 overflow-y-auto px-6 py-6" data-modal-scroll-reset>
                 <section>
                     <h3 class="mb-3 text-sm font-semibold text-slate-800">Datos generales</h3>
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">

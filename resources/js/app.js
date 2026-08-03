@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         document.body.classList.add('overflow-hidden');
+
+        modal.querySelectorAll('[data-modal-scroll-reset]').forEach((el) => {
+            el.scrollTop = 0;
+        });
     };
 
     const closeModal = (modal) => {
