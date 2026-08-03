@@ -9,12 +9,14 @@ use App\Http\Controllers\Admin\HotelGroupsController as AdminHotelGroupsControll
 use App\Http\Controllers\Admin\HotelsController as AdminHotelsController;
 use App\Http\Controllers\Admin\InterestedClientController as AdminInterestedClientController;
 use App\Http\Controllers\Admin\LucideIconController as AdminLucideIconController;
+use App\Http\Controllers\Admin\OffersController as AdminOffersController;
 use App\Http\Controllers\AgencyRegistrationController;
 use App\Http\Controllers\ContactController;
 use App\Models\AccommodationType;
 use App\Models\Destination;
 use App\Models\Hotel;
 use App\Models\HotelGroup;
+use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +39,19 @@ Route::get('/contact', function () {
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/offers', function () {
-    return view('offers');
+    $featuredHotels = Hotel::where('active', true)
+        ->where('is_published', true)
+        ->where('featured', true)
+        ->with(['destination', 'principalImage'])
+        ->orderBy('star_rating', 'desc')
+        ->get();
+
+    $promotionalOffers = Offer::where('active', true)
+        ->orderBy('sort_order')
+        ->orderBy('id')
+        ->get();
+
+    return view('offers', compact('featuredHotels', 'promotionalOffers'));
 })->name('offers');
 
 Route::get('/register-agency', function () {
@@ -68,6 +82,13 @@ Route::get('/media/hotel-groups/{filename}', function (string $filename) {
 
     return response()->file($path);
 })->where('filename', '[A-Za-z0-9._-]+')->name('media.hotel-groups');
+
+Route::get('/media/offers/{filename}', function (string $filename) {
+    $path = storage_path('travel_media/offers/' . $filename);
+    abort_unless(is_file($path), 404);
+
+    return response()->file($path);
+})->where('filename', '[A-Za-z0-9._-]+')->name('media.offers');
 
 Route::get('/hotels', function (Request $request) {
     $hotels = Hotel::where('active', true)
@@ -170,6 +191,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/destinations', [AdminDestinationController::class, 'store'])->name('destinations.store');
         Route::put('/destinations/{destination}', [AdminDestinationController::class, 'update'])->name('destinations.update');
         Route::delete('/destinations/{destination}', [AdminDestinationController::class, 'destroy'])->name('destinations.destroy');
+        Route::get('/offers', [AdminOffersController::class, 'index'])->name('offers.index');
+        Route::post('/offers', [AdminOffersController::class, 'store'])->name('offers.store');
+        Route::put('/offers/{offer}', [AdminOffersController::class, 'update'])->name('offers.update');
+        Route::delete('/offers/{offer}', [AdminOffersController::class, 'destroy'])->name('offers.destroy');
         Route::get('/hotel-groups', [AdminHotelGroupsController::class, 'index'])->name('hotel-groups.index');
         Route::post('/hotel-groups', [AdminHotelGroupsController::class, 'store'])->name('hotel-groups.store');
         Route::put('/hotel-groups/{hotel_group}', [AdminHotelGroupsController::class, 'update'])->name('hotel-groups.update');

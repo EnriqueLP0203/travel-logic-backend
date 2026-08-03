@@ -19,6 +19,12 @@ $navItems = [
 'icon' => 'lucide-map-pin',
 ],
 [
+'route' => 'admin.offers.index',
+'active' => 'admin.offers.*',
+'label' => 'Gestor de ofertas',
+'icon' => 'lucide-badge-percent',
+],
+[
 'route' => 'admin.hotel-groups.index',
 'active' => 'admin.hotel-groups.*',
 'label' => 'Grupos de hotel',

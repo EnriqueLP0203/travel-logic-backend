@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!modal) return;
 
             populateDestinationModal(modal, trigger);
+            populateOfferModal(modal, trigger);
             populateCustomerInformationModal(modal, trigger);
             populateInterestedClientModal(modal, trigger);
             populateAccommodationTypeModal(modal, trigger);
@@ -131,6 +132,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (cityLabel) {
                 cityLabel.textContent = trigger.dataset.city || '—';
+            }
+        }
+    };
+
+    const populateOfferModal = (modal, trigger) => {
+        const target = trigger.dataset.modalTarget;
+
+        if (target === 'offer-edit') {
+            const form = modal.querySelector('[data-edit-form]');
+            const idInput = modal.querySelector('[data-edit-id]');
+            const nameInput = modal.querySelector('[data-edit-name]');
+            const linkInput = modal.querySelector('[data-edit-link]');
+            const sortOrderInput = modal.querySelector('[data-edit-sort-order]');
+            const activeInput = modal.querySelector('[data-edit-active]');
+            const preview = modal.querySelector('[data-edit-image-preview]');
+            const placeholder = modal.querySelector('[data-edit-image-placeholder]');
+            const fileName = modal.querySelector('[data-image-name]');
+            const fileInput = modal.querySelector('[data-image-input]');
+
+            if (form && trigger.dataset.updateUrl) {
+                form.action = trigger.dataset.updateUrl;
+            }
+
+            if (idInput) idInput.value = trigger.dataset.id || '';
+            if (nameInput) nameInput.value = trigger.dataset.name || '';
+            if (linkInput) linkInput.value = trigger.dataset.link || '';
+            if (sortOrderInput) sortOrderInput.value = trigger.dataset.sortOrder || '0';
+            if (activeInput) activeInput.checked = trigger.dataset.active === '1';
+
+            if (fileInput) fileInput.value = '';
+            if (fileName) fileName.textContent = '';
+
+            const thumb = trigger.dataset.thumbnail || '';
+            if (thumb && preview) {
+                preview.src = thumb;
+                preview.classList.remove('hidden');
+                placeholder?.classList.add('hidden');
+            } else if (preview) {
+                preview.removeAttribute('src');
+                preview.classList.add('hidden');
+                placeholder?.classList.remove('hidden');
+            }
+        }
+
+        if (target === 'offer-delete') {
+            const form = modal.querySelector('[data-delete-form]');
+            const nameLabel = modal.querySelector('[data-delete-name]');
+
+            if (form && trigger.dataset.deleteUrl) {
+                form.action = trigger.dataset.deleteUrl;
+            }
+
+            if (nameLabel) {
+                nameLabel.textContent = trigger.dataset.name || '—';
             }
         }
     };
