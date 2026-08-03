@@ -16,7 +16,7 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="{{ $name }}-title"
-    class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    class="fixed inset-0 z-[200] hidden items-center justify-center p-4">
     <div data-modal-close class="absolute inset-0 bg-stone-900/50"></div>
 
     <div class="relative z-10 flex min-h-64 max-h-[90vh] w-full max-w-5xl flex-col gap-10 overflow-y-auto rounded-2xl bg-white p-20 shadow-2xl">

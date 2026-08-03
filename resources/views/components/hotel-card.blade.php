@@ -8,14 +8,14 @@
     $stars = (int) $hotel->star_category;
 @endphp
 
-<div class="flex h-[460px] w-96 flex-col overflow-hidden rounded-3xl bg-white shadow-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-2xl">
+<div class="group flex h-[460px] w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
     {{-- Imagen principal --}}
     <div class="h-72 w-full shrink-0 overflow-hidden bg-gray-200">
         @if ($image && $image->url)
             <img
                 src="{{ $image->url }}"
                 alt="{{ $hotel->name }}"
-                class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
         @else
             <div class="flex h-full w-full items-center justify-center bg-gray-300">
@@ -46,7 +46,7 @@
         <div class="mt-auto pt-3 flex justify-end">
             <a
                 href="{{ route('hotel.show', $hotel->slug) }}"
-                class="inline-flex items-center gap-2 rounded-lg bg-green-300 px-4 py-2 text-base font-bold font-inter text-white"
+                class="inline-flex items-center gap-2 rounded-lg bg-green-300 px-4 py-2 text-base font-bold font-inter text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-400 hover:shadow-md"
             >
                 Ver más
             </a>

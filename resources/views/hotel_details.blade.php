@@ -30,6 +30,7 @@ $location = $hotel->destination
 
 <div class="mx-auto mt-24 w-full max-w-[1600px] px-2 pb-10 sm:px-3 md:px-4 lg:px-6 lg:pb-16">
     {{-- Encabezado --}}
+    <x-animate-in>
     <header class="mb-8">
         <p class="mb-3.5 text-xs font-semibold text-gray-400 sm:text-sm">
             <a href="{{ route('hotels') }}" class="transition-colors hover:text-blue-300">Hoteles</a>
@@ -48,16 +49,18 @@ $location = $hotel->destination
             @endif
         </div>
     </header>
+    </x-animate-in>
 
     {{-- Galería: imagen principal + mosaico 2x2 --}}
-    <section class="mb-10 grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">
+    <x-animate-in delay="100">
+    <section class="group mb-10 grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">
         {{-- Imagen principal --}}
         <div class="h-64 overflow-hidden rounded-2xl bg-gray-200 sm:h-80 lg:h-[420px]">
             @if ($principalImage && $principalImage->url)
             <img
                 src="{{ $principalImage->url }}"
                 alt="{{ $hotel->name }}"
-                class="h-full w-full object-cover" />
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
             @else
             <div class="flex h-full w-full items-center justify-center bg-gray-300">
                 <svg class="h-16 w-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,14 +96,16 @@ $location = $hotel->destination
                     <img
                         src="{{ $image->url }}"
                         alt="{{ $hotel->name }} - imagen {{ $slot + 1 }}"
-                        class="h-full w-full object-cover" />
+                        class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
                     @endif
                 </div>
             @endfor
         </div>
     </section>
+    </x-animate-in>
 
     {{-- Detalles + Grupos / Tipos --}}
+    <x-animate-in delay="150">
     <section class="mb-10 grid grid-cols-1 items-start gap-7 lg:grid-cols-[1.4fr_1fr]">
         {{-- Columna izquierda: Detalles --}}
         <div>
@@ -161,9 +166,11 @@ $location = $hotel->destination
             </div>
         </div>
     </section>
+    </x-animate-in>
 </div>
 
 {{-- Banner CTA — ancho completo --}}
+<x-animate-in delay="200">
 <section class="relative w-full overflow-hidden bg-blue-400 py-12 sm:py-24">
     <div class="relative mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 lg:px-6">
         <div class="flex flex-col items-start justify-between gap-8 px-6 sm:px-8 lg:flex-row lg:items-center lg:px-10">
@@ -181,12 +188,13 @@ $location = $hotel->destination
 
             <a
                 href="{{ route('register-agency') }}"
-                class="relative shrink-0 rounded-lg bg-green-300 px-7 py-3.5 text-xl font-bold text-white transition-opacity hover:opacity-90">
+                class="relative shrink-0 rounded-lg bg-green-300 px-7 py-3.5 text-xl font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md">
                 Regístrate
             </a>
         </div>
     </div>
 </section>
+</x-animate-in>
 
 {{-- Mismo formulario de contacto (interested_clients) — fondo blanco, ancho completo --}}
 <section id="contacto" aria-label="Formulario de contacto" class="w-full bg-white">

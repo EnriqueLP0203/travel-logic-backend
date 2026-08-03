@@ -7,8 +7,8 @@ $headingClass = $inverted ? 'text-white' : 'text-indigo-950';
 $subtitleClass = $inverted ? 'text-white' : 'text-indigo-950';
 $labelClass = $inverted ? 'text-white' : 'text-indigo-950';
 $inputClass = $inverted
-    ? 'w-full h-12 rounded-lg border border-white/30 bg-white p-2 text-sm font-light font-lato text-blue-300'
-    : 'w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950';
+    ? 'w-full h-12 rounded-lg border border-white/30 bg-white p-2 text-sm font-light font-lato text-blue-300 transition-shadow duration-200 focus:outline-none focus:ring-2 focus:ring-green-300'
+    : 'w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950 transition-shadow duration-200 focus:outline-none focus:ring-2 focus:ring-green-300';
 $errorClass = $inverted ? 'text-red-300' : 'text-red-600';
 $hintClass = $inverted ? 'text-white/60' : 'text-indigo-950/60';
 $successBoxClass = $inverted
@@ -19,6 +19,7 @@ $termsLinkClass = $inverted
     : 'text-sm font-medium font-lato text-indigo-950';
 @endphp
 
+<x-animate-in>
 <div {{ $attributes->merge(['class' => 'grid grid-cols-1 gap-12 py-16 md:py-24 lg:grid-cols-2']) }}>
     <div class="flex w-full flex-col items-start text-left lg:w-3xl">
         <h2 class="mb-4 text-4xl font-black font-inter sm:text-5xl lg:text-6xl {{ $headingClass }}">
@@ -111,7 +112,7 @@ $termsLinkClass = $inverted
                     @enderror
                 </div>
 
-                <button type="submit" class="h-12 w-full rounded-lg bg-green-300 p-2 text-sm font-medium font-lato text-white transition-opacity hover:opacity-90">
+                <button type="submit" class="h-12 w-full rounded-lg bg-green-300 p-2 text-sm font-medium font-lato text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md">
                     Enviar
                 </button>
             </form>
@@ -122,3 +123,4 @@ $termsLinkClass = $inverted
         <img src="{{ asset('images/mapa.png') }}" alt="Contacto" class="h-auto w-full max-w-[720px]" />
     </div>
 </div>
+</x-animate-in>

@@ -1,29 +1,29 @@
 <div class="flex w-full flex-col rounded-xl border border-green-300 bg-white p-6 shadow-xl">
         <!-- botones filtros de informacion -->
-        <div class="flex items-center gap-12">
+        <div class="flex items-center gap-4 overflow-x-auto pb-1 sm:gap-8 lg:gap-12 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <a x-on:click="activo = (activo === 'hoteles' ? null : 'hoteles')"
                 :class="activo === 'hoteles' ? 'text-green-400' : 'text-slate-500'"
-                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+                class="shrink-0 cursor-pointer whitespace-nowrap text-sm font-bold font-montserrat transition-colors duration-200 hover:text-green-400">
                 🏨 Hoteles
             </a>
             <a x-on:click="activo = (activo === 'vuelos' ? null : 'vuelos')"
                 :class="activo === 'vuelos' ? 'text-green-400' : 'text-slate-500'"
-                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+                class="shrink-0 cursor-pointer whitespace-nowrap text-sm font-bold font-montserrat transition-colors duration-200 hover:text-green-400">
                 ✈️ Vuelos
             </a>
             <a x-on:click="activo = (activo === 'paquetes' ? null : 'paquetes')"
                 :class="activo === 'paquetes' ? 'text-green-400' : 'text-slate-500'"
-                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+                class="shrink-0 cursor-pointer whitespace-nowrap text-sm font-bold font-montserrat transition-colors duration-200 hover:text-green-400">
                 🎒 Paquetes
             </a>
             <a x-on:click="activo = (activo === 'tours' ? null : 'tours')"
                 :class="activo === 'tours' ? 'text-green-400' : 'text-slate-500'"
-                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+                class="shrink-0 cursor-pointer whitespace-nowrap text-sm font-bold font-montserrat transition-colors duration-200 hover:text-green-400">
                 🎯 Tours
             </a>
             <a x-on:click="activo = (activo === 'bodas' ? null : 'bodas')"
                 :class="activo === 'bodas' ? 'text-green-400' : 'text-slate-500'"
-                class="cursor-pointer text-sm font-bold font-montserrat hover:text-green-400 transition-colors">
+                class="shrink-0 cursor-pointer whitespace-nowrap text-sm font-bold font-montserrat transition-colors duration-200 hover:text-green-400">
                 💍 Grupos & Bodas
             </a>
         </div>
@@ -76,7 +76,7 @@
 
             <button
                 type="button"
-                class="w-full shrink-0 rounded-lg bg-green-300 px-8 py-2.5 text-sm font-bold font-montserrat text-white transition-opacity hover:opacity-90 lg:w-auto"
+                class="w-full shrink-0 rounded-lg bg-green-300 px-8 py-2.5 text-sm font-bold font-montserrat text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md lg:w-auto"
             >
                 Ver más
             </button>

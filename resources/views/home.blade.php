@@ -17,24 +17,24 @@
 
                 <div class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
 
-                <p class="ml-24 relative z-10 max-w-xl text-6xl font-black font-montserrat leading-tight text-white">
+                <p class="relative z-10 ml-0 max-w-xl text-3xl font-black font-montserrat leading-tight text-white sm:ml-8 sm:text-4xl md:text-5xl lg:ml-24 lg:text-6xl">
                     El socio estratégico que tu agencia necesita
                 </p>
-                <p class="ml-24 mb-4 relative z-10 max-w-xl text-base font-normal text-white/90 sm:text-lg md:text-xl">
+                <p class="relative z-10 mb-4 ml-0 max-w-xl text-base font-normal text-white/90 sm:ml-8 sm:text-lg md:text-xl lg:ml-24">
                     Soluciones integrales y personalizadas bajo el modelo que simplifican tu operación y te permiten ofrecer experiencias memorables a tus clientes.
                 </p>
-                <div class="ml-24 flex items-center gap-2">
+                <div class="relative z-10 ml-0 flex flex-col gap-3 sm:ml-8 sm:flex-row sm:items-center sm:gap-2 lg:ml-24">
                     <a
                         href="https://www.partners.travel-logic.com/site/login"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center gap-2 relative z-10 w-fit rounded-lg bg-green-300 px-6 py-3 text-base font-bold text-white transition-opacity hover:opacity-90">
+                        class="flex w-fit items-center gap-2 rounded-lg bg-green-300 px-6 py-3 text-base font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md">
                         Acceder al portal
                         <x-lucide-arrow-right class="h-4 w-4 text-white" />
                     </a>
                     <a
                         href="{{ route('register-agency') }}"
-                        class="relative z-10 w-fit rounded-lg border border-white px-6 py-3 text-base font-semibold text-white transition-opacity hover:opacity-90">
+                        class="w-fit rounded-lg border border-white px-6 py-3 text-base font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90">
                         Quiero registrarme
                     </a>
                 </div>
@@ -59,37 +59,32 @@
 
 <div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-2 pt-28 sm:px-3 sm:pt-32 md:px-4 md:pt-36 lg:px-6 lg:pt-40">
     {{-- key features --}}
-    <section id="key-features" aria-label="Key Features" class="mb-10 md:mb-14 lg:mb-20">
-        <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
-            <div class="flex flex-col items-center gap-2">
-                <div class="size-16 bg-green-100 rounded-lg flex items-center justify-center">
-                    <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
-                </div>
-                <p class="w-72 text-center text-2xl font-extrabold font-inter text-indigo-950">Liberar el potencial de cada agencia</p>
-                <p class="w-72 text-center text-base font-medium text-zinc-500">Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.</p>
+    <x-animate-in>
+        <section id="key-features" aria-label="Key Features" class="mb-10 md:mb-14 lg:mb-20">
+            <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
+                @php
+                $keyFeatures = [
+                    ['title' => 'Liberar el potencial de cada agencia', 'desc' => 'Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.'],
+                    ['title' => 'El operador turístico líder del mercado', 'desc' => 'Ser reconocidos como el socio estratégico de referencia para agencias de viajes mediante nuestro enfoque de.'],
+                    ['title' => 'Tu socio estratégico B2B', 'desc' => 'Tour operador especializado en el mercado B2B que conecta agencias con una amplia red de servicios hoteleros, mejorando su eficiencia y garantizando experiencias de viaje memorables'],
+                ];
+                @endphp
+                @foreach ($keyFeatures as $index => $feature)
+                    <x-animate-in delay="{{ $index * 100 }}" variant="subtle" class="flex flex-col items-center gap-2 sm:gap-4">
+                        <div class="flex size-16 items-center justify-center rounded-lg bg-green-100">
+                            <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
+                        </div>
+                        <p class="w-full max-w-xs text-center text-xl font-extrabold font-inter text-indigo-950 sm:text-2xl">{{ $feature['title'] }}</p>
+                        <p class="w-full max-w-xs text-center text-base font-medium text-zinc-500">{{ $feature['desc'] }}</p>
+                    </x-animate-in>
+                @endforeach
             </div>
-
-            <div class="flex flex-col items-center gap-4">
-                <div class="size-16 bg-green-100 rounded-lg flex items-center justify-center">
-                    <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
-                </div>
-                <p class="w-72 text-center text-2xl font-extrabold font-inter text-indigo-950">El operador turístico líder del mercado</p>
-                <p class="w-72 text-center text-base font-medium text-zinc-500">Ser reconocidos como el socio estratégico de referencia para agencias de viajes mediante nuestro enfoque de.</p>
-            </div>
-
-            <div class="flex flex-col items-center gap-4">
-                <div class="size-16 bg-green-100 rounded-lg flex items-center justify-center">
-                    <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
-                </div>
-                <p class="w-72 text-center text-2xl font-extrabold font-inter text-indigo-950">Tu socio estratégico B2B</p>
-                <p class="w-72 text-center text-base font-medium text-zinc-500">Tour operador especializado en el mercado B2B que conecta agencias con una amplia red de servicios hoteleros, mejorando su eficiencia y garantizando experiencias de viaje memorables</p>
-            </div>
-        </div>
-
-    </section>
+        </section>
+    </x-animate-in>
 </div>
 
 {{-- Features --}}
+<x-animate-in>
 <section id="features" aria-label="Features" class="w-full bg-blue-400">
     <div class="grid min-h-[420px] grid-cols-1 lg:grid-cols-2 lg:min-h-[520px]">
         <div class="flex flex-col justify-center gap-6 px-6 py-12 sm:px-8 sm:py-16 md:px-16 lg:px-24 xl:px-32">
@@ -100,60 +95,29 @@
             </div>
             <p class="max-w-xl text-base font-normal font-inter text-white">Plataforma B2B diseñada por expertos bajo el modelo One Stop Shop para impulsar las ventas de tu agencia.</p>
             <div class="flex flex-col gap-6">
-                <div class="flex items-start gap-4">
-                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
-                        <p class="text-2xl font-normal font-inter text-white">1</p>
-                    </div>
-                    <div>
-                        <p class="text-base font-bold font-inter text-white">Portal B2B Exclusivo</p>
-                        <p class="text-xs font-normal font-inter text-white/90">Plataforma 100% diseñada para agencias. Consulta disponibilidad, cotiza y reserva en tiempo real, las 24 horas del día.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
-                        <p class="text-2xl font-normal font-inter text-white">2</p>
-                    </div>
-                    <div>
-                        <p class="text-base font-bold font-inter text-white">Tarifas Netas Garantizadas</p>
-                        <p class="text-xs font-normal font-inter text-white/90">Precios de mayorista en más de 500 hoteles y paquetes en México, el Caribe y destinos internacionales seleccionados.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
-                        <p class="text-2xl font-normal font-inter text-white">3</p>
-                    </div>
-                    <div>
-                        <p class="text-base font-bold font-inter text-white">Cotizador con tu Marca</p>
-                        <p class="text-xs font-normal font-inter text-white/90">Genera propuestas con el logo y datos de tu agencia, listas para enviar a tus clientes al instante vía PDF o correo.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
-                        <p class="text-2xl font-normal font-inter text-white">4</p>
-                    </div>
-                    <div>
-                        <p class="text-base font-bold font-inter text-white">Herramientas de Marketing</p>
-                        <p class="text-xs font-normal font-inter text-white/90">Descarga flyers y materiales promocionales personalizados para impulsar tus ventas en redes sociales y WhatsApp.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
-                        <p class="text-2xl font-normal font-inter text-white">5</p>
-                    </div>
-                    <div>
-                        <p class="text-base font-bold font-inter text-white">Herramientas de Marketing</p>
-                        <p class="text-xs font-normal font-inter text-white/90">Plataforma 100% diseñada para agencias. Consulta disponibilidad, cotiza y reserva en tiempo real, las 24 horas del día.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
-                        <p class="text-2xl font-normal font-inter text-white">6</p>
-                    </div>
-                    <div>
-                        <p class="text-base font-bold font-inter text-white">Portal B2B Exclusivo</p>
-                        <p class="text-xs font-normal font-inter text-white/90">Plataforma 100% diseñada para agencias. Consulta disponibilidad, cotiza y reserva en tiempo real, las 24 horas del día.</p>
-                    </div>
-                </div>
+                @php
+                $features = [
+                    ['num' => 1, 'title' => 'Portal B2B Exclusivo', 'desc' => 'Plataforma 100% diseñada para agencias. Consulta disponibilidad, cotiza y reserva en tiempo real, las 24 horas del día.'],
+                    ['num' => 2, 'title' => 'Tarifas Netas Garantizadas', 'desc' => 'Precios de mayorista en más de 500 hoteles y paquetes en México, el Caribe y destinos internacionales seleccionados.'],
+                    ['num' => 3, 'title' => 'Cotizador con tu Marca', 'desc' => 'Genera propuestas con el logo y datos de tu agencia, listas para enviar a tus clientes al instante vía PDF o correo.'],
+                    ['num' => 4, 'title' => 'Herramientas de Marketing', 'desc' => 'Descarga flyers y materiales promocionales personalizados para impulsar tus ventas en redes sociales y WhatsApp.'],
+                    ['num' => 5, 'title' => 'Herramientas de Marketing', 'desc' => 'Plataforma 100% diseñada para agencias. Consulta disponibilidad, cotiza y reserva en tiempo real, las 24 horas del día.'],
+                    ['num' => 6, 'title' => 'Portal B2B Exclusivo', 'desc' => 'Plataforma 100% diseñada para agencias. Consulta disponibilidad, cotiza y reserva en tiempo real, las 24 horas del día.'],
+                ];
+                @endphp
+                @foreach ($features as $index => $feature)
+                    <x-animate-in delay="{{ $index * 80 }}" variant="subtle">
+                        <div class="flex items-start gap-4">
+                            <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-green-300">
+                                <p class="text-2xl font-normal font-inter text-white">{{ $feature['num'] }}</p>
+                            </div>
+                            <div>
+                                <p class="text-base font-bold font-inter text-white">{{ $feature['title'] }}</p>
+                                <p class="text-xs font-normal font-inter text-white/90">{{ $feature['desc'] }}</p>
+                            </div>
+                        </div>
+                    </x-animate-in>
+                @endforeach
             </div>
         </div>
         <div class="flex items-center justify-center px-6 py-12 sm:px-8 lg:px-12 lg:py-16">
@@ -162,28 +126,32 @@
                 alt="Todo lo que tu agencia necesita"
                 width="560"
                 height="575"
-                class="h-auto w-2xl object-contain" />
+                class="h-auto w-full max-w-2xl object-contain transition-transform duration-500 hover:scale-105" />
         </div>
     </div>
 </section>
+</x-animate-in>
 
 <!-- seccion portafolio de destinos -->
+<x-animate-in>
 <section id="portfolio-hotels" aria-label="Portafolio de destinos" class="mt-10 w-full bg-white">
     <div class="flex flex-col items-start gap-3 px-6 sm:px-8 md:px-16 lg:px-24">
         <p class="text-sm font-extrabold font-inter text-green-300">Nuestro portafolio</p>
-        <p class="text-4xl font-black font-inter text-indigo-950">Destinos que venden solos</p>
+        <p class="text-3xl font-black font-inter text-indigo-950 sm:text-4xl">Destinos que venden solos</p>
         <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
     </div>
 
     <x-destinations-carousel :destinations="$destinations" />
 </section>
+</x-animate-in>
 
-<section id="steps" aria-label="Cómo empezar" class="w-full bg-blue-400 mt-20">
+<x-animate-in>
+<section id="steps" aria-label="Cómo empezar" class="mt-20 w-full bg-blue-400">
     <div class="grid grid-cols-1 gap-10 px-6 py-12 sm:px-8 sm:py-16 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-24 lg:py-20">
-        <div class="w-2xl flex flex-col gap-6">
+        <div class="flex w-full max-w-2xl flex-col gap-6">
             <div class="flex flex-col items-start gap-3">
                 <p class="text-sm font-extrabold font-inter text-green-300">Así de fácil</p>
-                <p class="text-4xl font-black font-inter text-white">Empieza a vender en 4 pasos</p>
+                <p class="text-3xl font-black font-inter text-white sm:text-4xl">Empieza a vender en 4 pasos</p>
                 <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
             </div>
 
@@ -191,50 +159,43 @@
                 Sin contratos complicados. Sin cuotas de entrada. Solo regístrate y genera comisiones.
             </p>
 
-            <ol class="mt-4 flex flex-col gap-8 border-l-4 border-green-300 pl-8">
-                <li class="flex items-center gap-8">
-                    <span class="flex size-14 shrink-0 items-center justify-center rounded-full outline outline-3 outline-green-300 text-3xl font-bold font-inter text-white" aria-hidden="true">1</span>
-                    <div>
-                        <p class="text-3xl font-bold font-inter text-white">Regístrate gratis</p>
-                        <p class="max-w-lg text-xl font-light font-inter text-white">Llena el formulario en línea con los datos de tu agencia. Aprobación en 24 horas.</p>
-                    </div>
-                </li>
-                <li class="flex items-center gap-8">
-                    <span class="flex size-14 shrink-0 items-center justify-center rounded-full outline outline-3 outline-green-300 text-3xl font-bold font-inter text-white" aria-hidden="true">2</span>
-                    <div>
-                        <p class="text-3xl font-bold font-inter text-white">Accede al portal B2B</p>
-                        <p class="max-w-lg text-xl font-light font-inter text-white">Explora tarifas netas y disponibilidad en tiempo real de más de 500 hoteles y paquetes.</p>
-                    </div>
-                </li>
-                <li class="flex items-center gap-8">
-                    <span class="flex size-14 shrink-0 items-center justify-center rounded-full outline outline-3 outline-green-300 text-3xl font-bold font-inter text-white" aria-hidden="true">3</span>
-                    <div>
-                        <p class="text-3xl font-bold font-inter text-white">Cotiza y reserva</p>
-                        <p class="max-w-lg text-xl font-light font-inter text-white">Genera propuestas con tu marca y confirma reservas para tus clientes al instante.</p>
-                    </div>
-                </li>
-                <li class="flex items-center gap-8">
-                    <span class="flex size-14 shrink-0 items-center justify-center rounded-full outline outline-3 outline-green-300 text-3xl font-bold font-inter text-white" aria-hidden="true">4</span>
-                    <div>
-                        <p class="text-3xl font-bold font-inter text-white">Genera comisiones</p>
-                        <p class="max-w-lg text-xl font-light font-inter text-white">Vende experiencias memorables y recibe tus comisiones sin trámites complicados.</p>
-                    </div>
-                </li>
+            <ol class="mt-4 flex flex-col gap-6 border-l-4 border-green-300 pl-6 sm:gap-8 sm:pl-8">
+                @php
+                $steps = [
+                    ['title' => 'Regístrate gratis', 'desc' => 'Llena el formulario en línea con los datos de tu agencia. Aprobación en 24 horas.'],
+                    ['title' => 'Accede al portal B2B', 'desc' => 'Explora tarifas netas y disponibilidad en tiempo real de más de 500 hoteles y paquetes.'],
+                    ['title' => 'Cotiza y reserva', 'desc' => 'Genera propuestas con tu marca y confirma reservas para tus clientes al instante.'],
+                    ['title' => 'Genera comisiones', 'desc' => 'Vende experiencias memorables y recibe tus comisiones sin trámites complicados.'],
+                ];
+                @endphp
+                @foreach ($steps as $index => $step)
+                    <li>
+                        <x-animate-in delay="{{ $index * 100 }}" variant="subtle">
+                            <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6 lg:gap-8">
+                                <span class="flex size-12 shrink-0 items-center justify-center rounded-full text-2xl font-bold font-inter text-white outline outline-3 outline-green-300 sm:size-14 sm:text-3xl" aria-hidden="true">{{ $index + 1 }}</span>
+                                <div>
+                                    <p class="text-xl font-bold font-inter text-white sm:text-2xl lg:text-3xl">{{ $step['title'] }}</p>
+                                    <p class="max-w-lg text-base font-light font-inter text-white sm:text-lg lg:text-xl">{{ $step['desc'] }}</p>
+                                </div>
+                            </div>
+                        </x-animate-in>
+                    </li>
+                @endforeach
             </ol>
 
             <a
                 href="{{ route('register-agency') }}"
-                class="mt-6 flex w-sm self-center justify-center items-center gap-2 rounded-lg bg-green-300 px-6 py-3 text-2xl font-bold text-white transition-opacity hover:opacity-90">
+                class="mt-6 flex w-full max-w-xs items-center justify-center gap-2 self-center rounded-lg bg-green-300 px-6 py-3 text-xl font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md sm:text-2xl">
                 Empezar
                 <x-lucide-arrow-right class="h-6 w-6 text-white" />
             </a>
         </div>
 
-        <div class="flex flex-col gap-4 items-center justify-center">
-            <div class="w-2xl h-96 rounded-3xl bg-zinc-300"></div>
-            <div class="grid grid-cols-2 gap-4 w-2xl">
-                <div class="h-96 rounded-3xl bg-zinc-300"></div>
-                <div class="h-96 flex flex-col gap-4">
+        <div class="flex flex-col items-center justify-center gap-4">
+            <div class="h-64 w-full max-w-2xl rounded-3xl bg-zinc-300 sm:h-80 lg:h-96"></div>
+            <div class="grid w-full max-w-2xl grid-cols-2 gap-4">
+                <div class="h-48 rounded-3xl bg-zinc-300 sm:h-64 lg:h-96"></div>
+                <div class="flex h-48 flex-col gap-4 sm:h-64 lg:h-96">
                     <div class="h-full rounded-3xl bg-zinc-300"></div>
                     <div class="h-full rounded-3xl bg-zinc-300"></div>
                 </div>
@@ -242,50 +203,54 @@
         </div>
     </div>
 </section>
+</x-animate-in>
 
-<section id="testimonials" aria-label="Testimonios" class="mt-20 w-full bg-white pb-20">
-    <div class="flex items-center justify-between px-24">
+<x-animate-in>
+<section id="testimonials" aria-label="Testimonios" class="mt-20 w-full bg-white pb-12 sm:pb-20">
+    <div class="flex flex-col gap-6 px-4 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-24">
         <div class="flex flex-col gap-3">
             <p class="text-sm font-extrabold font-inter text-green-300">Testimonios</p>
-            <p class="text-4xl font-black font-inter text-blue-400">Lo que dicen nuestras agencias</p>
+            <p class="text-3xl font-black font-inter text-blue-400 sm:text-4xl">Lo que dicen nuestras agencias</p>
             <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
         </div>
         <div class="flex items-center gap-4">
-            <button type="button" aria-label="Testimonio anterior" class="flex size-20 items-center justify-center rounded-full border-3 border-green-300">
-                <x-lucide-arrow-left class="h-10 w-10 text-green-300" />
+            <button type="button" aria-label="Testimonio anterior" class="flex size-12 items-center justify-center rounded-full border-3 border-green-300 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md lg:size-20">
+                <x-lucide-arrow-left class="h-6 w-6 text-green-300 lg:h-10 lg:w-10" />
             </button>
-            <button type="button" aria-label="Testimonio siguiente" class="flex size-20 items-center justify-center rounded-full border-3 border-green-300">
-                <x-lucide-arrow-right class="h-10 w-10 text-green-300" />
+            <button type="button" aria-label="Testimonio siguiente" class="flex size-12 items-center justify-center rounded-full border-3 border-green-300 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md lg:size-20">
+                <x-lucide-arrow-right class="h-6 w-6 text-green-300 lg:h-10 lg:w-10" />
             </button>
         </div>
     </div>
 
-    <div class="mt-32 flex flex-wrap justify-center gap-4 px-24">
-        @foreach (range(1, 4) as $_)
-        <x-testimonial-card
-            name="Jorge Lopez"
-            quote="Travel Logic transformó nuestra operación. El cotizador con nuestra marca nos ahorra horas cada semana y nuestros clientes quedan impresionados." />
+    <div class="mt-10 flex flex-wrap justify-center gap-4 px-4 sm:mt-16 sm:px-8 lg:mt-32 lg:px-24">
+        @foreach (range(1, 4) as $index)
+            <x-animate-in delay="{{ $index * 100 }}" variant="subtle">
+                <x-testimonial-card
+                    name="Jorge Lopez"
+                    quote="Travel Logic transformó nuestra operación. El cotizador con nuestra marca nos ahorra horas cada semana y nuestros clientes quedan impresionados." />
+            </x-animate-in>
         @endforeach
     </div>
 </section>
+</x-animate-in>
 
-<section id="contact" aria-label="Contact" class="w-full bg-blue-300 mt-20 px-24 py-32">
-    <div class="flex flex-row gap-20 justify-center">
-        <div class="w-2xl flex flex-col gap-8 items-center justify-center">
-            <p class="text-5xl font-black font-inter text-white">¿Listo para hacer crecer tu agencia con nosotros?</p>
-            <p class="text-base font-medium font-inter text-white">Únete a más de 200 agencias que ya disfrutan de tarifas exclusivasy herramientas profesionales bajo el modelo One Stop Shop.</p>
-            <div class="flex flex-row gap-4">
-                <a href="{{ route('register-agency') }}" class="bg-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Registrarme gratis</a>
-                <a href="https://apsholding.mx/agendar-cita-travel-logic" target="_blank" rel="noopener noreferrer" class="border border-green-300 text-white px-12 py-3 rounded-lg text-base font-medium font-inter">Hablar con un asesor</a>
+<x-animate-in>
+<section id="contact" aria-label="Contact" class="mt-20 w-full bg-blue-300 px-4 py-16 sm:px-8 sm:py-24 lg:px-24 lg:py-32">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-center gap-8 lg:flex-row lg:gap-20">
+        <div class="flex w-full max-w-xl flex-col items-center justify-center gap-6 text-center lg:items-start lg:text-left">
+            <p class="text-3xl font-black font-inter text-white sm:text-4xl lg:text-5xl">¿Listo para hacer crecer tu agencia con nosotros?</p>
+            <p class="text-base font-medium font-inter text-white">Únete a más de 200 agencias que ya disfrutan de tarifas exclusivas y herramientas profesionales bajo el modelo One Stop Shop.</p>
+            <div class="flex w-full flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+                <a href="{{ route('register-agency') }}" class="rounded-lg bg-green-300 px-8 py-3 text-center text-base font-medium font-inter text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:px-12">Registrarme gratis</a>
+                <a href="https://apsholding.mx/agendar-cita-travel-logic" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-green-300 px-8 py-3 text-center text-base font-medium font-inter text-white transition-all duration-200 hover:-translate-y-0.5 sm:px-12">Hablar con un asesor</a>
             </div>
         </div>
-        <div>
-            <img src="{{ asset('images/mapa.png') }}" alt="Contact" width="560" height="575" class="h-auto w-2xl object-contain" />
+        <div class="w-full max-w-xl">
+            <img src="{{ asset('images/mapa.png') }}" alt="Contact" width="560" height="575" class="h-auto w-full object-contain" />
         </div>
     </div>
-
 </section>
-
-
+</x-animate-in>
 
 @endsection

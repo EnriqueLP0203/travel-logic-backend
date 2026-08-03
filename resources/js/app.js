@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         observer.unobserve(el);
                     });
                 },
-                { threshold: 0, rootMargin: '0px 0px 0px 0px' },
+                { threshold: 0, rootMargin: '0px 0px -8% 0px' },
             );
 
             elements.forEach((el) => observer.observe(el));

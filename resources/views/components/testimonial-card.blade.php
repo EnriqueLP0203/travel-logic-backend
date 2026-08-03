@@ -4,7 +4,7 @@
     'rating' => 5,
 ])
 
-<article {{ $attributes->merge(['class' => 'flex w-sm flex-col gap-10 rounded-3xl border border-green-300 p-10']) }}>
+<article {{ $attributes->merge(['class' => 'flex w-full max-w-sm flex-col gap-6 rounded-3xl border border-green-300 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:gap-10 sm:p-10']) }}>
     <header class="flex items-center gap-4">
         <div class="flex size-24 shrink-0 items-center justify-center rounded-full bg-green-300" aria-hidden="true">
             <x-lucide-user class="h-10 w-10 text-white" />

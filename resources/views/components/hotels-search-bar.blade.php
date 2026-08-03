@@ -11,10 +11,11 @@
 @endphp
 
 <div>
+    <x-animate-in>
     <form
         method="GET"
         action="{{ route('hotels') }}"
-        class="w-full bg-white rounded-2xl shadow-xl p-6 mb-12">
+        class="mb-12 w-full rounded-2xl bg-white p-6 shadow-xl">
         @if ($activeGroup)
             <input type="hidden" name="hotel_group_id" value="{{ $activeGroup }}">
         @endif
@@ -82,6 +83,7 @@
             </button>
         </div>
     </form>
+    </x-animate-in>
 
     <x-hotels-filters-modal
         :hotel-groups="$hotelGroups"
