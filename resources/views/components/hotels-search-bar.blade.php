@@ -26,20 +26,41 @@
             <input type="hidden" name="accommodation_type" value="{{ $activeType }}">
         @endif
 
-        <div class="flex flex-col gap-4 md:flex-row md:items-end md:gap-5">
-            <button
-                type="button"
-                data-modal-target="hotels-filters"
-                class="flex items-center gap-2 w-full border-2 border-gray-200 shrink-0 rounded-lg px-4 py-2.5 font-semibold text-black transition-colors duration-200 hover:bg-green-100 md:w-auto"
-            >
-                Filtros
-                <x-lucide-sliders-horizontal class="size-4 text-gray-500" />
-            </button>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+            <div class="relative min-w-0 flex-1">
+                <label for="name" class="sr-only">Buscar hotel</label>
+                <x-lucide-search class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-500" />
+                <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value="{{ request('name') }}"
+                    placeholder="Buscar hotel"
+                    class="h-11 w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-10 pr-3 text-indigo-950 placeholder-gray-500 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-200" />
+            </div>
 
+            <div class="flex shrink-0 gap-2">
+                <button
+                    type="submit"
+                    class="h-11 flex-1 rounded-lg bg-green-300 px-8 font-semibold text-white transition-colors duration-200 hover:bg-green-400 sm:flex-none">
+                    Buscar
+                </button>
+                <button
+                    type="button"
+                    data-modal-target="hotels-filters"
+                    class="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border-2 border-gray-200 px-4 font-semibold text-black transition-colors duration-200 hover:bg-green-100 sm:flex-none"
+                >
+                    Filtros
+                    <x-lucide-sliders-horizontal class="size-4 text-gray-500" />
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-4 flex flex-wrap gap-2">
             <a
                 href="{{ route('hotels', request()->except(['accommodation_type', 'page'])) }}"
                 @class([
-                    'flex items-center justify-center gap-2 w-full border-2 shrink-0 rounded-lg px-8 py-2.5 font-semibold transition-colors duration-200 md:w-auto',
+                    'inline-flex items-center justify-center rounded-lg border-2 px-4 py-2.5 font-semibold transition-colors duration-200',
                     'border-green-400 bg-green-100 text-black' => blank($activeType),
                     'border-gray-200 text-black hover:bg-green-100' => filled($activeType),
                 ])
@@ -57,7 +78,7 @@
                     name="accommodation_type"
                     value="{{ $type->id }}"
                     @class([
-                        'flex items-center gap-2 w-full border-2 shrink-0 rounded-lg px-8 py-2.5 font-semibold transition-colors duration-200 md:w-auto',
+                        'inline-flex items-center rounded-lg border-2 px-4 py-2.5 font-semibold transition-colors duration-200',
                         'border-green-400 bg-green-100 text-black' => $isActive,
                         'border-gray-200 text-black hover:bg-green-100' => ! $isActive,
                     ])
@@ -65,22 +86,6 @@
                     {{ $typeName }}
                 </button>
             @endforeach
-
-            <div class="flex w-full flex-col gap-1.5">
-                <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    value="{{ request('name') }}"
-                    placeholder="Buscar hotel"
-                    class="w-full rounded-lg border border-gray-200 bg-gray-50 p-2.5 text-indigo-950 placeholder-gray-500 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-200" />
-            </div>
-
-            <button
-                type="submit"
-                class="w-full shrink-0 rounded-lg bg-green-300 px-8 py-2.5 font-semibold text-white transition-colors duration-200 hover:bg-green-400 md:w-auto">
-                Buscar
-            </button>
         </div>
     </form>
     </x-animate-in>
