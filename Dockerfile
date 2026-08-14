@@ -29,9 +29,9 @@ COPY . .
 # Instalamos dependencias de PHP
 RUN composer install --optimize-autoloader --no-dev --no-interaction
 
-# Front: el repo usa pnpm (pnpm-lock.yaml)
+# Front: Alpine no incluye corepack; pnpm se instala con npm
 RUN if [ -f package.json ]; then \
-        corepack enable && pnpm install --frozen-lockfile && pnpm run build; \
+        npm install -g pnpm@11.8.0 && pnpm install --frozen-lockfile && pnpm run build; \
     fi
 
 # Permisos que Laravel necesita
