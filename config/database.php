@@ -3,6 +3,24 @@
 use Illuminate\Support\Str;
 use Pdo\Mysql;
 
+$mysqlSslOptions = [];
+
+if (extension_loaded('pdo_mysql')) {
+    $sslCa = env('MYSQL_ATTR_SSL_CA');
+
+    if ($sslCa) {
+        $mysqlSslOptions[Mysql::ATTR_SSL_CA] = $sslCa;
+    }
+
+    $useSsl = filled(env('MYSQL_ADDON_HOST')) || filter_var(env('DB_SSL', false), FILTER_VALIDATE_BOOLEAN);
+
+    if ($useSsl) {
+        $mysqlSslOptions[\PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = $sslCa
+            ? filter_var(env('MYSQL_ATTR_SSL_VERIFY_SERVER_CERT', true), FILTER_VALIDATE_BOOLEAN)
+            : filter_var(env('MYSQL_ATTR_SSL_VERIFY_SERVER_CERT', false), FILTER_VALIDATE_BOOLEAN);
+    }
+}
+
 return [
 
     /*
@@ -46,12 +64,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'url' => env('DB_URL', env('MYSQL_ADDON_URI')),
+            'host' => env('DB_HOST', env('MYSQL_ADDON_HOST', '127.0.0.1')),
+            'port' => env('DB_PORT', env('MYSQL_ADDON_PORT', '3306')),
+            'database' => env('DB_DATABASE', env('MYSQL_ADDON_DB', 'laravel')),
+            'username' => env('DB_USERNAME', env('MYSQL_ADDON_USER', 'root')),
+            'password' => env('DB_PASSWORD', env('MYSQL_ADDON_PASSWORD', '')),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8mb4'),
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
@@ -59,9 +77,7 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                Mysql::ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+            'options' => $mysqlSslOptions,
         ],
 
         'mariadb' => [
