@@ -76,6 +76,8 @@
 
             <button
                 type="button"
+                x-on:click="activo = activo ? null : 'hoteles'"
+                x-text="activo ? 'Ocultar' : 'Ver más'"
                 class="w-full shrink-0 rounded-lg bg-green-300 px-8 py-2.5 text-sm font-bold font-montserrat text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md lg:w-auto"
             >
                 Ver más

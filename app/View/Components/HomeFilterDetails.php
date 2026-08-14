@@ -15,56 +15,46 @@ class HomeFilterDetails extends Component
 
     public function __construct()
     {
-        $cards = [
-            [
-                'name'  => 'Hotel +',
-                'image' => asset('images/home/frame1.webp'),
-            ],
-            [
-                'name'  => 'Tour + Hotel',
-                'image' => asset('images/home/frame2.webp'),
-            ],
-            [
-                'name'  => 'Vuelo + Hotel',
-                'image' => asset('images/home/frame3.webp'),
-            ],
+        $cardImages = [
+            asset('images/home/frame1.webp'),
+            asset('images/home/frame2.webp'),
+            asset('images/home/frame3.webp'),
         ];
+
+        $cardsFor = fn (string $title): array => array_map(
+            fn (string $image): array => ['name' => $title, 'image' => $image],
+            $cardImages,
+        );
+
+        $lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
+
+Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.';
 
         $this->categorias = [
             'hoteles' => [
                 'title' => 'Hoteles',
-                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
-
-Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
-                'cards' => $cards,
+                'text'  => $lorem,
+                'cards' => $cardsFor('Hoteles'),
             ],
             'vuelos' => [
                 'title' => 'Vuelos',
-                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
-
-Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
-                'cards' => $cards,
+                'text'  => $lorem,
+                'cards' => $cardsFor('Vuelos'),
             ],
             'paquetes' => [
                 'title' => 'Paquetes',
-                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
-
-Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
-                'cards' => $cards,
+                'text'  => $lorem,
+                'cards' => $cardsFor('Paquetes'),
             ],
             'tours' => [
                 'title' => 'Tours',
-                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
-
-Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
-                'cards' => $cards,
+                'text'  => $lorem,
+                'cards' => $cardsFor('Tours'),
             ],
             'bodas' => [
                 'title' => 'Grupos & Bodas',
-                'text'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui magna, venenatis in gravida eget, dictum at lectus. Sed ex lectus, laoreet et felis at, ultricies mattis ex. Praesent eu auctor lacus. Nam ipsum lectus, accumsan sit amet nunc non, eleifend placerat orci. Fusce sed tempus nisl. 
-
-Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.',
-                'cards' => $cards,
+                'text'  => $lorem,
+                'cards' => $cardsFor('Grupos & Bodas'),
             ],
         ];
     }
