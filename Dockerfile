@@ -1,4 +1,4 @@
-FROM php:8.3-fpm-alpine AS base
+FROM php:8.4-fpm-alpine AS base
 
 # Dependencias del sistema y extensiones de PHP que Laravel necesita
 RUN apk add --no-cache \
