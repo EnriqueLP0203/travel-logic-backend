@@ -154,20 +154,6 @@ Route::get('/hotels/{slug}', function (string $slug) {
     return view('hotel_details', compact('hotel'));
 })->name('hotel.show');
 
-Route::get('/hotel_detail', function () {
-    return view('hotel_detail');
-})->name('hotel_detail');
-
-Route::get('/auth-traveler', function () {
-    $previous = url()->previous();
-
-    if (! str_contains($previous, '/auth-traveler')) {
-        session(['url.intended' => $previous]);
-    }
-
-    return view('auth-traveler');
-})->name('auth-traveler');
-
 Route::redirect('/admin-dashboard-auth', '/admin/login');
 
 Route::prefix('admin')->name('admin.')->group(function () {
