@@ -65,15 +65,15 @@
             <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
                 @php
                 $keyFeatures = [
-                ['title' => 'Liberar el potencial de cada agencia', 'desc' => 'Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.'],
-                ['title' => 'El operador turístico líder del mercado', 'desc' => 'Ser reconocidos como el socio estratégico de referencia para agencias de viajes mediante nuestro enfoque de.'],
-                ['title' => 'Tu socio estratégico B2B', 'desc' => 'Tour operador especializado en el mercado B2B que conecta agencias con una amplia red de servicios hoteleros, mejorando su eficiencia y garantizando experiencias de viaje memorables'],
+                ['title' => 'Liberar el potencial de cada agencia', 'desc' => 'Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.', 'icon' => 'lock-keyhole'],
+                ['title' => 'El operador turístico líder del mercado', 'desc' => 'Ser reconocidos como el socio estratégico de referencia para agencias de viajes mediante nuestro enfoque de.', 'icon' => 'trophy'],
+                ['title' => 'Tu socio estratégico B2B', 'desc' => 'Tour operador especializado en el mercado B2B que conecta agencias con una amplia red de servicios hoteleros, mejorando su eficiencia y garantizando experiencias de viaje memorables', 'icon' => 'handshake'],
                 ];
                 @endphp
                 @foreach ($keyFeatures as $index => $feature)
                 <x-animate-in delay="{{ $index * 100 }}" variant="subtle" class="flex flex-col items-center gap-2 sm:gap-4">
                     <div class="flex size-16 items-center justify-center rounded-lg bg-green-100">
-                        <x-lucide-plane-takeoff class="h-10 w-10 text-green-300" />
+                        <x-dynamic-component :component="'lucide-' . $feature['icon']" class="h-10 w-10 text-green-300" />
                     </div>
                     <p class="w-full max-w-xs text-center text-xl font-extrabold font-inter text-indigo-950 sm:text-2xl">{{ $feature['title'] }}</p>
                     <p class="w-full max-w-xs text-center text-base font-medium text-zinc-500">{{ $feature['desc'] }}</p>
