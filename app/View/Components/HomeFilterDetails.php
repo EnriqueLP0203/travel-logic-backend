@@ -31,30 +31,30 @@ class HomeFilterDetails extends Component
 Donec eget consectetur nisl. Aliquam fringilla sapien a dapibus vehicula. Vivamus cursus, elit porttitor aliquet scelerisque, justo nisi tincidunt tellus, vitae iaculis nulla enim eu sapien. Praesent venenatis quis augue et mattis. Sed interdum diam sit amet nunc volutpat, id vehicula tortor hendrerit. Curabitur vitae varius ante. Aliquam et nibh lectus.';
 
         $this->categorias = [
-            'hoteles' => [
-                'title' => 'Hoteles',
+            'todo-incluido' => [
+                'title' => 'Todo incluido',
                 'text'  => $lorem,
-                'cards' => $cardsFor('Hoteles'),
+                'cards' => $cardsFor('Todo incluido'),
             ],
-            'vuelos' => [
-                'title' => 'Vuelos',
+            'plan-europeo' => [
+                'title' => 'Plan Europeo',
                 'text'  => $lorem,
-                'cards' => $cardsFor('Vuelos'),
+                'cards' => $cardsFor('Plan Europeo'),
             ],
-            'paquetes' => [
-                'title' => 'Paquetes',
+            'glamping' => [
+                'title' => 'Glamping',
                 'text'  => $lorem,
-                'cards' => $cardsFor('Paquetes'),
+                'cards' => $cardsFor('Glamping'),
             ],
-            'tours' => [
-                'title' => 'Tours',
+            'cruceros' => [
+                'title' => 'Cruceros',
                 'text'  => $lorem,
-                'cards' => $cardsFor('Tours'),
+                'cards' => $cardsFor('Cruceros'),
             ],
-            'bodas' => [
-                'title' => 'Grupos & Bodas',
+            'long-stay' => [
+                'title' => 'Long Stay',
                 'text'  => $lorem,
-                'cards' => $cardsFor('Grupos & Bodas'),
+                'cards' => $cardsFor('Long Stay'),
             ],
         ];
     }
