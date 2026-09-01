@@ -63,30 +63,59 @@
             </div>
             @php
             $airlines = [
-            ['src' => 'aircanada.png', 'alt' => 'Air Canada'],
-            ['src' => 'american.png', 'alt' => 'American Airlines'],
-            ['src' => 'british.png', 'alt' => 'British Airways'],
-            ['src' => 'qatar.png', 'alt' => 'Qatar Airways'],
-            ['src' => 'emirates.png', 'alt' => 'Emirates'],
-            ['src' => 'southwest.png', 'alt' => 'Southwest Airlines'],
-            ['src' => 'turkish.png', 'alt' => 'Turkish Airlines'],
+            ['src' => 'volaris.webp', 'alt' => 'Volaris'],
+            ['src' => 'aeromexico.webp', 'alt' => 'Aeroméxico'],
+            ['src' => 'viva-aerobus.webp', 'alt' => 'Viva Aerobus'],
             ];
+            $hotels = [
+            ['src' => 'palace.webp', 'alt' => 'Palace Resorts'],
+            ['src' => 'pam.webp', 'alt' => 'PAM Hotels'],
+            ['src' => 'xcaret.webp', 'alt' => 'Xcaret'],
+            ['src' => 'karisma.webp', 'alt' => 'Karisma Hotels & Resorts'],
+            ['src' => 'accor.webp', 'alt' => 'Accor'],
+            ['src' => 'arriva.webp', 'alt' => 'Arriva Hospitality'],
+            ['src' => 'marriott.webp', 'alt' => 'Marriott'],
+            ['src' => 'hilton.webp', 'alt' => 'Hilton'],
+            ['src' => 'hyatt.webp', 'alt' => 'Hyatt'],
+            ['src' => 'emporio.webp', 'alt' => 'Emporio'],
+            ['src' => 'fairmont.webp', 'alt' => 'Fairmont'],
+            ['src' => 'aimbridge.webp', 'alt' => 'Aimbridge'],
+            ['src' => 'catalonia.webp', 'alt' => 'Catalonia'],
+            ['src' => 'imperial.webp', 'alt' => 'Grupo Imperial'],
+            ['src' => 'paladium.webp', 'alt' => 'Palladium'],
+            ];
+            $logoClass = 'w-48 shrink-0 object-contain transition-transform duration-300 hover:scale-105';
             @endphp
 
-            <div class="mx-auto mt-12 flex w-full flex-col gap-12 sm:mt-20 sm:gap-16 lg:gap-24">
-                <div class="flex flex-col items-center">
-                    <p class="text-3xl font-extrabold font-inter text-blue-300 sm:text-4xl lg:text-5xl">Marcas con las que trabajamos</p>
+            <div class="mx-auto mt-12 flex w-full max-w-8xl flex-col items-center gap-12 sm:mt-20 sm:gap-16">
+                <div class="flex flex-col items-center gap-3">
+                    <p class="text-center text-3xl font-extrabold font-inter text-blue-300 sm:text-4xl lg:text-5xl">Marcas con las que trabajamos</p>
+                    <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
                 </div>
-                @foreach (array_chunk($airlines, 4) as $row)
-                <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 sm:gap-x-16 lg:gap-x-24">
-                    @foreach ($row as $airline)
-                    <img
-                        src="{{ asset('images/about/' . $airline['src']) }}"
-                        alt="{{ $airline['alt'] }}"
-                        class="h-16 w-32 shrink-0 object-contain transition-transform duration-300 hover:scale-105 sm:h-20 sm:w-48 lg:h-24 lg:w-64" />
-                    @endforeach
+
+                <div class="flex w-full flex-col items-center gap-6">
+                    <p class="text-sm font-extrabold font-inter uppercase tracking-wide text-green-300">Aerolíneas</p>
+                    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-16">
+                        @foreach ($airlines as $airline)
+                        <img
+                            src="{{ asset('images/about/' . $airline['src']) }}"
+                            alt="{{ $airline['alt'] }}"
+                            class="{{ $logoClass }}" />
+                        @endforeach
+                    </div>
                 </div>
-                @endforeach
+
+                <div class="flex w-full flex-col items-center gap-6">
+                    <p class="text-sm font-extrabold font-inter uppercase tracking-wide text-green-300">Cadenas de hoteles</p>
+                    <div class="flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
+                        @foreach ($hotels as $hotel)
+                        <img
+                            src="{{ asset('images/about/' . $hotel['src']) }}"
+                            alt="{{ $hotel['alt'] }}"
+                            class="{{ $logoClass }}" />
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -97,15 +126,11 @@
         <div class="mx-auto flex max-w-6xl flex-col items-start justify-center gap-12 sm:gap-16 lg:flex-row lg:gap-24">
             <div class="flex max-w-md flex-col items-center justify-center gap-2">
                 <p class="text-2xl font-extrabold font-inter text-white">Misión</p>
-                <p class="text-center text-base font-medium font-inter text-white/80">Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.</p>
+                <p class="text-center text-base font-medium font-inter text-white/80">Liberar el potencial de las agencias de viajes con soluciones integrales que simplifican su operación y crean experiencias memorables para sus clientes.</p>
             </div>
             <div class="flex max-w-md flex-col items-center justify-center gap-2">
                 <p class="text-2xl font-extrabold font-inter text-white">Visión</p>
-                <p class="text-center text-base font-medium font-inter text-white/80">Ser reconocidos como el socio estratégico de referencia para agencias de viajes mediante nuestro enfoque de.</p>
-            </div>
-            <div class="flex max-w-md flex-col items-center justify-center gap-2">
-                <p class="text-2xl font-extrabold font-inter text-white">Valores</p>
-                <p class="text-center text-base font-medium font-inter text-white/80">Tour operador especializado en el mercado B2B que conecta agencias con una amplia red de servicios hoteleros, mejorando su eficiencia y garantizando experiencias de viaje memorables</p>
+                <p class="text-center text-base font-medium font-inter text-white/80">Ser el operador turístico líder, reconocido como el socio estratégico de referencia para agencias de viajes.</p>
             </div>
         </div>
     </section>
