@@ -1,5 +1,5 @@
 @props([
-    'inverted' => false,
+'inverted' => false,
 ])
 
 @php
@@ -7,120 +7,199 @@ $headingClass = $inverted ? 'text-white' : 'text-indigo-950';
 $subtitleClass = $inverted ? 'text-white' : 'text-indigo-950';
 $labelClass = $inverted ? 'text-white' : 'text-indigo-950';
 $inputClass = $inverted
-    ? 'w-full h-12 rounded-lg border border-white/30 bg-white p-2 text-sm font-light font-lato text-blue-300 transition-shadow duration-200 focus:outline-none focus:ring-2 focus:ring-green-300'
-    : 'w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950 transition-shadow duration-200 focus:outline-none focus:ring-2 focus:ring-green-300';
+? 'w-full h-12 rounded-lg border border-white/30 bg-white p-2 text-sm font-light font-lato text-blue-300 transition-shadow duration-200 focus:outline-none focus:ring-2 focus:ring-green-300'
+: 'w-full h-12 rounded-lg border border-indigo-950/20 p-2 text-sm font-light font-lato text-indigo-950 transition-shadow duration-200 focus:outline-none focus:ring-2 focus:ring-green-300';
 $errorClass = $inverted ? 'text-red-300' : 'text-red-600';
 $hintClass = $inverted ? 'text-white/60' : 'text-indigo-950/60';
 $successBoxClass = $inverted
-    ? 'mb-4 rounded-lg border border-green-200/30 bg-green-300/20 px-4 py-3 text-sm text-white'
-    : 'mb-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700';
+? 'mb-4 rounded-lg border border-green-200/30 bg-green-300/20 px-4 py-3 text-sm text-white'
+: 'mb-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700';
 $termsLinkClass = $inverted
-    ? 'text-sm font-medium font-lato text-green-300 hover:text-green-200'
-    : 'text-sm font-medium font-lato text-indigo-950';
+? 'text-sm font-medium font-lato text-green-300 hover:text-green-200'
+: 'text-sm font-medium font-lato text-indigo-950';
 @endphp
 
 <x-animate-in>
-<div {{ $attributes->merge(['class' => 'grid grid-cols-1 gap-12 py-16 md:py-24 lg:grid-cols-2']) }}>
-    <div class="flex w-full flex-col items-start text-left lg:w-3xl">
-        <h2 class="mb-4 text-4xl font-black font-inter sm:text-5xl lg:text-6xl {{ $headingClass }}">
-            ¿Listo para hacer crecer tu agencia con nosotros?
-        </h2>
+    <div {{ $attributes->merge(['class' => 'grid grid-cols-1 gap-12 py-16 md:py-24 lg:grid-cols-2']) }}>
+        <div class="flex w-full flex-col items-start text-left lg:w-3xl">
+            <h2 class="mb-4 text-4xl font-black font-inter sm:text-5xl lg:text-6xl {{ $headingClass }}">
+                ¿Listo para hacer crecer tu agencia con nosotros?
+            </h2>
 
-        <p class="w-full max-w-lg text-lg font-light font-inter sm:text-xl {{ $subtitleClass }}">
-            Únete a más de 200 agencias que ya disfrutan de tarifas exclusivas y herramientas profesionales bajo el modelo One Stop Shop.
-        </p>
+            <p class="w-full max-w-3xl text-lg font-light font-inter sm:text-xl {{ $subtitleClass }}">
+                Completa el formulario y un asesor te contactará con tarifas exclusivas. También puedes escribirnos por WhatsApp al 9982339545 o a reservaciones@travel-logic.com
+            </p>
 
-        <div class="mt-8 w-full max-w-lg">
-            @if (session('success'))
-            <div class="{{ $successBoxClass }}">
-                {{ session('success') }}
-            </div>
-            @endif
-
-            <form action="{{ route('contact.store') }}" method="POST" class="flex flex-col gap-4">
-                @csrf
-
-                <div class="flex flex-col gap-2">
-                    <label for="name" class="text-sm font-medium font-lato {{ $labelClass }}">Nombre</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value="{{ old('name') }}"
-                        maxlength="250"
-                        required
-                        class="{{ $inputClass }} @error('name') border-red-500 @enderror"
-                    />
-                    @error('name')
-                    <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label for="email" class="text-sm font-medium font-lato {{ $labelClass }}">Correo</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value="{{ old('email') }}"
-                        maxlength="150"
-                        required
-                        class="{{ $inputClass }} @error('email') border-red-500 @enderror"
-                    />
-                    @error('email')
-                    <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label for="phone" class="text-sm font-medium font-lato {{ $labelClass }}">Teléfono</label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value="{{ old('phone') }}"
-                        inputmode="numeric"
-                        minlength="7"
-                        maxlength="15"
-                        pattern="[0-9]{7,15}"
-                        title="Entre 7 y 15 dígitos, sin espacios"
-                        required
-                        class="{{ $inputClass }} @error('phone') border-red-500 @enderror"
-                    />
-                    <p class="text-xs {{ $hintClass }}">Entre 7 y 15 dígitos, sin espacios ni guiones.</p>
-                    @error('phone')
-                    <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="flex flex-col gap-1">
-                    <div class="flex items-center gap-2">
-                        <input
-                            type="checkbox"
-                            id="terms"
-                            name="terms"
-                            value="1"
-                            @checked(old('terms'))
-                            class="size-4 @error('terms') border-red-500 @enderror"
-                        />
-                        <label for="terms" class="text-sm font-light font-lato {{ $labelClass }}">
-                            Acepto los <a href="#" class="{{ $termsLinkClass }}">términos y condiciones</a>
-                        </label>
+            <div class="grid grid-cols-2 gap-4 mt-8">
+                <div class="w-auto flex items-center gap-2 bg-gray-200 p-4 rounded-lg">
+                    <div class="size-16 flex items-center justify-center rounded-full bg-green-100">
+                        <x-lucide-phone class="h-6 w-6 text-green-400" />
                     </div>
-                    @error('terms')
-                    <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
-                    @enderror
+                    <div>
+                        <p class="text-md font-normal font-inter text-gray-500">WHATSAPP</p>
+                        <P class="text-xl font-normal font-inter">9982339545</P>
+                    </div>
                 </div>
+                <div class="w-auto flex items-center gap-2 bg-gray-200 p-4 rounded-lg">
+                    <div class="size-16 flex items-center justify-center rounded-full bg-blue-100">
+                        <x-lucide-mail class="h-6 w-6 text-blue-200" />
+                    </div>
+                    <div>
+                        <p class="text-md font-normal font-inter text-gray-500">EMAIL</p>
+                        <p class="text-xl font-normal font-inter">reservaciones@travel-logic.com</p>
+                    </div>
+                </div>
+            </div>
 
-                <button type="submit" class="h-12 w-full rounded-lg bg-green-300 p-2 text-sm font-medium font-lato text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md">
-                    Enviar
-                </button>
-            </form>
+            <div class="mt-8 w-full max-w-3xl">
+                @if (session('success'))
+                <div class="{{ $successBoxClass }}">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                <form action="{{ route('contact.store') }}" method="POST" class="flex flex-col gap-4">
+                    @csrf
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="flex flex-col gap-2">
+                            <label for="agency-name" class="text-md font-medium font-lato {{ $labelClass }}">Nombre de la agencia</label>
+                            <input
+                                type="text"
+                                id="agency-name"
+                                name="agency_name"
+                                value="{{ old('agency_name') }}"
+                                maxlength="250"
+                                required
+                                class="{{ $inputClass }} @error('name') border-red-500 @enderror" />
+                            @error('name')
+                            <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label for="agent-name" class="text-md font-medium font-lato {{ $labelClass }}">Nombre de la agencia</label>
+                            <input
+                                type="text"
+                                id="agent-name"
+                                name="agent_name"
+                                value="{{ old('agent_name') }}"
+                                maxlength="250"
+                                required
+                                class="{{ $inputClass }} @error('agent_name') border-red-500 @enderror" />
+                            @error('agent_name')
+                            <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label for="email" class="text-md font-medium font-lato {{ $labelClass }}">Correo</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                maxlength="150"
+                                required
+                                class="{{ $inputClass }} @error('email') border-red-500 @enderror" />
+                            @error('email')
+                            <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label for="phone" class="text-md font-medium font-lato {{ $labelClass }}">Teléfono/Whatsapp</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                value="{{ old('phone') }}"
+                                inputmode="numeric"
+                                minlength="7"
+                                maxlength="15"
+                                pattern="[0-9]{7,15}"
+                                title="Entre 7 y 15 dígitos, sin espacios"
+                                required
+                                class="{{ $inputClass }} @error('phone') border-red-500 @enderror" />
+                            <p class="text-xs {{ $hintClass }}">Entre 7 y 15 dígitos, sin espacios ni guiones.</p>
+                            @error('phone')
+                            <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="country" class="text-md font-medium font-lato {{ $labelClass }}">Pais</label>
+                            <input
+                                type="text"
+                                id="country"
+                                name="country"
+                                value="{{ old('country') }}"
+                                maxlength="250"
+                                required
+                                class="{{ $inputClass }} @error('country') border-red-500 @enderror" />
+                            @error('country')
+                            <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label for="city" class="text-md font-medium font-lato {{ $labelClass }}">Ciudad</label>
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                value="{{ old('city') }}"
+                                maxlength="250"
+                                required
+                                class="{{ $inputClass }} @error('city') border-red-500 @enderror" />
+                            @error('city')
+                            <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label for="service-type" class="text-md font-medium font-lato {{ $labelClass }}">Tipo de servicio</label>
+                            <input
+                                type="text"
+                                id="service-type"
+                                name="service_type"
+                                value="{{ old('service_type') }}"
+                                maxlength="250"
+                                required
+                                class="{{ $inputClass }} @error('service_type') border-red-500 @enderror" />
+                            @error('service_type')
+                            <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                name="terms"
+                                value="1"
+                                @checked(old('terms'))
+                                class="size-4 @error('terms') border-red-500 @enderror" />
+                            <label for="terms" class="text-md font-light font-lato {{ $labelClass }}">
+                                Acepto los <a href="#" class="{{ $termsLinkClass }}">términos y condiciones</a>
+                            </label>
+                        </div>
+                        @error('terms')
+                        <p class="text-xs {{ $errorClass }}">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="h-12 w-full rounded-lg bg-green-300 p-2 text-sm font-medium font-lato text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md">
+                        Enviar
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="flex h-full items-center justify-center">
+            <img src="{{ asset('images/mapa.png') }}" alt="Contacto" class="h-auto w-full max-w-[720px]" />
         </div>
     </div>
-
-    <div class="flex h-full items-center justify-center">
-        <img src="{{ asset('images/mapa.png') }}" alt="Contacto" class="h-auto w-full max-w-[720px]" />
-    </div>
-</div>
 </x-animate-in>
