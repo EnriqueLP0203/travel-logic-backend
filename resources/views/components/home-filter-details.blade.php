@@ -16,11 +16,11 @@
         >
             <div class="flex flex-col items-center gap-8 mt-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
                 <div class="flex w-full min-w-0 flex-1 flex-col justify-center">
-                    <h3 class="text-2xl font-black font-montserrat text-indigo-950">
+                    <h3 class="text-4xl font-black font-montserrat text-indigo-950">
                         {{ $categoria['title'] }}
                     </h3>
                     <div class="mt-2 h-1 w-12 bg-green-300" aria-hidden="true"></div>
-                    <p class="mt-4 max-w-3xl text-base font-normal font-montserrat text-slate-500">
+                    <p class="mt-4 max-w-3xl text-base font-normal font-montserrat text-slate-700 leading-8">
                         {{ $categoria['text'] }}
                     </p>
                 </div>

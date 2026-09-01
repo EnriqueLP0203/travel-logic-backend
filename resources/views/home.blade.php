@@ -62,7 +62,7 @@
     {{-- key features --}}
     <x-animate-in>
         <section id="key-features" aria-label="Key Features" class="mb-10 md:mb-14 lg:mb-20">
-            <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
+            <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-12 xl:gap-16">
                 @php
                 $keyFeatures = [
                 ['title' => 'Liberar el potencial de cada agencia', 'desc' => 'Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.', 'icon' => 'lock-keyhole'],
