@@ -122,15 +122,81 @@
 </x-animate-in>
 
 <x-animate-in>
-    <section id="mission" aria-label="Mission" class="mt-12 w-full bg-blue-300 px-4 py-16 sm:mt-20 sm:px-8 sm:py-24 lg:px-24 lg:py-32">
-        <div class="mx-auto flex max-w-6xl flex-col items-start justify-center gap-12 sm:gap-16 lg:flex-row lg:gap-24">
-            <div class="flex max-w-md flex-col items-center justify-center gap-2">
-                <p class="text-2xl font-extrabold font-inter text-white">Misión</p>
-                <p class="text-center text-base font-medium font-inter text-white/80">Liberar el potencial de las agencias de viajes con soluciones integrales que simplifican su operación y crean experiencias memorables para sus clientes.</p>
+    <section id="mission" aria-label="Misión y visión" class="mt-12 w-full bg-blue-300 px-4 py-16 sm:mt-20 sm:px-8 sm:py-24 lg:px-24 lg:py-32">
+        @php
+        $missionVision = [
+            [
+                'label' => 'Nuestro propósito',
+                'title' => 'Misión',
+                'icon' => 'target',
+                'text' => 'Liberar el potencial de las agencias de viajes con soluciones integrales que simplifican su operación y crean experiencias memorables para sus clientes.',
+            ],
+            [
+                'label' => 'Hacia dónde vamos',
+                'title' => 'Visión',
+                'icon' => 'compass',
+                'text' => 'Ser el operador turístico líder, reconocido como el socio estratégico de referencia para agencias de viajes.',
+            ],
+        ];
+        @endphp
+        <div class="mx-auto flex max-w-6xl flex-col items-stretch gap-6 lg:flex-row lg:gap-8">
+            @foreach ($missionVision as $index => $item)
+            <x-animate-in delay="{{ $index * 80 }}" variant="subtle" class="flex-1">
+                <article class="flex h-full flex-col gap-5 rounded-3xl border-l-4 border-green-300 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-0.5 sm:gap-6 sm:p-8">
+                    <div class="flex size-16 items-center justify-center rounded-lg bg-white/10">
+                        <x-dynamic-component :component="'lucide-' . $item['icon']" class="h-8 w-8 text-green-300" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <p class="text-sm font-extrabold font-inter uppercase tracking-wide text-green-300">{{ $item['label'] }}</p>
+                        <h2 class="text-3xl font-extrabold font-inter text-balance text-white lg:text-4xl">{{ $item['title'] }}</h2>
+                    </div>
+                    <p class="text-pretty text-base font-medium font-inter leading-8 text-white/80 sm:text-lg">{{ $item['text'] }}</p>
+                </article>
+            </x-animate-in>
+            @endforeach
+        </div>
+    </section>
+</x-animate-in>
+
+<x-animate-in>
+    <section id="values" aria-label="Nuestros valores" class="w-full bg-white px-4 py-16 sm:px-8 sm:py-24 lg:px-24 lg:py-32">
+        @php
+        $values = [
+            ['title' => 'Confianza', 'desc' => 'Base de cada relación con nuestras agencias.', 'icon' => 'shield-check'],
+            ['title' => 'Cercanía', 'desc' => 'Acompañamiento humano en cada etapa.', 'icon' => 'heart-handshake'],
+            ['title' => 'Innovación', 'desc' => 'IA y herramientas digitales integradas.', 'icon' => 'sparkles'],
+            ['title' => 'Colaboración', 'desc' => 'Red de socios comprometidos.', 'icon' => 'users'],
+            ['title' => 'Integridad', 'desc' => 'Transparencia y ética en todo lo que hacemos.', 'icon' => 'scale'],
+            ['title' => 'Reconocimiento', 'desc' => 'Valoramos el esfuerzo de cada agencia.', 'icon' => 'award'],
+            ['title' => 'Eficiencia', 'desc' => 'Optimización continua para mejores resultados.', 'icon' => 'gauge'],
+        ];
+        @endphp
+        <div class="mx-auto flex w-full max-w-7xl flex-col items-center gap-12">
+            <div class="flex flex-col items-center gap-3">
+                <h2 class="text-center text-3xl font-extrabold font-inter text-blue-300 sm:text-4xl lg:text-5xl">Nuestros valores</h2>
+                <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
             </div>
-            <div class="flex max-w-md flex-col items-center justify-center gap-2">
-                <p class="text-2xl font-extrabold font-inter text-white">Visión</p>
-                <p class="text-center text-base font-medium font-inter text-white/80">Ser el operador turístico líder, reconocido como el socio estratégico de referencia para agencias de viajes.</p>
+
+            <div class="flex w-full flex-wrap items-start justify-center gap-x-6 gap-y-2 sm:gap-x-10">
+                @foreach ($values as $index => $value)
+                <x-animate-in
+                    delay="{{ $index * 80 }}"
+                    variant="subtle"
+                    @class([
+                        'w-full max-w-sm',
+                        'lg:mt-16' => $index % 2 === 1,
+                        'lg:mb-16' => $index % 2 === 0,
+                    ])
+                >
+                    <article class="flex h-full flex-col gap-4 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8">
+                        <div class="flex size-16 items-center justify-center rounded-lg bg-green-100">
+                            <x-dynamic-component :component="'lucide-' . $value['icon']" class="h-10 w-10 text-green-300" />
+                        </div>
+                        <h3 class="text-xl font-extrabold font-inter text-blue-300 sm:text-2xl">{{ $value['title'] }}</h3>
+                        <p class="text-pretty text-base font-normal font-lato leading-7 text-zinc-500">{{ $value['desc'] }}</p>
+                    </article>
+                </x-animate-in>
+                @endforeach
             </div>
         </div>
     </section>
