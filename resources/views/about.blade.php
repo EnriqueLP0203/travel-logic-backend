@@ -125,18 +125,18 @@
     <section id="mission" aria-label="Misión y visión" class="mt-12 w-full bg-blue-300 px-4 py-16 sm:mt-20 sm:px-8 sm:py-24 lg:px-24 lg:py-32">
         @php
         $missionVision = [
-            [
-                'label' => 'Nuestro propósito',
-                'title' => 'Misión',
-                'icon' => 'target',
-                'text' => 'Liberar el potencial de las agencias de viajes con soluciones integrales que simplifican su operación y crean experiencias memorables para sus clientes.',
-            ],
-            [
-                'label' => 'Hacia dónde vamos',
-                'title' => 'Visión',
-                'icon' => 'compass',
-                'text' => 'Ser el operador turístico líder, reconocido como el socio estratégico de referencia para agencias de viajes.',
-            ],
+        [
+        'label' => 'Nuestro propósito',
+        'title' => 'Misión',
+        'icon' => 'target',
+        'text' => 'Liberar el potencial de las agencias de viajes con soluciones integrales que simplifican su operación y crean experiencias memorables para sus clientes.',
+        ],
+        [
+        'label' => 'Hacia dónde vamos',
+        'title' => 'Visión',
+        'icon' => 'compass',
+        'text' => 'Ser el operador turístico líder, reconocido como el socio estratégico de referencia para agencias de viajes.',
+        ],
         ];
         @endphp
         <div class="mx-auto flex max-w-6xl flex-col items-stretch gap-6 lg:flex-row lg:gap-8">
@@ -162,13 +162,13 @@
     <section id="values" aria-label="Nuestros valores" class="w-full bg-white px-4 py-16 sm:px-8 sm:py-24 lg:px-24 lg:py-32">
         @php
         $values = [
-            ['title' => 'Confianza', 'desc' => 'Base de cada relación con nuestras agencias.', 'icon' => 'shield-check'],
-            ['title' => 'Cercanía', 'desc' => 'Acompañamiento humano en cada etapa.', 'icon' => 'heart-handshake'],
-            ['title' => 'Innovación', 'desc' => 'IA y herramientas digitales integradas.', 'icon' => 'sparkles'],
-            ['title' => 'Colaboración', 'desc' => 'Red de socios comprometidos.', 'icon' => 'users'],
-            ['title' => 'Integridad', 'desc' => 'Transparencia y ética en todo lo que hacemos.', 'icon' => 'scale'],
-            ['title' => 'Reconocimiento', 'desc' => 'Valoramos el esfuerzo de cada agencia.', 'icon' => 'award'],
-            ['title' => 'Eficiencia', 'desc' => 'Optimización continua para mejores resultados.', 'icon' => 'gauge'],
+        ['title' => 'Confianza', 'desc' => 'Base de cada relación con nuestras agencias.', 'icon' => 'shield-check'],
+        ['title' => 'Cercanía', 'desc' => 'Acompañamiento humano en cada etapa.', 'icon' => 'heart-handshake'],
+        ['title' => 'Innovación', 'desc' => 'IA y herramientas digitales integradas.', 'icon' => 'sparkles'],
+        ['title' => 'Colaboración', 'desc' => 'Red de socios comprometidos.', 'icon' => 'users'],
+        ['title' => 'Integridad', 'desc' => 'Transparencia y ética en todo lo que hacemos.', 'icon' => 'scale'],
+        ['title' => 'Reconocimiento', 'desc' => 'Valoramos el esfuerzo de cada agencia.', 'icon' => 'award'],
+        ['title' => 'Eficiencia', 'desc' => 'Optimización continua para mejores resultados.', 'icon' => 'gauge'],
         ];
         @endphp
         <div class="mx-auto flex w-full max-w-7xl flex-col items-center gap-12">
@@ -182,12 +182,10 @@
                 <x-animate-in
                     delay="{{ $index * 80 }}"
                     variant="subtle"
-                    @class([
-                        'w-full max-w-sm',
-                        'lg:mt-16' => $index % 2 === 1,
-                        'lg:mb-16' => $index % 2 === 0,
+                    @class([ 'w-full max-w-sm' , 'lg:mt-16'=> $index % 2 === 1,
+                    'lg:mb-16' => $index % 2 === 0,
                     ])
-                >
+                    >
                     <article class="flex h-full flex-col gap-4 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8">
                         <div class="flex size-16 items-center justify-center rounded-lg bg-green-100">
                             <x-dynamic-component :component="'lucide-' . $value['icon']" class="h-10 w-10 text-green-300" />
@@ -204,6 +202,15 @@
 
 <x-animate-in>
     <section id="team" aria-label="Team" class="mb-12 mt-12 w-full bg-white px-4 sm:mb-20 sm:mt-20 sm:px-8 md:px-12 lg:px-16 xl:px-24">
+        @php $team = [
+        ['name' => 'Ana Ornelas', 'role' => 'Gerente General', 'phone' => '9987348273', 'email' => 'gerencia@travel-logic.com', 'avatar' => 'ana.webp'],
+        ['name' => 'Danny Mercado', 'role' => 'Gerente Comercial', 'phone' => '9981251330', 'email' => 'producto@travel-logic.com', 'avatar' => 'danny.webp'],
+        ['name' => 'Sofia Gerardo', 'role' => 'Ejecutiva de Ventas & RRPP', 'phone' => '9981351534', 'email' => 'ventas@travel-logic.com', 'avatar' => 'sofia.webp'],
+        ['name' => 'Fernanda Valdéz', 'role' => 'Especialista de Servicio', 'phone' => '9982404465', 'email' => 'reservas@travel-logic.com', 'avatar' => 'fernanda.webp'],
+        ['name' => 'pendiente', 'role' => 'Especialista de Hospedaje', 'phone' => '9982339545', 'email' => 'reservas@travel-logic.com', 'avatar' => 'pendiente.webp'],
+        ['name' => 'Yamili Dzib', 'role' => 'Asistente Administrativo', 'phone' => '9982321008', 'email' => 'administracion@travel-logic.com', 'avatar' => 'yamili.webp'],
+        ]; @endphp
+
         <div class="mx-auto w-full max-w-[1600px]">
             <p class="mb-8 text-3xl font-extrabold font-inter text-blue-300 sm:mb-12 sm:text-4xl lg:text-5xl">El Equipo</p>
 
