@@ -142,7 +142,43 @@
             <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
         </div>
 
-        <x-destinations-carousel :destinations="$destinations" />
+        <div class="flex gap-8 py-12 justify-center">
+            <div class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
+                <img src="{{ asset('images/destination-home-section/playas.webp') }}" class="w-full h-full object-cover rounded-2xl">
+                <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
+                    <p class="text-white text-2xl font-bold font-inter">Sol y playa</p>
+                    <p class="text-white text-base font-normal font-inter">costas y actividades marinas</p>
+                </div>
+            </div>
+            <div class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
+                <img src="{{ asset('images/destination-home-section/cultura.webp') }}" class="w-full h-full object-cover rounded-2xl">
+                <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
+                    <p class="text-white text-2xl font-bold font-inter">Cultura</p>
+                    <p class="text-white text-base font-normal font-inter">historia, arte y gastronomía</p>
+                </div>
+            </div>
+            <div class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
+                <img src="{{ asset('images/destination-home-section/naturaleza.webp') }}" class="w-full h-full object-cover rounded-2xl">
+                <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
+                    <p class="text-white text-2xl font-bold font-inter">Naturaleza y ecoturismo</p>
+                    <p class="text-white text-base font-normal font-inter">aventura al aire libre</p>
+                </div>
+            </div>
+            <div class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
+                <img src="{{ asset('images/destination-home-section/negocios.webp') }}" class="w-full h-full object-cover rounded-2xl">
+                <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
+                    <p class="text-white text-2xl font-bold font-inter">Negocios y reuniones</p>
+                    <p class="text-white text-base font-normal font-inter">congresos y viajes corporativos</p>
+                </div>
+            </div>
+            <div class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
+                <img src="{{ asset('images/destination-home-section/termalismo.webp') }}" class="w-full h-full object-cover rounded-2xl">
+                <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
+                    <p class="text-white text-2xl font-bold font-inter">Salud y bienestar</p>
+                    <p class="text-white text-base font-normal font-inter">termalismo y recuperación</p>
+                </div>
+            </div>
+        </div>
     </section>
 </x-animate-in>
 
