@@ -89,9 +89,9 @@
     <section id="features" aria-label="Features" class="w-full bg-blue-400">
         <div class="grid min-h-[420px] grid-cols-1 lg:grid-cols-2 lg:min-h-[520px]">
             <div class="flex flex-col justify-center gap-6 px-6 py-12 sm:px-8 sm:py-16 md:px-16 lg:px-24 xl:px-32">
-                <p class="text-sm font-extrabold font-inter text-green-300">¿Por qué Travel Logic?</p>
+                <p class="text-xl font-extrabold font-inter text-green-300">¿Por qué Travel Logic?</p>
                 <div class="flex flex-col gap-4">
-                    <p class="text-2xl font-bold font-inter text-white sm:text-3xl lg:text-4xl">Todo lo que tu agencia necesita</p>
+                    <p class="text-2xl font-bold font-inter text-white sm:text-3xl lg:text-5xl">Todo lo que tu agencia necesita</p>
                     <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
                 </div>
                 <p class="max-w-xl text-base font-normal font-inter text-white">Plataforma B2B diseñada por expertos bajo el modelo One Stop Shop para impulsar las ventas de tu agencia.</p>
@@ -137,8 +137,8 @@
 <x-animate-in>
     <section id="portfolio-hotels" aria-label="Portafolio de destinos" class="mt-10 w-full bg-white">
         <div class="flex flex-col items-start gap-3 px-6 sm:px-8 md:px-16 lg:px-24">
-            <p class="text-sm font-extrabold font-inter text-green-300">Nuestro portafolio</p>
-            <p class="text-3xl font-black font-inter text-indigo-950 sm:text-4xl">Destinos que venden solos</p>
+            <p class="text-xl font-extrabold font-inter text-green-300">Nuestro portafolio</p>
+            <p class="text-3xl font-black font-inter text-indigo-950 sm:text-5xl">Destinos que venden solos</p>
             <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
         </div>
 
@@ -187,8 +187,8 @@
         <div class="grid grid-cols-1 gap-10 px-6 py-12 sm:px-8 sm:py-16 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-24 lg:py-20">
             <div class="flex w-full max-w-2xl flex-col gap-6">
                 <div class="flex flex-col items-start gap-3">
-                    <p class="text-sm font-extrabold font-inter text-green-300">Así de fácil</p>
-                    <p class="text-3xl font-black font-inter text-white sm:text-4xl">Empieza a vender en 4 pasos</p>
+                    <p class="text-xl font-extrabold font-inter text-green-300">Así de fácil</p>
+                    <p class="text-3xl font-black font-inter text-white sm:text-5xl">Empieza a vender en 4 pasos</p>
                     <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
                 </div>
 
@@ -266,8 +266,8 @@
     >
         <div class="flex flex-col gap-6 px-4 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-24">
             <div class="flex flex-col gap-3">
-                <p class="text-sm font-extrabold font-inter text-green-300">Testimonios</p>
-                <p class="text-3xl font-black font-inter text-blue-400 sm:text-4xl">Lo que dicen nuestras agencias</p>
+                <p class="text-xl font-extrabold font-inter text-green-300">Testimonios</p>
+                <p class="text-3xl font-black font-inter text-blue-400 sm:text-5xl">Lo que dicen nuestras agencias</p>
                 <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
             </div>
             <div class="flex items-center gap-4" x-show="canScroll" x-cloak>
