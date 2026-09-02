@@ -13,7 +13,9 @@ class ContactController extends Controller
      */
     public function store(StoreInterestedClientRequest $request): RedirectResponse
     {
-        InterestedClient::create($request->only('name', 'email', 'phone'));
+        InterestedClient::create($request->only(
+            'agency_name', 'agent_name', 'email', 'phone', 'country', 'city', 'service_type'
+        ));
 
         return back()
             ->with('success', 'Tu mensaje fue enviado correctamente. Te contactaremos pronto.');

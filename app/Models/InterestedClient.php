@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class InterestedClient extends Model
 {
     protected $fillable = [
-        'name',
+        'agency_name',
+        'agent_name',
         'email',
         'phone',
+        'country',
+        'city',
+        'service_type',
         'is_attended',
     ];
+
 
     protected $casts = [
         'is_attended' => 'boolean',
