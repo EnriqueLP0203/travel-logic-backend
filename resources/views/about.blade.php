@@ -217,11 +217,11 @@
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
                 @foreach ($team as $index => $member)
                 <x-animate-in delay="{{ $index * 80 }}" variant="subtle">
-                    <div class="relative aspect-[568/488] w-full overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <div class="group relative aspect-[568/488] w-full overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1">
                         <div class="absolute left-[14%] top-[4.5%] h-[59%] w-[45%] overflow-hidden rounded-2xl bg-gray-400">
-                            <img src="{{ asset('images/team/' . $member['avatar']) }}" alt="{{ $member['name'] }}" class="h-full w-full object-cover">
+                            <img src="{{ asset('images/team/' . $member['avatar']) }}" alt="{{ $member['name'] }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
-                        <div class="absolute bottom-[4%] left-[28%] w-[56%] rounded-tl-xl rounded-tr-xl rounded-br-xl bg-blue-300 p-4 sm:p-6 lg:p-8">
+                        <div class="absolute bottom-[4%] left-[28%] w-1/2 rounded-tl-2xl rounded-tr-2xl rounded-br-2xl bg-blue-300 p-4 sm:p-6 lg:p-8">
                             <p class="font-inter text-base font-bold leading-5 text-white lg:text-lg">
                                 {{ $member['name'] }}
                             </p>
