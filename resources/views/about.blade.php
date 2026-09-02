@@ -201,7 +201,7 @@
 </x-animate-in>
 
 <x-animate-in>
-    <section id="team" aria-label="Team" class="mb-12 mt-12 w-full bg-white px-4 sm:mb-20 sm:mt-20 sm:px-8 md:px-12 lg:px-16 xl:px-24">
+    <section id="team" aria-label="Team" class="mb-12 w-full bg-white px-4 sm:mb-20 sm:px-8 md:px-12 lg:px-16 xl:px-24">
         @php $team = [
         ['name' => 'Ana Ornelas', 'role' => 'Gerente General', 'phone' => '9987348273', 'email' => 'gerencia@travel-logic.com', 'avatar' => 'ana.webp'],
         ['name' => 'Danny Mercado', 'role' => 'Gerente Comercial', 'phone' => '9981251330', 'email' => 'producto@travel-logic.com', 'avatar' => 'danny.webp'],
