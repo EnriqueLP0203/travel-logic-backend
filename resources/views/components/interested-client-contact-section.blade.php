@@ -27,28 +27,39 @@ $termsLinkClass = $inverted
             </h2>
 
             <p class="w-full max-w-3xl text-lg font-light font-inter sm:text-xl {{ $subtitleClass }}">
-                Completa el formulario y un asesor te contactará con tarifas exclusivas. También puedes escribirnos por WhatsApp al 9982339545 o a reservaciones@travel-logic.com
+                Completa el formulario y un asesor te contactará con tarifas exclusivas. También puedes contactarnos por WhatsApp o enviarnos un correo.
             </p>
 
+            {{-- Botones de contacto rápido --}}
             <div class="grid grid-cols-2 gap-4 mt-8">
-                <div class="w-auto flex items-center gap-2 bg-gray-200 p-4 rounded-lg">
-                    <div class="size-16 flex items-center justify-center rounded-full bg-green-100">
-                        <x-lucide-phone class="h-6 w-6 text-green-400" />
+
+                {{-- WhatsApp --}}
+                @php $waCardClass = $inverted ? 'border border-white/20 bg-white/10' : 'border border-green-200 bg-green-50'; @endphp
+                <a href="https://wa.me/529982339545?text=Hola,%20quiero%20hacer%20negocio%20con%20ustedes"
+                    target="_blank" rel="noopener noreferrer"
+                    class="flex items-center gap-3 rounded-lg p-4 no-underline transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md {{ $waCardClass }}">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-100">
+                        <x-lucide-phone class="h-5 w-5 text-green-600" />
                     </div>
                     <div>
-                        <p class="text-md font-normal font-inter text-gray-500">WHATSAPP</p>
-                        <P class="text-xl font-normal font-inter">9982339545</P>
+                        <p class="text-xs font-medium font-inter {{ $inverted ? 'text-white/60' : 'text-gray-500' }}">WhatsApp</p>
+                        <p class="text-sm font-semibold font-inter {{ $inverted ? 'text-white' : 'text-gray-900' }}">998 233 9545</p>
                     </div>
-                </div>
-                <div class="w-auto flex items-center gap-2 bg-gray-200 p-4 rounded-lg">
-                    <div class="size-16 flex items-center justify-center rounded-full bg-blue-100">
-                        <x-lucide-mail class="h-6 w-6 text-blue-200" />
+                </a>
+
+                {{-- Email --}}
+                @php $emailCardClass = $inverted ? 'border border-white/20 bg-white/10' : 'border border-indigo-200 bg-indigo-50'; @endphp
+                <a href="mailto:reservaciones@travel-logic.com"
+                    class="flex items-center gap-3 rounded-lg p-4 no-underline transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md {{ $emailCardClass }}">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100">
+                        <x-lucide-mail class="h-5 w-5 text-indigo-600" />
                     </div>
                     <div>
-                        <p class="text-md font-normal font-inter text-gray-500">EMAIL</p>
-                        <p class="text-xl font-normal font-inter">reservaciones@travel-logic.com</p>
+                        <p class="text-xs font-medium font-inter {{ $inverted ? 'text-white/60' : 'text-gray-500' }}">Correo</p>
+                        <p class="text-xs font-semibold font-inter truncate {{ $inverted ? 'text-white' : 'text-gray-900' }}">reservaciones@travel-logic.com</p>
                     </div>
-                </div>
+                </a>
+
             </div>
 
             <div class="mt-8 w-full max-w-3xl">
@@ -77,7 +88,7 @@ $termsLinkClass = $inverted
                         </div>
 
                         <div class="flex flex-col gap-2">
-                            <label for="agent-name" class="text-md font-medium font-lato {{ $labelClass }}">Nombre de la agencia</label>
+                            <label for="agent-name" class="text-md font-medium font-lato {{ $labelClass }}">Nombre del agente</label>
                             <input
                                 type="text"
                                 id="agent-name"

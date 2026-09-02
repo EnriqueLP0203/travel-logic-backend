@@ -74,9 +74,12 @@
             <thead>
                 <tr class="border-y border-slate-200 bg-slate-50 text-left">
                     <th class="w-12 px-6 py-3 font-medium text-slate-500">#</th>
-                    <th class="px-6 py-3 font-semibold text-blue-600">Nombre</th>
+                    <th class="px-6 py-3 font-semibold text-blue-600">Agencia</th>
+                    <th class="px-6 py-3 font-semibold text-blue-600">Agente</th>
                     <th class="px-6 py-3 font-semibold text-blue-600">Correo</th>
                     <th class="px-6 py-3 font-semibold text-blue-600">Teléfono</th>
+                    <th class="px-6 py-3 font-semibold text-blue-600">Ubicación</th>
+                    <th class="px-6 py-3 font-semibold text-blue-600">Servicio</th>
                     <th class="px-6 py-3 font-semibold text-blue-600">Fecha</th>
                     <th class="px-6 py-3 font-semibold text-blue-600">Estado</th>
                     <th class="px-6 py-3 text-center font-medium text-slate-500">Acciones</th>
@@ -86,9 +89,12 @@
                 @forelse ($registros as $registro)
                     <tr class="hover:bg-slate-50">
                         <td class="px-6 py-3 text-slate-500">{{ $registros->firstItem() + $loop->index }}</td>
-                        <td class="px-6 py-3 text-slate-700">{{ $registro->name }}</td>
+                        <td class="px-6 py-3 font-medium text-slate-800">{{ $registro->agency_name }}</td>
+                        <td class="px-6 py-3 text-slate-700">{{ $registro->agent_name }}</td>
                         <td class="px-6 py-3 text-slate-700">{{ $registro->email }}</td>
                         <td class="px-6 py-3 text-slate-700">{{ $registro->phone }}</td>
+                        <td class="px-6 py-3 text-slate-500">{{ $registro->city }}, {{ $registro->country }}</td>
+                        <td class="px-6 py-3 text-slate-500">{{ $registro->service_type }}</td>
                         <td class="px-6 py-3 text-slate-500">{{ $registro->created_at?->format('d/m/Y H:i') }}</td>
                         <td class="px-6 py-3">
                             @if ($registro->is_attended)
@@ -103,7 +109,7 @@
                                     type="button"
                                     data-modal-target="interested-client-attend"
                                     data-id="{{ $registro->id }}"
-                                    data-client-name="{{ $registro->name }}"
+                                    data-client-name="{{ $registro->agent_name }}"
                                     data-is-attended="{{ $registro->is_attended ? '1' : '0' }}"
                                     data-update-url="{{ route('admin.interested-clients.update', $registro) }}"
                                     class="text-blue-500 transition-all duration-300 hover:scale-110 hover:text-blue-700"
@@ -115,7 +121,7 @@
                                     type="button"
                                     data-modal-target="interested-client-delete"
                                     data-id="{{ $registro->id }}"
-                                    data-client-name="{{ $registro->name }}"
+                                    data-client-name="{{ $registro->agent_name }}"
                                     data-delete-url="{{ route('admin.interested-clients.destroy', $registro) }}{{ $status ? '?status='.$status : '' }}"
                                     class="text-red-500 transition-all duration-300 hover:scale-110 hover:text-red-700"
                                     title="Eliminar">
@@ -126,7 +132,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="px-6 py-8 text-center text-slate-400">
+                        <td colspan="10" class="px-6 py-8 text-center text-slate-400">
                             No hay clientes interesados registrados.
                         </td>
                     </tr>

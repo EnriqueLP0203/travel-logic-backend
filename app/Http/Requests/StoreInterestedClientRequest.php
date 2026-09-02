@@ -18,10 +18,14 @@ class StoreInterestedClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:250'],
-            'email' => ['required', 'email:rfc,dns', 'max:150'],
-            'phone' => ['required', new NumericPhone],
-            'terms' => ['accepted'],
+            'agency_name'  => ['required', 'string', 'max:250'],
+            'agent_name'   => ['required', 'string', 'max:250'],
+            'email'        => ['required', 'email:rfc,dns', 'max:150'],
+            'phone'        => ['required', new NumericPhone],
+            'country'      => ['required', 'string', 'max:250'],
+            'city'         => ['required', 'string', 'max:250'],
+            'service_type' => ['required', 'string', 'max:250'],
+            'terms'        => ['accepted'],
         ];
     }
 
@@ -31,13 +35,18 @@ class StoreInterestedClientRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'El nombre es obligatorio.',
-            'name.max' => 'El nombre no puede superar 250 caracteres.',
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'Ingresa un correo electrónico válido.',
-            'email.max' => 'El correo no puede superar 150 caracteres.',
-            'phone.required' => 'El teléfono es obligatorio.',
-            'terms.accepted' => 'Debes aceptar los términos y condiciones.',
+            'agency_name.required'  => 'El nombre de la agencia es obligatorio.',
+            'agency_name.max'       => 'El nombre de la agencia no puede superar 250 caracteres.',
+            'agent_name.required'   => 'El nombre del agente es obligatorio.',
+            'agent_name.max'        => 'El nombre del agente no puede superar 250 caracteres.',
+            'email.required'        => 'El correo electrónico es obligatorio.',
+            'email.email'           => 'Ingresa un correo electrónico válido.',
+            'email.max'             => 'El correo no puede superar 150 caracteres.',
+            'phone.required'        => 'El teléfono es obligatorio.',
+            'country.required'      => 'El país es obligatorio.',
+            'city.required'         => 'La ciudad es obligatoria.',
+            'service_type.required' => 'El tipo de servicio es obligatorio.',
+            'terms.accepted'        => 'Debes aceptar los términos y condiciones.',
         ];
     }
 
