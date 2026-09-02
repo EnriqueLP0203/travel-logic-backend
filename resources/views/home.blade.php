@@ -249,6 +249,10 @@
         class="mt-20 w-full bg-white pb-12 sm:pb-20"
         x-data="{
             modal: null,
+            open: false,
+            openModal(data) { this.modal = data; this.open = true; },
+            closeModal() { this.open = false; },
+            afterLeave() { this.modal = null; },
             canScroll: false,
             init() {
                 const track = this.$refs.track;
@@ -261,8 +265,8 @@
                 this.$refs.track.scrollBy({ left: dir * ((card?.offsetWidth ?? 320) + 16), behavior: 'smooth' });
             },
         }"
-        x-on:keydown.escape.window="modal = null"
-        x-effect="document.body.classList.toggle('overflow-hidden', !!modal)"
+        x-on:keydown.escape.window="closeModal()"
+        x-effect="document.body.classList.toggle('overflow-hidden', open)"
     >
         <div class="flex flex-col gap-6 px-4 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-24">
             <div class="flex flex-col gap-3">
@@ -314,7 +318,7 @@
 
         <template x-teleport="body">
         <div
-            x-show="modal"
+            x-show="open"
             x-cloak
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0"
@@ -322,17 +326,18 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0"
+            @after-leave="afterLeave()"
             class="fixed inset-0 z-[200] flex items-center justify-center p-4"
             role="dialog"
             aria-modal="true"
             aria-labelledby="testimonial-modal-title"
         >
-            <div class="absolute inset-0 bg-stone-900/50" x-on:click="modal = null"></div>
+            <div class="absolute inset-0 bg-stone-900/50" x-on:click="closeModal()"></div>
             <div class="relative z-10 flex max-h-[80vh] w-full max-w-xl flex-col overflow-hidden rounded-3xl border border-green-300 bg-white p-6 shadow-2xl sm:p-10">
                 <button
                     type="button"
                     aria-label="Cerrar"
-                    x-on:click="modal = null"
+                    x-on:click="closeModal()"
                     class="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-100 hover:text-stone-900"
                 >
                     <x-lucide-x class="size-5" />

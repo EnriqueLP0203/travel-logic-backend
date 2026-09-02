@@ -32,7 +32,7 @@
     @if ($isLong)
         <button
             type="button"
-            x-on:click="modal = {{ \Illuminate\Support\Js::from(['name' => $name, 'quote' => $quote, 'rating' => (int) $rating]) }}"
+            x-on:click="openModal({{ \Illuminate\Support\Js::from(['name' => $name, 'quote' => $quote, 'rating' => (int) $rating]) }})"
             class="mt-auto self-start text-sm font-semibold font-inter text-green-300 transition-colors hover:text-green-400"
         >
             Leer más
