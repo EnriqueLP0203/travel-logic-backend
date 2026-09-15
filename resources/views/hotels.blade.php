@@ -15,7 +15,7 @@
     @if ($hotels->isNotEmpty())
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 justify-items-center">
             @foreach ($hotels as $hotel)
-                <x-animate-in delay="{{ $loop->index * 80 }}" variant="subtle">
+                <x-animate-in delay="{{ $loop->index * 10 }}" variant="subtle">
                     <x-hotel-card :hotel="$hotel" />
                 </x-animate-in>
             @endforeach
