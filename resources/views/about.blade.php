@@ -38,15 +38,16 @@
                 </div>
             </div>
 
-            <div class="flex w-full max-w-xl flex-col justify-center">
-                <div class="mb-6 flex flex-col gap-2">
+            <div class="flex w-full max-w-xl flex-col justify-center gap-6">
+                <div class="mb-2 flex flex-col gap-2">
                     <h1 class="font-inter text-4xl font-semibold leading-tight text-white">Nosotros</h1>
                     <p class="font-inter text-xl font-medium text-white/80">Soluciones integrales y personalizadas.</p>
                 </div>
                 <div class="border-l-4 border-sky-500 pl-6">
-                    <p class="font-inter text-xl font-normal leading-8 text-white">
-                        Lorem ipsum dolor sit amet consectetur. In at amet semper velit elit nisi faucibus arcu. Bibendum nulla porttitor faucibus bibendum erat a vulputate sed. Quisque quis viverra turpis at erat vel ut metus congue. Sed senectus ullamcorper imperdiet sit fermentum. Fermentum faucibus proin hac sed condimentum euismod felis risus.
-                    </p>
+                    <div class="flex flex-col gap-4 font-inter text-base font-normal leading-8 text-white sm:text-lg">
+                        <p>Travel Logic nació el 23 de septiembre de 2023 de una idea simple: si ya negociábamos las mejores tarifas hoteleras para nuestra propia operación dentro de APS Holding, ¿por qué no compartir esa ventaja con otras agencias? Así nació una operadora mayorista construida desde la experiencia real de operar y negociar.</p>
+                        <p>Somos parte de una familia de empresas: <span class="font-bold text-green-400">COMEVA, GATE 48, TRAKEN, SMART AVIATION, BAGGAGE EXPRESS Y VIRION MEDIA</span>, todas unidas por una misma visión. Hoy seguimos con la misma idea original: convertir las mejores tarifas en ventaja competitiva para todo el gremio.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,24 +55,18 @@
 </x-animate-in>
 
 <x-animate-in>
-    <section id="history" aria-label="History" class="w-full bg-white px-4 py-16 sm:px-8 sm:py-24 lg:px-24 lg:py-32">
-        <div class="flex flex-col items-center gap-4">
-            <p class="text-3xl font-extrabold font-inter text-blue-300 sm:text-4xl lg:text-5xl">Nuestra Historia</p>
-            <div class="flex max-w-7xl flex-col gap-6 text-center text-base font-normal font-lato leading-8 text-black sm:text-lg lg:text-xl">
-                <p>Travel Logic nació el 23 de septiembre de 2023 de una idea simple: si ya negociábamos las mejores tarifas hoteleras para nuestra propia operación dentro de APS Holding, ¿por qué no compartir esa ventaja con otras agencias? Así nació una operadora mayorista construida desde la experiencia real de operar y negociar.</p>
-                <p>Somos parte de una familia de empresas: <span class="font-bold text-green-400">COMEVA, GATE 48, TRAKEN, SMART AVIATION, BAGGAGE EXPRESS Y VIRION MEDIA</span>, todas unidas por una misma visión. Hoy seguimos con la misma idea original: convertir las mejores tarifas en ventaja competitiva para todo el gremio.</p>
-            </div>
-            @php
-            $airlines = [
-            ['src' => 'volaris.webp', 'alt' => 'Volaris'],
-            ['src' => 'aeromexico.webp', 'alt' => 'Aeroméxico'],
-            ['src' => 'viva-aerobus.webp', 'alt' => 'Viva Aerobus'],
-            ];
-            $hotels = [
-            ['src' => 'palace.webp', 'alt' => 'Palace Resorts'],
-            ['src' => 'pam.webp', 'alt' => 'PAM Hotels'],
-            ['src' => 'xcaret.webp', 'alt' => 'Xcaret'],
-            ['src' => 'karisma.webp', 'alt' => 'Karisma Hotels & Resorts'],
+    <section id="brands" aria-label="Marcas con las que trabajamos" class="w-full bg-white px-4 py-16 sm:px-8 sm:py-24 lg:px-24 lg:py-32">
+        @php
+        $airlines = [
+        ['src' => 'volaris.webp', 'alt' => 'Volaris'],
+        ['src' => 'aeromexico.webp', 'alt' => 'Aeroméxico'],
+        ['src' => 'viva-aerobus.webp', 'alt' => 'Viva Aerobus'],
+        ];
+        $hotels = [
+        ['src' => 'palace.webp', 'alt' => 'Palace Resorts'],
+        ['src' => 'pam.webp', 'alt' => 'PAM Hotels'],
+        ['src' => 'xcaret.webp', 'alt' => 'Xcaret'],
+        ['src' => 'karisma.webp', 'alt' => 'Karisma Hotels & Resorts'],
             ['src' => 'accor.webp', 'alt' => 'Accor'],
             ['src' => 'arriva.webp', 'alt' => 'Arriva Hospitality'],
             ['src' => 'marriott.webp', 'alt' => 'Marriott'],
@@ -116,7 +111,6 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
         </div>
     </section>
 </x-animate-in>
@@ -177,16 +171,14 @@
                 <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
             </div>
 
-            <div class="flex w-full flex-wrap items-start justify-center gap-x-6 gap-y-2 sm:gap-x-10">
+            <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
                 @foreach ($values as $index => $value)
                 <x-animate-in
                     delay="{{ $index * 80 }}"
                     variant="subtle"
-                    @class([ 'w-full max-w-sm' , 'lg:mt-16'=> $index % 2 === 1,
-                    'lg:mb-16' => $index % 2 === 0,
-                    ])
-                    >
-                    <article class="flex h-full flex-col gap-4 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8">
+                    class="w-full max-w-sm {{ $loop->last && count($values) % 3 !== 0 ? 'lg:col-span-3' : '' }}"
+                >
+                    <article class="flex h-full flex-col items-center gap-4 rounded-3xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8">
                         <div class="flex size-16 items-center justify-center rounded-lg bg-green-100">
                             <x-dynamic-component :component="'lucide-' . $value['icon']" class="h-10 w-10 text-green-300" />
                         </div>
