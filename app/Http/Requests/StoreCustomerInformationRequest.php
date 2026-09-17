@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Rules\NumericPhone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 
 class StoreCustomerInformationRequest extends FormRequest
 {
@@ -26,7 +25,7 @@ class StoreCustomerInformationRequest extends FormRequest
             'agency_name' => ['required', 'string', 'max:250'],
             'legal_name' => ['required', 'string', 'max:250'],
             'logo_url' => ['nullable', 'url', 'max:500'],
-            'password' => ['required', 'confirmed', Password::defaults()],
+            'password' => ['nullable', 'string'],
 
             'contact_person' => ['required', 'string', 'max:250'],
             'email' => ['required', 'email:rfc,dns', 'max:150', 'unique:customer_information,email'],
@@ -58,13 +57,11 @@ class StoreCustomerInformationRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'username.required' => 'El nombre de usuario es obligatorio.',
-            'username.unique' => 'Este nombre de usuario ya está registrado.',
+            'username.required' => 'El nombre de agente es obligatorio.',
+            'username.unique' => 'Este nombre de agente ya está registrado.',
             'agency_name.required' => 'El nombre de la agencia es obligatorio.',
             'legal_name.required' => 'El nombre fiscal es obligatorio.',
             'logo_url.url' => 'El enlace del logotipo debe ser una URL válida.',
-            'password.required' => 'La contraseña es obligatoria.',
-            'password.confirmed' => 'Las contraseñas no coinciden.',
             'contact_person.required' => 'La persona de contacto es obligatoria.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'Ingresa un correo electrónico válido.',

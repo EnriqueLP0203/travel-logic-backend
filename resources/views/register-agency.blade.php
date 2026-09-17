@@ -32,7 +32,6 @@
             agency_name: {{ $errors->has('agency_name') ? 'true' : 'false' }},
             legal_name: {{ $errors->has('legal_name') ? 'true' : 'false' }},
             logo_url: {{ $errors->has('logo_url') ? 'true' : 'false' }},
-            password: {{ $errors->has('password') ? 'true' : 'false' }},
             contact_person: {{ $errors->has('contact_person') ? 'true' : 'false' }},
             email: {{ $errors->has('email') ? 'true' : 'false' }},
             country: {{ $errors->has('country') ? 'true' : 'false' }},
@@ -93,7 +92,7 @@
             </div>
 
             <h1 class="text-center text-3xl font-black font-montserrat text-indigo-950">
-                <span x-show="paso !== 3">Crear Cuenta</span>
+                <span x-show="paso !== 3">Iniciar registro</span>
                 <span x-show="paso === 3" x-cloak>Información de facturación</span>
             </h1>
 
@@ -140,7 +139,7 @@
                 {{-- PASO 1 --}}
                 <div x-show="paso === 1" class="flex flex-col gap-5">
                     <div class="flex flex-col gap-1.5">
-                        <label for="agency_username" class="text-sm font-medium font-montserrat text-indigo-950">Nombre de Usuario</label>
+                        <label for="agency_username" class="text-sm font-medium font-montserrat text-indigo-950">Nombre de agente</label>
                         <input id="agency_username" type="text" name="username" value="{{ old('username') }}" maxlength="100"
                             @input="clearError('username')"
                             :class="fieldErrors.username ? 'border-red-400' : 'border-stone-300'"
@@ -185,22 +184,6 @@
                         @endif
                     </div>
 
-                    <div class="flex flex-col gap-1.5">
-                        <label for="agency_password" class="text-sm font-medium font-montserrat text-indigo-950">Contraseña</label>
-                        <input id="agency_password" type="password" name="password"
-                            @input="clearError('password')"
-                            :class="fieldErrors.password ? 'border-red-400' : 'border-stone-300'"
-                            class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
-                        @if ($errors->has('password'))
-                            <p x-show="fieldErrors.password" x-cloak class="text-xs text-red-600">{{ $errors->first('password') }}</p>
-                        @endif
-                    </div>
-
-                    <div class="flex flex-col gap-1.5">
-                        <label for="agency_password_confirm" class="text-sm font-medium font-montserrat text-indigo-950">Confirmar contraseña</label>
-                        <input id="agency_password_confirm" type="password" name="password_confirmation"
-                            class="h-12 w-full rounded-lg border border-stone-300 px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
-                    </div>
 
                     <button type="button" x-on:click="paso = 2"
                         class="mt-2 h-12 w-full rounded-lg bg-green-300 text-base font-bold font-montserrat text-white transition-opacity hover:opacity-90">

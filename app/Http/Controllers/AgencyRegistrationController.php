@@ -21,7 +21,7 @@ class AgencyRegistrationController extends Controller
             'agency_name' => $data['agency_name'],
             'legal_name' => $data['legal_name'],
             'logo_url' => $data['logo_url'] ?? null,
-            'password' => $data['password'],
+            'password' => $data['password'] ?? null,
             'contact_person' => $data['contact_person'],
             'email' => $data['email'],
             'country' => $data['country'],
