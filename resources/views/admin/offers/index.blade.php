@@ -41,7 +41,6 @@
                     <th class="px-6 py-3 font-medium text-slate-500 w-12">#</th>
                     <th class="px-6 py-3 font-semibold text-blue-600">Nombre</th>
                     <th class="px-6 py-3 font-medium text-slate-500">Thumbnail</th>
-                    <th class="px-6 py-3 font-semibold text-blue-600">Enlace</th>
                     <th class="px-6 py-3 font-semibold text-blue-600">Orden</th>
                     <th class="px-6 py-3 font-semibold text-blue-600">Activo</th>
                     <th class="px-6 py-3 font-medium text-slate-500 text-center">Acciones</th>
@@ -61,15 +60,6 @@
                             <span class="inline-flex items-center justify-center w-14 h-10 bg-slate-100 rounded-md text-slate-400 text-xs">—</span>
                         @endif
                     </td>
-                    <td class="px-6 py-3 text-slate-700">
-                        @if ($offer->link)
-                            <a href="{{ $offer->link }}" target="_blank" rel="noopener" class="text-blue-600 hover:underline truncate max-w-xs inline-block">
-                                {{ $offer->link }}
-                            </a>
-                        @else
-                            <span class="text-slate-400">—</span>
-                        @endif
-                    </td>
                     <td class="px-6 py-3 text-slate-700">{{ $offer->sort_order }}</td>
                     <td class="px-6 py-3">
                         @if ($offer->active)
@@ -85,7 +75,6 @@
                                 data-modal-target="offer-edit"
                                 data-id="{{ $offer->id }}"
                                 data-name="{{ $offer->name }}"
-                                data-link="{{ $offer->link ?? '' }}"
                                 data-active="{{ $offer->active ? '1' : '0' }}"
                                 data-sort-order="{{ $offer->sort_order }}"
                                 data-thumbnail="{{ $offer->thumbnail_url ?? '' }}"
@@ -110,7 +99,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="px-6 py-8 text-center text-slate-400">
+                    <td colspan="6" class="px-6 py-8 text-center text-slate-400">
                         No hay ofertas registradas.
                     </td>
                 </tr>

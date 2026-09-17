@@ -18,7 +18,6 @@ class StoreOfferRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'link' => ['nullable', 'string', 'max:2048', 'url'],
             'active' => ['sometimes', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'image' => ['required', 'image', 'mimes:jpeg,jpg,png,webp', 'max:10240'],
@@ -32,7 +31,6 @@ class StoreOfferRequest extends FormRequest
     {
         return [
             'name.required' => 'El nombre de la oferta es obligatorio.',
-            'link.url' => 'El enlace debe ser una URL válida.',
             'image.required' => 'La imagen es obligatoria.',
             'image.image' => 'El archivo debe ser una imagen.',
             'image.mimes' => 'La imagen debe ser JPG, PNG o WEBP.',
@@ -42,12 +40,9 @@ class StoreOfferRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $link = $this->input('link');
-
         $this->merge([
             'active' => $this->boolean('active'),
             'sort_order' => $this->input('sort_order', 0),
-            'link' => filled($link) ? $link : null,
         ]);
     }
 }

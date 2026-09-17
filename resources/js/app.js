@@ -161,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (idInput) idInput.value = trigger.dataset.id || '';
             if (nameInput) nameInput.value = trigger.dataset.name || '';
-            if (linkInput) linkInput.value = trigger.dataset.link || '';
             if (sortOrderInput) sortOrderInput.value = trigger.dataset.sortOrder || '0';
             if (activeInput) activeInput.checked = trigger.dataset.active === '1';
 

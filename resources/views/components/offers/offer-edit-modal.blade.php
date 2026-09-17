@@ -61,23 +61,6 @@
                     </div>
 
                     <div class="flex flex-col gap-1.5">
-                        <label for="{{ $name }}-link" class="text-sm font-medium text-slate-700">
-                            Enlace (opcional)
-                        </label>
-                        <input
-                            id="{{ $name }}-link"
-                            type="url"
-                            name="link"
-                            data-edit-link
-                            value="{{ old('link') }}"
-                            placeholder="https://ejemplo.com/promo"
-                            class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 @error('link') border-red-400 @enderror">
-                        @error('link')
-                            <p class="text-xs text-red-500">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="flex flex-col gap-1.5">
                         <label for="{{ $name }}-sort-order" class="text-sm font-medium text-slate-700">
                             Orden de aparición
                         </label>

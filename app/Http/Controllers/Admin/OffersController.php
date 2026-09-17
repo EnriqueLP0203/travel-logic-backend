@@ -34,7 +34,6 @@ class OffersController extends Controller
 
         Offer::create([
             'name' => $data['name'],
-            'link' => $data['link'] ?? null,
             'active' => $request->boolean('active'),
             'sort_order' => (int) ($data['sort_order'] ?? 0),
             ...$imageData,
@@ -56,7 +55,6 @@ class OffersController extends Controller
         $data = $request->validated();
         $payload = [
             'name' => $data['name'],
-            'link' => $data['link'] ?? null,
             'active' => $request->boolean('active'),
             'sort_order' => (int) ($data['sort_order'] ?? 0),
         ];
