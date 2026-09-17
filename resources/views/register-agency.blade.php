@@ -5,19 +5,19 @@
 @section('content')
 
 @php
-    $initialPaso = 1;
+$initialPaso = 1;
 
-    if ($errors->hasAny(['contact_person', 'email', 'country', 'state', 'city', 'phone', 'mobile'])) {
-        $initialPaso = 2;
-    }
+if ($errors->hasAny(['contact_person', 'email', 'country', 'state', 'city', 'phone', 'mobile'])) {
+$initialPaso = 2;
+}
 
-    if ($errors->hasAny([
-        'billing_manager', 'billing_address', 'billing_zip_code', 'billing_tax_id',
-        'billing_email', 'billing_country', 'billing_state', 'billing_city',
-        'billing_phone', 'billing_phone_2', 'billing_mobile', 'billing_same_as_contact',
-    ])) {
-        $initialPaso = 3;
-    }
+if ($errors->hasAny([
+'billing_manager', 'billing_address', 'billing_zip_code', 'billing_tax_id',
+'billing_email', 'billing_country', 'billing_state', 'billing_city',
+'billing_phone', 'billing_phone_2', 'billing_mobile', 'billing_same_as_contact',
+])) {
+$initialPaso = 3;
+}
 @endphp
 
 {{-- Registro de agencia en 3 pasos.
@@ -57,38 +57,38 @@
         },
     }"
     class="relative min-h-screen grid grid-cols-1"
-    :class="paso === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'"
->
+    :class="paso === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'">
 
     <a
         href="{{ route('home') }}"
-        class="absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold font-montserrat text-indigo-950 transition-opacity hover:opacity-80 sm:left-6 sm:top-6"
-    >
+        class="absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold font-montserrat text-indigo-950 transition-opacity hover:opacity-80 sm:left-6 sm:top-6">
         <x-lucide-arrow-left class="h-4 w-4" />
         Volver al inicio
     </a>
 
     <div
-        class="relative hidden bg-[#D9D9D9] lg:block"
-        :class="paso === 3 ? 'lg:col-span-1' : ''"
-    >
-        <div class="flex h-full min-h-[680px] w-full items-center justify-center">
-            <x-lucide-user class="h-16 w-16 text-gray-400" />
-        </div>
+        class="relative hidden overflow-hidden bg-[#D9D9D9] lg:block"
+        :class="paso === 3 ? 'lg:col-span-1' : ''">
+        <img
+            src="{{ asset('images/bg-register.png') }}"
+            alt="Travel Logic"
+            class="absolute inset-0 h-full w-full object-cover object-center" />
     </div>
 
     <div
         class="flex items-center justify-center px-6 py-12 sm:px-10 lg:px-16"
-        :class="paso === 3 ? 'lg:col-span-2' : ''"
-    >
+        :class="paso === 3 ? 'lg:col-span-2' : ''">
         <div class="w-full" :class="paso === 3 ? 'max-w-3xl' : 'max-w-md'">
 
             <div
                 x-show="showGlobalError"
                 x-cloak
-                class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-            >
+                class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                 Revisa los campos marcados e intenta de nuevo.
+            </div>
+
+            <div class="flex justify-center mb-4">
+                <img src="{{ asset('images/logo.webp') }}" alt="Travel Logic" class="w-48 shrink-0" />
             </div>
 
             <h1 class="text-center text-3xl font-black font-montserrat text-indigo-950">
@@ -99,8 +99,7 @@
             <div class="mt-6 flex items-center justify-center gap-2">
                 <div
                     class="flex size-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold font-montserrat transition-colors"
-                    :class="paso > 1 ? 'border-green-300 bg-green-300 text-white' : 'border-green-300 text-green-300'"
-                >
+                    :class="paso > 1 ? 'border-green-300 bg-green-300 text-white' : 'border-green-300 text-green-300'">
                     <span x-show="paso === 1">01</span>
                     <svg x-show="paso > 1" x-cloak class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
@@ -111,8 +110,7 @@
 
                 <div
                     class="flex size-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold font-montserrat transition-colors"
-                    :class="paso > 2 ? 'border-green-300 bg-green-300 text-white' : (paso === 2 ? 'border-green-300 text-green-300' : 'border-gray-300 text-gray-400')"
-                >
+                    :class="paso > 2 ? 'border-green-300 bg-green-300 text-white' : (paso === 2 ? 'border-green-300 text-green-300' : 'border-gray-300 text-gray-400')">
                     <span x-show="paso <= 2">02</span>
                     <svg x-show="paso > 2" x-cloak class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
@@ -123,8 +121,7 @@
 
                 <div
                     class="flex size-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold font-montserrat transition-colors"
-                    :class="paso === 3 ? 'border-green-300 text-green-300' : 'border-gray-300 text-gray-400'"
-                >
+                    :class="paso === 3 ? 'border-green-300 text-green-300' : 'border-gray-300 text-gray-400'">
                     03
                 </div>
             </div>
@@ -132,8 +129,7 @@
             <form
                 method="POST"
                 action="{{ route('register-agency.store') }}"
-                class="mt-8"
-            >
+                class="mt-8">
                 @csrf
 
                 {{-- PASO 1 --}}
@@ -145,7 +141,7 @@
                             :class="fieldErrors.username ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('username'))
-                            <p x-show="fieldErrors.username" x-cloak class="text-xs text-red-600">{{ $errors->first('username') }}</p>
+                        <p x-show="fieldErrors.username" x-cloak class="text-xs text-red-600">{{ $errors->first('username') }}</p>
                         @endif
                     </div>
 
@@ -156,7 +152,7 @@
                             :class="fieldErrors.agency_name ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('agency_name'))
-                            <p x-show="fieldErrors.agency_name" x-cloak class="text-xs text-red-600">{{ $errors->first('agency_name') }}</p>
+                        <p x-show="fieldErrors.agency_name" x-cloak class="text-xs text-red-600">{{ $errors->first('agency_name') }}</p>
                         @endif
                     </div>
 
@@ -167,7 +163,7 @@
                             :class="fieldErrors.legal_name ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('legal_name'))
-                            <p x-show="fieldErrors.legal_name" x-cloak class="text-xs text-red-600">{{ $errors->first('legal_name') }}</p>
+                        <p x-show="fieldErrors.legal_name" x-cloak class="text-xs text-red-600">{{ $errors->first('legal_name') }}</p>
                         @endif
                     </div>
 
@@ -180,7 +176,7 @@
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 placeholder:text-stone-900/40 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         <p class="text-xs text-slate-500">Pega un enlace compartido (Google Drive, Dropbox, etc.) para descargar el logotipo.</p>
                         @if ($errors->has('logo_url'))
-                            <p x-show="fieldErrors.logo_url" x-cloak class="text-xs text-red-600">{{ $errors->first('logo_url') }}</p>
+                        <p x-show="fieldErrors.logo_url" x-cloak class="text-xs text-red-600">{{ $errors->first('logo_url') }}</p>
                         @endif
                     </div>
 
@@ -200,7 +196,7 @@
                             :class="fieldErrors.contact_person ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('contact_person'))
-                            <p x-show="fieldErrors.contact_person" x-cloak class="text-xs text-red-600">{{ $errors->first('contact_person') }}</p>
+                        <p x-show="fieldErrors.contact_person" x-cloak class="text-xs text-red-600">{{ $errors->first('contact_person') }}</p>
                         @endif
                     </div>
 
@@ -211,7 +207,7 @@
                             :class="fieldErrors.email ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('email'))
-                            <p x-show="fieldErrors.email" x-cloak class="text-xs text-red-600">{{ $errors->first('email') }}</p>
+                        <p x-show="fieldErrors.email" x-cloak class="text-xs text-red-600">{{ $errors->first('email') }}</p>
                         @endif
                     </div>
 
@@ -222,7 +218,7 @@
                             :class="fieldErrors.country ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('country'))
-                            <p x-show="fieldErrors.country" x-cloak class="text-xs text-red-600">{{ $errors->first('country') }}</p>
+                        <p x-show="fieldErrors.country" x-cloak class="text-xs text-red-600">{{ $errors->first('country') }}</p>
                         @endif
                     </div>
 
@@ -233,7 +229,7 @@
                             :class="fieldErrors.state ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('state'))
-                            <p x-show="fieldErrors.state" x-cloak class="text-xs text-red-600">{{ $errors->first('state') }}</p>
+                        <p x-show="fieldErrors.state" x-cloak class="text-xs text-red-600">{{ $errors->first('state') }}</p>
                         @endif
                     </div>
 
@@ -244,7 +240,7 @@
                             :class="fieldErrors.city ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('city'))
-                            <p x-show="fieldErrors.city" x-cloak class="text-xs text-red-600">{{ $errors->first('city') }}</p>
+                        <p x-show="fieldErrors.city" x-cloak class="text-xs text-red-600">{{ $errors->first('city') }}</p>
                         @endif
                     </div>
 
@@ -257,7 +253,7 @@
                             :class="fieldErrors.phone ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('phone'))
-                            <p x-show="fieldErrors.phone" x-cloak class="text-xs text-red-600">{{ $errors->first('phone') }}</p>
+                        <p x-show="fieldErrors.phone" x-cloak class="text-xs text-red-600">{{ $errors->first('phone') }}</p>
                         @endif
                     </div>
 
@@ -270,7 +266,7 @@
                             :class="fieldErrors.mobile ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('mobile'))
-                            <p x-show="fieldErrors.mobile" x-cloak class="text-xs text-red-600">{{ $errors->first('mobile') }}</p>
+                        <p x-show="fieldErrors.mobile" x-cloak class="text-xs text-red-600">{{ $errors->first('mobile') }}</p>
                         @endif
                     </div>
 
@@ -302,7 +298,7 @@
                             :class="fieldErrors.billing_address ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('billing_address'))
-                            <p x-show="fieldErrors.billing_address" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_address') }}</p>
+                        <p x-show="fieldErrors.billing_address" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_address') }}</p>
                         @endif
                     </div>
 
@@ -313,7 +309,7 @@
                             :class="fieldErrors.billing_zip_code ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('billing_zip_code'))
-                            <p x-show="fieldErrors.billing_zip_code" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_zip_code') }}</p>
+                        <p x-show="fieldErrors.billing_zip_code" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_zip_code') }}</p>
                         @endif
                     </div>
 
@@ -324,7 +320,7 @@
                             :class="fieldErrors.billing_tax_id ? 'border-red-400' : 'border-stone-300'"
                             class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                         @if ($errors->has('billing_tax_id'))
-                            <p x-show="fieldErrors.billing_tax_id" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_tax_id') }}</p>
+                        <p x-show="fieldErrors.billing_tax_id" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_tax_id') }}</p>
                         @endif
                     </div>
 
@@ -344,8 +340,7 @@
                                 value="1"
                                 x-model="billingSameAsContact"
                                 class="size-4 rounded border-stone-300 text-green-400 focus:ring-green-300/40"
-                                @checked(old('billing_same_as_contact'))
-                            />
+                                @checked(old('billing_same_as_contact')) />
                             Usar los mismos datos de contacto para facturación
                         </label>
                     </div>
@@ -358,7 +353,7 @@
                                 :class="fieldErrors.billing_email ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                             @if ($errors->has('billing_email'))
-                                <p x-show="fieldErrors.billing_email" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_email') }}</p>
+                            <p x-show="fieldErrors.billing_email" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_email') }}</p>
                             @endif
                         </div>
 
@@ -369,7 +364,7 @@
                                 :class="fieldErrors.billing_country ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                             @if ($errors->has('billing_country'))
-                                <p x-show="fieldErrors.billing_country" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_country') }}</p>
+                            <p x-show="fieldErrors.billing_country" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_country') }}</p>
                             @endif
                         </div>
 
@@ -380,7 +375,7 @@
                                 :class="fieldErrors.billing_state ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                             @if ($errors->has('billing_state'))
-                                <p x-show="fieldErrors.billing_state" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_state') }}</p>
+                            <p x-show="fieldErrors.billing_state" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_state') }}</p>
                             @endif
                         </div>
 
@@ -391,7 +386,7 @@
                                 :class="fieldErrors.billing_city ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                             @if ($errors->has('billing_city'))
-                                <p x-show="fieldErrors.billing_city" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_city') }}</p>
+                            <p x-show="fieldErrors.billing_city" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_city') }}</p>
                             @endif
                         </div>
 
@@ -404,7 +399,7 @@
                                 :class="fieldErrors.billing_phone ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                             @if ($errors->has('billing_phone'))
-                                <p x-show="fieldErrors.billing_phone" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_phone') }}</p>
+                            <p x-show="fieldErrors.billing_phone" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_phone') }}</p>
                             @endif
                         </div>
 
@@ -417,7 +412,7 @@
                                 :class="fieldErrors.billing_mobile ? 'border-red-400' : 'border-stone-300'"
                                 class="h-12 w-full rounded-lg border px-4 text-base font-montserrat text-stone-900 focus:outline-none focus:ring-2 focus:ring-green-300/40" />
                             @if ($errors->has('billing_mobile'))
-                                <p x-show="fieldErrors.billing_mobile" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_mobile') }}</p>
+                            <p x-show="fieldErrors.billing_mobile" x-cloak class="text-xs text-red-600">{{ $errors->first('billing_mobile') }}</p>
                             @endif
                         </div>
                     </div>
