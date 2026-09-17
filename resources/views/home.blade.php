@@ -135,41 +135,61 @@
     </div>
 
     <div class="flex gap-8 py-12 justify-center flex-wrap lg:flex-nowrap">
-        <div data-animate="fade-up" data-animate-delay="0.0" class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
-            <img src="{{ asset('images/destination-home-section/playas.webp') }}" class="w-full h-full object-cover rounded-2xl">
+        <a
+            href="{{ route('hotels', ['hotel_group_id' => 1]) }}"
+            data-animate="fade-up" data-animate-delay="0.0"
+            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+        >
+            <img src="{{ asset('images/destination-home-section/playas.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Sol y playa">
             <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
                 <p class="text-white text-2xl font-bold font-inter">Sol y playa</p>
                 <p class="text-white text-base font-normal font-inter">costas y actividades marinas</p>
             </div>
-        </div>
-        <div data-animate="fade-up" data-animate-delay="0.1" class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
-            <img src="{{ asset('images/destination-home-section/cultura.webp') }}" class="w-full h-full object-cover rounded-2xl">
+        </a>
+        <a
+            href="{{ route('hotels', ['hotel_group_id' => 7]) }}"
+            data-animate="fade-up" data-animate-delay="0.1"
+            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+        >
+            <img src="{{ asset('images/destination-home-section/cultura.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Cultura">
             <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
                 <p class="text-white text-2xl font-bold font-inter">Cultura</p>
                 <p class="text-white text-base font-normal font-inter">historia, arte y gastronomía</p>
             </div>
-        </div>
-        <div data-animate="fade-up" data-animate-delay="0.2" class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
-            <img src="{{ asset('images/destination-home-section/naturaleza.webp') }}" class="w-full h-full object-cover rounded-2xl">
+        </a>
+        <a
+            href="{{ route('hotels', ['hotel_group_id' => 8]) }}"
+            data-animate="fade-up" data-animate-delay="0.2"
+            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+        >
+            <img src="{{ asset('images/destination-home-section/naturaleza.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Naturaleza y ecoturismo">
             <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
                 <p class="text-white text-2xl font-bold font-inter">Naturaleza y ecoturismo</p>
                 <p class="text-white text-base font-normal font-inter">aventura al aire libre</p>
             </div>
-        </div>
-        <div data-animate="fade-up" data-animate-delay="0.3" class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
-            <img src="{{ asset('images/destination-home-section/negocios.webp') }}" class="w-full h-full object-cover rounded-2xl">
+        </a>
+        <a
+            href="{{ route('hotels', ['hotel_group_id' => 9]) }}"
+            data-animate="fade-up" data-animate-delay="0.3"
+            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+        >
+            <img src="{{ asset('images/destination-home-section/negocios.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Negocios y reuniones">
             <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
                 <p class="text-white text-2xl font-bold font-inter">Negocios y reuniones</p>
                 <p class="text-white text-base font-normal font-inter">congresos y viajes corporativos</p>
             </div>
-        </div>
-        <div data-animate="fade-up" data-animate-delay="0.4" class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300">
-            <img src="{{ asset('images/destination-home-section/termalismo.webp') }}" class="w-full h-full object-cover rounded-2xl">
+        </a>
+        <a
+            href="{{ route('hotels', ['hotel_group_id' => 10]) }}"
+            data-animate="fade-up" data-animate-delay="0.4"
+            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+        >
+            <img src="{{ asset('images/destination-home-section/termalismo.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Salud y bienestar">
             <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
                 <p class="text-white text-2xl font-bold font-inter">Salud y bienestar</p>
                 <p class="text-white text-base font-normal font-inter">termalismo y recuperación</p>
             </div>
-        </div>
+        </a>
     </div>
 </section>
 
