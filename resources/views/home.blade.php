@@ -251,16 +251,48 @@
     </div>
 </section>
 
+@php
+$testimonials = [
+    ['name' => 'Lizette Zepeda — Citimar Travel Agency', 'quote' => 'Tuve la oportunidad de participar en el FAMTRIP a Tulum organizado por Travel Logic, y la experiencia fue excelente de principio a fin. Conocimos dos magníficas propiedades, disfrutamos del destino y visitamos la zona arqueológica de Cobá, viviendo de primera mano todo lo que posteriormente podremos recomendar a nuestros viajeros. Quiero destacar el profesionalismo de Dani Mercado, gerente de ventas, así como de todo su equipo, quienes estuvieron siempre atentos para que cada actividad se desarrollara en tiempo y forma, haciendo de este viaje una experiencia productiva y enriquecedora para todos los agentes de viajes participantes. Además, fue muy valioso formar parte de un nuevo concepto de FAMTRIP, integrando a diversos socios comerciales que presentaron sus servicios y beneficios para fortalecer el trabajo conjunto entre agencias y proveedores. ¡Una experiencia que califico con 5 estrellas!', 'rating' => 5],
+    ['name' => 'Noravi Travel', 'quote' => 'La verdad han sido muy atentos, sus explicaciones son muy precisas, te atienden las dudas prácticamente de inmediato y resuelven, que es lo más importante. Con las personas que he tratado siempre han estado al pendiente de todo.', 'rating' => 5],
+];
+$longTestimonials = array_values(array_filter($testimonials, fn($t) => mb_strlen($t['quote']) > 180));
+@endphp
+
 <section
     id="testimonials"
     aria-label="Testimonios"
     class="mt-20 w-full bg-white pb-12 sm:pb-20"
     x-data="{
+        testimonials: {{ Illuminate\Support\Js::from($longTestimonials) }},
+        currentIndex: 0,
+        slideDir: 1,
+        sliding: false,
+        visible: true,
         modal: null,
         open: false,
-        openModal(data) { this.modal = data; this.open = true; },
+        openModal(data, index) {
+            this.modal = data;
+            this.currentIndex = index ?? 0;
+            this.open = true;
+        },
         closeModal() { this.open = false; },
         afterLeave() { this.modal = null; },
+        navigate(dir) {
+            if (this.sliding) return;
+            const next = this.currentIndex + dir;
+            if (next < 0 || next >= this.testimonials.length) return;
+            this.slideDir = dir;
+            this.sliding = true;
+            this.visible = false;
+            setTimeout(() => {
+                this.currentIndex = next;
+                this.modal = this.testimonials[next];
+                this.slideDir = dir;
+                this.visible = true;
+                setTimeout(() => { this.sliding = false; }, 350);
+            }, 300);
+        },
         canScroll: false,
         init() {
             const track = this.$refs.track;
@@ -274,6 +306,8 @@
         },
     }"
     x-on:keydown.escape.window="closeModal()"
+    x-on:keydown.arrow-left.window="open && navigate(-1)"
+    x-on:keydown.arrow-right.window="open && navigate(1)"
     x-effect="document.body.classList.toggle('overflow-hidden', open)">
     <div data-animate="fade-up" class="flex flex-col gap-6 px-4 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-24">
         <div class="flex flex-col gap-3">
@@ -299,24 +333,21 @@
         </div>
     </div>
 
-    @php
-    $testimonials = [
-    ['name' => 'Lizette Zepeda — Citimar Travel Agency', 'quote' => 'Tuve la oportunidad de participar en el FAMTRIP a Tulum organizado por Travel Logic, y la experiencia fue excelente de principio a fin. Conocimos dos magníficas propiedades, disfrutamos del destino y visitamos la zona arqueológica de Cobá, viviendo de primera mano todo lo que posteriormente podremos recomendar a nuestros viajeros. Quiero destacar el profesionalismo de Dani Mercado, gerente de ventas, así como de todo su equipo, quienes estuvieron siempre atentos para que cada actividad se desarrollara en tiempo y forma, haciendo de este viaje una experiencia productiva y enriquecedora para todos los agentes de viajes participantes. Además, fue muy valioso formar parte de un nuevo concepto de FAMTRIP, integrando a diversos socios comerciales que presentaron sus servicios y beneficios para fortalecer el trabajo conjunto entre agencias y proveedores. ¡Una experiencia que califico con 5 estrellas!', 'rating' => 5],
-    ['name' => 'Noravi Travel', 'quote' => 'La verdad han sido muy atentos, sus explicaciones son muy precisas, te atienden las dudas prácticamente de inmediato y resuelven, que es lo más importante. Con las personas que he tratado siempre han estado al pendiente de todo.', 'rating' => 5],
-    ];
-    @endphp
-
     <div
         x-ref="track"
         class="mt-10 flex flex-nowrap snap-x snap-mandatory gap-4 overflow-x-auto px-4 py-2 sm:mt-16 sm:px-8 lg:mt-32 lg:px-24 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         :class="canScroll ? 'justify-start' : 'justify-center'">
+        @php $longIndex = 0; @endphp
         @foreach ($testimonials as $index => $testimonial)
+        @php $isLong = mb_strlen($testimonial['quote']) > 180; @endphp
         <div data-animate="fade-up" data-animate-delay="{{ $index * 0.15 }}" class="flex shrink-0 snap-start">
             <x-testimonial-card
                 :name="$testimonial['name']"
                 :quote="$testimonial['quote']"
-                :rating="$testimonial['rating'] ?? 5" />
+                :rating="$testimonial['rating'] ?? 5"
+                :modal-index="$isLong ? $longIndex : null" />
         </div>
+        @if ($isLong) @php $longIndex++; @endphp @endif
         @endforeach
     </div>
 
@@ -336,33 +367,86 @@
             aria-modal="true"
             aria-labelledby="testimonial-modal-title">
             <div class="absolute inset-0 bg-stone-900/50" x-on:click="closeModal()"></div>
-            <div class="relative z-10 flex max-h-[80vh] w-full max-w-xl flex-col overflow-hidden rounded-3xl border border-green-300 bg-white p-6 shadow-2xl sm:p-10">
+
+            {{-- Modal panel --}}
+            <div class="relative z-10 flex w-full max-w-2xl flex-col rounded-3xl border border-green-300 bg-white shadow-2xl">
+
+                {{-- Close button --}}
                 <button
                     type="button"
                     aria-label="Cerrar"
                     x-on:click="closeModal()"
-                    class="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-100 hover:text-stone-900">
+                    class="absolute right-4 top-4 z-10 flex size-9 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-100 hover:text-stone-900">
                     <x-lucide-x class="size-5" />
                 </button>
-                <div class="flex min-h-0 flex-col gap-6 overflow-y-auto pr-2">
-                    <header class="flex items-center gap-4 pr-8">
-                        <div class="flex size-16 shrink-0 items-center justify-center rounded-full bg-green-300 sm:size-20" aria-hidden="true">
-                            <x-lucide-user class="h-8 w-8 text-white" />
-                        </div>
-                        <div>
-                            <p id="testimonial-modal-title" class="text-xl font-bold font-inter text-blue-400" x-text="modal?.name"></p>
-                            <div class="mt-1 flex items-center gap-0.5" role="img" :aria-label="(modal?.rating ?? 0) + ' de 5 estrellas'">
-                                <template x-for="i in [1, 2, 3, 4, 5]" :key="i">
-                                    <span>
-                                        <x-lucide-star
-                                            class="h-4 w-4"
-                                            x-bind:class="i <= (modal?.rating ?? 0) ? 'fill-amber-400 text-amber-400' : 'text-gray-300'" />
-                                    </span>
-                                </template>
+
+                {{-- Slide content wrapper --}}
+                <div class="overflow-hidden rounded-3xl">
+                    <div
+                        :style="{
+                            transform: visible ? 'translateX(0)' : (slideDir > 0 ? 'translateX(-60px)' : 'translateX(60px)'),
+                            opacity: visible ? 1 : 0,
+                            transition: 'transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.3s ease'
+                        }"
+                        class="flex max-h-[75vh] flex-col gap-6 overflow-y-auto p-6 sm:p-10"
+                    >
+                        <header class="flex items-center gap-4 pr-8">
+                            <div class="flex size-16 shrink-0 items-center justify-center rounded-full bg-green-300 sm:size-20" aria-hidden="true">
+                                <x-lucide-user class="h-8 w-8 text-white" />
                             </div>
-                        </div>
-                    </header>
-                    <blockquote class="text-base font-light font-inter text-slate-500 sm:text-xl" x-text="modal?.quote"></blockquote>
+                            <div>
+                                <p id="testimonial-modal-title" class="text-xl font-bold font-inter text-blue-400" x-text="modal?.name"></p>
+                                <div class="mt-1 flex items-center gap-0.5" role="img" :aria-label="(modal?.rating ?? 0) + ' de 5 estrellas'">
+                                    <template x-for="i in [1, 2, 3, 4, 5]" :key="i">
+                                        <span>
+                                            <x-lucide-star
+                                                class="h-4 w-4"
+                                                x-bind:class="i <= (modal?.rating ?? 0) ? 'fill-amber-400 text-amber-400' : 'text-gray-300'" />
+                                        </span>
+                                    </template>
+                                </div>
+                            </div>
+                        </header>
+                        <blockquote class="text-base font-light font-inter text-slate-500 sm:text-xl" x-text="modal?.quote"></blockquote>
+                    </div>
+                </div>
+
+                {{-- Navigation footer --}}
+                <div class="flex items-center justify-between border-t border-gray-100 px-6 py-4 sm:px-10">
+                    {{-- Prev --}}
+                    <button
+                        type="button"
+                        aria-label="Testimonio anterior"
+                        x-on:click="navigate(-1)"
+                        :disabled="currentIndex === 0 || sliding"
+                        :class="currentIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:-translate-x-0.5 hover:shadow-md cursor-pointer'"
+                        class="flex size-10 items-center justify-center rounded-full border-2 border-green-300 transition-all duration-200 sm:size-12">
+                        <x-lucide-arrow-left class="h-5 w-5 text-green-300" />
+                    </button>
+
+                    {{-- Counter dots --}}
+                    <div class="flex items-center gap-2">
+                        <template x-for="(t, i) in testimonials" :key="i">
+                            <button
+                                type="button"
+                                x-on:click="navigate(i - currentIndex)"
+                                :aria-label="'Ir al testimonio ' + (i + 1)"
+                                :class="i === currentIndex ? 'bg-green-300 scale-125' : 'bg-gray-300 hover:bg-green-200'"
+                                class="size-2.5 rounded-full transition-all duration-200">
+                            </button>
+                        </template>
+                    </div>
+
+                    {{-- Next --}}
+                    <button
+                        type="button"
+                        aria-label="Testimonio siguiente"
+                        x-on:click="navigate(1)"
+                        :disabled="currentIndex === testimonials.length - 1 || sliding"
+                        :class="currentIndex === testimonials.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:translate-x-0.5 hover:shadow-md cursor-pointer'"
+                        class="flex size-10 items-center justify-center rounded-full border-2 border-green-300 transition-all duration-200 sm:size-12">
+                        <x-lucide-arrow-right class="h-5 w-5 text-green-300" />
+                    </button>
                 </div>
             </div>
         </div>

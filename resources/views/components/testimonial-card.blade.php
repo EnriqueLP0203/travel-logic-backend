@@ -2,6 +2,7 @@
     'name',
     'quote',
     'rating' => 5,
+    'modalIndex' => null,
 ])
 
 @php
@@ -32,7 +33,7 @@
     @if ($isLong)
         <button
             type="button"
-            x-on:click="openModal({{ \Illuminate\Support\Js::from(['name' => $name, 'quote' => $quote, 'rating' => (int) $rating]) }})"
+            x-on:click="openModal({{ \Illuminate\Support\Js::from(['name' => $name, 'quote' => $quote, 'rating' => (int) $rating]) }}, {{ $modalIndex ?? 0 }})"
             class="mt-auto self-start text-sm font-semibold font-inter text-green-300 transition-colors hover:text-green-400"
         >
             Leer más
