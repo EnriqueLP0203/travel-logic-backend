@@ -53,7 +53,7 @@ $navItems = [
 
 <aside class="sticky top-0 flex h-screen w-64 shrink-0 flex-col bg-blue-400 text-white">
     <div class="flex items-center gap-3 border-b border-white/10 px-5 py-6">
-        <img src="{{ asset('images/logo.webp') }}" alt="Travel Logic" class="w-12" />
+        <img src="{{ asset('images/logo_white.png') }}" alt="Travel Logic" class="w-20" />
         <div>
             <p class="font-montserrat text-sm font-bold tracking-wide">Travel Logic</p>
             <p class="font-lato text-xs text-blue-100">Panel admin</p>
