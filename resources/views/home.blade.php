@@ -46,7 +46,7 @@
 
         <div class="pointer-events-none absolute inset-x-0 bottom-0 z-20 translate-y-1/2 px-2 sm:px-3 md:px-4 lg:px-6">
             <div class="pointer-events-auto mx-auto w-full max-w-[1600px]">
-                <x-home-filter-info />
+                <x-home-filter-info :destinations="$destinations" />
             </div>
         </div>
     </div>
