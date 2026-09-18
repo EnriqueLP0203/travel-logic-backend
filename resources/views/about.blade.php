@@ -46,7 +46,7 @@
                 <div class="border-l-4 border-sky-500 pl-6">
                     <div class="flex flex-col gap-4 font-inter text-base font-normal leading-8 text-white sm:text-lg">
                         <p>Travel Logic nació el 23 de septiembre de 2023 de una idea simple: si ya negociábamos las mejores tarifas hoteleras para nuestra propia operación dentro de APS Holding, ¿por qué no compartir esa ventaja con otras agencias? Así nació una operadora mayorista construida desde la experiencia real de operar y negociar.</p>
-                        <p>Somos parte de una familia de empresas: <span class="font-bold text-green-400">COMEVA, GATE 48, TRAKEN, SMART AVIATION, BAGGAGE EXPRESS Y VIRION MEDIA</span>, todas unidas por una misma visión. Hoy seguimos con la misma idea original: convertir las mejores tarifas en ventaja competitiva para todo el gremio.</p>
+                        <p>Somos parte de una familia de empresas: <span class="font-bold text-green-400">COME-EVA, GATE 48, TRAKEN, SMART AVIATION, BAGGAGE EXPRESS Y VIRION MEDIA</span>, todas unidas por una misma visión. Hoy seguimos con la misma idea original: convertir las mejores tarifas en ventaja competitiva para todo el gremio.</p>
                     </div>
                 </div>
             </div>
@@ -67,50 +67,50 @@
         ['src' => 'pam.webp', 'alt' => 'PAM Hotels'],
         ['src' => 'xcaret.webp', 'alt' => 'Xcaret'],
         ['src' => 'karisma.webp', 'alt' => 'Karisma Hotels & Resorts'],
-            ['src' => 'accor.webp', 'alt' => 'Accor'],
-            ['src' => 'arriva.webp', 'alt' => 'Arriva Hospitality'],
-            ['src' => 'marriott.webp', 'alt' => 'Marriott'],
-            ['src' => 'hilton.webp', 'alt' => 'Hilton'],
-            ['src' => 'hyatt.webp', 'alt' => 'Hyatt'],
-            ['src' => 'emporio.webp', 'alt' => 'Emporio'],
-            ['src' => 'fairmont.webp', 'alt' => 'Fairmont'],
-            ['src' => 'aimbridge.webp', 'alt' => 'Aimbridge'],
-            ['src' => 'catalonia.webp', 'alt' => 'Catalonia'],
-            ['src' => 'imperial.webp', 'alt' => 'Grupo Imperial'],
-            ['src' => 'paladium.webp', 'alt' => 'Palladium'],
-            ];
-            $logoClass = 'w-48 shrink-0 object-contain transition-transform duration-300 hover:scale-105';
-            @endphp
+        ['src' => 'accor.webp', 'alt' => 'Accor'],
+        ['src' => 'arriva.webp', 'alt' => 'Arriva Hospitality'],
+        ['src' => 'marriott.webp', 'alt' => 'Marriott'],
+        ['src' => 'hilton.webp', 'alt' => 'Hilton'],
+        ['src' => 'hyatt.webp', 'alt' => 'Hyatt'],
+        ['src' => 'emporio.webp', 'alt' => 'Emporio'],
+        ['src' => 'fairmont.webp', 'alt' => 'Fairmont'],
+        ['src' => 'aimbridge.webp', 'alt' => 'Aimbridge'],
+        ['src' => 'catalonia.webp', 'alt' => 'Catalonia'],
+        ['src' => 'imperial.webp', 'alt' => 'Grupo Imperial'],
+        ['src' => 'paladium.webp', 'alt' => 'Palladium'],
+        ];
+        $logoClass = 'w-48 shrink-0 object-contain transition-transform duration-300 hover:scale-105';
+        @endphp
 
-            <div class="mx-auto mt-12 flex w-full max-w-8xl flex-col items-center gap-12 sm:mt-20 sm:gap-16">
-                <div class="flex flex-col items-center gap-3">
-                    <p class="text-center text-3xl font-extrabold font-inter text-blue-300 sm:text-4xl lg:text-5xl">Marcas con las que trabajamos</p>
-                    <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
-                </div>
+        <div class="mx-auto mt-12 flex w-full max-w-8xl flex-col items-center gap-12 sm:mt-20 sm:gap-16">
+            <div class="flex flex-col items-center gap-3">
+                <p class="text-center text-3xl font-extrabold font-inter text-blue-300 sm:text-4xl lg:text-5xl">Marcas con las que trabajamos</p>
+                <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
+            </div>
 
-                <div class="flex w-full flex-col items-center gap-6">
-                    <p class="text-sm font-extrabold font-inter uppercase tracking-wide text-green-300">Aerolíneas</p>
-                    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-16">
-                        @foreach ($airlines as $airline)
-                        <img
-                            src="{{ asset('images/about/' . $airline['src']) }}"
-                            alt="{{ $airline['alt'] }}"
-                            class="{{ $logoClass }}" />
-                        @endforeach
-                    </div>
+            <div class="flex w-full flex-col items-center gap-6">
+                <p class="text-sm font-extrabold font-inter uppercase tracking-wide text-green-300">Aerolíneas</p>
+                <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-16">
+                    @foreach ($airlines as $airline)
+                    <img
+                        src="{{ asset('images/about/' . $airline['src']) }}"
+                        alt="{{ $airline['alt'] }}"
+                        class="{{ $logoClass }}" />
+                    @endforeach
                 </div>
+            </div>
 
-                <div class="flex w-full flex-col items-center gap-6">
-                    <p class="text-sm font-extrabold font-inter uppercase tracking-wide text-green-300">Cadenas de hoteles</p>
-                    <div class="flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
-                        @foreach ($hotels as $hotel)
-                        <img
-                            src="{{ asset('images/about/' . $hotel['src']) }}"
-                            alt="{{ $hotel['alt'] }}"
-                            class="{{ $logoClass }}" />
-                        @endforeach
-                    </div>
+            <div class="flex w-full flex-col items-center gap-6">
+                <p class="text-sm font-extrabold font-inter uppercase tracking-wide text-green-300">Cadenas de hoteles</p>
+                <div class="flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
+                    @foreach ($hotels as $hotel)
+                    <img
+                        src="{{ asset('images/about/' . $hotel['src']) }}"
+                        alt="{{ $hotel['alt'] }}"
+                        class="{{ $logoClass }}" />
+                    @endforeach
                 </div>
+            </div>
         </div>
     </section>
 </x-animate-in>
@@ -176,8 +176,7 @@
                 <x-animate-in
                     delay="{{ $index * 80 }}"
                     variant="subtle"
-                    class="w-full max-w-sm {{ $loop->last && count($values) % 3 !== 0 ? 'lg:col-span-3' : '' }}"
-                >
+                    class="w-full max-w-sm {{ $loop->last && count($values) % 3 !== 0 ? 'lg:col-span-3' : '' }}">
                     <article class="flex h-full flex-col items-center gap-4 rounded-3xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8">
                         <div class="flex size-16 items-center justify-center rounded-lg bg-green-100">
                             <x-dynamic-component :component="'lucide-' . $value['icon']" class="h-10 w-10 text-green-300" />

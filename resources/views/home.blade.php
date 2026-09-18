@@ -238,13 +238,33 @@
             </a>
         </div>
 
-        <div data-animate="fade-left" class="flex flex-col items-center justify-center gap-4">
-            <div class="h-64 w-full max-w-2xl rounded-3xl bg-zinc-300 sm:h-80 lg:h-96"></div>
+        <div data-animate="fade-left" class="group flex flex-col items-center justify-center gap-4">
+            <div class="h-64 w-full max-w-2xl overflow-hidden rounded-3xl sm:h-80 lg:h-96">
+                <img
+                    src="{{ asset('images/home/frame1.webp') }}"
+                    alt="Viajes de Travel Logic"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            </div>
             <div class="grid w-full max-w-2xl grid-cols-2 gap-4">
-                <div class="h-48 rounded-3xl bg-zinc-300 sm:h-64 lg:h-96"></div>
+                <div class="h-48 overflow-hidden rounded-3xl sm:h-64 lg:h-96">
+                    <img
+                        src="{{ asset('images/home/frame2.webp') }}"
+                        alt="Destinos turísticos"
+                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
                 <div class="flex h-48 flex-col gap-4 sm:h-64 lg:h-96">
-                    <div class="h-full rounded-3xl bg-zinc-300"></div>
-                    <div class="h-full rounded-3xl bg-zinc-300"></div>
+                    <div class="flex-1 overflow-hidden rounded-3xl">
+                        <img
+                            src="{{ asset('images/home/frame3.webp') }}"
+                            alt="Experiencias de viaje"
+                            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    </div>
+                    <div class="flex-1 overflow-hidden rounded-3xl">
+                        <img
+                            src="{{ asset('images/home/frame4.webp') }}"
+                            alt="Hoteles y resorts"
+                            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    </div>
                 </div>
             </div>
         </div>
