@@ -1,4 +1,23 @@
 import Alpine from 'alpinejs';
+import Lenis from 'lenis';
+import gsap from 'gsap';
+
+// ─── Smooth Scroll (Lenis) ────────────────────────────────────────────────────
+const lenis = new Lenis({
+    lerp: 0.07,             // interpolación por frame: más bajo = más lento y suave (0.05–0.15)
+    wheelMultiplier: 0.8,   // distancia por tick de rueda: más bajo = menos salto por scroll
+    smoothWheel: true,
+    touchMultiplier: 1.2,
+});
+
+// Sincroniza Lenis con el ticker de GSAP (ya instalado en el proyecto)
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+// Exponer lenis globalmente por si ScrollTrigger u otros scripts lo necesitan
+window.lenis = lenis;
+// ─────────────────────────────────────────────────────────────────────────────
+
 window.Alpine = Alpine;
 Alpine.start();
 document.addEventListener('DOMContentLoaded', () => {
