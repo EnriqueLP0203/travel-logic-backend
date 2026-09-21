@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/home-animations.js',
+                'resources/js/about-animations.js',
             ],
             refresh: true,
             fonts: [

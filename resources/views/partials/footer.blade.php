@@ -50,10 +50,7 @@
                 <a href="https://www.instagram.com/travelogicmexico/" aria-label="Instagram" class="flex size-8 items-center justify-center rounded-lg bg-white/50 text-white transition-opacity duration-200 hover:opacity-80">
                     <x-si-instagram class="size-4" />
                 </a>
-                <a href="#" aria-label="X" class="flex size-8 items-center justify-center rounded-lg bg-white/50 text-white transition-opacity duration-200 hover:opacity-80">
-                    <x-si-x class="size-4" />
-                </a>
-                <a href="#" aria-label="LinkedIn" class="flex size-8 items-center justify-center rounded-lg bg-white/50 text-white transition-opacity duration-200 hover:opacity-80">
+                <a href="https://www.linkedin.com/company/travel-logic-m%C3%A9xico/" aria-label="LinkedIn" class="flex size-8 items-center justify-center rounded-lg bg-white/50 text-white transition-opacity duration-200 hover:opacity-80">
                     <x-lucide-linkedin class="size-4" />
                 </a>
             </div>
