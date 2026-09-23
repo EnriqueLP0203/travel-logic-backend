@@ -6,30 +6,31 @@
 
 {{-- Hero about: imágenes desde la izquierda, texto desde la derecha --}}
 <section id="about" aria-label="Nosotros" class="w-full bg-blue-300 py-10 sm:py-16 md:py-24 lg:py-32 overflow-hidden">
-    <div class="mx-auto flex w-full max-w-[1600px] flex-col items-center gap-10 px-4 sm:px-8 md:gap-14 md:px-12 lg:flex-row lg:items-center lg:justify-center lg:gap-16 xl:gap-20 lg:px-16 xl:px-24">
-        {{-- Bloque de imágenes — entra desde la izquierda --}}
-        <div data-animate="fade-left" data-animate-distance="100" class="group flex w-full shrink-0 flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:items-stretch justify-center lg:w-auto">
-            <div class="w-full max-w-sm overflow-hidden rounded-2xl sm:rounded-3xl sm:w-72 md:w-80 lg:w-72 xl:w-96">
+    <div class="mx-auto flex w-full max-w-[1600px] flex-col items-center gap-8 sm:gap-10 md:gap-14 px-4 sm:px-8 md:px-12 lg:flex-row lg:items-center lg:justify-center lg:gap-16 xl:gap-20 lg:px-16 xl:px-24">
+        
+        {{-- Bloque de imágenes — en mobile va debajo (order-2), en lg a la izquierda (lg:order-1) --}}
+        <div data-animate="fade-left" data-animate-distance="100" class="order-2 lg:order-1 group flex w-full shrink-0 flex-row items-stretch justify-center gap-2.5 sm:gap-4 max-w-[340px] xs:max-w-[380px] sm:max-w-none lg:w-auto">
+            <div class="w-1/2 sm:w-72 md:w-80 lg:w-72 xl:w-96 overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl">
                 <img
                     src="{{ asset('images/home/frame1.webp') }}"
                     alt="Equipo de Travel Logic"
-                    class="h-64 sm:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
             </div>
-            <div class="flex w-full max-w-sm flex-col gap-3 sm:gap-4 sm:w-72 md:w-80 lg:w-72 xl:w-96">
-                <div class="h-48 sm:min-h-60 md:min-h-80 flex-1 overflow-hidden rounded-2xl sm:rounded-3xl">
+            <div class="flex w-1/2 sm:w-72 md:w-80 lg:w-72 xl:w-96 flex-col gap-2.5 sm:gap-4">
+                <div class="h-28 xs:h-36 sm:min-h-60 md:min-h-80 flex-1 overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl">
                     <img
                         src="{{ asset('images/home/frame2.webp') }}"
                         alt="Oficinas de Travel Logic"
                         class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <div class="flex gap-3 sm:gap-4">
-                    <div class="h-32 sm:h-auto flex-1 overflow-hidden rounded-2xl sm:rounded-3xl">
+                <div class="flex gap-2.5 sm:gap-4">
+                    <div class="h-16 xs:h-20 sm:h-auto flex-1 overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl">
                         <img
                             src="{{ asset('images/home/frame3.webp') }}"
                             alt="Experiencias de viaje"
                             class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     </div>
-                    <div class="h-32 sm:h-auto flex-1 overflow-hidden rounded-2xl sm:rounded-3xl">
+                    <div class="h-16 xs:h-20 sm:h-auto flex-1 overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl">
                         <img
                             src="{{ asset('images/home/frame4.webp') }}"
                             alt="Destinos turísticos"
@@ -39,13 +40,13 @@
             </div>
         </div>
 
-        {{-- Texto — entra desde la derecha --}}
-        <div data-animate="fade-right" data-animate-distance="100" class="flex w-full max-w-xl flex-col justify-center gap-4 sm:gap-6">
-            <div class="mb-1 sm:mb-2 flex flex-col gap-2">
+        {{-- Texto — en mobile va primero (order-1), centrado y sin borde; en desktop va a la derecha (lg:order-2) con borde --}}
+        <div data-animate="fade-right" data-animate-distance="100" class="order-1 lg:order-2 flex w-full max-w-xl flex-col items-center sm:items-start text-center sm:text-left justify-center gap-3 sm:gap-6">
+            <div class="mb-1 sm:mb-2 flex flex-col items-center sm:items-start gap-2">
                 <h1 class="font-inter text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-white">Nosotros</h1>
             </div>
-            <div class="border-l-4 border-sky-500 pl-4 sm:pl-6">
-                <div class="flex flex-col gap-3 sm:gap-4 font-inter text-sm sm:text-base md:text-lg font-normal leading-relaxed sm:leading-8 text-white">
+            <div class="border-l-0 sm:border-l-4 sm:border-sky-500 pl-0 sm:pl-6">
+                <div class="flex flex-col gap-3 sm:gap-4 font-inter text-sm sm:text-base md:text-lg font-normal leading-relaxed sm:leading-8 text-white text-center sm:text-left">
                     <p>Travel Logic nació el 23 de septiembre de 2023 de una idea simple: si ya negociábamos las mejores tarifas hoteleras para nuestra propia operación dentro de APS Holding, ¿por qué no compartir esa ventaja con otras agencias? Así nació una operadora mayorista construida desde la experiencia real de operar y negociar.</p>
                     <p>Somos parte de una familia de empresas: <span class="font-bold text-green-400">COME-EVA, GATE 48, TRAKEN, SMART AVIATION, BAGGAGE EXPRESS Y VIRION MEDIA</span>, todas unidas por una misma visión. Hoy seguimos con la misma idea original: convertir las mejores tarifas en ventaja competitiva para todo el gremio.</p>
                 </div>
