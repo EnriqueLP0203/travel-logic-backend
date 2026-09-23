@@ -3,7 +3,7 @@
 @section('title', 'Hoteles - Travel Logic')
 
 @section('content')
-<div class="mx-auto w-full max-w-[1600px] px-2 pb-10 sm:px-3 md:px-4 lg:px-6 lg:pb-16 mt-24">
+<div class="mx-auto w-full max-w-[1600px] px-3 pb-10 sm:px-4 md:px-6 lg:px-8 lg:pb-16 mt-16 sm:mt-20 md:mt-24">
     {{-- search bar (modal fuera del animate-in para evitar problemas de z-index) --}}
     <x-hotels-search-bar
         :destinations="$destinations"
@@ -13,9 +13,9 @@
 
     {{-- Grid de hoteles --}}
     @if ($hotels->isNotEmpty())
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 justify-items-center">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
             @foreach ($hotels as $hotel)
-                <x-animate-in delay="{{ $loop->index * 10 }}" variant="subtle">
+                <x-animate-in delay="{{ $loop->index * 10 }}" variant="subtle" class="w-full flex justify-center">
                     <x-hotel-card :hotel="$hotel" />
                 </x-animate-in>
             @endforeach

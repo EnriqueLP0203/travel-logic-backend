@@ -8,9 +8,9 @@
     $stars = (int) $hotel->star_category;
 @endphp
 
-<div class="group flex h-[460px] w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+<div class="group flex h-[400px] sm:h-[440px] md:h-[460px] w-full max-w-[340px] sm:max-w-sm flex-col overflow-hidden rounded-2xl sm:rounded-3xl bg-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
     {{-- Imagen principal --}}
-    <div class="h-72 w-full shrink-0 overflow-hidden bg-gray-200">
+    <div class="h-52 sm:h-64 md:h-72 w-full shrink-0 overflow-hidden bg-gray-200">
         @if ($image && $image->url)
             <img
                 src="{{ $image->url }}"
@@ -30,13 +30,13 @@
     </div>
 
     {{-- Contenido --}}
-    <div class="flex flex-1 flex-col px-4 py-5">
+    <div class="flex flex-1 flex-col p-4 sm:p-5">
         {{-- Nombre --}}
-        <p class="line-clamp-2 text-2xl font-bold font-inter leading-snug text-indigo-950">{{ $hotel->name }}</p>
+        <p class="line-clamp-2 text-lg sm:text-xl md:text-2xl font-bold font-inter leading-snug text-indigo-950">{{ $hotel->name }}</p>
 
         {{-- Destino --}}
         @if ($hotel->destination)
-            <p class="mt-0.5 flex items-center gap-1 text-xs font-medium text-black">
+            <p class="mt-1 flex items-center gap-1 text-xs font-medium text-black">
                 <x-lucide-map-pin class="size-3.5 shrink-0 text-zinc-500" />
                 {{ $hotel->destination->city }}
             </p>
@@ -46,7 +46,7 @@
         <div class="mt-auto pt-3 flex justify-end">
             <a
                 href="{{ route('hotel.show', $hotel->slug) }}"
-                class="inline-flex items-center gap-2 rounded-lg bg-green-300 px-4 py-2 text-base font-bold font-inter text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-400 hover:shadow-md"
+                class="inline-flex items-center gap-1.5 sm:gap-2 rounded-lg bg-green-300 px-3.5 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base font-bold font-inter text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-400 hover:shadow-md"
             >
                 Ver más
             </a>
