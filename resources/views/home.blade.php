@@ -5,9 +5,11 @@
 @section('content')
 
 {{-- Hero + filtro flotante entre secciones --}}
-<div x-data="{ activo: null }">
+<div x-data="{ activo: null }" class="w-full overflow-x-clip">
+    {{-- En mobile el hero ocupa toda su altura y el filtro fluye DEBAJO en el documento. --}}
+    {{-- En lg+ el filtro queda absolutamente posicionado a la mitad del borde inferior del hero. --}}
     <div class="relative">
-        <div data-animate="fade-up" class="relative flex min-h-[70vh] flex-col justify-center gap-1 overflow-hidden px-6 py-2 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24 lg:pb-32">
+        <div data-animate="fade-up" class="relative flex min-h-[60vh] flex-col justify-center gap-1 overflow-hidden px-4 py-2 sm:min-h-[80vh] sm:px-8 sm:py-16 md:px-16 lg:min-h-screen lg:px-24 lg:pb-32">
             <img
                 src="{{ asset('images/home/bg-1.webp') }}"
                 alt=""
@@ -16,13 +18,13 @@
 
             <div class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
 
-            <p class="relative z-10 ml-0 max-w-5xl text-4xl font-normal font-montserrat leading-tight text-white sm:ml-8 sm:text-4xl md:text-5xl lg:ml-24 lg:text-9xl">
+            <p class="relative z-10 ml-0 max-w-5xl text-3xl font-normal font-montserrat leading-tight text-white sm:ml-8 sm:text-4xl md:text-5xl lg:ml-24 lg:text-9xl">
                 TU SOCIO,
             </p>
-            <p class="relative z-10 ml-0 max-w-5xl text-4xl font-black font-montserrat leading-tight text-white sm:ml-8 sm:text-4xl md:text-5xl lg:ml-24 lg:text-9xl">
+            <p class="relative z-10 ml-0 max-w-5xl text-3xl font-black font-montserrat leading-tight text-white sm:ml-8 sm:text-4xl md:text-5xl lg:ml-24 lg:text-9xl">
                 TU VENTAJA
             </p>
-            <p class="relative z-10 mb-4 ml-0 max-w-xl text-base font-lato font-bold text-white/90 sm:ml-8 sm:text-lg md:text-2xl lg:ml-24">
+            <p class="relative z-10 mb-4 ml-0 max-w-xl text-sm font-lato font-bold text-white/90 sm:ml-8 sm:text-lg md:text-2xl lg:ml-24">
                 Tour operador B2B que simplifica tu operación con tarifas exclusivas y nuestro modelo One Stop Shop.
 
             </p>
@@ -31,38 +33,44 @@
                     href="https://www.partners.travel-logic.com/site/login"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex w-fit items-center gap-2 rounded-lg bg-green-300 px-6 py-3 text-xl font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md">
+                    class="flex w-fit items-center gap-2 rounded-lg bg-green-300 px-5 py-2.5 text-base font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md sm:px-6 sm:py-3 sm:text-xl">
                     Acceder al portal
                     <x-lucide-arrow-right class="h-4 w-4 text-white" />
                 </a>
                 <a
                     href="{{ route('register-agency') }}"
-                    class="w-fit rounded-lg border border-white px-6 py-3 text-xl font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90">
+                    class="w-fit rounded-lg border border-white px-5 py-2.5 text-base font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 sm:px-6 sm:py-3 sm:text-xl">
                     Quiero registrarme
                 </a>
             </div>
 
         </div>
 
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 z-20 translate-y-1/2 px-2 sm:px-3 md:px-4 lg:px-6">
+        {{-- Filtro: en lg+ flota entre hero y contenido (absolute + translate-y-1/2) --}}
+        <div class="hidden lg:block lg:pointer-events-none lg:absolute lg:inset-x-0 lg:bottom-0 lg:z-20 lg:translate-y-1/2 lg:px-6">
             <div class="pointer-events-auto mx-auto w-full max-w-[1600px]">
                 <x-home-filter-info :destinations="$destinations" />
             </div>
         </div>
     </div>
 
-    {{-- Bloque de detalles: FUERA del hero, en el flujo normal.
-         Al aparecer empuja el contenido de abajo; al ocultarse, libera el espacio. --}}
-    <div class="mt-24 sm:mt-28 md:mt-32">
+    {{-- Filtro en mobile: fluye normalmente en el documento, sin solaparse --}}
+    <div class="block px-4 py-4 sm:px-6 sm:py-6 lg:hidden">
+        <x-home-filter-info :destinations="$destinations" />
+    </div>
+
+    {{-- Bloque de detalles: en mobile no necesita margen extra (filtro ya está en flujo).
+         En lg+ necesita el margen grande para liberar espacio al filtro flotante. --}}
+    <div class="mt-4 sm:mt-6 lg:mt-32">
         <x-home-filter-details />
     </div>
 </div>{{-- cierra x-data --}}
 
 
-<div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-2 pt-28 sm:px-3 sm:pt-32 md:px-4 md:pt-36 lg:px-6 lg:pt-40">
+<div class="font-sans antialiased bg-white text-stone-900 mx-auto w-full max-w-[1600px] px-4 pt-20 sm:px-6 sm:pt-28 md:px-4 md:pt-32 lg:px-6 lg:pt-40">
     {{-- key features --}}
     <section id="key-features" aria-label="Key Features" class="mb-10 md:mb-14 lg:mb-20">
-        <div class="flex flex-col items-stretch gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-12 xl:gap-16">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-10 lg:gap-12 xl:gap-16">
             @php
             $keyFeatures = [
             ['title' => 'Liberar el potencial de cada agencia', 'desc' => 'Proporcionamos acceso a soluciones integrales y personalizadas que simplifican su operación y les permiten ofrecer experiencias memorables a sus clientes finales.', 'icon' => 'lock-keyhole'],
@@ -71,12 +79,12 @@
             ];
             @endphp
             @foreach ($keyFeatures as $index => $feature)
-            <div data-animate="fade-up" data-animate-delay="{{ $index * 0.15 }}" class="flex flex-col items-center gap-2 sm:gap-4">
-                <div class="flex size-16 items-center justify-center rounded-lg bg-green-100">
-                    <x-dynamic-component :component="'lucide-' . $feature['icon']" class="h-10 w-10 text-green-300" />
+            <div data-animate="fade-up" data-animate-delay="{{ $index * 0.15 }}" class="flex flex-col items-center gap-3 px-2 sm:gap-4">
+                <div class="flex size-14 items-center justify-center rounded-lg bg-green-100 sm:size-16">
+                    <x-dynamic-component :component="'lucide-' . $feature['icon']" class="h-8 w-8 text-green-300 sm:h-10 sm:w-10" />
                 </div>
-                <p class="w-full max-w-xs text-center text-xl font-extrabold font-inter text-indigo-950 sm:text-2xl">{{ $feature['title'] }}</p>
-                <p class="w-full max-w-xs text-center text-base font-medium text-zinc-500">{{ $feature['desc'] }}</p>
+                <p class="w-full max-w-xs text-center text-lg font-extrabold font-inter text-indigo-950 sm:text-xl lg:text-2xl">{{ $feature['title'] }}</p>
+                <p class="w-full max-w-xs text-center text-sm font-medium text-zinc-500 sm:text-base">{{ $feature['desc'] }}</p>
             </div>
             @endforeach
         </div>
@@ -128,85 +136,75 @@
 
 <!-- seccion portafolio de destinos -->
 <section id="portfolio-hotels" aria-label="Portafolio de destinos" class="mt-10 w-full bg-white overflow-hidden">
-    <div data-animate="fade-up" class="flex flex-col items-start gap-3 px-6 sm:px-8 md:px-16 lg:px-24">
+    <div data-animate="fade-up" class="flex flex-col items-start gap-3 px-4 sm:px-8 md:px-16 lg:px-24">
         <p class="text-xl font-extrabold font-inter text-green-300">Nuestro portafolio</p>
-        <p class="text-3xl font-black font-inter text-indigo-950 sm:text-7xl">Destinos que venden solos</p>
+        <p class="text-2xl font-black font-inter text-indigo-950 sm:text-4xl lg:text-7xl">Destinos que venden solos</p>
         <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
     </div>
 
-    <div class="flex gap-8 py-12 justify-center flex-wrap lg:flex-nowrap">
-        <a
-            href="{{ route('hotels', ['hotel_group_id' => 1]) }}"
-            data-animate="fade-up" data-animate-delay="0.0"
-            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+    {{-- Mobile: carrusel horizontal deslizable --}}
+    <div class="relative">
+        {{-- Scroll track --}}
+        <div
+            class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 py-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-6 sm:px-8 lg:flex-nowrap lg:justify-center lg:gap-8 lg:overflow-visible lg:px-24 lg:py-12"
+            aria-label="Carrusel de destinos"
         >
-            <img src="{{ asset('images/destination-home-section/playas.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Sol y playa">
-            <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
-                <p class="text-white text-2xl font-bold font-inter">Sol y playa</p>
-                <p class="text-white text-base font-normal font-inter">costas y actividades marinas</p>
-            </div>
-        </a>
-        <a
-            href="{{ route('hotels', ['hotel_group_id' => 7]) }}"
-            data-animate="fade-up" data-animate-delay="0.1"
-            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
-        >
-            <img src="{{ asset('images/destination-home-section/cultura.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Cultura">
-            <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
-                <p class="text-white text-2xl font-bold font-inter">Cultura</p>
-                <p class="text-white text-base font-normal font-inter">historia, arte y gastronomía</p>
-            </div>
-        </a>
-        <a
-            href="{{ route('hotels', ['hotel_group_id' => 8]) }}"
-            data-animate="fade-up" data-animate-delay="0.2"
-            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
-        >
-            <img src="{{ asset('images/destination-home-section/naturaleza.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Naturaleza y ecoturismo">
-            <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
-                <p class="text-white text-2xl font-bold font-inter">Naturaleza y ecoturismo</p>
-                <p class="text-white text-base font-normal font-inter">aventura al aire libre</p>
-            </div>
-        </a>
-        <a
-            href="{{ route('hotels', ['hotel_group_id' => 9]) }}"
-            data-animate="fade-up" data-animate-delay="0.3"
-            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
-        >
-            <img src="{{ asset('images/destination-home-section/negocios.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Negocios y reuniones">
-            <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
-                <p class="text-white text-2xl font-bold font-inter">Negocios y reuniones</p>
-                <p class="text-white text-base font-normal font-inter">congresos y viajes corporativos</p>
-            </div>
-        </a>
-        <a
-            href="{{ route('hotels', ['hotel_group_id' => 10]) }}"
-            data-animate="fade-up" data-animate-delay="0.4"
-            class="group relative w-[316px] h-[500px] overflow-hidden bg-zinc-300 rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
-        >
-            <img src="{{ asset('images/destination-home-section/termalismo.webp') }}" class="w-full h-full object-cover rounded-2xl" alt="Salud y bienestar">
-            <div class="absolute inset-0 flex flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300">
-                <p class="text-white text-2xl font-bold font-inter">Salud y bienestar</p>
-                <p class="text-white text-base font-normal font-inter">termalismo y recuperación</p>
-            </div>
-        </a>
+            @php
+            $portfolioItems = [
+                ['group_id' => 1,  'img' => 'playas.webp',    'alt' => 'Sol y playa',            'label' => 'Sol y playa',           'sub' => 'costas y actividades marinas',  'delay' => '0.0'],
+                ['group_id' => 7,  'img' => 'cultura.webp',   'alt' => 'Cultura',                'label' => 'Cultura',               'sub' => 'historia, arte y gastronomía',  'delay' => '0.1'],
+                ['group_id' => 8,  'img' => 'naturaleza.webp','alt' => 'Naturaleza y ecoturismo','label' => 'Naturaleza y ecoturismo','sub' => 'aventura al aire libre',         'delay' => '0.2'],
+                ['group_id' => 9,  'img' => 'negocios.webp',  'alt' => 'Negocios y reuniones',   'label' => 'Negocios y reuniones',  'sub' => 'congresos y viajes corporativos','delay' => '0.3'],
+                ['group_id' => 10, 'img' => 'termalismo.webp','alt' => 'Salud y bienestar',      'label' => 'Salud y bienestar',     'sub' => 'termalismo y recuperación',     'delay' => '0.4'],
+            ];
+            @endphp
+            @foreach ($portfolioItems as $item)
+            <a
+                href="{{ route('hotels', ['hotel_group_id' => $item['group_id']]) }}"
+                data-animate="fade-up" data-animate-delay="{{ $item['delay'] }}"
+                class="group relative shrink-0 snap-start w-[72vw] max-w-[280px] h-[380px] overflow-hidden bg-zinc-300 rounded-2xl transition-all duration-300 cursor-pointer hover:scale-105 sm:w-[260px] sm:h-[420px] lg:w-[316px] lg:h-[500px]"
+            >
+                <img
+                    src="{{ asset('images/destination-home-section/' . $item['img']) }}"
+                    class="w-full h-full object-cover rounded-2xl"
+                    alt="{{ $item['alt'] }}"
+                >
+                {{-- Label always visible on mobile, hover-only on desktop --}}
+                <div class="absolute inset-0 flex flex-col gap-1 justify-end p-4 bg-gradient-to-t from-black/70 to-transparent lg:hidden">
+                    <p class="text-white text-lg font-bold font-inter">{{ $item['label'] }}</p>
+                    <p class="text-white/80 text-sm font-normal font-inter">{{ $item['sub'] }}</p>
+                </div>
+                <div class="absolute inset-0 hidden flex-col gap-2 justify-center items-center p-4 bg-black/50 group-hover:opacity-100 opacity-0 transition-all duration-300 lg:flex">
+                    <p class="text-white text-2xl font-bold font-inter">{{ $item['label'] }}</p>
+                    <p class="text-white text-base font-normal font-inter">{{ $item['sub'] }}</p>
+                </div>
+            </a>
+            @endforeach
+        </div>
+
+        {{-- Scroll hint dots — only on mobile --}}
+        <div class="flex justify-center gap-1.5 pb-2 lg:hidden" aria-hidden="true">
+            @foreach ($portfolioItems as $i => $item)
+            <span class="block h-1.5 w-1.5 rounded-full {{ $i === 0 ? 'bg-green-300 w-4' : 'bg-zinc-300' }} transition-all duration-300"></span>
+            @endforeach
+        </div>
     </div>
 </section>
 
 <section id="steps" aria-label="Cómo empezar" class="mt-20 w-full bg-blue-400 overflow-hidden">
-    <div class="grid grid-cols-1 gap-10 px-6 py-12 sm:px-8 sm:py-16 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-24 lg:py-20">
+    <div class="grid grid-cols-1 gap-10 px-4 py-12 sm:px-8 sm:py-16 md:px-16 lg:grid-cols-2 lg:gap-16 lg:px-24 lg:py-20">
         <div data-animate="fade-right" class="flex w-full max-w-2xl flex-col gap-6">
             <div class="flex flex-col items-start gap-3">
                 <p class="text-xl font-extrabold font-inter text-green-300">Así de fácil</p>
-                <p class="text-3xl font-black font-inter text-white sm:text-7xl">Empieza a vender en 4 pasos</p>
+                <p class="text-2xl font-black font-inter text-white sm:text-4xl lg:text-7xl">Empieza a vender en 4 pasos</p>
                 <div class="h-1 w-12 bg-green-300" aria-hidden="true"></div>
             </div>
 
-            <p class="max-w-lg text-xl font-normal font-inter text-white">
+            <p class="max-w-lg text-base font-normal font-inter text-white sm:text-xl">
                 Sin contratos complicados. Sin cuotas de entrada. Solo regístrate y genera comisiones.
             </p>
 
-            <ol class="mt-4 flex flex-col gap-6 border-l-4 border-green-300 pl-6 sm:gap-8 sm:pl-8">
+            <ol class="mt-4 flex flex-col gap-5 border-l-4 border-green-300 pl-5 sm:gap-8 sm:pl-8">
                 @php
                 $steps = [
                 ['title' => 'Regístrate gratis', 'desc' => 'Llena el formulario en línea con los datos de tu agencia. Aprobación en 24 horas.'],
@@ -218,11 +216,11 @@
                 @foreach ($steps as $index => $step)
                 <li>
                     <div data-animate="fade-up" data-animate-delay="{{ $index * 0.1 }}">
-                        <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6 lg:gap-8">
-                            <span class="flex size-12 shrink-0 items-center justify-center rounded-full text-2xl font-bold font-inter text-white outline outline-3 outline-green-300 sm:size-14 sm:text-3xl" aria-hidden="true">{{ $index + 1 }}</span>
+                        <div class="flex items-center gap-4 sm:gap-6 lg:gap-8">
+                            <span class="flex size-10 shrink-0 items-center justify-center rounded-full text-xl font-bold font-inter text-white outline outline-3 outline-green-300 sm:size-14 sm:text-3xl" aria-hidden="true">{{ $index + 1 }}</span>
                             <div>
-                                <p class="text-xl font-bold font-inter text-white sm:text-2xl lg:text-3xl">{{ $step['title'] }}</p>
-                                <p class="max-w-lg text-base font-light font-inter text-white sm:text-lg lg:text-xl">{{ $step['desc'] }}</p>
+                                <p class="text-base font-bold font-inter text-white sm:text-2xl lg:text-3xl">{{ $step['title'] }}</p>
+                                <p class="max-w-lg text-sm font-light font-inter text-white/90 sm:text-lg lg:text-xl">{{ $step['desc'] }}</p>
                             </div>
                         </div>
                     </div>
@@ -232,13 +230,14 @@
 
             <a
                 href="{{ route('register-agency') }}"
-                class="mt-6 flex w-full max-w-xs items-center justify-center gap-2 self-center rounded-lg bg-green-300 px-6 py-3 text-xl font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md sm:text-2xl">
+                class="mt-4 flex w-full max-w-xs items-center justify-center gap-2 self-center rounded-lg bg-green-300 px-6 py-3 text-base font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md sm:text-2xl">
                 Empezar
                 <x-lucide-arrow-right class="h-6 w-6 text-white" />
             </a>
         </div>
 
-        <div data-animate="fade-left" class="group flex flex-col items-center justify-center gap-4">
+        {{-- Image collage: hidden on mobile, visible from md+ --}}
+        <div data-animate="fade-left" class="group hidden flex-col items-center justify-center gap-4 md:flex">
             <div class="h-64 w-full max-w-2xl overflow-hidden rounded-3xl sm:h-80 lg:h-96">
                 <img
                     src="{{ asset('images/home/frame1.webp') }}"

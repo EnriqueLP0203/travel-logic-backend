@@ -59,14 +59,15 @@
             }
         }"
         x-on:submit.prevent="submit"
-        class="mt-6 flex w-full flex-col gap-4 lg:flex-row lg:items-end lg:gap-4"
+        class="mt-4 grid grid-cols-2 gap-3 lg:mt-6 lg:flex lg:flex-row lg:items-end lg:gap-4"
     >
-        <div class="flex min-w-0 flex-1 flex-col gap-1.5">
-            <label for="filtro-destino" class="text-sm font-bold font-montserrat text-slate-500">Destinos</label>
+        {{-- Destino --}}
+        <div class="flex min-w-0 flex-col gap-1 lg:flex-1 lg:gap-1.5">
+            <label for="filtro-destino" class="text-xs font-bold font-montserrat text-slate-500 lg:text-sm">Destinos</label>
             <select
                 id="filtro-destino"
                 x-model="destino"
-                class="w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm font-montserrat text-slate-700 focus:border-green-300 focus:outline-none focus:ring-1 focus:ring-green-300"
+                class="w-full rounded-lg border border-gray-300 bg-white p-2 text-xs font-montserrat text-slate-700 focus:border-green-300 focus:outline-none focus:ring-1 focus:ring-green-300 lg:p-2.5 lg:text-sm"
             >
                 <option value="" selected disabled>Selecciona un destino</option>
                 @if (isset($destinations) && count($destinations) > 0)
@@ -82,34 +83,37 @@
             </select>
         </div>
 
-        <div class="flex min-w-0 flex-1 flex-col gap-1.5">
-            <label for="filtro-checkin" class="text-sm font-bold font-montserrat text-slate-500">Check-in</label>
+        {{-- Check-in --}}
+        <div class="flex min-w-0 flex-col gap-1 lg:flex-1 lg:gap-1.5">
+            <label for="filtro-checkin" class="text-xs font-bold font-montserrat text-slate-500 lg:text-sm">Check-in</label>
             <input
                 type="date"
                 id="filtro-checkin"
                 x-model="checkin"
                 x-on:change="if (checkout && checkout < checkin) checkout = ''"
-                class="w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm font-montserrat text-slate-700 focus:border-green-300 focus:outline-none focus:ring-1 focus:ring-green-300"
+                class="w-full rounded-lg border border-gray-300 bg-white p-2 text-xs font-montserrat text-slate-700 focus:border-green-300 focus:outline-none focus:ring-1 focus:ring-green-300 lg:p-2.5 lg:text-sm"
             />
         </div>
 
-        <div class="flex min-w-0 flex-1 flex-col gap-1.5">
-            <label for="filtro-checkout" class="text-sm font-bold font-montserrat text-slate-500">Check-out</label>
+        {{-- Check-out --}}
+        <div class="flex min-w-0 flex-col gap-1 lg:flex-1 lg:gap-1.5">
+            <label for="filtro-checkout" class="text-xs font-bold font-montserrat text-slate-500 lg:text-sm">Check-out</label>
             <input
                 type="date"
                 id="filtro-checkout"
                 x-model="checkout"
                 :min="checkin"
-                class="w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm font-montserrat text-slate-700 focus:border-green-300 focus:outline-none focus:ring-1 focus:ring-green-300"
+                class="w-full rounded-lg border border-gray-300 bg-white p-2 text-xs font-montserrat text-slate-700 focus:border-green-300 focus:outline-none focus:ring-1 focus:ring-green-300 lg:p-2.5 lg:text-sm"
             />
         </div>
 
-        <div class="flex min-w-0 flex-1 flex-col gap-1.5">
-            <label for="filtro-huespedes" class="text-sm font-bold font-montserrat text-slate-500">Huéspedes</label>
+        {{-- Huéspedes --}}
+        <div class="flex min-w-0 flex-col gap-1 lg:flex-1 lg:gap-1.5">
+            <label for="filtro-huespedes" class="text-xs font-bold font-montserrat text-slate-500 lg:text-sm">Huéspedes</label>
             <select
                 id="filtro-huespedes"
                 x-model="huespedes"
-                class="w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm font-montserrat text-slate-700 focus:border-green-300 focus:outline-none focus:ring-1 focus:ring-green-300"
+                class="w-full rounded-lg border border-gray-300 bg-white p-2 text-xs font-montserrat text-slate-700 focus:border-green-300 focus:outline-none focus:ring-1 focus:ring-green-300 lg:p-2.5 lg:text-sm"
             >
                 <option value="" selected disabled>Selecciona huéspedes</option>
                 @for ($i = 1; $i <= 10; $i++)
@@ -119,13 +123,14 @@
             </select>
         </div>
 
+        {{-- Botón: ocupa ambas columnas en mobile, auto en desktop --}}
         <button
             type="submit"
             :disabled="!formValido"
             :class="formValido
                 ? 'bg-green-300 text-white cursor-pointer hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed opacity-60 shadow-none hover:translate-y-0'"
-            class="w-full shrink-0 rounded-lg px-8 py-2.5 text-sm font-bold font-montserrat transition-all duration-200 lg:w-auto"
+            class="col-span-2 w-full shrink-0 rounded-lg px-8 py-2.5 text-sm font-bold font-montserrat transition-all duration-200 lg:col-span-1 lg:w-auto"
         >
             Ver más
         </button>
